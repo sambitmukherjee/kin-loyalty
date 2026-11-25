@@ -1,8 +1,9 @@
 # Data dictionary — manifest and attempt schema version 1
 
 Manifest, request, response, and attempt records are implemented. Analysis tables
-remain planned. Provider mappings are documentation-verified; live smoke results
-remain pending. See `docs/provider_verification.md` for primary sources.
+remain planned. Four live smoke requests were accepted; observed metadata and
+limitations appear in `docs/phase4b_report.md`. See `docs/provider_verification.md`
+for primary sources.
 Missing provider metadata stays distinguishable from zero. Current mock records
 have `synthetic: true`; their usage counts are synthetic, not provider measurements.
 
@@ -23,7 +24,8 @@ The exact schemas are printed in `docs/study1_prompt_review.md`. If verified
 provider support requires omitting numeric bounds from the API schema, local
 validation must still enforce them. The reason is requested as one sentence in
 the prompt; a sentence-count heuristic is not part of these schemas. Provider
-support remains later-phase work; canonical local validation is implemented.
+support has been checked for the four smoke requests; canonical local validation
+is implemented.
 
 ## Trial manifests
 
@@ -69,7 +71,7 @@ construct API arguments explicitly; local `context` is never forwarded.
 | `api_payload` | object/null | Exact frozen SDK method arguments, including submitted response schema; null/absent in older mock-only manifests |
 
 Exact mappings are in `docs/provider_verification.md`; the prepared smoke plan
-freezes them. Live acceptance remains pending. Anthropic's submitted schema omits
+freezes them. All four frozen smoke requests were accepted. Anthropic's submitted schema omits
 unsupported numeric bounds while the canonical `json_schema` retains them.
 Google SDK-only raw-response/continuation controls are included in the snapshot
 but are not API generation fields. Keys, headers, and raw SDK exception text do
@@ -108,7 +110,7 @@ frozen `request`, source hashes, design cell, and planned order. Additional fiel
 | `api_retry_index` | integer | API attempt within this response opportunity and runner invocation; starts at 1 on resume |
 | `dispatch_sequence` | integer | Actual globally increasing attempt reservation order across resumes; differs from planned/completion order |
 | `manifest_sha256`, `trial_sha256` | strings | Exact manifest-file hash and serialized trial hash; schema property order is preserved |
-| `execution_mode` | string | `mock` currently; backend identity checked on resume |
+| `execution_mode` | string | `mock` or `live`; backend identity checked on resume |
 | `synthetic` | boolean | True for mock data; main analysis must reject it unless explicitly testing with mock data |
 | `timestamp_utc` | string | ISO-8601 UTC attempt start/reservation time |
 | `completed_at_utc` | string/null | Completion/log-close time; recovery time for a formerly unknown attempt |
@@ -144,6 +146,11 @@ excluding thoughts; Anthropic/OpenAI/Moonshot output includes reasoning.
 Anthropic input excludes cache reads/writes, while Chat Completions input includes
 them. Full raw JSON retains all original counters. Google cache writes are not
 exposed and remain null. Exact field paths are in `docs/provider_verification.md`.
+In the observed smoke responses, Kimi omitted its cache-read count but returned
+256 cache-write tokens; Google omitted cache-read and cache-write counts. These
+missing counts remain null. All four reasoning counts were present, including
+Anthropic's observed zero. Returned version strings equaled the requested model
+IDs; no more specific build identifiers were returned.
 
 ### Outcome and API-error objects
 

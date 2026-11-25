@@ -244,3 +244,41 @@ and any batch that must be rerun. No post-pilot fixes or deviations exist yet.
 - **Status:** Phase 4a complete and committed locally. Provider acceptance,
   actual returned versions, and observed usage/cache behavior remain pending
   the separately approved real smoke test. No real logs or main data exist.
+
+## 2026-11-25 — Phase 4a push and Phase 4b authorization
+
+- **Push:** At the researcher's explicit request, pushed Phase 4a commit
+  `90dd4e2` to the private GitHub main branch without starting Phase 4b.
+- **Credentials:** At the researcher's request, stored the four supplied keys
+  in local `.env` with permissions 0600; verified loader compatibility and Git
+  exclusion without printing keys or contacting providers.
+- **Approval:** Researcher then instructed “Start phase 4b.” The stated scope
+  was four planned draws, at most 32 HTTP attempts in one invocation including
+  retries/re-asks. No further batch or push was authorized.
+
+## 2026-11-25 — Phase 4b smoke results and metadata limitation
+
+- **Execution:** Ran the unchanged four-request manifest once through the
+  existing provider factory and runner from clean, pushed commit `90dd4e2`.
+  All four returned valid JSON in their first attempt: no API errors, retries,
+  re-asks, exclusions, output-cap stops, or unfinished draws. Four attempts used.
+- **Metadata:** Returned versions matched the four requested model IDs, without
+  more specific build suffixes. Inputs ranged from 233 to 539 tokens. All
+  reasoning counters were present (Anthropic 0, OpenAI 14, Google 233, Kimi 82).
+  Only Kimi supplied default reasoning text. OpenAI/Anthropic cache reads and
+  writes were zero.
+- **Limitation:** Kimi returned 256 cache-write tokens but omitted its cache-read
+  count. Google omitted cache counts. Missing fields remain null, never inferred
+  as zero. Reported the Kimi limitation to the researcher and made no extra calls
+  or setting changes. Researcher review is needed before the pilot.
+- **Artifacts:** Preserved raw bodies, complete frozen requests, metadata, and
+  provenance in `data/study1/smoke/attempts.jsonl`; stored the one-invocation
+  summary and wrote `docs/phase4b_report.md` with hashes and offline inspection.
+- **Status:** Marked current roster `smoke_verified` to mean request acceptance
+  with the reported metadata caveats. Original manifest/status/source hashes
+  remain unchanged. No prompt, schema, scientific setting, or analysis changed.
+  Phase 4b completes with a local commit; Phase 5 needs separate approval.
+- **Verification:** All 252 offline tests passed after the status update. The
+  report's offline inspection command, frozen-request/state/summary checks,
+  provider metadata checks, unchanged source/prompt/manifest checks, and
+  secret-exclusion/Git-ignore checks passed. No extra API calls were made.

@@ -1,7 +1,8 @@
 # Adding a model — implementation outline
 
 The common asynchronous interface, mock engine, and four provider adapters are
-implemented. Documentation is verified; live smoke acceptance remains pending.
+implemented. All four current models accepted their live smoke requests; see
+`phase4b_report.md` for observed metadata and the missing Kimi cache-read count.
 
 1. Add a stable key, lab, exact display name, API model ID, provider, and key
    environment-variable name to `configs/models.yaml`.

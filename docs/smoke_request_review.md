@@ -1,6 +1,10 @@
-# Prepared smoke request review — not executed
+# Smoke request review — frozen before execution
 
-Four planned dictator / not-disclosed / paraphrase-1 draws, one per model. No real API calls or observed responses exist. Keys and request headers are omitted. Local context is not forwarded.
+Four dictator / not-disclosed / paraphrase-1 draws, one per model. This review and
+the manifest were frozen before execution. All four completed in the approved
+Phase 4b invocation on 2026-11-25; see [the smoke report](phase4b_report.md).
+The arguments and manifest hash below are unchanged. Keys and request headers
+are omitted. Local context is not forwarded.
 
 Manifest: `data/study1/smoke/manifest.jsonl`
 

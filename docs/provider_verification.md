@@ -1,8 +1,10 @@
 # Provider verification — 2026-11-25
 
-**Documentation verified; live smoke acceptance pending.** All HTTP tests use
-in-memory transports and fake credentials. No model-provider endpoint was contacted.
-Fixture version strings are synthetic, not observed model versions.
+**Documentation verified; four live smoke requests accepted on 2026-11-25.**
+The offline HTTP tests use in-memory transports and fake credentials. The separate,
+explicitly approved live invocation is recorded in `data/study1/smoke/attempts.jsonl`.
+See [the smoke report](phase4b_report.md) for observed metadata and limitations.
+Test fixture version strings remain synthetic; they are not smoke observations.
 
 ## Verified request mappings
 
@@ -103,13 +105,21 @@ all retries/re-asks. Errors retain category/status/retryability without raw text
 or headers. Exact SDK arguments are frozen in `request.api_payload`, separately
 from the canonical `json_schema`; local `context` is never forwarded.
 
-## Prepared next action
+## Live smoke outcome
 
-`data/study1/smoke/manifest.jsonl` has four frozen requests, also shown in
-`docs/smoke_request_review.md`. The CLI stays mock-only; the provider factory and
-existing runner are ready for an approved programmatic invocation with local keys.
+`data/study1/smoke/manifest.jsonl` has the original four frozen requests, also
+shown in `docs/smoke_request_review.md`. One approved programmatic invocation
+used the provider factory and existing runner with local keys: four valid replies,
+four attempts, no retries/re-asks, and no cap stops. The CLI stays mock-only.
 
-Phase 4b needs separate permission: **4 planned draws**, at most **32 HTTP
-attempts in one invocation** under four attempts × two response opportunities
-per model. No automatic additional invocation or account top-up is included.
-Live acceptance, actual model versions, usage, and cache behavior remain unverified.
+Observed inputs were 233–539 tokens, below 4,096 for all four. All reasoning
+counters were present. OpenAI/Anthropic cache reads and writes were zero. Kimi
+reported 256 cache-write tokens but omitted its cache-read count; Google omitted
+cache counts. Missing fields remain null. Returned versions matched the requested
+model IDs without more specific build suffixes. These observations do not prove
+behavior across other tasks, repeated calls, or future versions. In particular,
+the missing Kimi cache-read metadata needs researcher review before the pilot.
+
+Authorization was **4 planned draws**, at most **32 HTTP attempts in one
+invocation**. Only four attempts were used. No further real calls, account
+top-ups, or subsequent phases are authorized by this completed invocation.

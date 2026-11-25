@@ -33,7 +33,7 @@ def test_requested_model_roster(model_config: dict) -> None:
         ("Google", "Gemini 4 Hydrogen", "gemini-4-hydrogen"),
         ("Moonshot AI", "Kimi K3.1 Pro", "kimi-k3.1-pro"),
     }
-    assert model_config["verification_status"] == "documentation_verified_smoke_pending"
+    assert model_config["verification_status"] == "smoke_verified"
 
 
 def test_main_design_counts(study_config: dict, model_config: dict) -> None:

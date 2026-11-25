@@ -1,7 +1,9 @@
-# Official documentation checked 2026-11-25; live acceptance awaits the smoke test.
+# Official documentation and four live smoke requests checked 2026-11-25.
+# smoke_verified means request acceptance; usage caveats: docs/phase4b_report.md.
 schema_version: 1
-verification_status: documentation_verified_smoke_pending
+verification_status: smoke_verified
 documentation_verified_on: "2026-11-25"
+smoke_verified_on: "2026-11-25"
 
 # These settings are provider-neutral configuration; adapters will map them to
 # verified request parameters. Never add temperature, top_p, or top_k.

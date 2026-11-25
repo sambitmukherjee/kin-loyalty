@@ -1,7 +1,8 @@
 # Offline experiment engine
 
 The CLI supports mock calls only. Provider adapters and a credential loader are
-implemented, but real smoke calls need their own approval. The offline engine
+implemented. Four approved live smoke requests have completed; subsequent real
+batches need separate approval. The offline engine
 does not import SDKs or read keys. Every mock record is explicitly synthetic.
 Frozen requests include documentation-verified SDK arguments; these are not
 evidence of a successful provider call.
@@ -28,8 +29,9 @@ phase-specific fixed seed before execution positions are assigned.
   other-lab, rows are paraphrases and columns are the other models in roster
   order: `[[3,2,2],[2,3,2],[2,2,2]]`. Both margins are 7/7/6 and all nine cells
   appear. The researcher explicitly selected these pilot and check allocations.
-- **Smoke:** four planned dictator/not-disclosed/paraphrase-1 draws, one/model.
-  This phase's demo executes them with the mock client, not the real providers.
+- **Smoke:** four dictator/not-disclosed/paraphrase-1 draws, one/model.
+  The approved live invocation completed all four in one attempt each; see
+  `phase4b_report.md`. The CLI demo uses a separate temporary mock manifest/log.
 
 Each trial has a stable ID from study, phase, model, decision, label, paraphrase,
 and draw index. Changing only the order seed changes order, not these IDs. The

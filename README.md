@@ -10,15 +10,18 @@ outside the current scope.
 
 ## Current status
 
-**Phase 4a: provider adapters implemented; real smoke test pending.** The researcher has approved the prompt
+**Phase 4b complete: four live smoke requests returned valid replies.** The researcher has approved the prompt
 text, response schemas, and Riley/Taylor and Casey/Morgan name pairs. The package
 builds balanced, deterministic manifests and executes/resumes them with a mock
 client, durable attempt logs, validation, retries, and one identical re-ask.
 The CLI supports **mock execution only**. Four provider adapters use the official
-SDKs with documentation-verified mappings and in-memory HTTP tests. No real model
-API calls, analysis results, or locked pre-registration exist yet. Live acceptance
-and actual returned metadata await the separately approved smoke test. See
+SDKs with documentation-verified mappings and in-memory HTTP tests. The approved
+smoke invocation made exactly four API attempts, with no retries or re-asks.
+Input sizes were 233–539 tokens; no response hit the output cap. Kimi omitted
+its cache-read count (retained as null) and reported 256 cache-write tokens.
+See the [smoke report and metadata limitations](docs/phase4b_report.md) and
 [provider verification and sources](docs/provider_verification.md).
+Analysis, pilot/comprehension, and the pre-registration lock remain pending.
 
 The planned main design has four models, three decisions, five labels, three
 paraphrases, and 20 draws per smallest cell: **3,600 planned draws**. Smoke tests,
@@ -109,8 +112,8 @@ separate report will summarize the comprehension check.
 
 ## Quickstart B: run a new experiment
 
-The offline planning/execution steps are implemented; real provider integration
-will follow in its approved phase:
+Planning, execution, and the four provider adapters are implemented. Every real
+batch still requires its own approval:
 
 1. Edit the readable model and study YAML files in `configs/` and the experiment
    templates in `prompts/study1/`.
@@ -132,7 +135,7 @@ and reproduction commands are not implemented. No current CLI command makes paid
 
 | Path | Purpose |
 | --- | --- |
-| `configs/models.yaml` | Model roster and documentation-verified settings; real smoke acceptance pending |
+| `configs/models.yaml` | Model roster and settings accepted in four live smoke requests; metadata caveats in the report |
 | `configs/study1.yaml` | Design, conditions, names, counts, fixed seeds, and analysis settings |
 | `prompts/study1/` | Versioned system/game templates, protected blocks and shared JSON instructions |
 | `src/kinloyalty/` | Prompt/schema tools, manifests, mock client, validation, logging, runner, CLI |
@@ -144,6 +147,7 @@ and reproduction commands are not implemented. No current CLI command makes paid
 | `docs/study1_prompt_review.md` | Fully rendered draft prompts and schemas for approval |
 | `docs/engine.md` | Allocation rules, retries/re-asks, concurrency, and durable resume |
 | `docs/provider_verification.md` | Official sources, exact API mappings, normalization, and prepared smoke scope |
+| `docs/phase4b_report.md` | Observed smoke metadata, limitations, artifact hashes, and offline inspection commands |
 | `tests/` | Offline protocol, manifest, validation, logging/resume, and CLI checks; socket connections blocked |
 | `codex_prompts/` | Local coding-agent instructions; always Git-ignored |
 
