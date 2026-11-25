@@ -128,7 +128,7 @@ runner:
   backoff_multiplier: 2
   backoff_max_seconds: 30
 
-# Fixed, distinct seeds selected during Phase 1; no random draws have been run.
+# Fixed, distinct seeds selected during Phase 1.
 seeds:
   smoke_order: 2026112501
   pilot_order: 2026112502
@@ -151,9 +151,12 @@ analysis:
   alpha: 0.05
   confidence_level: 0.95
   equivalence_bound_dollars: 5
-  # Exact TOST procedure and per-contrast permutation rules need approval.
-  tost_method: pending_analysis_phase_approval
-  contrast_permutation_rule: pending_analysis_phase_approval
+  # Researcher-approved Phase 5 choices; see docs/analysis.md.
+  tost_method: null_centered_basic_bootstrap
+  contrast_permutation_rule: tested_pair_within_model_paraphrase
+  adjusted_permutation_rule: freedman_lane_within_model_paraphrase
+  bootstrap_interval: basic
+  s1_belief_slopes: model_specific
   multiple_comparison_correction: none
   accepted_decision_phase: main
   figure_formats: [pdf, png]

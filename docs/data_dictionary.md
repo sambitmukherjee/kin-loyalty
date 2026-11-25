@@ -1,7 +1,7 @@
 # Data dictionary — manifest and attempt schema version 1
 
-Manifest, request, response, and attempt records are implemented. Analysis tables
-remain planned. Four live smoke requests were accepted; observed metadata and
+Manifest, request, response, attempt records, and analysis tables are implemented.
+Four live smoke requests were accepted; observed metadata and
 limitations appear in `docs/phase4b_report.md`. See `docs/provider_verification.md`
 for primary sources.
 Missing provider metadata stays distinguishable from zero. Current mock records
@@ -196,29 +196,63 @@ identifiers, outcome dollars, proposer belief when applicable, and provenance.
 | Ultimatum responder | `smallest_amount_for_your_user_you_will_accept` | — |
 
 Amounts must be whole dollars in [0, 100]. Every decision reply also includes a
-one-sentence `reason`. Schema validation and the retry/exclusion lifecycle are
-implemented; the analysis-table loader follows in its later phase.
+one-sentence `reason`. The loader verifies saved histories and includes only the
+final valid reply per main draw. `decisions.csv` retains model key/display/API ID,
+decision, label, paraphrase, draw, counterparty model text/key, outcome, proposer
+belief (otherwise empty), returned model version, trial/record IDs, code commit,
+and manifest hash. The original reason and full request remain in the attempt log.
 
 Excluded and unfinished draws are not valid outcome rows. Their counts and
 re-asks must remain available for diagnostics by model × decision × label.
 Smoke, pilot, and comprehension decisions must never enter the main outcome
 analysis. Mock records exist only for offline validation.
 
-## Reports and generated tables
+## Implemented analysis artifacts
 
-- Main descriptives: n, mean, median, standard deviation, share at $50, share at
-  $0, and modal share by model × decision × label.
-- Estimates: named contrast, model or pooled scope, estimate, bootstrap interval,
-  two-sided permutation p-value, and secondary/primary designation.
-- Equivalence: configurable ±$5 bound, both one-sided tests, and pooled result;
-  the exact TOST method requires approval in the analysis phase.
-- S1: belief contrasts and offer contrasts with and without the belief control.
-- Attempt diagnostics: re-asks, exclusions, unfinished draws, reasoning usage,
-  cached usage, and truncation.
-- Pilot: parse/mechanical diagnostics and outcome distributions by model and
-  decision, pooled over labels; no label-effect calculations.
-- Comprehension: answer shares by model × card label, scored counts, and pass/fail
-  using at least 18 of 20 correct for each scored label. Undisclosed is unscored.
+CSV files use a header row, UTF-8, stable row order, and 12 significant digits
+for floating-point values. Empty numeric cells mean missing values, never zeros.
+All point estimates and interval limits are dollars. Methods/seeds are specified
+in `analysis.md` and the versioned study configuration.
 
-Exact output filenames, table columns, and types will be documented alongside
-the implemented analysis. Figures will be saved as PDF and PNG.
+| Artifact | Rows and fields |
+| --- | --- |
+| `decisions.csv` | One final valid main draw; fields described above |
+| `coverage.csv` | Model × decision × label × paraphrase: planned, valid, excluded; inference requires no unfinished/not-started draws |
+| `descriptives.csv` | Model × decision × label: n, mean, median, sample SD, shares at $50 and $0, modal share, distinct values |
+| `attempt_diagnostics.csv` | Model × decision × label: observed draws, valid, re-asked draws, excluded, unfinished, attempts, API errors |
+| `contrasts.csv` | 150 rows: decision, outcome (`outcome`/`belief`), method (`unadjusted`/`belief_adjusted`), left/right labels, family, model/pooled scope, primary/secondary designation, estimate, basic bootstrap 95% interval, two-sided permutation p-value, resampling counts |
+| `equivalence.csv` | Always one pooled P1 row: estimate, bound, lower/upper one-sided p-values, their maximum (`p_tost`), equivalent boolean, 90% basic interval and its level |
+| `s1_coefficient_changes.csv` | 30 rows: contrast/scope, adjusted-minus-unadjusted offer coefficient and paired bootstrap 95% interval; descriptive association, no extra p-value |
+| `usage_calls.csv` | Every attempt: record/trial ID, model/provider, response presence, validity, returned version, stop/truncation, all five usage counters; API errors have empty response fields |
+| `usage_summary.csv` | Model/provider × usage metric: responses, observed/missing counts, mean, median, minimum, maximum; missing counts are computed only among actual responses |
+| `comprehension.csv` | Optional separate batch: model × card, planned/valid/excluded/unfinished/not-started, completion flag, yes/no/unsure counts and shares of planned 20, correct/scored status, label/model pass |
+| `resampling_distributions.npz` | Named arrays of bootstrap estimates and permutation null statistics for every outcome/method/contrast/scope; includes the pooled P1 draws used by TOST |
+| `provenance.json` | Synthetic flag/interpretation, exact input/config/package-source hashes, analysis settings/seeds, dependency versions, code provenance |
+| `artifacts.sha256.json` | SHA-256 of every generated artifact except itself |
+
+The NPZ keys have the form
+`decision:outcome:method:left-right:scope:bootstrap|permutation`. Arrays use the
+configured 10,000 entries. Scope is a configured model key or `pooled`.
+
+Figures `main_distributions`, `responder_distributions`, and `s1_coefficients`
+are saved as both `.pdf` and `.png`; `comprehension` adds a table figure in both
+formats when the separate batch is supplied. Synthetic titles identify simulated
+data. PDF creation/modification dates are omitted for deterministic artifacts.
+
+## Separate pilot and comprehension reports
+
+`report pilot` writes `pooled_descriptives.csv`,
+`pooled_attempt_diagnostics.csv`, `pooled_decisions.csv`, `mechanical_checks.csv`,
+usage tables, and provenance/artifact hashes. Decision grouping is model ×
+decision, never label. The pooled decision export includes only model, decision,
+outcome, and belief; audit identifiers remain in the source logs. Mechanical
+checks report coverage, response validity rate (>95%), truncation, missing
+reasoning/input/cache counts, zero-cache verification when required, prompt-size
+checks, dictator floor status, and decision variation. Usage audit rows retain
+record IDs, but no decision-outcome comparison by label is computed.
+
+`report comprehension` writes `comprehension.csv`, usage tables, and provenance/
+artifact hashes. Planned denominator 20 includes excluded draws as non-correct.
+Unfinished/not-started draws prevent final pass/fail classification; undisclosed
+remains unscored. A failed model is retained in the study. Neither report changes
+configuration or automatically starts another batch.

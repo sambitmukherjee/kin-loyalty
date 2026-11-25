@@ -10,7 +10,7 @@ outside the current scope.
 
 ## Current status
 
-**Phase 4b complete: four live smoke requests returned valid replies.** The researcher has approved the prompt
+**Phase 5: saved-log analysis and reproduction implemented.** The researcher has approved the prompt
 text, response schemas, and Riley/Taylor and Casey/Morgan name pairs. The package
 builds balanced, deterministic manifests and executes/resumes them with a mock
 client, durable attempt logs, validation, retries, and one identical re-ask.
@@ -21,7 +21,9 @@ Input sizes were 233–539 tokens; no response hit the output cap. Kimi omitted
 its cache-read count (retained as null) and reported 256 cache-write tokens.
 See the [smoke report and metadata limitations](docs/phase4b_report.md) and
 [provider verification and sources](docs/provider_verification.md).
-Analysis, pilot/comprehension, and the pre-registration lock remain pending.
+Analysis is tested on temporary synthetic batches, including a planted effect;
+it has not been run on pilot decisions. The pilot/comprehension run and the
+pre-registration lock remain pending. See [analysis methods and commands](docs/analysis.md).
 
 The planned main design has four models, three decisions, five labels, three
 paraphrases, and 20 draws per smallest cell: **3,600 planned draws**. Smoke tests,
@@ -102,13 +104,34 @@ preserving its bytes for recovery.
 
 ## Quickstart A: reproduce the paper
 
-This workflow will be implemented before the pre-registration lock. It will read
-saved logs and regenerate tables and PDF/PNG figures without API keys. There are
-no paper data or reproduction commands available in this skeleton.
+The reproduction command reads saved main logs and a separate comprehension
+batch, then regenerates CSV tables, PDF/PNG figures, resampling distributions,
+provenance, and artifact hashes without API keys:
 
-The planned entry point is `kinloyalty reproduce`. Analysis will reject pilot,
-smoke, and comprehension decisions as input to the main outcome analysis. A
-separate report will summarize the comprehension check.
+```sh
+kinloyalty reproduce --data data/study1/main \
+  --comprehension data/study1/comprehension --output results/study1/generated
+```
+
+Real main data do not exist yet, so this command currently stops with a missing
+input error. It rejects smoke/pilot/comprehension decisions as main outcomes,
+requires every main draw to be terminal, and refuses to overwrite outputs.
+`kinloyalty analyze study1` runs the same pipeline with the same arguments.
+
+For an entirely offline demonstration, use new temporary paths:
+
+```sh
+kinloyalty simulate-study1 --directory /private/tmp/kin-loyalty-analysis-demo \
+  --own-model-effect 12
+kinloyalty reproduce --data /private/tmp/kin-loyalty-analysis-demo/main \
+  --comprehension /private/tmp/kin-loyalty-analysis-demo/comprehension \
+  --output /private/tmp/kin-loyalty-analysis-demo-results --allow-synthetic
+```
+
+This generates explicitly synthetic main/pilot/comprehension logs through the
+mock client and runner. The output labels them simulated. Synthetic batches are
+kept outside the configured real study data/results roots. See [the methods,
+eligibility rules, and inference conventions](docs/analysis.md).
 
 ## Quickstart B: run a new experiment
 
@@ -126,10 +149,12 @@ batch still requires its own approval:
    approved batch through the manifest-based runner, resuming by trial ID.
 5. Retain the append-only attempt logs and reproduce outputs from those logs.
 
-Available commands are `review-prompts`, `manifest`, and mock-only `run`.
+Available commands are `review-prompts`, `manifest`, mock-only `run`,
+`simulate-study1`, `analyze study1`, `reproduce`, and `report pilot|comprehension`.
 Real smoke execution is available programmatically through the provider factory
-and runner after approval; it is not exposed by the CLI yet. Reporting, analysis,
-and reproduction commands are not implemented. No current CLI command makes paid calls.
+and runner after approval; it is not exposed by the CLI yet. Pilot reports pool
+all labels; comprehension reports apply the separate pass rule. No CLI command
+makes paid calls.
 
 ## Repository layout
 
@@ -138,16 +163,17 @@ and reproduction commands are not implemented. No current CLI command makes paid
 | `configs/models.yaml` | Model roster and settings accepted in four live smoke requests; metadata caveats in the report |
 | `configs/study1.yaml` | Design, conditions, names, counts, fixed seeds, and analysis settings |
 | `prompts/study1/` | Versioned system/game templates, protected blocks and shared JSON instructions |
-| `src/kinloyalty/` | Prompt/schema tools, manifests, mock client, validation, logging, runner, CLI |
+| `src/kinloyalty/` | Prompts/schemas, manifests, clients, validation, logging, runner, saved-log analysis, CLI |
 | `data/study1/` | Separate smoke, pilot, and comprehension batches; main data added later |
 | `results/study1/` | Generated tables and figures, once implemented |
 | `preregistration/` | Reserved for the final Study 1 pre-registration |
-| `docs/data_dictionary.md` | Draft attempt-log and analysis-table contracts |
+| `docs/data_dictionary.md` | Attempt-log and implemented analysis-table contracts |
 | `docs/decisions.md` | Dated decisions, approvals, and later deviations |
 | `docs/study1_prompt_review.md` | Fully rendered draft prompts and schemas for approval |
 | `docs/engine.md` | Allocation rules, retries/re-asks, concurrency, and durable resume |
 | `docs/provider_verification.md` | Official sources, exact API mappings, normalization, and prepared smoke scope |
 | `docs/phase4b_report.md` | Observed smoke metadata, limitations, artifact hashes, and offline inspection commands |
+| `docs/analysis.md` | Eligibility, approved methods, resampling conventions, reports, and reproduction |
 | `tests/` | Offline protocol, manifest, validation, logging/resume, and CLI checks; socket connections blocked |
 | `codex_prompts/` | Local coding-agent instructions; always Git-ignored |
 
@@ -160,8 +186,9 @@ artifacts and are not ignored.
 
 - P1 tests dictator transfers to `own_model` versus `other_lab`; its pooled
   estimate gives each of the four models equal weight.
-- All difference tests are two-sided. The pooled P1 equivalence test uses the
-  configurable ±$5 bound; exact TOST conventions await analysis-phase approval.
+- All difference tests are two-sided. Pooled P1 equivalence always uses bootstrap
+  TOST against configurable ±$5 bounds. The researcher approved tested-pair
+  permutations, Freedman–Lane adjusted tests, and model-specific S1 belief slopes.
 - Pilot decision summaries pool over labels. No pilot label-effect comparisons
   are computed, and pilot decisions never enter the main analysis.
 - An invalid reply gets one identical fresh re-ask. Two invalid replies exclude

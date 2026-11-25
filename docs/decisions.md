@@ -282,3 +282,59 @@ and any batch that must be rerun. No post-pilot fixes or deviations exist yet.
   report's offline inspection command, frozen-request/state/summary checks,
   provider metadata checks, unchanged source/prompt/manifest checks, and
   secret-exclusion/Git-ignore checks passed. No extra API calls were made.
+
+## 2026-11-25 — Phase 4b push and Phase 5 approval
+
+- **Approval:** Researcher directed a push first, then authorized Phase 5.
+- **Push:** Pushed `3fd70c5` to private GitHub main before beginning analysis work.
+- **Scope:** Implement log-based analysis, reports, figures, and reproduction;
+  validate only on synthetic/mock data. No pilot/main API calls or new push.
+
+## 2026-11-25 — Approved analysis conventions
+
+- **Researcher choices:** Through clarification responses, approved bootstrap
+  TOST using the same 10,000 stratified resamples; tested-pair label permutations
+  within model × paraphrase; Freedman–Lane residual permutation for belief-adjusted
+  S1; and separate model-specific belief slopes with equally averaged adjusted
+  contrasts. Recorded these choices in `configs/study1.yaml`.
+- **Implementation conventions:** Use basic bootstrap intervals consistent with
+  null-centered TOST errors, absolute-statistic two-sided permutation tails,
+  conservative randomized +1 corrections, and named SHA-256-derived RNG streams.
+  Report both TOST p-values, their maximum, and the corresponding 90% interval.
+  All ordinary contrast intervals are 95%; resampling counts and seeds unchanged.
+- **S1 interpretation:** Bootstrap paired offers/beliefs together. Before/after
+  label coefficients and their paired-bootstrap change are reported; coefficient
+  change is a descriptive association, not a causal mediation estimate. No extra
+  hypothesis test is introduced for that change.
+- **Eligibility:** Main analysis rejects smoke/pilot/comprehension decisions,
+  mixed backends, unapproved synthetic input, altered histories, pending calls,
+  and nonterminal/missing configured draws. Exclusions remain explicit, never
+  imputed as zero. Empty cells/non-identifiable adjusted regressions fail.
+- **Reporting:** Pilot decisions are pooled over labels. Comprehension keeps
+  planned denominators, reports incomplete cells, and retains failed models.
+- **Sources:** `docs/analysis.md` links the primary method descriptions. No
+  dependency, prompt, model, sampling, or API-setting changes were introduced.
+
+## 2026-11-25 — Phase 5 verification and completion
+
+- **Tests:** 275 offline tests passed, including 23 new analysis checks. These
+  compare independent OLS fits, enumerate a permutation-null case, check TOST
+  boundaries and paired resampling, verify equal model weights under unequal
+  retained counts, and exercise eligibility/history/reporting/reproduction.
+- **Full-size mock verification:** Generated separate planted-$12 and zero-effect
+  batches through the actual mock runner: 3,600 synthetic main draws, 240 pilot,
+  and 320 comprehension each. Used 10,000 bootstrap/permutation draws for every
+  contrast. Pooled P1 was $12.4875 (95% interval $11.4583–$13.5333) for the planted
+  case and $0.4875 (−$0.5417–$1.5333) for the null case. Only the null case passed
+  equivalence within ±$5. These are software checks, not observed model findings.
+- **Reproduction:** Full-size `analyze`/`reproduce` artifacts matched byte for byte.
+  Final visual review corrected table-title/legend spacing; the offline suite
+  and rendered outputs passed again. Offline wheel/source builds, archive
+  inclusion/exclusion, syntax, and public API docstrings passed.
+- **Data separation:** Mock inputs/results remain in a temporary workspace
+  outside real study folders. No additional paid calls, analyses of observed
+  pilot outcomes, label comparisons on pilot data, or real main manifest/data
+  were produced. Credentials/local instructions remain ignored and untracked.
+- **Status:** Phase 5 complete with a local commit and `docs/phase5_report.md`;
+  no new push. Phase 6 and its 240+320 live draws need separate approval, as
+  does accepting the reported Kimi cache-read metadata limitation before pilot.
