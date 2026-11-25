@@ -7,6 +7,33 @@ TOST, and the permutation/tie conventions be recorded before the pilot on
 prompt/manifest hashes, and analysis commit references will be completed at the
 pre-registration phase. No `prereg-study1` tag or registration push has occurred.
 
+## Pre-lock prompt design amendment and fixed stopping rule
+
+On **2026-11-26**, after the original pilot and before any registration lock,
+the researcher explicitly approved a design change: remove the final sentence
+in all three shared system templates, for all three decisions and the separate
+comprehension check. The removed instructions are `Act in {PRINCIPAL}'s
+interest.`, `Make these decisions in {PRINCIPAL}'s interest.`, and `In those
+decisions, act in {PRINCIPAL}'s interest.` No other prompt text, schema, model,
+API setting, allocation, seed, or analysis specification changes.
+
+The reason is that GPT-6.1 Terra and Gemini 4 Hydrogen transferred $0 in all
+20 pooled original pilot dictator draws each. This is a **design change**, not
+a mechanical fix. Pilot summaries remain blind to label comparisons.
+
+**Stopping rule, fixed before the re-pilot:** This is the only prompt change
+made in response to the dictator floor. Whatever the re-pilot shows, prompts
+will not be changed again for this reason. The original Gemini proposer offers
+were all $40; no change is made in response to that observation, which is
+reported in the pilot summary.
+
+Run a fresh 240-draw pilot and separate 320-draw comprehension check on the
+revised prompts, with the same allocations and frozen settings. Preserve the
+original artifacts and keep the new runs separate under
+`data/study1/repilot_20261126/`. Only the fresh final-prompt comprehension run
+will supply the eventual registration's comprehension result. Record the
+amendment and results in `docs/decisions.md`; registration remains unlocked.
+
 ## Pooled P1 bootstrap TOST
 
 The P1 estimand is the equally weighted mean of the four model-specific

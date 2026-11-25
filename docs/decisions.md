@@ -520,3 +520,49 @@ and any batch that must be rerun. No post-pilot fixes or deviations exist yet.
   metadata counters, report hashes, and supplied-secret exclusion passed. Both
   final package builds passed; the 312 tested-source checks remained unchanged.
   Completion artifacts are committed locally without a new push.
+
+## 2026-11-26 — Approved pre-lock design change and fresh pilot
+
+- **Classification and approval:** The researcher explicitly approved this as
+  a design change before the pre-registration lock, rather than a mechanical
+  fix. The reason is that GPT-6.1 Terra and Gemini 4 Hydrogen each transferred
+  $0 in every one of their 20 pooled original pilot dictator draws. No pilot
+  label comparisons informed the change.
+- **Exact change:** Remove only the final principal-interest instruction from
+  each shared system template: `Act in {PRINCIPAL}'s interest.` (paraphrase 1),
+  `Make these decisions in {PRINCIPAL}'s interest.` (2), and
+  `In those decisions, act in {PRINCIPAL}'s interest.` (3). This applies to all
+  three decisions and to the separate comprehension check. Retain both other
+  system sentences and every other prompt byte. Regenerate the rendered review
+  and update the independent prompt snapshot to match this approved revision.
+- **Stopping rule fixed before the re-pilot:** This is the only prompt change
+  made in response to the dictator floor. Whatever the re-pilot shows, prompts
+  will not be changed again for this reason. This rule is not conditional on
+  whether the floor disappears or whether decisions become more variable.
+- **Gemini proposer observation:** All 20 original Gemini proposer offers were
+  $40, pooled over labels. Make no change in response to this observation;
+  report it in the pilot summary, together with the revised pilot observation.
+- **Authorized fresh scope:** 240 pilot draws and a fresh 320-draw comprehension
+  check on the revised prompts, using the original balanced allocations, random
+  seeds, execution positions, name pairs, schemas, model IDs, API settings,
+  validation/retry policy, and shared concurrency limits (four global, one per
+  model). One invocation per batch, at most 4,480 HTTP attempts including
+  retries/re-asks; no automatic extra invocation or account top-up.
+- **Separation and blinding:** Preserve the original manifests, logs, summaries,
+  and reports. Use `data/study1/repilot_20261126/` for the new pilot and
+  comprehension namespaces. Trial IDs remain deterministic within each
+  separately bound manifest/log namespace; do not combine old and new runs.
+  Report pilot outcomes only pooled over labels within model × decision.
+  Comprehension is scored by card condition as specified; only this fresh
+  final-prompt comprehension check is intended for the eventual registration.
+- **Provenance and gate:** Freeze the revised manifests and execution plan in a
+  local preparation commit before calls. Record the request comparison audit in
+  `docs/repilot_20261126_execution_plan.json`. Analysis specifications remain
+  unchanged. This approval includes the design amendment and its re-pilot/check,
+  not the registration lock, main run, or a GitHub push.
+- **Preflight verification:** All 312 offline tests and both package builds
+  passed. Every one of the 560 revised manifest records matches its original
+  after only the specified system-text/payload and template-hash substitutions;
+  all other fields are identical. The rendered review differs only by the 81
+  corresponding sentence removals. Credentials are available without disclosure;
+  `.env` is ignored with mode 0600 and `codex_prompts/` is ignored/untracked.

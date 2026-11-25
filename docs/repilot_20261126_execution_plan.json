@@ -1,0 +1,85 @@
+{
+  "planned_draws": 560,
+  "maximum_http_attempts": 4480,
+  "invocations_per_batch": 1,
+  "automatic_extra_invocation": false,
+  "concurrency": 4,
+  "per_model_concurrency": 1,
+  "batches": {
+    "pilot": {
+      "manifest": "data/study1/repilot_20261126/pilot/manifest.jsonl",
+      "sha256": "0ad3405905e6468523b00a0f8680e0bc0c4f9c96228aa2b8b70042e87d2a4a3e",
+      "draws": 240,
+      "draws_per_model": {
+        "gemini_4_hydrogen": 60,
+        "gpt_6_1_terra": 60,
+        "kimi_k3_1_pro": 60,
+        "claude_sonnet_5_5": 60
+      },
+      "runner_policy": {
+        "concurrency": 4,
+        "per_model_concurrency": 1,
+        "timeout_seconds": 120,
+        "api_attempts_per_response": 4,
+        "backoff_initial_seconds": 1,
+        "backoff_multiplier": 2,
+        "backoff_max_seconds": 30,
+        "invalid_reasks": 1
+      },
+      "original_manifest": "data/study1/pilot/manifest.jsonl",
+      "original_sha256": "7f92a5aff7fb447e9bd0f0482065ab67b8b96d6230f69b6f511f8e1059e92ff4"
+    },
+    "comprehension": {
+      "manifest": "data/study1/repilot_20261126/comprehension/manifest.jsonl",
+      "sha256": "92ce5927a501038d4c629e3fe243b643fca7caf660c074f1317c967aca620a13",
+      "draws": 320,
+      "draws_per_model": {
+        "claude_sonnet_5_5": 80,
+        "kimi_k3_1_pro": 80,
+        "gpt_6_1_terra": 80,
+        "gemini_4_hydrogen": 80
+      },
+      "runner_policy": {
+        "concurrency": 4,
+        "per_model_concurrency": 1,
+        "timeout_seconds": 120,
+        "api_attempts_per_response": 4,
+        "backoff_initial_seconds": 1,
+        "backoff_multiplier": 2,
+        "backoff_max_seconds": 30,
+        "invalid_reasks": 1
+      },
+      "original_manifest": "data/study1/comprehension/manifest.jsonl",
+      "original_sha256": "77a75c301c8071271e2d0dbc03cf00d191d1ae60d9a10e60c60fa78bd4d603dd"
+    }
+  },
+  "revision": "repilot_20261126",
+  "approved_on": "2026-11-26",
+  "classification": "researcher-approved design change before lock",
+  "stopping_rule": "Only prompt change in response to the dictator floor; no further prompt change for this reason regardless of re-pilot outcomes.",
+  "gemini_constant_proposer_policy": "Report original constant $40 offers; make no change in response.",
+  "original_artifacts_preserved": true,
+  "cohort_summary": "data/study1/repilot_20261126/cohort_summary.json",
+  "request_integrity_audit": {
+    "draws_compared_to_original": 560,
+    "changed_template_files": [
+      "system_1.txt",
+      "system_2.txt",
+      "system_3.txt"
+    ],
+    "unchanged_template_files": 15,
+    "rendered_review_examples_changed_only_by_sentence_removal": 81,
+    "permitted_request_differences": [
+      "system_prompt final sentence removed",
+      "matching API payload system field updated"
+    ],
+    "permitted_source_differences": [
+      "SHA-256 of the three system templates"
+    ],
+    "all_other_manifest_and_request_fields_identical": true,
+    "original_attempt_logs_sha256": {
+      "pilot": "28ac551d9077db3ab7d823a33e568e4b4d504b946893ae87431ff00aabad5cf0",
+      "comprehension": "e685cc23631700c9000ad02a87d8938ff2d9145a7c98b25c9adb2c0261507fd1"
+    }
+  }
+}
