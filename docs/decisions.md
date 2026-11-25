@@ -78,3 +78,46 @@ and any batch that must be rerun. No post-pilot fixes or deviations exist yet.
   rendered prompt correctness, engine behavior, or analysis execution yet.
 - **Approval/status:** Completed within the researcher's Phase 1 authorization.
   See `docs/phase1_report.md` for changed files, checks, and pending items.
+
+## 2026-11-25 — Private GitHub repository and Phase 1 push
+
+- **Decision:** Create `sambitmukherjee/kin-loyalty` as a private GitHub repository
+  and push the committed Phase 1 `main` branch.
+- **Reason/approval:** Explicit researcher request in the Codex chat after the
+  Phase 1 report. Privacy and the remote commit were verified.
+- **Result:** `origin` points to `https://github.com/sambitmukherjee/kin-loyalty.git`;
+  the pushed Phase 1 commit is `08ed49f25825c267f4e743593c947f31b1943d44`.
+  The ignored `codex_prompts/` directory was absent from the committed tree.
+
+## 2026-11-25 — Phase 2 prompt drafts, cards, and schemas
+
+- **Decision:** Implement the approved Phase 2 scope with plain-text system/game
+  templates, shared task-specific JSON instructions, exact agent/human blocks,
+  generic card rendering, and canonical JSON schemas.
+- **Reason:** Keep protected wording shared and testable while making each
+  paraphrase's economic description directly inspectable.
+- **Approval:** Researcher explicitly instructed "Begin Phase 2" in the Codex
+  chat. This authorizes drafting and implementation; approval of the final text
+  and names is still pending.
+- **Drafts:** Paraphrase 2 uses Riley/Taylor; paraphrase 3 uses Casey/Morgan. Each
+  preserves the $100 total, who chooses, rejection/acceptance consequences, and
+  the responder's advance acceptance threshold. The first system sentence,
+  counterparty block, human sentence, and JSON instructions are protected.
+- **Storage detail:** Card field data remains in YAML. The unchanged agent
+  introduction and human sentence now live in plain-text block templates.
+  Configured paths resolve relative to the study YAML file rather than shell
+  cwd. These choices do not change rendered experimental wording.
+- **Schemas:** Ordered required fields, no extra properties, integer 0–100
+  amounts, string reason, and a separate yes/no/unsure comprehension enum.
+  Numeric-bound omission is available only for later verified provider needs;
+  canonical local validation must retain bounds. No additional sentence-count
+  heuristic is introduced.
+- **Review:** `docs/study1_prompt_review.md` shows 63 complete decision examples
+  covering all 45 cells plus every other-lab name, and 18 separate comprehension
+  examples, for one focal model. It is not a manifest or a rotation schedule.
+- **Verification:** 128 offline tests passed, covering exact protocol snapshots,
+  protected text, isolated label changes, comprehension separation, schema
+  invariance, explicit other-lab selection, copied-config paths, and CLI/review
+  reproducibility. No provider calls were made.
+- **Status:** Awaiting researcher approval of all prompt text and proposed name
+  pairs. Phase 3 is not started; Phase 2 is committed locally only.

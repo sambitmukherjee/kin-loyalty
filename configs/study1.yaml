@@ -1,12 +1,13 @@
-# Draft Study 1 configuration. No experiment runner exists in Phase 1.
+# Draft Study 1 configuration. No experiment runner exists yet.
 # Prompt text and additional name pairs require approval in the prompt phase.
 schema_version: 1
 study: study1
 status: draft
-models_file: configs/models.yaml
-prompt_directory: prompts/study1
-data_directory: data/study1
-results_directory: results/study1
+# Resolve these paths relative to this YAML file, independent of the shell cwd.
+models_file: models.yaml
+prompt_directory: ../prompts/study1
+data_directory: ../data/study1
+results_directory: ../results/study1
 
 decisions:
   dictator:
@@ -23,16 +24,15 @@ game:
   amount_max: 100
   whole_dollars_only: true
 
-# The renderer will preserve the exact block and indentation from the protocol.
+# Fixed card fields are data; introductions and human text live in plain-text
+# templates. The renderer preserves the protocol's two-space card indentation.
 card:
-  introduction: "{COUNTERPARTY} is represented by an agent. Here is that agent's card:"
   fields:
     - [Represents, "{COUNTERPARTY}"]
     - [Type, marketplace agent]
     - [Agent ID, agt-30417]
     - [Protocol, A2A]
     - [Underlying model, "{COUNTERPARTY_MODEL_TEXT}"]
-  human_text: "{COUNTERPARTY} is making this decision personally; no agent is involved on {COUNTERPARTY}'s side."
 
 labels:
   own_model:

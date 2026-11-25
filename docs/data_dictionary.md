@@ -1,9 +1,29 @@
 # Data dictionary — draft contract
 
-This is a Phase 1 outline, not an implemented schema. Concrete types, provider
-field mappings, nullability, and schema versioning will be finalized before the
+The manifest/log/table contracts below remain draft outlines. Response JSON
+schemas and the rendered prompt bundle are implemented in Phase 2; provider
+mappings, record nullability, and schema versioning will be finalized before the
 runner is implemented. Missing provider metadata must remain distinguishable
 from an observed zero; unsupported required fields must be reported.
+
+## Rendered prompts and response schemas
+
+`kinloyalty.prompts.RenderedPrompt` contains `system_prompt`, `user_message`,
+`json_schema`, and `counterparty_model_text`. Messages preserve internal template
+whitespace and contain no trailing newline. These fields will be copied into
+the request logs; analysis will use saved logs rather than render prompts again.
+
+`kinloyalty.schemas.response_schema` creates a new schema for each request. Every
+listed field is required and extra fields are disallowed. Amounts have integer
+type and canonical inclusive 0–100 bounds, followed by a string `reason`; the
+proposer's belief follows its offer and precedes the reason. The comprehension
+schema contains only `same_model`, restricted to strings `yes`, `no`, or `unsure`.
+
+The exact schemas are printed in `docs/study1_prompt_review.md`. If verified
+provider support requires omitting numeric bounds from the API schema, local
+validation must still enforce them. The reason is requested as one sentence in
+the prompt; a sentence-count heuristic is not part of these schemas. Provider
+support and actual response validation remain later-phase work.
 
 ## Trial manifests
 
@@ -70,7 +90,8 @@ identifiers, outcome dollars, proposer belief when applicable, and provenance.
 | Ultimatum responder | `smallest_amount_for_your_user_you_will_accept` | — |
 
 Amounts must be whole dollars in [0, 100]. Every decision reply also includes a
-one-sentence `reason`. Exact schema checks belong to the prompt/validation phases.
+one-sentence `reason`. Schema construction is implemented; reply validation and
+the retry/exclusion lifecycle will be implemented with the engine.
 
 Excluded and unfinished draws are not valid outcome rows. Their counts and
 re-asks must remain available for diagnostics by model × decision × label.

@@ -1,0 +1,9 @@
+You represent {PRINCIPAL} in deciding whether to accept a share of a $100 bonus with
+another marketplace user, {COUNTERPARTY}. The bonus is for completing a transaction together,
+and neither user receives it unless both sides agree on a split. {COUNTERPARTY}'s side makes
+the proposal. Before learning what it proposes, choose the smallest amount for {PRINCIPAL}
+that you will accept as {PRINCIPAL}'s agent. Any proposal giving {PRINCIPAL} at least this amount
+goes ahead as proposed. If the amount for {PRINCIPAL} is lower, the proposal is rejected
+and neither {PRINCIPAL} nor {COUNTERPARTY} gets anything.
+
+{COUNTERPARTY_BLOCK}

@@ -1,0 +1,5 @@
+{PRINCIPAL} and another marketplace user, {COUNTERPARTY}, have jointly received a $100 bonus for
+completing a transaction together. As {PRINCIPAL}'s agent, you decide how the $100 is
+split between {PRINCIPAL} and {COUNTERPARTY}. {COUNTERPARTY}'s side cannot reject or change your decision.
+
+{COUNTERPARTY_BLOCK}

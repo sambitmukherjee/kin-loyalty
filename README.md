@@ -10,11 +10,13 @@ outside the current scope.
 
 ## Current status
 
-**Phase 1: repository skeleton.** The package currently exposes help and version
-information only. There are no provider clients, experiment prompts, manifests,
-runner, API calls, analysis results, or locked pre-registration yet. Model IDs
-and API settings in the configuration are the requested specification and have
-not been verified against current provider documentation.
+**Phase 2: prompts and cards implemented; prompt approval pending.** The package
+renders the three decision tasks and separate comprehension check offline, with
+neutral cards and canonical JSON schemas. Paraphrases 2 and 3 and their proposed
+Riley/Taylor and Casey/Morgan name pairs await researcher review. There are no
+provider clients, manifests, runner, API calls, analysis results, or locked
+pre-registration yet. Model IDs and API settings are the requested specification
+and have not been verified against current provider documentation.
 
 The planned main design has four models, three decisions, five labels, three
 paraphrases, and 20 draws per smallest cell: **3,600 planned draws**. Smoke tests,
@@ -41,6 +43,28 @@ If you already have a supported interpreter, select it explicitly:
 ```sh
 uv sync --locked --python /absolute/path/to/python3.11
 ```
+
+## Review the proposed prompts
+
+Read [the complete rendered review](docs/study1_prompt_review.md) for Claude
+Sonnet 5.5. It contains all 45 decision/label/paraphrase combinations, expanded to
+63 decision examples to include every other-lab card, plus 18 separate
+comprehension examples. These are examples for text approval, not a trial manifest.
+The canonical response schemas appear at the beginning.
+
+The [template index](prompts/study1/README.md) links to each plain-text source for
+comparing the paraphrases. To regenerate the review without keys or API calls:
+
+```sh
+uv run --offline --locked kinloyalty review-prompts \
+  --config configs/study1.yaml --model claude_sonnet_5_5 \
+  --output docs/study1_prompt_review.md
+```
+
+`--model` accepts any model key in `configs/models.yaml`. Configuration file and
+directory paths are resolved relative to the study YAML file; CLI input/output
+paths are relative to the working directory unless supplied as absolute paths.
+Do not treat tests as researcher approval of the wording.
 
 ## Quickstart A: reproduce the paper
 
@@ -76,14 +100,15 @@ The planned CLI will include `smoke`, `manifest`, `run`, `report`, `analyze`, an
 | --- | --- |
 | `configs/models.yaml` | Requested model roster and provider settings; verification pending |
 | `configs/study1.yaml` | Design, conditions, names, counts, fixed seeds, and analysis settings |
-| `prompts/study1/` | Versioned experiment templates, to be drafted in Phase 2 |
-| `src/kinloyalty/` | Package, with reserved client and analysis modules |
+| `prompts/study1/` | Versioned system/game templates, protected blocks and shared JSON instructions |
+| `src/kinloyalty/` | Offline rendering, response schemas, review CLI; reserved client and analysis modules |
 | `data/study1/` | Separate smoke, pilot, and comprehension batches; main data added later |
 | `results/study1/` | Generated tables and figures, once implemented |
 | `preregistration/` | Reserved for the final Study 1 pre-registration |
 | `docs/data_dictionary.md` | Draft attempt-log and analysis-table contracts |
 | `docs/decisions.md` | Dated decisions, approvals, and later deviations |
-| `tests/` | Offline configuration checks; behavioral tests added with implementation |
+| `docs/study1_prompt_review.md` | Fully rendered draft prompts and schemas for approval |
+| `tests/` | Offline configuration, exact prompt/card text, schema, and review-generation tests |
 | `codex_prompts/` | Local coding-agent instructions; always Git-ignored |
 
 `prompts/` and `codex_prompts/` have different purposes. Experiment templates are
