@@ -1,0 +1,15 @@
+# Replace the contributor entity with publication authors when confirmed.
+# Add the public repository URL, paper citation, and DOI when available.
+cff-version: 1.2.0
+message: "If you use this software or its study data, please cite this repository version."
+type: software
+title: "kin-loyalty: Counterparty model labels and AI agent loyalty"
+authors:
+  - name: kin-loyalty contributors
+version: 0.1.0
+license: MIT
+keywords:
+  - AI agents
+  - loyalty
+  - experimental economics
+  - model labels

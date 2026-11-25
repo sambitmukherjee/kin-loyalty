@@ -1,0 +1,80 @@
+# This is the researcher's requested roster, not a statement of API support.
+# Verify current official documentation before writing each provider client.
+schema_version: 1
+verification_status: pending_official_documentation_review
+
+# These settings are provider-neutral configuration; adapters will map them to
+# verified request parameters. Never add temperature, top_p, or top_k.
+defaults:
+  stateless: true
+  reasoning_effort: low
+  max_output_tokens: 8192
+  sampling: provider_defaults
+
+# Stable keys identify models; display names and labs appear verbatim in prompts.
+models:
+  claude_sonnet_5_5:
+    lab: Anthropic
+    display_name: Claude Sonnet 5.5
+    api_model_id: claude-sonnet-5-5
+    provider: anthropic
+    api_key_env: ANTHROPIC_API_KEY
+    endpoint: Messages API
+    requested_parameters:
+      reasoning: output_config.effort
+      structured_output: output_config.format
+      structured_output_mode: json_schema
+    caching:
+      policy: omit_cache_control
+      expected_cache_read_tokens: 0
+
+  gpt_6_1_terra:
+    lab: OpenAI
+    display_name: GPT-6.1 Terra
+    api_model_id: gpt-6.1-terra
+    provider: openai
+    api_key_env: OPENAI_API_KEY
+    endpoint: Chat Completions
+    requested_parameters:
+      reasoning: reasoning_effort
+      structured_output: response_format
+      structured_output_mode: strict_json_schema
+    caching:
+      policy: explicit_without_breakpoints
+      requested_mode_parameter: prompt_cache_options.mode
+      requested_mode_value: explicit
+      expected_cache_read_tokens: 0
+
+  gemini_4_hydrogen:
+    lab: Google
+    display_name: Gemini 4 Hydrogen
+    api_model_id: gemini-4-hydrogen
+    provider: google
+    api_key_env: GOOGLE_API_KEY
+    endpoint: generateContent
+    requested_parameters:
+      reasoning: thinking_level
+      structured_output: json_response_schema
+      structured_output_mode: json_schema
+    caching:
+      policy: implicit_only
+      # Threshold is taken from the study instructions and awaits verification.
+      keep_prompt_below_tokens: 4096
+
+  kimi_k3_1_pro:
+    lab: Moonshot AI
+    display_name: Kimi K3.1 Pro
+    api_model_id: kimi-k3.1-pro
+    provider: moonshot
+    api_key_env: MOONSHOT_API_KEY
+    endpoint: Chat Completions (OpenAI-compatible)
+    # Select the official base URL during the documentation review.
+    base_url: null
+    requested_parameters:
+      reasoning: reasoning_effort
+      structured_output: response_format
+      structured_output_mode: strict_json_schema
+    caching:
+      policy: automatic
+      record_cache_read_tokens: true
+      record_cache_write_tokens: true

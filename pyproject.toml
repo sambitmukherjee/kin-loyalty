@@ -1,0 +1,53 @@
+[build-system]
+requires = ["hatchling>=1.26"]
+build-backend = "hatchling.build"
+
+[project]
+name = "kin-loyalty"
+version = "0.1.0"
+description = "Experiments on counterparty model labels and AI agents' loyalty to their principals."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+dependencies = [
+    "anthropic>=0.40",
+    "openai>=1.60",
+    "google-genai>=1.0",
+    "pandas>=2.2",
+    "numpy>=1.26",
+    "scipy>=1.13",
+    "statsmodels>=0.14",
+    "matplotlib>=3.9",
+    "PyYAML>=6.0",
+]
+
+[project.scripts]
+kinloyalty = "kinloyalty.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8.0"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/kinloyalty"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/src",
+    "/configs",
+    "/prompts",
+    "/tests",
+    "/docs",
+    "/preregistration",
+    "/README.md",
+    "/LICENSE",
+    "/DATA_LICENSE",
+    "/CITATION.cff",
+    "/.env.example",
+    "/.python-version",
+    "/pyproject.toml",
+    "/uv.lock",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-config --strict-markers"

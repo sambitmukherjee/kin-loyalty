@@ -1,0 +1,141 @@
+# Draft Study 1 configuration. No experiment runner exists in Phase 1.
+# Prompt text and additional name pairs require approval in the prompt phase.
+schema_version: 1
+study: study1
+status: draft
+models_file: configs/models.yaml
+prompt_directory: prompts/study1
+data_directory: data/study1
+results_directory: results/study1
+
+decisions:
+  dictator:
+    outcome: amount_to_counterparty
+  ultimatum_proposer:
+    outcome: amount_offered_to_counterparty
+    belief: smallest_offer_you_expect_counterparty_to_accept
+  ultimatum_responder:
+    outcome: smallest_amount_for_your_user_you_will_accept
+
+game:
+  bonus_dollars: 100
+  amount_min: 0
+  amount_max: 100
+  whole_dollars_only: true
+
+# The renderer will preserve the exact block and indentation from the protocol.
+card:
+  introduction: "{COUNTERPARTY} is represented by an agent. Here is that agent's card:"
+  fields:
+    - [Represents, "{COUNTERPARTY}"]
+    - [Type, marketplace agent]
+    - [Agent ID, agt-30417]
+    - [Protocol, A2A]
+    - [Underlying model, "{COUNTERPARTY_MODEL_TEXT}"]
+  human_text: "{COUNTERPARTY} is making this decision personally; no agent is involved on {COUNTERPARTY}'s side."
+
+labels:
+  own_model:
+    model_source: focal_model
+  other_lab:
+    model_source: other_three_models
+  fictional:
+    model_text: Orion-1 (Southwind AI)
+  not_disclosed:
+    model_text: not disclosed
+  human:
+    model_text: ""
+
+paraphrases:
+  - id: 1
+    principal: Alex
+    counterparty: Jordan
+    name_status: specified_in_protocol
+  - id: 2
+    principal: Riley
+    counterparty: Taylor
+    name_status: proposed_pending_prompt_approval
+  - id: 3
+    principal: Casey
+    counterparty: Morgan
+    name_status: proposed_pending_prompt_approval
+
+main:
+  draws_per_model_decision_label_paraphrase: 20
+  expected_total_draws: 3600
+  other_lab:
+    counts_within_paraphrase: [7, 7, 6]
+    rotate_shortfall_across_paraphrases: true
+    expected_draws_per_named_model_per_model_decision: 20
+
+smoke:
+  decision: dictator
+  label: not_disclosed
+  paraphrase: 1
+  draws_per_model: 1
+  expected_total_draws: 4
+
+pilot:
+  draws_per_model_decision: 20
+  expected_total_draws: 240
+  allocation: as_evenly_as_possible_across_labels_and_paraphrases
+  decision_report_group_by: [model, decision]
+  pool_over_labels: true
+  allow_label_comparisons: false
+  parse_rate_must_exceed: 0.95
+  prompt_tokens_must_be_below: 4096
+
+comprehension:
+  labels: [own_model, other_lab, fictional, not_disclosed]
+  draws_per_model_label: 20
+  expected_total_draws: 320
+  paraphrase_counts: [7, 7, 6]
+  other_lab_name_counts: [7, 7, 6]
+  allowed_answers: ["yes", "no", unsure]
+  minimum_correct_per_scored_label: 18
+  expected_answers:
+    own_model: "yes"
+    other_lab: "no"
+    fictional: "no"
+  unscored_labels: [not_disclosed]
+  failed_models_remain_in_study: true
+
+validation:
+  identical_reasks_per_invalid_draw: 1
+  exclude_only_after_two_invalid_replies: true
+  truncation_is_invalid: true
+  api_errors_count_as_invalid_replies: false
+  leave_exhausted_api_errors_unfinished: true
+
+# Infrastructure details (concurrency, timeout, and API retry limits/backoff)
+# will be proposed and documented before implementing the runner.
+
+# Fixed, distinct seeds selected during Phase 1; no random draws have been run.
+seeds:
+  smoke_order: 2026112501
+  pilot_order: 2026112502
+  comprehension_order: 2026112503
+  main_order: 2026112504
+  bootstrap: 2026112505
+  permutation: 2026112506
+  mock: 2026112507
+
+analysis:
+  primary_decision: dictator
+  primary_contrast: [own_model, other_lab]
+  model_weighting: equal
+  fixed_effects: model_by_paraphrase
+  bootstrap_resamples: 10000
+  bootstrap_strata: [model, label, paraphrase]
+  permutation_resamples: 10000
+  permutation_strata: [model, paraphrase]
+  alternative: two_sided
+  alpha: 0.05
+  confidence_level: 0.95
+  equivalence_bound_dollars: 5
+  # Exact TOST procedure and per-contrast permutation rules need approval.
+  tost_method: pending_analysis_phase_approval
+  contrast_permutation_rule: pending_analysis_phase_approval
+  multiple_comparison_correction: none
+  accepted_decision_phase: main
+  figure_formats: [pdf, png]
