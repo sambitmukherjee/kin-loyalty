@@ -483,3 +483,40 @@ and any batch that must be rerun. No post-pilot fixes or deviations exist yet.
   global/per-model cap checks and fatal-error logging/cancellation. Both real
   manifests regenerate identically. Store a local preparation commit before
   calling providers so execution has a clean, exact code/plan provenance.
+
+## 2026-11-25 — Phase 6 execution and findings
+
+- **Execution:** Preparation commit `9f77c99` ran one concurrent cohort from
+  23:13:47 to 23:32:18 IST. All 240 pilot and 320 comprehension draws finished
+  valid in 562 HTTP attempts. OpenAI HTTP 500 and Kimi HTTP 429 each recovered
+  on retry; no invalid response, re-ask, exclusion, or unfinished draw occurred.
+  Every live record names the clean preparation commit. Measured concurrency
+  was at most four globally and one per model, as approved.
+- **Mechanical passes:** Every model had 100% valid responses and passed all
+  three scored comprehension card conditions at 20/20. Undisclosed responses
+  were all unsure and unscored. No output-cap stops; reasoning/input counts
+  present for all 560 model responses. Largest prompt: 722 tokens. OpenAI and
+  Anthropic explicitly reported zero cache reads/writes throughout.
+- **Pooled pilot flags:** GPT-6.1 Terra and Gemini 4 Hydrogen each transferred
+  $0 in all 20 dictator draws. Gemini offered $40 in all 20 proposer draws.
+  Those cells fail the planned floor/variation checks. Kimi had 19/20 zero
+  dictator transfers. These distributions pool all labels; no condition
+  comparison or main P1/S1 inference was computed.
+- **Metadata:** Kimi reports cache reads in 73/140 responses and omits them in
+  67/140; cache writes are reported in all 140. Google omits cache counts in
+  all 140. Preserve these missing fields as null. All returned model strings
+  equal their requested IDs, without more specific version suffixes. Kimi
+  returned default reasoning text; no visibility setting was changed.
+- **Artifacts/status:** Saved both full logs/summaries, cohort summary, audit,
+  and separate offline reports. `docs/phase6_report.md` gives pooled full
+  frequency distributions, comprehension scores, commands, and open items.
+  Phase 6 is complete with review flags; no prompt/setting/model/allocation or
+  analysis change was made after seeing pilot data. All four models remain.
+  Phase 7 review and any proposed mechanical fix need separate approval.
+  No new push, main manifest/data, or registration lock was performed.
+- **Final verification:** Both offline report commands reproduced byte-identical
+  artifacts in new temporary directories. Frozen plan/log hashes, saved-history
+  reconstruction, clean live-code provenance, actual concurrency, retry identity,
+  metadata counters, report hashes, and supplied-secret exclusion passed. Both
+  final package builds passed; the 312 tested-source checks remained unchanged.
+  Completion artifacts are committed locally without a new push.

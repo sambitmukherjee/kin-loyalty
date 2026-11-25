@@ -1,0 +1,121 @@
+{
+  "live_code_commit": "9f77c99a92d5869a2fa4326b1550b711698da007",
+  "planned_draws": 560,
+  "actual_attempts": 562,
+  "valid_draws": 560,
+  "invalid_responses": 0,
+  "exclusions": 0,
+  "unfinished_draws": 0,
+  "batches": {
+    "pilot": {
+      "planned": 240,
+      "attempts": 242,
+      "valid": 240,
+      "manifest_sha256": "7f92a5aff7fb447e9bd0f0482065ab67b8b96d6230f69b6f511f8e1059e92ff4",
+      "attempts_sha256": "28ac551d9077db3ab7d823a33e568e4b4d504b946893ae87431ff00aabad5cf0",
+      "api_errors": [
+        {
+          "model": "gpt_6_1_terra",
+          "kind": "server_error",
+          "retryable": true,
+          "status_code": 500
+        },
+        {
+          "model": "kimi_k3_1_pro",
+          "kind": "rate_limit",
+          "retryable": true,
+          "status_code": 429
+        }
+      ]
+    },
+    "comprehension": {
+      "planned": 320,
+      "attempts": 320,
+      "valid": 320,
+      "manifest_sha256": "77a75c301c8071271e2d0dbc03cf00d191d1ae60d9a10e60c60fa78bd4d603dd",
+      "attempts_sha256": "e685cc23631700c9000ad02a87d8938ff2d9145a7c98b25c9adb2c0261507fd1",
+      "api_errors": []
+    }
+  },
+  "models": {
+    "claude_sonnet_5_5": {
+      "responses": 140,
+      "returned_versions": {
+        "claude-sonnet-5-5": 140
+      },
+      "stop_reasons": {
+        "end_turn": 140
+      },
+      "input_tokens_min": 487,
+      "input_tokens_max": 722,
+      "reasoning_counts_observed": 140,
+      "default_reasoning_text_responses": 0,
+      "cache_read_observed": 140,
+      "cache_read_missing": 0,
+      "cache_write_observed": 140,
+      "cache_write_missing": 0
+    },
+    "gpt_6_1_terra": {
+      "responses": 140,
+      "returned_versions": {
+        "gpt-6.1-terra": 140
+      },
+      "stop_reasons": {
+        "stop": 140
+      },
+      "input_tokens_min": 199,
+      "input_tokens_max": 318,
+      "reasoning_counts_observed": 140,
+      "default_reasoning_text_responses": 0,
+      "cache_read_observed": 140,
+      "cache_read_missing": 0,
+      "cache_write_observed": 140,
+      "cache_write_missing": 0
+    },
+    "gemini_4_hydrogen": {
+      "responses": 140,
+      "returned_versions": {
+        "gemini-4-hydrogen": 140
+      },
+      "stop_reasons": {
+        "STOP": 140
+      },
+      "input_tokens_min": 414,
+      "input_tokens_max": 648,
+      "reasoning_counts_observed": 140,
+      "default_reasoning_text_responses": 0,
+      "cache_read_observed": 0,
+      "cache_read_missing": 140,
+      "cache_write_observed": 0,
+      "cache_write_missing": 140
+    },
+    "kimi_k3_1_pro": {
+      "responses": 140,
+      "returned_versions": {
+        "kimi-k3.1-pro": 140
+      },
+      "stop_reasons": {
+        "stop": 140
+      },
+      "input_tokens_min": 358,
+      "input_tokens_max": 496,
+      "reasoning_counts_observed": 140,
+      "default_reasoning_text_responses": 140,
+      "cache_read_observed": 73,
+      "cache_read_missing": 67,
+      "cache_write_observed": 140,
+      "cache_write_missing": 0
+    }
+  },
+  "observed_concurrency": {
+    "global_max": 4,
+    "per_model_max": {
+      "gemini_4_hydrogen": 1,
+      "gpt_6_1_terra": 1,
+      "claude_sonnet_5_5": 1,
+      "kimi_k3_1_pro": 1
+    }
+  },
+  "started_local": "2026-11-25T23:13:47.950892+05:30",
+  "completed_local": "2026-11-25T23:32:18.205802+05:30"
+}

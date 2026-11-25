@@ -1,0 +1,29 @@
+{
+  "status": "completed",
+  "started_at_utc": "2026-11-25T17:43:47.950892+00:00",
+  "completed_at_utc": "2026-11-25T18:02:18.205802+00:00",
+  "maximum_http_attempts": 4480,
+  "calls_started": 562,
+  "batches": {
+    "pilot": {
+      "planned": 240,
+      "already_final": 0,
+      "valid": 240,
+      "excluded": 0,
+      "unfinished_trial_ids": [],
+      "calls_started": 242,
+      "recovered_attempts": 0,
+      "attempt_records_written": 242
+    },
+    "comprehension": {
+      "planned": 320,
+      "already_final": 0,
+      "valid": 320,
+      "excluded": 0,
+      "unfinished_trial_ids": [],
+      "calls_started": 320,
+      "recovered_attempts": 0,
+      "attempt_records_written": 320
+    }
+  }
+}

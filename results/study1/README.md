@@ -13,3 +13,9 @@ mock demonstration and `docs/data_dictionary.md` for each output contract.
 
 Pilot reports are separate and pool all labels. Comprehension reporting uses its
 own batch. Neither enters the main decision analysis.
+
+Observed Phase 6 reports are now in `pilot-report/` and `comprehension-report/`.
+The pilot report contains pooled distributions and mechanics only. The separate
+comprehension table shows all four models passing. Read `docs/phase6_report.md`
+for the all-zero dictator floors and constant-offer review flags before any fix
+or subsequent live run is considered.

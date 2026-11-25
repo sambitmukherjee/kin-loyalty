@@ -5,11 +5,17 @@ four valid replies, and no retries or re-asks. See `smoke/attempts.jsonl`,
 `smoke/run_summary.json`, and `docs/phase4b_report.md`. Every batch has a
 deterministic JSONL manifest before execution and an append-only attempt log.
 
+Phase 6 completed 240 pilot and 320 comprehension draws in separate concurrent
+batches on 2026-11-25. All were valid; 562 attempts include two recovered API
+errors. Each batch has `manifest.jsonl`, `attempts.jsonl`, and `run_summary.json`.
+The overall completion is in `phase6_cohort_summary.json`; see
+`docs/phase6_report.md` for the floor/variation review flags and metadata caveats.
+
 | Directory | Intended contents | Outcome-analysis eligibility |
 | --- | --- | --- |
 | `smoke/` | Four completed settings-check draws, one per model | Never |
-| `pilot/` | 240 planned pilot draws, kept separate from comprehension | Never |
-| `comprehension/` | 320 planned card-recognition draws | Separate comprehension report only |
+| `pilot/` | 240 completed pilot draws, kept separate from comprehension | Never |
+| `comprehension/` | 320 completed card-recognition draws | Separate comprehension report only |
 | `main/` | Main-run manifest at lock; 3,600 planned decisions executed only later | Main decisions only |
 
 The main directory will be created when the main manifest is generated. No main

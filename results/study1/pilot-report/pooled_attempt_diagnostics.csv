@@ -1,0 +1,13 @@
+model,decision,draws_observed,valid,reasked_draws,excluded,unfinished,attempts,api_errors
+claude_sonnet_5_5,dictator,20,20,0,0,0,20,0
+claude_sonnet_5_5,ultimatum_proposer,20,20,0,0,0,20,0
+claude_sonnet_5_5,ultimatum_responder,20,20,0,0,0,20,0
+gemini_4_hydrogen,dictator,20,20,0,0,0,20,0
+gemini_4_hydrogen,ultimatum_proposer,20,20,0,0,0,20,0
+gemini_4_hydrogen,ultimatum_responder,20,20,0,0,0,20,0
+gpt_6_1_terra,dictator,20,20,0,0,0,21,1
+gpt_6_1_terra,ultimatum_proposer,20,20,0,0,0,20,0
+gpt_6_1_terra,ultimatum_responder,20,20,0,0,0,20,0
+kimi_k3_1_pro,dictator,20,20,0,0,0,20,0
+kimi_k3_1_pro,ultimatum_proposer,20,20,0,0,0,21,1
+kimi_k3_1_pro,ultimatum_responder,20,20,0,0,0,20,0

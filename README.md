@@ -10,7 +10,7 @@ outside the current scope.
 
 ## Current status
 
-**Phase 5: saved-log analysis and reproduction implemented.** The researcher has approved the prompt
+**Phase 6 complete: 240 pilot and 320 comprehension draws, with review flags.** The researcher has approved the prompt
 text, response schemas, and Riley/Taylor and Casey/Morgan name pairs. The package
 builds balanced, deterministic manifests and executes/resumes them with a mock
 client, durable attempt logs, validation, retries, and one identical re-ask.
@@ -21,9 +21,12 @@ Input sizes were 233–539 tokens; no response hit the output cap. Kimi omitted
 its cache-read count (retained as null) and reported 256 cache-write tokens.
 See the [smoke report and metadata limitations](docs/phase4b_report.md) and
 [provider verification and sources](docs/provider_verification.md).
-Analysis is tested on temporary synthetic batches, including a planted effect;
-it has not been run on pilot decisions. The pilot/comprehension run and the
-pre-registration lock remain pending. See [analysis methods and commands](docs/analysis.md).
+All 560 responses were valid, using 562 API attempts after two recovered errors.
+All four models passed comprehension. Pooled pilot checks found all-zero
+dictator transfers for OpenAI/Gemini and constant Gemini proposer offers.
+See the [Phase 6 report](docs/phase6_report.md) for pooled distributions, metadata,
+and review items. No pilot label-effect comparison was computed, and the
+pre-registration remains unlocked. See [analysis methods and commands](docs/analysis.md).
 The [unlocked pre-registration draft](preregistration/study1.md) records the
 researcher's fixed S1 count rule and paired descriptive comparison, plus the
 pooled P1 percentile-bootstrap TOST specification.
@@ -159,8 +162,8 @@ batch still requires its own approval:
 
 Available commands are `review-prompts`, `manifest`, mock-only `run`,
 `simulate-study1`, `analyze study1`, `reproduce`, and `report pilot|comprehension`.
-Real smoke execution is available programmatically through the provider factory
-and runner after approval; it is not exposed by the CLI yet. Pilot reports pool
+Real batch execution is available programmatically through the provider factory
+and runner/cohort coordinator after approval; it is not exposed by the CLI yet. Pilot reports pool
 all labels; comprehension reports apply the separate pass rule. No CLI command
 makes paid calls.
 
@@ -182,6 +185,7 @@ makes paid calls.
 | `docs/provider_verification.md` | Official sources, exact API mappings, normalization, and prepared smoke scope |
 | `docs/phase4b_report.md` | Observed smoke metadata, limitations, artifact hashes, and offline inspection commands |
 | `docs/analysis.md` | Eligibility, approved methods, resampling conventions, reports, and reproduction |
+| `docs/phase6_report.md` | Observed pilot/comprehension results, pooled distributions, mechanical checks, and review flags |
 | `tests/` | Offline protocol, manifest, validation, logging/resume, and CLI checks; socket connections blocked |
 | `codex_prompts/` | Local coding-agent instructions; always Git-ignored |
 

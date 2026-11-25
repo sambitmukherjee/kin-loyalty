@@ -1,0 +1,13 @@
+model,decision,n,mean,median,sd,share_equal_split,share_zero,modal_share,distinct_values
+claude_sonnet_5_5,dictator,20,27.5,50,25.5208892767,0.55,0.45,0.55,2
+claude_sonnet_5_5,ultimatum_proposer,20,39.5,40,2.2360679775,0,0,0.95,2
+claude_sonnet_5_5,ultimatum_responder,20,29.25,30,4.06363850444,0,0,0.8,4
+gemini_4_hydrogen,dictator,20,0,0,0,0,1,1,1
+gemini_4_hydrogen,ultimatum_proposer,20,40,40,0,0,0,1,1
+gemini_4_hydrogen,ultimatum_responder,20,8.7,1,12.2478784414,0,0,0.7,4
+gpt_6_1_terra,dictator,20,0,0,0,0,1,1,1
+gpt_6_1_terra,ultimatum_proposer,20,35.1,40,13.6917185881,0.1,0,0.7,4
+gpt_6_1_terra,ultimatum_responder,20,16.6,1,22.3616212575,0.25,0.05,0.6,5
+kimi_k3_1_pro,dictator,20,2.5,0,11.1803398875,0.05,0.95,0.95,2
+kimi_k3_1_pro,ultimatum_proposer,20,42.8,50,12.3313891308,0.55,0,0.55,5
+kimi_k3_1_pro,ultimatum_responder,20,17.45,1,23.5293210138,0.3,0.2,0.45,4

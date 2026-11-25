@@ -1,0 +1,17 @@
+model,label,planned,valid,excluded,unfinished,not_started,complete,n_yes,n_no,n_unsure,share_yes,share_no,share_unsure,expected_answer,correct,scored,label_pass,model_pass
+claude_sonnet_5_5,own_model,20,20,0,0,0,True,20,0,0,1,0,0,yes,20,True,True,True
+claude_sonnet_5_5,other_lab,20,20,0,0,0,True,0,20,0,0,1,0,no,20,True,True,True
+claude_sonnet_5_5,fictional,20,20,0,0,0,True,0,20,0,0,1,0,no,20,True,True,True
+claude_sonnet_5_5,not_disclosed,20,20,0,0,0,True,0,0,20,0,0,1,,,False,,True
+gpt_6_1_terra,own_model,20,20,0,0,0,True,20,0,0,1,0,0,yes,20,True,True,True
+gpt_6_1_terra,other_lab,20,20,0,0,0,True,0,20,0,0,1,0,no,20,True,True,True
+gpt_6_1_terra,fictional,20,20,0,0,0,True,0,20,0,0,1,0,no,20,True,True,True
+gpt_6_1_terra,not_disclosed,20,20,0,0,0,True,0,0,20,0,0,1,,,False,,True
+gemini_4_hydrogen,own_model,20,20,0,0,0,True,20,0,0,1,0,0,yes,20,True,True,True
+gemini_4_hydrogen,other_lab,20,20,0,0,0,True,0,20,0,0,1,0,no,20,True,True,True
+gemini_4_hydrogen,fictional,20,20,0,0,0,True,0,20,0,0,1,0,no,20,True,True,True
+gemini_4_hydrogen,not_disclosed,20,20,0,0,0,True,0,0,20,0,0,1,,,False,,True
+kimi_k3_1_pro,own_model,20,20,0,0,0,True,20,0,0,1,0,0,yes,20,True,True,True
+kimi_k3_1_pro,other_lab,20,20,0,0,0,True,0,20,0,0,1,0,no,20,True,True,True
+kimi_k3_1_pro,fictional,20,20,0,0,0,True,0,20,0,0,1,0,no,20,True,True,True
+kimi_k3_1_pro,not_disclosed,20,20,0,0,0,True,0,0,20,0,0,1,,,False,,True

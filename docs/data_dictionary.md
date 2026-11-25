@@ -277,3 +277,18 @@ artifact hashes. Planned denominator 20 includes excluded draws as non-correct.
 Unfinished/not-started draws prevent final pass/fail classification; undisclosed
 remains unscored. A failed model is retained in the study. Neither report changes
 configuration or automatically starts another batch.
+
+## Phase 6 cohort artifacts
+
+Pilot/comprehension each retain their frozen manifest, append-only attempt log,
+and the ordinary `run_summary.json` fields defined above. The cohort does not
+merge either raw dataset or their outcomes.
+
+`data/study1/phase6_cohort_summary.json` records status, UTC start/completion,
+authorized maximum attempts, actual calls started, and each batch's mechanical
+summary. `docs/phase6_execution_plan.json` records the approved scope, one
+invocation per batch, shared concurrency caps, exact policies and plan hashes.
+`docs/phase6_audit.json` records observed code revision, counts, log/manifest
+hashes, safe API-error categories/statuses, per-model returned versions/stops,
+token/metadata presence, measured concurrency maxima, and local execution times.
+These are audit/completion artifacts, not outcome-effect estimates.
