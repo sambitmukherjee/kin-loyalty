@@ -10,13 +10,15 @@ outside the current scope.
 
 ## Current status
 
-**Phase 3: offline experiment engine.** The researcher has approved the prompt
+**Phase 4a: provider adapters implemented; real smoke test pending.** The researcher has approved the prompt
 text, response schemas, and Riley/Taylor and Casey/Morgan name pairs. The package
 builds balanced, deterministic manifests and executes/resumes them with a mock
 client, durable attempt logs, validation, retries, and one identical re-ask.
-The CLI supports **mock execution only**. No real provider clients or model API
-calls, analysis results, or locked pre-registration exist yet. Model IDs and API
-settings remain unverified until the provider-client phase.
+The CLI supports **mock execution only**. Four provider adapters use the official
+SDKs with documentation-verified mappings and in-memory HTTP tests. No real model
+API calls, analysis results, or locked pre-registration exist yet. Live acceptance
+and actual returned metadata await the separately approved smoke test. See
+[provider verification and sources](docs/provider_verification.md).
 
 The planned main design has four models, three decisions, five labels, three
 paraphrases, and 20 draws per smallest cell: **3,600 planned draws**. Smoke tests,
@@ -114,22 +116,23 @@ will follow in its approved phase:
    templates in `prompts/study1/`.
 2. Verify each model's endpoint and request parameters against its provider's
    current official documentation. Obtain approval for all prompt text.
-3. Create a local `.env` from `.env.example` and fill in the required keys. The
-   runner's key loading will be implemented with the provider clients. Keys and
-   request headers must never appear in logs.
+3. After real-call approval, create a local `.env` from `.env.example` and fill
+   in the required keys. The provider factory loads these with process-environment
+   precedence. Keys and request headers must never appear in logs.
 4. Generate and inspect a deterministic trial manifest before any batch. Run the
    approved batch through the manifest-based runner, resuming by trial ID.
 5. Retain the append-only attempt logs and reproduce outputs from those logs.
 
 Available commands are `review-prompts`, `manifest`, and mock-only `run`.
-Real `smoke`, reporting, analysis, and reproduction commands are not implemented
-yet. No command in the current package makes paid model calls.
+Real smoke execution is available programmatically through the provider factory
+and runner after approval; it is not exposed by the CLI yet. Reporting, analysis,
+and reproduction commands are not implemented. No current CLI command makes paid calls.
 
 ## Repository layout
 
 | Path | Purpose |
 | --- | --- |
-| `configs/models.yaml` | Requested model roster and provider settings; verification pending |
+| `configs/models.yaml` | Model roster and documentation-verified settings; real smoke acceptance pending |
 | `configs/study1.yaml` | Design, conditions, names, counts, fixed seeds, and analysis settings |
 | `prompts/study1/` | Versioned system/game templates, protected blocks and shared JSON instructions |
 | `src/kinloyalty/` | Prompt/schema tools, manifests, mock client, validation, logging, runner, CLI |
@@ -140,6 +143,7 @@ yet. No command in the current package makes paid model calls.
 | `docs/decisions.md` | Dated decisions, approvals, and later deviations |
 | `docs/study1_prompt_review.md` | Fully rendered draft prompts and schemas for approval |
 | `docs/engine.md` | Allocation rules, retries/re-asks, concurrency, and durable resume |
+| `docs/provider_verification.md` | Official sources, exact API mappings, normalization, and prepared smoke scope |
 | `tests/` | Offline protocol, manifest, validation, logging/resume, and CLI checks; socket connections blocked |
 | `codex_prompts/` | Local coding-agent instructions; always Git-ignored |
 

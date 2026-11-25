@@ -54,9 +54,8 @@ the paper. No pre-registration lock exists yet.
 
 ## Open decisions for their respective phases
 
-- Before clients: verify every requested model ID, endpoint, effort parameter,
-  schema/caching setting, output cap, and required response metadata against
-  current official provider documentation. Stop on discrepancies.
+- Provider documentation was reviewed in Phase 4a (entry below). Live model,
+  parameter, usage, and cache acceptance still require the approved smoke test.
 - Prompt text, schemas, and name pairs were approved on 2026-11-25 (entry below).
 - Pilot allocation and joint comprehension rotation were selected by the
   researcher before engine implementation; infrastructure defaults are below.
@@ -189,3 +188,59 @@ and any batch that must be rerun. No post-pilot fixes or deviations exist yet.
   pilot label-effect comparisons, retained main manifest/data, or lock occurred.
 - **Status:** Phase 3 complete, committed locally. Next phase requires the
   researcher's approval under the established phase gate.
+
+## 2026-11-25 — Phase 3 push and Phase 4a authorization
+
+- **Approval:** Researcher authorized Phase 4a after directing a push first.
+- **Result:** Pushed `a356aed` to the private GitHub main branch before starting
+  the documentation review. No push of the new Phase 4a work is authorized yet.
+- **Scope:** Verify official documentation and implement SDK adapters with
+  offline tests. No real or paid model calls are authorized in this subphase.
+
+## 2026-11-25 — Provider documentation and request snapshots
+
+- **Verification:** Official sources confirm all four requested model IDs,
+  low-effort settings, endpoint families, structured output, output caps, and
+  caching policies. Sources and SDK versions are in `docs/provider_verification.md`.
+  Old Google/Moonshot documentation redirects to official AI Studio/Kimi sites;
+  the Moonshot API origin remains `https://api.moonshot.ai/v1`.
+- **Authorized exception:** Anthropic does not support numeric schema bounds.
+  Apply the fallback explicitly allowed by protocol Section 2.2: remove bounds
+  only from its submitted API schema, preserving the approved prompt and local
+  canonical schema/validator. Other provider schemas retain bounds.
+- **Transport:** Freeze exact SDK arguments in `request.api_payload`, separately
+  from the canonical schema. Exclude all local context, credentials, and headers.
+  Disable SDK retries; disable Google's automatic continuation/function calling.
+  No sampling or additional thought-visibility settings are sent.
+- **Metadata:** Capture raw JSON bodies and all documented version, stop,
+  reasoning, input/output, and cache read/write paths without fabricating zeros.
+  Keep provider counter definitions explicit. Missing metadata remains visible.
+- **Credentials:** Add a local `.env`/process-key loader with precedence and
+  safe errors; do not add a dependency or read real keys during offline tests.
+- **Approval/status:** Implemented within authorized Phase 4a. No scientific
+  design or prompt changes; real acceptance remains pending Phase 4b.
+
+## 2026-11-25 — Prepared smoke plan
+
+- **Artifact:** `data/study1/smoke/manifest.jsonl`, four frozen dictator /
+  not-disclosed / paraphrase-1 requests, one per model. Actual SDK arguments are
+  rendered in `docs/smoke_request_review.md` for inspection.
+- **Scope:** Generation only; no real logs, calls, or observed versions exist.
+- **Next authorization:** Phase 4b has four planned draws, up to 32 HTTP attempts
+  in one invocation under the existing four-attempt/two-response policy. No
+  additional invocation or account top-up is included. Report failures and
+  missing required metadata before proceeding.
+
+## 2026-11-25 — Phase 4a verification
+
+- **Result:** 252 offline tests passed, including 54 provider-specific checks
+  using the locked official SDKs and in-memory HTTP transports. No live API call
+  or real credential was used. Error tests cover status/connection/timeouts with
+  no hidden retry, no raw error/header leakage, and runner-controlled accounting.
+- **Artifacts:** Offline wheel/source builds and archive checks passed. All
+  provider modules and exact approved prompts are included; local instructions
+  and secrets are excluded. The prepared four-request smoke manifest is
+  deterministic and matches its readable SDK-argument review and digest.
+- **Status:** Phase 4a complete and committed locally. Provider acceptance,
+  actual returned versions, and observed usage/cache behavior remain pending
+  the separately approved real smoke test. No real logs or main data exist.

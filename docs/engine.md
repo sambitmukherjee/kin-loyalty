@@ -1,9 +1,10 @@
 # Offline experiment engine
 
-The Phase 3 CLI supports mock calls only. Provider SDKs are not imported by the
-engine and no keys are read. Every mock record is explicitly synthetic. The
-provider names/settings in the frozen requests are the requested, still-unverified
-specification, not evidence of a successful provider call.
+The CLI supports mock calls only. Provider adapters and a credential loader are
+implemented, but real smoke calls need their own approval. The offline engine
+does not import SDKs or read keys. Every mock record is explicitly synthetic.
+Frozen requests include documentation-verified SDK arguments; these are not
+evidence of a successful provider call.
 
 ## Allocation and frozen manifests
 
@@ -32,8 +33,8 @@ phase-specific fixed seed before execution positions are assigned.
 
 Each trial has a stable ID from study, phase, model, decision, label, paraphrase,
 and draw index. Changing only the order seed changes order, not these IDs. The
-manifest also freezes the complete request, schemas, design metadata, source
-hashes, and runner defaults. Local mock context contains labels/expected answers;
+manifest also freezes the complete request, canonical schemas, SDK arguments,
+design metadata, source hashes, and runner defaults. Local mock context contains labels/expected answers;
 it is never part of a system/user message and must never be forwarded by a
 provider adapter. Resume does not reload or rerender current source files.
 

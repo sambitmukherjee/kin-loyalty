@@ -17,6 +17,7 @@ class ModelRequest:
     user_message: str
     json_schema: dict[str, Any]
     context: dict[str, Any] = field(default_factory=dict)
+    api_payload: dict[str, Any] | None = None
 
 
 @dataclass(frozen=True)
@@ -64,4 +65,8 @@ class ModelClient(Protocol):
 
     async def complete(self, request: ModelRequest) -> ModelResponse:
         """Return the full normalized response or raise a safe ClientError."""
+        ...
+
+    async def aclose(self) -> None:
+        """Release client resources without making another model call."""
         ...

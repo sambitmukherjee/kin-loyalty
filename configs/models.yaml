@@ -1,7 +1,7 @@
-# This is the researcher's requested roster, not a statement of API support.
-# Verify current official documentation before writing each provider client.
+# Official documentation checked 2026-11-25; live acceptance awaits the smoke test.
 schema_version: 1
-verification_status: pending_official_documentation_review
+verification_status: documentation_verified_smoke_pending
+documentation_verified_on: "2026-11-25"
 
 # These settings are provider-neutral configuration; adapters will map them to
 # verified request parameters. Never add temperature, top_p, or top_k.
@@ -20,6 +20,9 @@ models:
     provider: anthropic
     api_key_env: ANTHROPIC_API_KEY
     endpoint: Messages API
+    transport:
+      base_url: https://api.anthropic.com
+      numeric_schema_bounds: false
     requested_parameters:
       reasoning: output_config.effort
       structured_output: output_config.format
@@ -35,6 +38,9 @@ models:
     provider: openai
     api_key_env: OPENAI_API_KEY
     endpoint: Chat Completions
+    transport:
+      base_url: https://api.openai.com/v1
+      numeric_schema_bounds: true
     requested_parameters:
       reasoning: reasoning_effort
       structured_output: response_format
@@ -52,13 +58,17 @@ models:
     provider: google
     api_key_env: GOOGLE_API_KEY
     endpoint: generateContent
+    transport:
+      base_url: https://generativelanguage.googleapis.com
+      api_version: v1beta
+      numeric_schema_bounds: true
     requested_parameters:
       reasoning: thinking_level
       structured_output: json_response_schema
       structured_output_mode: json_schema
     caching:
       policy: implicit_only
-      # Threshold is taken from the study instructions and awaits verification.
+      # Confirmed by the current official Gemini caching documentation.
       keep_prompt_below_tokens: 4096
 
   kimi_k3_1_pro:
@@ -68,8 +78,9 @@ models:
     provider: moonshot
     api_key_env: MOONSHOT_API_KEY
     endpoint: Chat Completions (OpenAI-compatible)
-    # Select the official base URL during the documentation review.
-    base_url: null
+    transport:
+      base_url: https://api.moonshot.ai/v1
+      numeric_schema_bounds: true
     requested_parameters:
       reasoning: reasoning_effort
       structured_output: response_format

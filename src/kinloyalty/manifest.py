@@ -3,13 +3,14 @@
 import os
 import random
 from copy import deepcopy
-from dataclasses import asdict
+from dataclasses import asdict, replace
 from pathlib import Path
 from typing import Any
 
 import yaml
 
 from kinloyalty.clients.base import ModelRequest
+from kinloyalty.clients.payloads import build_api_payload
 from kinloyalty.logs import assert_no_credentials, file_hash, json_line, read_jsonl
 from kinloyalty.prompts import load_prompt_library, render_prompt
 from kinloyalty.validate import check_schema
@@ -78,6 +79,7 @@ def build_manifest(config_path: str | Path, phase: str) -> list[dict[str, Any]]:
         trial_id = f"{study['study']}:{phase}:{model}:{decision}:{label}:p{paraphrase}:d{draw:03d}"
         settings = deepcopy(roster["defaults"])
         settings.update({"requested_parameters": selected["requested_parameters"], "caching": selected["caching"]})
+        settings.update(verification_status=roster["verification_status"], transport=selected["transport"])
         context = {"label": label}
         if decision == "comprehension":
             context["expected_answer"] = study["comprehension"]["expected_answers"].get(label, "unsure")
@@ -86,6 +88,7 @@ def build_manifest(config_path: str | Path, phase: str) -> list[dict[str, Any]]:
             endpoint=selected["endpoint"], settings=settings, system_prompt=prompt.system_prompt,
             user_message=prompt.user_message, json_schema=prompt.json_schema, context=context,
         )
+        request = replace(request, api_payload=build_api_payload(request))
         trials.append({
             "schema_version": 1, "study": study["study"], "phase": phase,
             "trial_id": trial_id, "model": model, "model_display_name": selected["display_name"],

@@ -1,7 +1,8 @@
 # Data dictionary — manifest and attempt schema version 1
 
 Manifest, request, response, and attempt records are implemented. Analysis tables
-remain planned. Provider mappings will be verified with the real clients later.
+remain planned. Provider mappings are documentation-verified; live smoke results
+remain pending. See `docs/provider_verification.md` for primary sources.
 Missing provider metadata stays distinguishable from zero. Current mock records
 have `synthetic: true`; their usage counts are synthetic, not provider measurements.
 
@@ -61,14 +62,18 @@ construct API arguments explicitly; local `context` is never forwarded.
 | --- | --- | --- |
 | `trial_id` | string | Must match the outer trial identity |
 | `provider`, `api_model_id`, `endpoint` | strings | Requested provider, model, and endpoint; no destination is contacted in mock mode |
-| `settings` | object | Non-secret provider specification: stateless flag, reasoning effort, output cap, sampling defaults, requested parameter mapping, and caching policy |
+| `settings` | object | Non-secret specification: stateless flag, effort, output cap, sampling defaults, parameter mapping, caching policy, verification status, and transport (base URL, Google API version, numeric-schema-bound support) |
 | `system_prompt`, `user_message` | strings | Full rendered message content, with no added retry/corrective text |
 | `json_schema` | object | Canonical response schema with numeric bounds |
 | `context` | object | Local-only metadata used by the mock; `label` and, for comprehension, `expected_answer` |
+| `api_payload` | object/null | Exact frozen SDK method arguments, including submitted response schema; null/absent in older mock-only manifests |
 
-API model/parameter support is still unverified. The client phase must establish
-the exact provider mappings before any real batch. Keys, headers, or raw SDK
-exception text do not belong in this object.
+Exact mappings are in `docs/provider_verification.md`; the prepared smoke plan
+freezes them. Live acceptance remains pending. Anthropic's submitted schema omits
+unsupported numeric bounds while the canonical `json_schema` retains them.
+Google SDK-only raw-response/continuation controls are included in the snapshot
+but are not API generation fields. Keys, headers, and raw SDK exception text do
+not belong in this object. Changes to destination/version require a new review.
 
 ### Runner policy (`runner_settings` / `runner_policy`)
 
@@ -133,6 +138,12 @@ frozen `request`, source hashes, design cell, and planned order. Additional fiel
 
 Mock input/output counts are simple word counts and reasoning usage is seeded
 synthetic data. They must never be reported as actual tokenizer/provider usage.
+
+Real adapters retain provider definitions: Google output is candidate tokens
+excluding thoughts; Anthropic/OpenAI/Moonshot output includes reasoning.
+Anthropic input excludes cache reads/writes, while Chat Completions input includes
+them. Full raw JSON retains all original counters. Google cache writes are not
+exposed and remain null. Exact field paths are in `docs/provider_verification.md`.
 
 ### Outcome and API-error objects
 

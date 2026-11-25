@@ -61,3 +61,7 @@ class MockClient:
             raw_response={"synthetic": True, "content": content, "usage": asdict(usage)},
             finish_reason="stop", usage=usage,
         )
+
+    async def aclose(self) -> None:
+        """Finish without resources or network activity."""
+        return None

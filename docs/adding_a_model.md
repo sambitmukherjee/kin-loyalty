@@ -1,7 +1,7 @@
 # Adding a model — implementation outline
 
-The common asynchronous client interface and mock engine are implemented.
-Provider adapters follow in the next approved phase.
+The common asynchronous interface, mock engine, and four provider adapters are
+implemented. Documentation is verified; live smoke acceptance remains pending.
 
 1. Add a stable key, lab, exact display name, API model ID, provider, and key
    environment-variable name to `configs/models.yaml`.
@@ -11,6 +11,8 @@ Provider adapters follow in the next approved phase.
 3. Implement a short adapter behind `clients/base.py`'s `ModelClient` interface.
    Reuse official SDKs; Kimi uses the OpenAI SDK with a verified Moonshot base URL.
    Never forward `request.context` to a provider or include keys/headers in logs.
+   Freeze exact arguments as `request.api_payload`; keep the canonical local
+   schema intact if a submitted provider schema needs the permitted bound fallback.
 4. Map the raw response, returned model version, default reasoning text, stop
    reason/truncation, and all token/cache counts without fabricating missing
    zeros. Normalize errors as safe `ClientError` metadata without raw exception
