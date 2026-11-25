@@ -1,0 +1,52 @@
+{
+  "planned_draws": 560,
+  "maximum_http_attempts": 4480,
+  "invocations_per_batch": 1,
+  "automatic_extra_invocation": false,
+  "concurrency": 4,
+  "per_model_concurrency": 1,
+  "batches": {
+    "pilot": {
+      "manifest": "data/study1/pilot/manifest.jsonl",
+      "sha256": "7f92a5aff7fb447e9bd0f0482065ab67b8b96d6230f69b6f511f8e1059e92ff4",
+      "draws": 240,
+      "draws_per_model": {
+        "gemini_4_hydrogen": 60,
+        "gpt_6_1_terra": 60,
+        "kimi_k3_1_pro": 60,
+        "claude_sonnet_5_5": 60
+      },
+      "runner_policy": {
+        "concurrency": 4,
+        "per_model_concurrency": 1,
+        "timeout_seconds": 120,
+        "api_attempts_per_response": 4,
+        "backoff_initial_seconds": 1,
+        "backoff_multiplier": 2,
+        "backoff_max_seconds": 30,
+        "invalid_reasks": 1
+      }
+    },
+    "comprehension": {
+      "manifest": "data/study1/comprehension/manifest.jsonl",
+      "sha256": "77a75c301c8071271e2d0dbc03cf00d191d1ae60d9a10e60c60fa78bd4d603dd",
+      "draws": 320,
+      "draws_per_model": {
+        "claude_sonnet_5_5": 80,
+        "kimi_k3_1_pro": 80,
+        "gpt_6_1_terra": 80,
+        "gemini_4_hydrogen": 80
+      },
+      "runner_policy": {
+        "concurrency": 4,
+        "per_model_concurrency": 1,
+        "timeout_seconds": 120,
+        "api_attempts_per_response": 4,
+        "backoff_initial_seconds": 1,
+        "backoff_multiplier": 2,
+        "backoff_max_seconds": 30,
+        "invalid_reasks": 1
+      }
+    }
+  }
+}

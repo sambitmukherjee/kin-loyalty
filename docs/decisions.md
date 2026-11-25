@@ -458,3 +458,28 @@ and any batch that must be rerun. No post-pilot fixes or deviations exist yet.
   30 adjusted-permutation arrays changed. Every pooled replicate averages the
   four same-index model statistics. Both builds and archive/source checks passed.
   No API call, live batch, registration lock, or GitHub push was made.
+
+## 2026-11-25 — Analysis push and Phase 6 authorization/preflight
+
+- **Approval:** Researcher directed a push, then instructed starting Phase 6.
+  Pushed the four completed analysis/specification commits through `3f3e115`
+  to private GitHub main before Phase 6 work.
+- **Live scope:** 240 pilot + 320 comprehension draws; one invocation per batch,
+  at most 4,480 HTTP attempts including API-error retries and one identical
+  invalid re-ask. No automatic extra invocation or account top-up. Preserve
+  previously reported missing cache metadata as null; no zero imputation.
+- **Frozen plans:** Generated separate manifests with the approved allocations,
+  seeds, prompts, schemas, and provider settings. Counts, hashes, request
+  validation, runner policies, and scope are in `docs/phase6_execution_plan.json`.
+- **Coordination:** Run both batches concurrently with the existing four-global,
+  one-per-model limits shared across them. Shared scheduling permits are acquired
+  before starting each call's timeout. Preserve separate logs and summaries;
+  stop on non-retryable provider errors after logging their safe category/status.
+  This infrastructure does not change scientific requests or retry budgets.
+- **Blinding:** Pilot decision summaries pool all labels; no pilot label-effect
+  comparison or main outcome analysis. Comprehension is scored separately by card
+  condition. No prompt/setting fixes or next phase are authorized by this run.
+- **Preflight verification:** All 312 offline tests passed, including cross-batch
+  global/per-model cap checks and fatal-error logging/cancellation. Both real
+  manifests regenerate identically. Store a local preparation commit before
+  calling providers so execution has a clean, exact code/plan provenance.

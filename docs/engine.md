@@ -83,6 +83,14 @@ dispatches. Retries and concurrent completion naturally interleave. Logs keep
 both planned `execution_position` and actual `dispatch_sequence`/timestamps, so
 planned order is never misrepresented as response-completion order.
 
+`run_cohort` runs separately frozen batches concurrently while sharing those
+same global/per-model permits. Queueing for a shared permit occurs before the
+attempt timeout starts. Each batch retains its own manifest, append-only log,
+lock, retry accounting, execution order, and run summary. Non-retryable API
+failures stop the cohort after the categorized failure is persisted; cancelled
+in-flight attempts remain interrupted and unfinished. No extra invocation is
+started automatically. This coordination changes no prompt or API setting.
+
 ## Durable logging and recovery
 
 `kinloyalty run --manifest <path> --log <path> --client mock` acquires a nonblocking

@@ -59,13 +59,24 @@ class RunSummary:
     attempt_records_written: int
 
 
+class RunnerLimits:
+    """Share scheduling permits across batches without counting queue time as API time."""
+
+    def __init__(self, policy: RunnerPolicy, models: list[str]) -> None:
+        """Create cohort-wide global/per-model limits from an existing runner policy."""
+        self.concurrency = policy.concurrency
+        self.per_model_concurrency = policy.per_model_concurrency
+        self.global_limit = asyncio.Semaphore(policy.concurrency)
+        self.model_limits = {model: asyncio.Semaphore(policy.per_model_concurrency) for model in models}
+
+
 def _utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
 async def run_manifest(
     manifest_path: str | Path, log_path: str | Path, client: ModelClient,
-    *, policy: RunnerPolicy | None = None,
+    *, policy: RunnerPolicy | None = None, shared_limits: RunnerLimits | None = None,
 ) -> RunSummary:
     """Resume a manifest with bounded concurrency, durable attempts, and one re-ask.
 
@@ -76,6 +87,11 @@ async def run_manifest(
     trials = read_manifest(manifest_path)
     manifest_hash = file_hash(manifest_path)
     policy = policy or RunnerPolicy(**trials[0]["runner_settings"])
+    limits = shared_limits or RunnerLimits(policy, [trial["model"] for trial in trials])
+    if (limits.concurrency != policy.concurrency
+        or limits.per_model_concurrency != policy.per_model_concurrency
+        or not {trial["model"] for trial in trials} <= limits.model_limits.keys()):
+        raise ValueError("Shared limits must match the manifest's scheduling policy and models.")
     trial_map = {trial["trial_id"]: trial for trial in trials}
     provenance = collect_provenance()
     run_id = str(uuid.uuid4())
@@ -93,8 +109,8 @@ async def run_manifest(
         states = reconstruct_states(trial_map, store.records, manifest_hash, mode, policy.invalid_reasks)
         already_final = sum(state.final for state in states.values())
         dispatch_sequence = max((record["dispatch_sequence"] for record in store.records), default=0)
-        global_limit = asyncio.Semaphore(policy.concurrency)
-        model_limits = {trial["model"]: asyncio.Semaphore(policy.per_model_concurrency) for trial in trials}
+        global_limit = limits.global_limit
+        model_limits = limits.model_limits
 
         async def execute(trial: dict[str, Any]) -> None:
             nonlocal calls_started, dispatch_sequence, fatal_error
