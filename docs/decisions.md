@@ -521,7 +521,7 @@ and any batch that must be rerun. No post-pilot fixes or deviations exist yet.
   final package builds passed; the 312 tested-source checks remained unchanged.
   Completion artifacts are committed locally without a new push.
 
-## 2026-11-26 — Approved pre-lock design change and fresh pilot
+## 2026-11-26 — Phase 7 approved pre-lock design change and fresh pilot
 
 - **Classification and approval:** The researcher explicitly approved this as
   a design change before the pre-registration lock, rather than a mechanical
@@ -567,7 +567,7 @@ and any batch that must be rerun. No post-pilot fixes or deviations exist yet.
   corresponding sentence removals. Credentials are available without disclosure;
   `.env` is ignored with mode 0600 and `codex_prompts/` is ignored/untracked.
 
-## 2026-11-26 — Revised-prompt pilot and comprehension completed
+## 2026-11-26 — Phase 7 revised-prompt pilot and comprehension completed
 
 - **Execution:** Preparation commit `4eb04f1` ran the revised-prompt cohort from
   00:07:36 to 00:22:43 IST. All 240 pilot and 320 fresh comprehension draws
@@ -611,3 +611,38 @@ and any batch that must be rerun. No post-pilot fixes or deviations exist yet.
   passed. All scientific inputs and engine/test source remain identical to the
   pre-call preparation commit. Supplied-secret scanning passed for every new or
   modified artifact. Store completion artifacts in a local commit without a push.
+
+## 2026-11-26 — Phase 7 closure verification
+
+- **Scope:** The researcher confirmed that the approved prompt design amendment
+  and its fresh pilot/comprehension check belong to Phase 7. Phase 7 is closed
+  after the following saved-artifact checks; no new API calls were made.
+- **Reasoning counts:** Present as nonnegative integers in all 560 revised-run
+  calls (140 per model). Anthropic explicitly reports zero in all 140; zero is
+  recorded rather than treated as missing. There were no failed API attempts
+  without responses in this run.
+- **Cache counts:** OpenAI and Anthropic each explicitly report zero cache reads
+  and writes in all 140 responses. Both normalized Kimi cache fields are retained
+  in all 140 records: writes are observed in all 140 (67 at 256, 73 at zero);
+  reads are observed in 73 (256 each) and omitted by the provider in 67. Those
+  missing read counts remain null, with raw responses preserved; do not impute
+  zero or claim that all read counts were supplied.
+- **Design-change record:** The preceding Phase 7 approval entry records the
+  removal as an explicitly researcher-approved design change before the lock,
+  not a mechanical fix. The reason is the all-zero pooled original dictator
+  pilot for GPT-6.1 Terra and Gemini 4 Hydrogen. The stopping rule was fixed
+  before the re-pilot: this is the only prompt change in response to the
+  dictator floor, regardless of the re-pilot results. No change was made in
+  response to Gemini's original constant-$40 proposer offers.
+- **Rendered prompts:** Regenerated `docs/study1_prompt_review.md` from the
+  final templates using `kinloyalty review-prompts`; it reproduced the already
+  committed file byte-identically. All 81 rendered system-message examples
+  contain exactly the two retained sentences: 27 examples for each paraphrase,
+  covering all three decisions and the separate comprehension check. The three
+  distinct system messages match their final source templates exactly, and none
+  retains the principal-interest sentence. SHA-256 and call-level counts are
+  recorded in `docs/phase7_closure.json`.
+- **Commit and gate:** Save this closure verification in a local commit. The
+  previously approved scientific inputs and all raw data remain unchanged.
+  Phase 8 has not started; pre-registration remains unlocked, with no tag,
+  GitHub push, main manifest, or main run.

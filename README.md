@@ -10,7 +10,7 @@ outside the current scope.
 
 ## Current status
 
-**Approved pre-lock design amendment and re-pilot complete.** The researcher has approved the prompt
+**Phase 7 complete: approved pre-lock design amendment and re-pilot verified.** The researcher has approved the prompt
 text, response schemas, and Riley/Taylor and Casey/Morgan name pairs. The package
 builds balanced, deterministic manifests and executes/resumes them with a mock
 client, durable attempt logs, validation, retries, and one identical re-ask.

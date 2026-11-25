@@ -1,0 +1,82 @@
+{
+  "phase": 7,
+  "closed_on": "2026-11-26",
+  "scope": "Revised-prompt pilot and fresh comprehension check",
+  "calls": 560,
+  "reasoning_counts_recorded": 560,
+  "inputs_sha256": {
+    "data/study1/repilot_20261126/pilot/attempts.jsonl": "e66e80e9d6c0d05da9c5cb29824812b9b10406e1ac5c809681a951ad81d4ad75",
+    "data/study1/repilot_20261126/comprehension/attempts.jsonl": "fcecdfc1518db4b157713d9a727179911c6e57ad655342993210f8ac6ab77460"
+  },
+  "models": {
+    "claude_sonnet_5_5": {
+      "calls": 140,
+      "reasoning_counts_recorded": 140,
+      "reasoning_counts_zero": 140,
+      "cache_read_field_present": 140,
+      "cache_write_field_present": 140,
+      "cache_read_values": {
+        "0": 140
+      },
+      "cache_write_values": {
+        "0": 140
+      }
+    },
+    "gemini_4_hydrogen": {
+      "calls": 140,
+      "reasoning_counts_recorded": 140,
+      "reasoning_counts_zero": 0,
+      "cache_read_field_present": 140,
+      "cache_write_field_present": 140,
+      "cache_read_values": {
+        "None": 140
+      },
+      "cache_write_values": {
+        "None": 140
+      }
+    },
+    "gpt_6_1_terra": {
+      "calls": 140,
+      "reasoning_counts_recorded": 140,
+      "reasoning_counts_zero": 72,
+      "cache_read_field_present": 140,
+      "cache_write_field_present": 140,
+      "cache_read_values": {
+        "0": 140
+      },
+      "cache_write_values": {
+        "0": 140
+      }
+    },
+    "kimi_k3_1_pro": {
+      "calls": 140,
+      "reasoning_counts_recorded": 140,
+      "reasoning_counts_zero": 0,
+      "cache_read_field_present": 140,
+      "cache_write_field_present": 140,
+      "cache_read_values": {
+        "None": 67,
+        "256": 73
+      },
+      "cache_write_values": {
+        "256": 67,
+        "0": 73
+      }
+    }
+  },
+  "decision_log": "docs/decisions.md",
+  "design_change_approved_before_lock": true,
+  "reason": "GPT-6.1 Terra and Gemini 4 Hydrogen each transferred $0 in every pooled original pilot dictator draw.",
+  "stopping_rule": "This is the only prompt change in response to the dictator floor; no further prompt change for this reason regardless of the re-pilot.",
+  "rendered_prompt_review": "docs/study1_prompt_review.md",
+  "rendered_prompt_review_sha256": "364f85a0451aba5837750f0eca48853f9705bdb822440e869b6ca2c487c1ad6d",
+  "review_regenerated_byte_identically": true,
+  "two_sentence_system_examples": 81,
+  "examples_per_paraphrase": {
+    "1": 27,
+    "2": 27,
+    "3": 27
+  },
+  "other_scientific_inputs_unchanged": true,
+  "new_api_calls": 0
+}

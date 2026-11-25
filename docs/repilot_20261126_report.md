@@ -1,5 +1,9 @@
 # Revised-prompt pilot and comprehension report — 2026-11-26
 
+**Phase 7 complete.** This approved design amendment and its re-pilot/check are
+part of Phase 7. The final closure verification is recorded in
+`docs/decisions.md` and `docs/phase7_closure.json`.
+
 ## Approved pre-lock design change
 
 The researcher explicitly approved this as a **design change before the lock**,
