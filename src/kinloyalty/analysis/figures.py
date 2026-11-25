@@ -69,6 +69,8 @@ def create_figures(frame: pd.DataFrame, estimates: pd.DataFrame, comprehension: 
 
         fig, axis = plt.subplots(figsize=(7.2, 3.4), layout="constrained")
         scopes = [*models, "pooled"]
+        unavailable_point = False
+        unavailable_interval = False
         for offset, outcome, method, color, label in (
             (-.2, "outcome", "unadjusted", "#2166ac", "Offer"),
             (0, "outcome", "belief_adjusted", "#b35806", "Offer, belief adjusted"),
@@ -79,10 +81,21 @@ def create_figures(frame: pd.DataFrame, estimates: pd.DataFrame, comprehension: 
             positions = np.arange(len(scopes)) + offset
             axis.vlines(positions, subset.ci_low, subset.ci_high, color=color)
             axis.scatter(positions, subset.estimate, color=color, label=label, s=10)
+            for position, row in zip(positions, subset.itertuples(), strict=True):
+                if not row.estimable:
+                    axis.text(position, .025, "NE", color=color, ha="center", transform=axis.get_xaxis_transform(), fontsize=6)
+                    unavailable_point = True
+                elif not row.interval_available:
+                    axis.annotate("*", (position, row.estimate), xytext=(3, 2), textcoords="offset points", color=color)
+                    unavailable_interval = True
         axis.axhline(0, color="gray", linewidth=.7)
         axis.set(xticks=range(len(scopes)), xticklabels=[roster[model]["display_name"] for model in models] + ["Pooled"],
                  ylabel="Own-model minus other-lab dollars")
-        axis.set_title(prefix + "S1: offers, adjusted offers, and beliefs", pad=29)
+        notes = (["NE: adjusted contrast not estimable"] if unavailable_point else [])
+        if unavailable_interval:
+            notes.append("*: bootstrap interval unavailable")
+        title = prefix + "S1 descriptive comparison: offers and beliefs"
+        axis.set_title(title + ("\n" + "; ".join(notes) if notes else ""), pad=29)
         axis.legend(loc="lower center", bbox_to_anchor=(.5, 1.01), ncol=3, frameon=False, fontsize=6)
         _save(fig, output, "s1_coefficients", formats)
 

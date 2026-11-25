@@ -21,8 +21,9 @@ explicitly. Multiple non-overlapping log files can be supplied.
 Main inference requires every configured draw to have a terminal record. API
 failures left unfinished must be resumed first. Only final valid replies enter
 outcome tables. Excluded draws remain in coverage and diagnostics; they are never
-imputed as zero. Empty label × paraphrase cells or non-identifiable adjusted
-regressions fail explicitly instead of dropping a model or changing its weight.
+imputed as zero. Empty label × paraphrase cells fail explicitly. Unavailable
+belief-adjusted regressions are flagged in the outputs, retaining every model
+and the four-model pooled target as described below.
 
 Synthetic data require `--allow-synthetic`. All output provenance and figure
 titles then identify them as simulated. Simulation directories must be outside
@@ -51,10 +52,43 @@ There is no multiplicity correction.
 For S1, paired offers and beliefs enter a regression with label and paraphrase
 controls. The researcher approved model-specific belief slopes; the workflow averages the
 four adjusted contrasts equally. Before/after coefficients and their paired
-bootstrap change are reported. Coefficient changes are descriptive associations;
+bootstrap change (unadjusted minus adjusted) are reported. Coefficient changes are descriptive associations;
 they are not causal mediation estimates. The change table has no additional
 hypothesis test. The adjusted coefficients themselves have intervals and
 permutation p-values.
+
+The adjusted/unadjusted offer regressions use the same retained draws and the
+same bootstrap indexes. The coefficient-change interval comes from the paired
+difference on each resample. No explained-share ratio is calculated: such a
+ratio is unstable when the unadjusted contrast is near zero. Stated beliefs are
+measured after the card, so the adjustment does not identify causal mediation.
+
+### Fixed count-based S1 estimability rule
+
+Before the pilot, the researcher fixed this rule: choose each label × paraphrase
+cell's modal belief, breaking modal ties by the lowest value; count retained
+valid proposer draws differing from their own cell's mode. If fewer than 10%
+are nonmodal, flag that model's adjusted contrast as not estimable. Exactly
+30/300 passes; fewer than 30/300 fails. For `N` retained valid draws, the minimum
+is `ceil(N/10)`. No SD cutoff is used, and this rule will not be tuned after the
+pilot. `s1_belief_diagnostics.csv` records every model's count/denominator and
+status; `s1_belief_cell_counts.csv` records the cell modes and counts.
+
+Unavailable adjusted point estimates, intervals, and p-values remain empty with
+explicit status/reason columns. Their unadjusted and belief analyses remain
+available. A four-model adjusted average is unavailable if any model is not
+estimable; no three-model average is substituted. Plots retain each model's
+position and identify unavailable adjusted contrasts with `NE`.
+
+For models passing the observed-sample rule, both regressions are fitted on
+every paired bootstrap resample without applying the practical count cutoff
+again. Numerically singular adjusted resamples remain NaN in the saved arrays
+and are counted. They are never removed or redrawn; if any are unavailable, the
+affected model and pooled paired-bootstrap intervals are unavailable. Observed
+identifiable points and their valid permutation tests remain available. Plots
+mark a point with an unavailable interval using `*`.
+
+The same specification is recorded in the unlocked `preregistration/study1.md`.
 
 ## Bootstrap intervals and equivalence
 

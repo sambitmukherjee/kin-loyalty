@@ -11,7 +11,7 @@ import statsmodels.formula.api as smf
 import yaml
 
 from kinloyalty.analysis.inference import (
-    bootstrap_coefficients, bootstrap_interval, bootstrap_tost, coefficients,
+    belief_cell_counts, belief_estimability, bootstrap_coefficients, bootstrap_interval, bootstrap_tost, coefficients,
     contrast_vector, make_design, permutation_contrasts, two_sided_p,
 )
 from kinloyalty.analysis.loading import load_saved_data
@@ -310,9 +310,178 @@ def test_pooled_contrast_keeps_equal_weights_when_model_counts_differ(batches: t
     frame.loc[(frame.model == first) & (frame.label == "own_model"), "outcome"] += 15
     frame.loc[(frame.model == second) & (frame.label == "own_model"), "outcome"] -= 10
     frame = frame[(frame.model != first) | (frame.draw_index == 1)]
-    estimates, _, _, _ = estimate_all(frame, study, list(models))
+    estimates = estimate_all(frame, study, list(models)).contrasts
     per_model = estimates[(estimates.decision == "dictator") & (estimates.family == "own_vs_other") & (estimates.scope != "pooled")]
     pooled = estimates[estimates.designation == "primary_P1"].estimate.iloc[0]
     assert pooled == pytest.approx(per_model.estimate.mean())
     indexed = per_model.set_index("scope").loc[list(models)].estimate
     assert abs(pooled - np.average(indexed, weights=[1, 3, 3, 3])) > 1
+
+
+def _modal_frame(nonmodal: int) -> pd.DataFrame:
+    rows = []
+    labels = ["own_model", "other_lab", "fictional", "not_disclosed", "human"]
+    for label in labels:
+        for paraphrase in [1, 2, 3]:
+            for draw in range(20):
+                rows.append({"model": "m", "label": label, "paraphrase_id": paraphrase,
+                             "trial_id": f"{label}:{paraphrase}:{draw:02d}", "outcome": 40 + draw % 7,
+                             "belief": 50})
+    frame = pd.DataFrame(rows)
+    # Spread deviations across cells so 50 remains each cell's mode.
+    positions = [cell * 20 + draw for draw in range(2) for cell in range(15)]
+    frame.loc[positions[:nonmodal], "belief"] = 51
+    return frame
+
+
+@pytest.mark.parametrize("nonmodal,estimable", [(0, False), (29, False), (30, True)])
+def test_fixed_modal_count_rule_has_exact_thirty_of_three_hundred_boundary(nonmodal: int, estimable: bool) -> None:
+    """The user-specified rule is strict below 10%; exactly 30/300 passes."""
+    frame = _modal_frame(nonmodal)
+    design = make_design(frame, "m", list(frame.label.unique()), [1, 2, 3])
+    result = belief_estimability(design, minimum_nonmodal_percent=10)
+    assert result["n"] == 300 and result["required_nonmodal_draws"] == 30
+    assert result["nonmodal_draws"] == nonmodal and result["estimable"] is estimable
+    if not estimable:
+        assert result["not_estimable_reason"] == "insufficient_nonmodal_belief_draws"
+
+
+def test_cell_mode_ties_use_lowest_and_do_not_use_the_global_mode() -> None:
+    """Cell-specific modes and lowest-value tie breaking are auditable in the outputs."""
+    frame = _modal_frame(0)
+    for index, (_, cell) in enumerate(frame.groupby(["label", "paraphrase_id"])):
+        frame.loc[cell.index[:10], "belief"] = 20 + index
+        frame.loc[cell.index[10:], "belief"] = 60 + index
+    design = make_design(frame, "m", list(frame.label.unique()), [1, 2, 3])
+    cells = belief_cell_counts(design)
+    assert len(cells) == 15 and all(cell["nonmodal_draws"] == 10 for cell in cells)
+    assert {cell["mode"] for cell in cells} == set(range(20, 35))
+    assert belief_estimability(design, minimum_nonmodal_percent=10)["nonmodal_draws"] == 150
+    # Varying cell modes alone must not qualify as within-cell variation.
+    for index, (_, cell) in enumerate(frame.groupby(["label", "paraphrase_id"])):
+        frame.loc[cell.index, "belief"] = 20 + index
+    design = make_design(frame, "m", list(frame.label.unique()), [1, 2, 3])
+    assert belief_estimability(design, minimum_nonmodal_percent=10)["nonmodal_draws"] == 0
+
+
+def test_singular_bootstrap_replicates_are_preserved_without_redrawing() -> None:
+    """Rare belief variation can disappear in resamples; those draws remain explicit."""
+    frame = pd.DataFrame({"model": ["m"] * 4, "label": ["own_model"] * 2 + ["other_lab"] * 2,
+                          "paraphrase_id": [1] * 4, "trial_id": list("abcd"),
+                          "outcome": [40, 42, 40, 40], "belief": [50, 51, 50, 50]})
+    design = make_design(frame, "m", ["own_model", "other_lab"], [1])
+    assert belief_estimability(design, minimum_nonmodal_percent=10)["estimable"]
+    ordinary, adjusted = bootstrap_coefficients(design, resamples=1000, seed=7, key="rare")
+    assert len(ordinary) == len(adjusted) == 1000
+    assert np.isfinite(ordinary).all()
+    invalid = ~np.isfinite(adjusted).all(axis=1)
+    assert .4 < invalid.mean() < .6
+
+
+def test_one_nonestimable_model_does_not_disappear_from_adjusted_pool(batches: tuple[Path, Path]) -> None:
+    """Keep every scope, report unavailable adjusted results, and retain other analyses."""
+    config, directory = batches
+    study, models = load_analysis_config(config)
+    data = load_saved_data([directory / "main"], phase="main", study=study, allow_synthetic=True)
+    frame = data.decisions.copy()
+    model = next(iter(models))
+    frame.loc[(frame.model == model) & (frame.decision == "ultimatum_proposer"), "belief"] = 50
+    result = estimate_all(frame, study, list(models))
+    rows = result.contrasts
+    adjusted = rows[(rows.decision == "ultimatum_proposer") & (rows.method == "belief_adjusted")]
+    unavailable = adjusted[adjusted.scope.isin([model, "pooled"])]
+    assert len(rows) == 150 and len(unavailable) == 12
+    assert not unavailable.estimable.any()
+    assert unavailable.estimate.isna().all() and unavailable.permutation_p.isna().all()
+    assert unavailable.non_estimable_models.eq(model).all()
+    assert adjusted[~adjusted.scope.isin([model, "pooled"])].estimable.all()
+    assert rows[rows.method == "unadjusted"].estimable.all()
+    assert len(result.coefficient_changes) == 30
+    assert result.coefficient_changes.query("scope == 'pooled'").unadjusted_minus_adjusted.isna().all()
+    diagnostic = result.belief_diagnostics.set_index("model").loc[model]
+    assert diagnostic.nonmodal_draws == 0 and diagnostic.bootstrap_fits_attempted == 0
+    assert diagnostic.rank_deficient and not diagnostic.estimable
+    assert len(result.belief_cells) == 60
+
+
+def test_s1_difference_interval_uses_the_paired_bootstrap_and_explicit_sign(batches: tuple[Path, Path]) -> None:
+    """The difference and its CI use paired before-minus-after draws, including pooling."""
+    config, directory = batches
+    study, models = load_analysis_config(config)
+    data = load_saved_data([directory / "main"], phase="main", study=study, allow_synthetic=True)
+    result = estimate_all(data.decisions, study, list(models))
+    for scope in [*models, "pooled"]:
+        prefix = "ultimatum_proposer:outcome:"
+        suffix = f":own_model-other_lab:{scope}:bootstrap"
+        before = result.distributions[prefix + "unadjusted" + suffix]
+        after = result.distributions[prefix + "belief_adjusted" + suffix]
+        difference = result.distributions[prefix + "unadjusted_minus_adjusted" + suffix]
+        assert np.array_equal(difference, before - after) or np.allclose(difference, before - after, atol=1e-12)
+        row = result.coefficient_changes.query("scope == @scope and left == 'own_model' and right == 'other_lab'").iloc[0]
+        low, high = bootstrap_interval(row.unadjusted_minus_adjusted, difference)
+        assert row.ci_low == pytest.approx(low) and row.ci_high == pytest.approx(high)
+        assert "not a causal mediation" in row.interpretation
+    assert "share_explained" not in result.coefficient_changes
+
+
+def test_singular_adjusted_resamples_withhold_ci_but_keep_identifiable_point(batches: tuple[Path, Path]) -> None:
+    """No bootstrap deletion/redraw or three-model interval is silently substituted."""
+    config, directory = batches
+    study, models = load_analysis_config(config)
+    study["analysis"]["bootstrap_resamples"] = 999
+    data = load_saved_data([directory / "main"], phase="main", study=study, allow_synthetic=True)
+    model = next(iter(models))
+    frame = data.decisions.copy()
+    rare = (frame.model == model) & (frame.decision == "ultimatum_proposer")
+    frame = frame[~rare | (frame.draw_index <= 2)].copy()
+    rare = (frame.model == model) & (frame.decision == "ultimatum_proposer")
+    frame.loc[rare, "belief"] = 50
+    frame.loc[rare & (frame.label == "own_model") & (frame.draw_index == 1), "belief"] = 51
+    result = estimate_all(frame, study, list(models))
+    diagnostic = result.belief_diagnostics.set_index("model").loc[model]
+    assert diagnostic.n == 30 and diagnostic.nonmodal_draws == 3 and diagnostic.estimable
+    assert diagnostic.bootstrap_numerical_failures > 0
+    adjusted = result.contrasts.query("method == 'belief_adjusted'")
+    affected = adjusted[adjusted.scope.isin([model, "pooled"])]
+    assert affected.estimable.all() and affected.estimate.notna().all()
+    assert not affected.interval_available.any() and affected.ci_low.isna().all()
+    assert affected.permutation_p.notna().all()
+    assert affected.bootstrap_unavailable_count.gt(0).all()
+    assert result.coefficient_changes.query("scope == 'pooled'").ci_low.isna().all()
+
+
+def test_fixed_modal_rule_cannot_be_silently_tuned(batches: tuple[Path, Path], tmp_path: Path) -> None:
+    config, _ = batches
+    study = yaml.safe_load(config.read_text())
+    study["analysis"]["s1_belief_estimability"]["minimum_nonmodal_percent"] = 5
+    modified = tmp_path / "modified.yaml"
+    modified.write_text(yaml.safe_dump(study))
+    with pytest.raises(ValueError, match="Unsupported analysis specification"):
+        load_analysis_config(modified)
+
+
+def test_nonestimable_model_is_exported_and_figure_keeps_its_position(batches: tuple[Path, Path], tmp_path: Path) -> None:
+    """A legitimate constant-belief mock run completes reproduction with explicit NE rows."""
+    config, directory = batches
+    study, models = load_analysis_config(config)
+    model = next(iter(models))
+    trials = read_jsonl(directory / "main/manifest.jsonl")
+    previous = {record["trial_id"]: record for record in read_jsonl(directory / "main/attempts.jsonl")}
+    scripts = {}
+    for trial in trials:
+        if trial["model"] == model and trial["decision"] == "ultimatum_proposer":
+            parsed = dict(previous[trial["trial_id"]]["outcome"]["parsed_json"])
+            parsed["smallest_offer_you_expect_counterparty_to_accept"] = 50
+            scripts[trial["trial_id"]] = [ModelResponse(json.dumps(parsed), returned_model_version="mock/constant-belief",
+                                                       raw_response={"synthetic": True, "content": parsed}, finish_reason="stop")]
+    manifest, log = tmp_path / "manifest.jsonl", tmp_path / "attempts.jsonl"
+    write_manifest(trials, manifest)
+    asyncio.run(run_manifest(manifest, log, MockClient(seed=study["seeds"]["mock"], scripts=scripts)))
+    output = analyze_study1(config, [log], tmp_path / "output", allow_synthetic=True)
+    diagnostics = pd.read_csv(output / "s1_belief_diagnostics.csv").set_index("model")
+    assert not diagnostics.loc[model, "estimable"] and len(diagnostics) == 4
+    contrasts = pd.read_csv(output / "contrasts.csv")
+    assert len(contrasts) == 150
+    assert not contrasts.query("method == 'belief_adjusted' and scope == 'pooled'").estimable.any()
+    assert (output / "s1_coefficients.pdf").read_bytes().startswith(b"%PDF")
+    assert len(pd.read_csv(output / "s1_belief_cell_counts.csv")) == 60

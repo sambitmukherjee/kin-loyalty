@@ -1,7 +1,9 @@
 # Study 1 pre-registration
 
-`study1.md` will be written only after the pilot, final comprehension check, and
-approved mechanical fixes. The design is not locked at this stage.
+`study1.md` contains an unlocked S1 draft requested by the researcher before the
+pilot, including the fixed cell-modal-count estimability rule. The complete
+pre-registration will be finalized after the pilot, final comprehension check,
+and approved mechanical fixes. The design is not locked at this stage.
 
 The final document must contain P1/P2/S1/S2 and estimands, study outcomes, model
 IDs and observed versions, verified API settings and schemas, final prompt paths

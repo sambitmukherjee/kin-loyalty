@@ -45,8 +45,53 @@ def make_design(frame: pd.DataFrame, model: str, labels: list[str], paraphrases:
                        [np.flatnonzero(frame.paraphrase_id == p) for p in paraphrases], frame)
 
 
-def coefficients(design: ModelDesign, y: np.ndarray, belief: np.ndarray | None = None) -> np.ndarray:
-    """Fit many paired resamples by Frisch–Waugh–Lovell, keeping belief paired."""
+def belief_cell_counts(design: ModelDesign) -> list[dict[str, Any]]:
+    """Audit each cell's lowest tied mode and number of nonmodal valid beliefs."""
+    if design.belief is None:
+        raise ValueError("Belief diagnostics require complete paired beliefs.")
+    rows = []
+    for cell in design.cells:
+        beliefs = design.belief[cell]
+        values, counts = np.unique(beliefs, return_counts=True)
+        mode = values[np.argmax(counts)]  # Sorted values make the first tied mode the lowest.
+        identity = design.frame.iloc[cell[0]]
+        nonmodal = int(np.count_nonzero(beliefs != mode))
+        rows.append({"model": design.model, "label": identity.label,
+                     "paraphrase_id": int(identity.paraphrase_id), "n": len(cell),
+                     "mode": float(mode), "modal_draws": len(cell) - nonmodal,
+                     "nonmodal_draws": nonmodal})
+    return rows
+
+
+def belief_estimability(design: ModelDesign, *, minimum_nonmodal_percent: int) -> dict[str, Any]:
+    """Apply the fixed cell-modal-count rule to retained valid proposer draws.
+
+    Each label × paraphrase cell uses its lowest tied mode. The count rule
+    applies to the observed sample, not to bootstrap replicate selection.
+    """
+    if type(minimum_nonmodal_percent) is not int or not 0 <= minimum_nonmodal_percent <= 100:
+        raise ValueError("Minimum nonmodal belief percentage must be an integer from 0 to 100.")
+    if design.belief is None:
+        raise ValueError("Belief diagnostics require complete paired beliefs.")
+    belief = design.belief
+    nonmodal = sum(cell["nonmodal_draws"] for cell in belief_cell_counts(design))
+    required = (minimum_nonmodal_percent * len(belief) + 99) // 100
+    rank_deficient = np.linalg.matrix_rank(np.column_stack([design.x, belief])) < design.x.shape[1] + 1
+    if nonmodal < required:
+        reason = "insufficient_nonmodal_belief_draws"
+    elif rank_deficient or not np.isfinite(coefficients(design, design.y, belief, allow_nonestimable=True)).all():
+        reason = "numerical_rank_deficiency"
+    else:
+        reason = ""
+    return {"model": design.model, "n": len(belief), "unique_beliefs": len(np.unique(belief)),
+            "nonmodal_draws": nonmodal, "nonmodal_share": nonmodal / len(belief),
+            "minimum_nonmodal_percent": minimum_nonmodal_percent, "required_nonmodal_draws": required,
+            "mode_tie_break": "lowest", "rank_deficient": bool(rank_deficient),
+            "estimable": not bool(reason), "not_estimable_reason": reason}
+
+
+def coefficients(design: ModelDesign, y: np.ndarray, belief: np.ndarray | None = None, *, allow_nonestimable: bool = False) -> np.ndarray:
+    """Fit paired resamples; optionally preserve singular replicates as NaN rows."""
     y = np.atleast_2d(y)
     beta = y @ design.inverse.T
     if belief is None:
@@ -55,14 +100,16 @@ def coefficients(design: ModelDesign, y: np.ndarray, belief: np.ndarray | None =
     b_beta = belief @ design.inverse.T
     residual_b = belief - b_beta @ design.x.T
     denominator = np.sum(residual_b * residual_b, axis=1)
-    if np.any(denominator < 1e-10):
+    valid = denominator >= 1e-10
+    if not allow_nonestimable and not valid.all():
         raise ValueError("Belief-adjusted regression is not identifiable in at least one resample.")
-    slope = np.sum(residual_b * y, axis=1) / denominator
+    slope = np.full(len(y), np.nan)
+    np.divide(np.sum(residual_b * y, axis=1), denominator, out=slope, where=valid)
     return beta - slope[:, None] * b_beta
 
 
-def bootstrap_coefficients(design: ModelDesign, *, resamples: int, seed: int, key: str) -> tuple[np.ndarray, np.ndarray | None]:
-    """Resample draws within label × paraphrase cells; retain joint offer/belief pairs."""
+def bootstrap_coefficients(design: ModelDesign, *, resamples: int, seed: int, key: str, include_adjusted: bool = True) -> tuple[np.ndarray, np.ndarray | None]:
+    """Resample pairs once for both fits; keep singular adjusted replicates explicit."""
     rng = seeded_rng(seed, f"bootstrap:{key}:{design.model}")
     ordinary, adjusted = [], []
     for start in range(0, resamples, 250):
@@ -72,8 +119,8 @@ def bootstrap_coefficients(design: ModelDesign, *, resamples: int, seed: int, ke
             indexes[:, cell] = rng.choice(cell, size=(size, len(cell)), replace=True)
         y = design.y[indexes]
         ordinary.append(coefficients(design, y))
-        if design.belief is not None:
-            adjusted.append(coefficients(design, y, design.belief[indexes]))
+        if design.belief is not None and include_adjusted:
+            adjusted.append(coefficients(design, y, design.belief[indexes], allow_nonestimable=True))
     return np.concatenate(ordinary), np.concatenate(adjusted) if adjusted else None
 
 

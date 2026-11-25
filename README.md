@@ -24,6 +24,9 @@ See the [smoke report and metadata limitations](docs/phase4b_report.md) and
 Analysis is tested on temporary synthetic batches, including a planted effect;
 it has not been run on pilot decisions. The pilot/comprehension run and the
 pre-registration lock remain pending. See [analysis methods and commands](docs/analysis.md).
+The [unlocked S1 pre-registration draft](preregistration/study1.md) records the
+researcher's fixed 10% cell-modal-count estimability rule and the paired
+descriptive before/after comparison.
 
 The planned main design has four models, three decisions, five labels, three
 paraphrases, and 20 draws per smallest cell: **3,600 planned draws**. Smoke tests,

@@ -1,6 +1,7 @@
 """Produce Study 1 estimates and reproducible artifacts from validated saved logs."""
 
 import json
+from dataclasses import dataclass
 from importlib.metadata import version
 from itertools import product
 from pathlib import Path
@@ -11,7 +12,7 @@ import pandas as pd
 import yaml
 
 from kinloyalty.analysis.inference import (
-    bootstrap_coefficients, bootstrap_interval, bootstrap_tost, coefficients,
+    belief_cell_counts, belief_estimability, bootstrap_coefficients, bootstrap_interval, bootstrap_tost, coefficients,
     contrast_vector, make_design, permutation_contrasts, two_sided_p,
 )
 from kinloyalty.analysis.loading import SavedData, load_saved_data
@@ -20,6 +21,18 @@ from kinloyalty.analysis.reports import (
 )
 from kinloyalty.logs import file_hash
 from kinloyalty.provenance import collect_provenance
+
+
+@dataclass
+class StudyEstimates:
+    """Collect inference outputs and explicit S1 estimability diagnostics."""
+
+    contrasts: pd.DataFrame
+    equivalence: pd.DataFrame
+    coefficient_changes: pd.DataFrame
+    distributions: dict[str, np.ndarray]
+    belief_diagnostics: pd.DataFrame
+    belief_cells: pd.DataFrame
 
 
 def load_analysis_config(path: str | Path) -> tuple[dict[str, Any], dict[str, Any]]:
@@ -40,6 +53,9 @@ def load_analysis_config(path: str | Path) -> tuple[dict[str, Any], dict[str, An
                 "permutation_strata": ["model", "paraphrase"],
                 "alternative": "two_sided", "multiple_comparison_correction": "none",
                 "s1_belief_slopes": "model_specific",
+                "s1_belief_estimability": {"minimum_nonmodal_percent": 10,
+                    "modal_cell": ["label", "paraphrase"], "mode_tie_break": "lowest",
+                    "denominator": "retained_valid_proposer_draws", "frozen_before_pilot": True},
                 "figure_formats": ["pdf", "png"]}
     if any(spec.get(key) != value for key, value in required.items()):
         raise ValueError("Unsupported analysis specification; do not silently substitute methods.")
@@ -82,41 +98,74 @@ def study_contrasts(study: dict[str, Any]) -> list[tuple[str, str, str]]:
     return contrasts
 
 
-def estimate_all(frame: pd.DataFrame, study: dict[str, Any], models: list[str]) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, dict[str, np.ndarray]]:
-    """Fit every prespecified contrast, always including pooled P1 equivalence."""
+def _estimate_fields(estimate: float, draws: np.ndarray, confidence: float, *, reason: str = "") -> dict[str, Any]:
+    estimable = bool(np.isfinite(estimate))
+    unavailable = int(np.count_nonzero(~np.isfinite(draws)))
+    interval_available = estimable and unavailable == 0
+    low, high = bootstrap_interval(estimate, draws, confidence) if interval_available else (np.nan, np.nan)
+    return {"estimate": estimate, "ci_low": low, "ci_high": high,
+            "estimable": estimable, "not_estimable_reason": reason if not estimable else "",
+            "interval_available": interval_available,
+            "interval_unavailable_reason": "" if interval_available else reason if not estimable else "non_estimable_bootstrap_replicates",
+            "bootstrap_unavailable_count": unavailable}
+
+
+def estimate_all(frame: pd.DataFrame, study: dict[str, Any], models: list[str]) -> StudyEstimates:
+    """Fit contrasts, flag unavailable S1 results, and keep all models in pooled targets."""
     spec = study["analysis"]
     labels = list(study["labels"])
     paraphrases = [entry["id"] for entry in study["paraphrases"]]
-    rows, changes, arrays = [], [], {}
+    rows, changes, arrays, belief_diagnostics, belief_cells = [], [], {}, [], []
     pooled_p1 = None
     tasks = [(decision, "outcome") for decision in study["decisions"]] + [("ultimatum_proposer", "belief")]
     for decision, outcome in tasks:
         subset = frame[frame.decision == decision]
         key = f"{decision}:{outcome}"
         designs = [make_design(subset, model, labels, paraphrases, outcome=outcome) for model in models]
-        boots = [bootstrap_coefficients(design, resamples=spec["bootstrap_resamples"], seed=study["seeds"]["bootstrap"], key=key) for design in designs]
+        s1 = decision == "ultimatum_proposer" and outcome == "outcome"
+        diagnostics = [belief_estimability(design, minimum_nonmodal_percent=spec["s1_belief_estimability"]["minimum_nonmodal_percent"]) for design in designs] if s1 else []
+        if s1:
+            for design in designs:
+                belief_cells.extend(belief_cell_counts(design))
+        boots = [bootstrap_coefficients(design, resamples=spec["bootstrap_resamples"],
+            seed=study["seeds"]["bootstrap"], key=key,
+            include_adjusted=s1 and diagnostics[i]["estimable"]) for i, design in enumerate(designs)]
         ordinary = [coefficients(design, design.y)[0] for design in designs]
-        adjusted = [coefficients(design, design.y, design.belief)[0] for design in designs] if designs[0].belief is not None else None
+        adjusted = [coefficients(design, design.y, design.belief)[0] if diagnostics[i]["estimable"]
+                    else np.full(design.x.shape[1], np.nan) for i, design in enumerate(designs)] if s1 else None
+        for i, diagnostic in enumerate(diagnostics):
+            adjusted_boot = boots[i][1]
+            belief_diagnostics.append({**diagnostic,
+                "bootstrap_fits_attempted": len(adjusted_boot) if adjusted_boot is not None else 0,
+                "bootstrap_numerical_failures": int(np.count_nonzero(~np.isfinite(adjusted_boot).all(axis=1))) if adjusted_boot is not None else 0})
         for left, right, family in study_contrasts(study):
             vectors = [contrast_vector(design, left, right) for design in designs]
             for control in ([False, True] if adjusted is not None else [False]):
                 method = "belief_adjusted" if control else "unadjusted"
                 observed = np.array([vectors[i] @ (adjusted[i] if control else ordinary[i]) for i in range(len(models))])
-                samples = np.column_stack([boots[i][int(control)] @ vectors[i] for i in range(len(models))])
+                samples = np.column_stack([boots[i][int(control)] @ vectors[i] if boots[i][int(control)] is not None
+                    else np.full(spec["bootstrap_resamples"], np.nan) for i in range(len(models))])
                 null = np.column_stack([permutation_contrasts(design, left, right,
                     resamples=spec["permutation_resamples"], seed=study["seeds"]["permutation"],
-                    key=key, adjusted=control) for design in designs])
+                    key=key, adjusted=control) if not control or diagnostics[i]["estimable"]
+                    else np.full(spec["permutation_resamples"], np.nan) for i, design in enumerate(designs)])
+                missing_models = [models[i] for i in range(len(models)) if not np.isfinite(observed[i])]
+                reasons = [diagnostic["not_estimable_reason"] for diagnostic in diagnostics] if control else [""] * len(models)
+                pooled_reason = "one_or_more_models_not_estimable" if missing_models else ""
                 for scope_index, scope in enumerate([*models, "pooled"]):
+                    # Ordinary mean deliberately propagates unavailable models; never average three.
                     estimate = float(observed[scope_index]) if scope != "pooled" else float(observed.mean())
                     draws = samples[:, scope_index] if scope != "pooled" else samples.mean(axis=1)
                     permuted = null[:, scope_index] if scope != "pooled" else null.mean(axis=1)
-                    low, high = bootstrap_interval(estimate, draws, spec["confidence_level"])
+                    reason = pooled_reason if scope == "pooled" else reasons[scope_index]
                     primary = decision == "dictator" and family == "own_vs_other" and scope == "pooled"
                     rows.append({"decision": decision, "outcome": outcome, "method": method,
                                  "left": left, "right": right, "family": family, "scope": scope,
                                  "designation": "primary_P1" if primary else "secondary",
-                                 "estimate": estimate, "ci_low": low, "ci_high": high,
-                                 "permutation_p": two_sided_p(estimate, permuted),
+                                 "interpretation": "descriptive post-card belief adjustment; not causal mediation" if control else "label contrast",
+                                 **_estimate_fields(estimate, draws, spec["confidence_level"], reason=reason),
+                                 "non_estimable_models": ";".join(missing_models) if scope == "pooled" else scope if not np.isfinite(estimate) else "",
+                                 "permutation_p": two_sided_p(estimate, permuted) if np.isfinite(estimate) and np.isfinite(permuted).all() else np.nan,
                                  "bootstrap_resamples": len(draws), "permutation_resamples": len(permuted)})
                     array_key = f"{key}:{method}:{left}-{right}:{scope}"
                     arrays[array_key + ":bootstrap"] = draws
@@ -128,13 +177,18 @@ def estimate_all(frame: pd.DataFrame, study: dict[str, Any], models: list[str]) 
                     before = np.array([vectors[i] @ ordinary[i] for i in range(len(models))])
                     before_samples = np.column_stack([boots[i][0] @ vectors[i] for i in range(len(models))])
                     for i, scope in enumerate([*models, "pooled"]):
-                        delta = float((observed - before)[i]) if scope != "pooled" else float((observed - before).mean())
-                        delta_samples = (samples - before_samples)[:, i] if scope != "pooled" else (samples - before_samples).mean(axis=1)
-                        low, high = bootstrap_interval(delta, delta_samples, spec["confidence_level"])
+                        delta = float((before - observed)[i]) if scope != "pooled" else float((before - observed).mean())
+                        delta_samples = (before_samples - samples)[:, i] if scope != "pooled" else (before_samples - samples).mean(axis=1)
+                        reason = pooled_reason if scope == "pooled" else reasons[i]
+                        fields = _estimate_fields(delta, delta_samples, spec["confidence_level"], reason=reason)
+                        fields["unadjusted_minus_adjusted"] = fields.pop("estimate")
                         changes.append({"left": left, "right": right, "scope": scope,
-                                        "adjusted_minus_unadjusted": delta, "ci_low": low, "ci_high": high,
+                                        **fields,
+                                        "non_estimable_models": ";".join(missing_models) if scope == "pooled" else scope if not np.isfinite(delta) else "",
                                         "interpretation": "descriptive coefficient change; not a causal mediation estimate"})
-    return pd.DataFrame(rows), pd.DataFrame([pooled_p1]), pd.DataFrame(changes), arrays
+                        arrays[f"{key}:unadjusted_minus_adjusted:{left}-{right}:{scope}:bootstrap"] = delta_samples
+    return StudyEstimates(pd.DataFrame(rows), pd.DataFrame([pooled_p1]), pd.DataFrame(changes), arrays,
+                          pd.DataFrame(belief_diagnostics), pd.DataFrame(belief_cells))
 
 
 def _write_csv(frame: pd.DataFrame, path: Path) -> None:
@@ -175,21 +229,23 @@ def analyze_study1(config: str | Path, paths: list[str | Path], output: str | Pa
         check_roster(check, roster)
         if check.synthetic != data.synthetic:
             raise ValueError("Cannot combine real and synthetic batches in one reproduction.")
-    estimates, equivalence, changes, arrays = estimate_all(data.decisions, study, list(roster))
+    estimates = estimate_all(data.decisions, study, list(roster))
     output.mkdir(parents=True)
     tables = {"decisions": data.decisions, "coverage": coverage,
               "descriptives": decision_descriptives(data.decisions),
-              "attempt_diagnostics": attempt_diagnostics(data), "contrasts": estimates,
-              "equivalence": equivalence, "s1_coefficient_changes": changes}
+              "attempt_diagnostics": attempt_diagnostics(data), "contrasts": estimates.contrasts,
+              "equivalence": estimates.equivalence, "s1_coefficient_changes": estimates.coefficient_changes,
+              "s1_belief_diagnostics": estimates.belief_diagnostics,
+              "s1_belief_cell_counts": estimates.belief_cells}
     tables["usage_calls"], tables["usage_summary"] = usage_tables(data)
     if check is not None:
         tables["comprehension"] = comprehension_table(check, study, list(roster))
     for name, frame in tables.items():
         _write_csv(frame, output / f"{name}.csv")
-    np.savez_compressed(output / "resampling_distributions.npz", **arrays)
+    np.savez_compressed(output / "resampling_distributions.npz", **estimates.distributions)
     from kinloyalty.analysis.figures import create_figures
 
-    create_figures(data.decisions, estimates, tables.get("comprehension"), study, roster, output, synthetic=data.synthetic)
+    create_figures(data.decisions, estimates.contrasts, tables.get("comprehension"), study, roster, output, synthetic=data.synthetic)
     _write_metadata(output, data, config, extra_files=check.files if check else None)
     return output
 

@@ -220,9 +220,11 @@ in `analysis.md` and the versioned study configuration.
 | `coverage.csv` | Model × decision × label × paraphrase: planned, valid, excluded; inference requires no unfinished/not-started draws |
 | `descriptives.csv` | Model × decision × label: n, mean, median, sample SD, shares at $50 and $0, modal share, distinct values |
 | `attempt_diagnostics.csv` | Model × decision × label: observed draws, valid, re-asked draws, excluded, unfinished, attempts, API errors |
-| `contrasts.csv` | 150 rows: decision, outcome (`outcome`/`belief`), method (`unadjusted`/`belief_adjusted`), left/right labels, family, model/pooled scope, primary/secondary designation, estimate, basic bootstrap 95% interval, two-sided permutation p-value, resampling counts |
+| `contrasts.csv` | 150 rows: decision, outcome (`outcome`/`belief`), method (`unadjusted`/`belief_adjusted`), left/right labels, family, model/pooled scope, primary/secondary designation, estimate, basic bootstrap 95% interval, two-sided permutation p-value, resampling counts, interpretation, point/interval availability and reasons, unavailable bootstrap count, non-estimable model names |
 | `equivalence.csv` | Always one pooled P1 row: estimate, bound, lower/upper one-sided p-values, their maximum (`p_tost`), equivalent boolean, 90% basic interval and its level |
-| `s1_coefficient_changes.csv` | 30 rows: contrast/scope, adjusted-minus-unadjusted offer coefficient and paired bootstrap 95% interval; descriptive association, no extra p-value |
+| `s1_coefficient_changes.csv` | 30 rows: contrast/scope, `unadjusted_minus_adjusted` offer coefficient and paired bootstrap 95% interval; descriptive association, no extra p-value or explained-share ratio; explicit point/interval availability and reasons |
+| `s1_belief_diagnostics.csv` | One row per model: retained valid proposer n, unique beliefs, nonmodal draw count/share, required count/percent, lowest-mode tie rule, rank status, estimability/reason, bootstrap fits attempted and numerical failures |
+| `s1_belief_cell_counts.csv` | Model × label × paraphrase: retained n, lowest tied mode, modal and nonmodal draw counts; audit of the fixed 10% rule |
 | `usage_calls.csv` | Every attempt: record/trial ID, model/provider, response presence, validity, returned version, stop/truncation, all five usage counters; API errors have empty response fields |
 | `usage_summary.csv` | Model/provider × usage metric: responses, observed/missing counts, mean, median, minimum, maximum; missing counts are computed only among actual responses |
 | `comprehension.csv` | Optional separate batch: model × card, planned/valid/excluded/unfinished/not-started, completion flag, yes/no/unsure counts and shares of planned 20, correct/scored status, label/model pass |
@@ -233,6 +235,15 @@ in `analysis.md` and the versioned study configuration.
 The NPZ keys have the form
 `decision:outcome:method:left-right:scope:bootstrap|permutation`. Arrays use the
 configured 10,000 entries. Scope is a configured model key or `pooled`.
+Paired coefficient changes add arrays with method `unadjusted_minus_adjusted`.
+Numerically singular adjusted bootstrap replicates remain NaN, with no deletion
+or redraw. Affected confidence intervals are unavailable, even if the observed
+point is identifiable. A model failing the fixed observed-sample count rule has
+unavailable adjusted arrays/results; the pooled four-model target remains
+unavailable as well. Unavailable point/interval values in CSV are empty, with
+`estimable`, `not_estimable_reason`, `interval_available`,
+`interval_unavailable_reason`, `bootstrap_unavailable_count`, and
+`non_estimable_models` distinguishing the reasons. No model is silently omitted.
 
 Figures `main_distributions`, `responder_distributions`, and `s1_coefficients`
 are saved as both `.pdf` and `.png`; `comprehension` adds a table figure in both

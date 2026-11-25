@@ -338,3 +338,47 @@ and any batch that must be rerun. No post-pilot fixes or deviations exist yet.
 - **Status:** Phase 5 complete with a local commit and `docs/phase5_report.md`;
   no new push. Phase 6 and its 240+320 live draws need separate approval, as
   does accepting the reported Kimi cache-read metadata limitation before pilot.
+
+## 2026-11-25 — S1 specification clarification before the pilot
+
+- **Confirmed:** Separate model regressions with model-specific belief slopes
+  and paraphrase controls; equal quarter-weights in the pooled adjusted contrast;
+  unadjusted fits on the same observations with only the belief term removed;
+  belief-outcome contrasts under the same fixed-effect/weighting conventions;
+  and shared paired resamples for adjusted/unadjusted offer fits and their change.
+- **Researcher-fixed count rule:** Reject the proposed SD cutoff. Within each
+  label × paraphrase cell, choose the modal stated belief, taking the lowest
+  value in a modal tie. A model's adjusted S1 contrast is not estimable if fewer
+  than 10% of its proposer draws differ from their own cell's mode. With 300
+  valid draws, 29 fails and 30 passes. Fix the rule now, before the pilot, and
+  do not adjust it after seeing pilot results.
+- **Operational denominator:** Use retained final-valid proposer draws (the
+  same cohort as both offer regressions); excluded replies cannot supply valid
+  beliefs. Report the actual denominator, threshold, and counts explicitly.
+  `configs/study1.yaml` records this definition and the fixed 10%/lowest-mode
+  rule, and the analysis rejects silently altered rule settings.
+- **Corrections to Phase 5:** Previously a singular adjusted fit aborted the
+  entire analysis. Now flag model-specific adjusted results as unavailable,
+  retain all unadjusted/belief analyses, and keep every model visible. A missing
+  model makes the four-model adjusted average unavailable; never average three.
+  Change the displayed difference from adjusted-minus-unadjusted to explicitly
+  named `unadjusted_minus_adjusted`; its interval still uses paired resamples.
+- **Resample failures:** Do not filter or redraw bootstrap samples. Numerically
+  singular adjusted replicates remain NaN and are counted. Withhold affected
+  model/pooled paired-bootstrap intervals if any replicates are unavailable;
+  retain identifiable observed estimates and valid permutation p-values.
+- **Interpretation:** No explained-share ratio is reported. The belief is
+  measured after the card, so this is descriptive rather than causal mediation.
+  Outputs, comments, and figure labels reflect this explicitly.
+- **Artifacts:** Added model/cell belief-count diagnostics and saved paired
+  difference arrays. At the researcher's explicit request, wrote the S1 section
+  in `preregistration/study1.md` as an incomplete, unlocked draft before pilot.
+  No registration tag/push, new phase, or model-provider call was authorized.
+- **Verification:** 285 offline tests passed, including 33 analysis tests. Added
+  exact 29-versus-30/300 boundary checks, cell-specific/lowest-mode tie checks,
+  explicit unavailable model/pooled results, paired-difference sign/intervals,
+  singular-bootstrap accounting, and rejection of silently changed rules.
+  A constant-belief mock batch exported all model scopes and readable NE markers.
+  The full-size 10,000-resample mock reproduction passed with unchanged P1.
+  Wheel/source builds, draft inclusion, and syntax/public documentation checks
+  passed. This clarification is committed locally without a push or new API call.

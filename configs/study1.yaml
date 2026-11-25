@@ -157,6 +157,13 @@ analysis:
   adjusted_permutation_rule: freedman_lane_within_model_paraphrase
   bootstrap_interval: basic
   s1_belief_slopes: model_specific
+  # Fixed by the researcher before the pilot; do not tune using pilot results.
+  s1_belief_estimability:
+    minimum_nonmodal_percent: 10
+    modal_cell: [label, paraphrase]
+    mode_tie_break: lowest
+    denominator: retained_valid_proposer_draws
+    frozen_before_pilot: true
   multiple_comparison_correction: none
   accepted_decision_phase: main
   figure_formats: [pdf, png]
