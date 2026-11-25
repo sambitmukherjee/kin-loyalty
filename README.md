@@ -10,7 +10,7 @@ outside the current scope.
 
 ## Current status
 
-**Phase 6 complete: 240 pilot and 320 comprehension draws, with review flags.** The researcher has approved the prompt
+**Approved pre-lock design amendment and re-pilot complete.** The researcher has approved the prompt
 text, response schemas, and Riley/Taylor and Casey/Morgan name pairs. The package
 builds balanced, deterministic manifests and executes/resumes them with a mock
 client, durable attempt logs, validation, retries, and one identical re-ask.
@@ -21,12 +21,22 @@ Input sizes were 233–539 tokens; no response hit the output cap. Kimi omitted
 its cache-read count (retained as null) and reported 256 cache-write tokens.
 See the [smoke report and metadata limitations](docs/phase4b_report.md) and
 [provider verification and sources](docs/provider_verification.md).
-All 560 responses were valid, using 562 API attempts after two recovered errors.
-All four models passed comprehension. Pooled pilot checks found all-zero
-dictator transfers for OpenAI/Gemini and constant Gemini proposer offers.
-See the [Phase 6 report](docs/phase6_report.md) for pooled distributions, metadata,
-and review items. No pilot label-effect comparison was computed, and the
-pre-registration remains unlocked. See [analysis methods and commands](docs/analysis.md).
+The [original Phase 6 pilot](docs/phase6_report.md) found all-zero dictator
+transfers for OpenAI/Gemini and constant Gemini proposer offers. On 2026-11-26,
+the researcher explicitly approved a design change before the lock: remove only
+the final principal-interest sentence from all three system paraphrases, used
+by every decision and comprehension. No other scientific input changed.
+The fresh 240-draw pilot and 320-draw comprehension check completed in exactly
+560 API attempts, all valid, without errors or re-asks. All four models passed
+every scored comprehension condition at 20/20. No model had an all-zero dictator
+floor; Sonnet and Gemini transferred $50 in all 20 dictator draws each. Gemini
+proposer offers varied; no change was made in response to its original constant
+$40 offers. **This is the only prompt change for the dictator floor; no further
+change will be made for that reason.** See the
+[re-pilot report](docs/repilot_20261126_report.md) for pooled distributions,
+metadata, and offline verification commands. Original artifacts are preserved.
+No pilot label-effect comparison was computed, and pre-registration remains
+unlocked. See [analysis methods and commands](docs/analysis.md).
 The [unlocked pre-registration draft](preregistration/study1.md) records the
 researcher's fixed S1 count rule and paired descriptive comparison, plus the
 pooled P1 percentile-bootstrap TOST specification.
@@ -82,7 +92,8 @@ uv run --offline --locked kinloyalty review-prompts \
 `--model` accepts any model key in `configs/models.yaml`. Configuration file and
 directory paths are resolved relative to the study YAML file; CLI input/output
 paths are relative to the working directory unless supplied as absolute paths.
-Prompt approval was recorded on 2026-11-25; it does not lock the pre-registration.
+Initial prompt approval was recorded on 2026-11-25; the system-sentence removal
+was explicitly approved on 2026-11-26. Neither locks the pre-registration.
 
 ## Try the offline engine
 
@@ -121,7 +132,7 @@ provenance, and artifact hashes without API keys:
 
 ```sh
 kinloyalty reproduce --data data/study1/main \
-  --comprehension data/study1/comprehension --output results/study1/generated
+  --comprehension data/study1/repilot_20261126/comprehension --output results/study1/generated
 ```
 
 Real main data do not exist yet, so this command currently stops with a missing

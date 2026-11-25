@@ -566,3 +566,48 @@ and any batch that must be rerun. No post-pilot fixes or deviations exist yet.
   all other fields are identical. The rendered review differs only by the 81
   corresponding sentence removals. Credentials are available without disclosure;
   `.env` is ignored with mode 0600 and `codex_prompts/` is ignored/untracked.
+
+## 2026-11-26 — Revised-prompt pilot and comprehension completed
+
+- **Execution:** Preparation commit `4eb04f1` ran the revised-prompt cohort from
+  00:07:36 to 00:22:43 IST. All 240 pilot and 320 fresh comprehension draws
+  completed valid in exactly 560 HTTP attempts. There were no API errors,
+  retries, invalid replies, re-asks, exclusions, or unfinished draws. Every
+  attempt records the clean preparation commit. Observed concurrency was four
+  globally and one per model, within the unchanged shared policy.
+- **Pooled dictator findings:** Sonnet and Gemini each transferred $50 in all
+  20 draws. GPT-6.1 Terra transferred $0 four times and $50 sixteen times;
+  Kimi transferred $0 thirteen times and $50 seven times. No model had an
+  all-zero floor. Sonnet and Gemini's dictator decisions were constant. These
+  findings pool all labels; no between-label pilot outcome comparison or
+  main-study inference was computed.
+- **Gemini proposer report:** The original pilot had 20/20 offers of $40.
+  The revised pilot has five offers of $40, ten of $45, and five of $50,
+  pooled over labels. No change was made in response to the original constant
+  offers, and no additional change is made in response to the new distribution.
+- **Fixed stopping rule honored:** The pre-lock design amendment remains the
+  only prompt change in response to the dictator floor. No further prompt or
+  sampling change is made after viewing the re-pilot. All four models remain.
+- **Fresh comprehension:** All four models scored 20/20 correct for each of
+  own-model, other-lab, and fictional cards; all undisclosed answers were unsure
+  (unscored). Use this final-prompt check for the eventual registration/paper,
+  preserving the original check solely as historical audit material.
+- **Mechanics and metadata:** Every model's response-validity rate was 100%;
+  no cap truncation and no missing input/reasoning counts. Largest input: 708
+  tokens. OpenAI/Anthropic cache reads/writes were explicitly zero. Kimi read
+  counts were observed in 73/140 responses and missing in 67/140; writes were
+  observed in all 140. Google omitted both cache counts in all 140. Missing
+  values remain null. Versions matched the requested IDs; Kimi's default
+  reasoning text was retained without a visibility-setting change.
+- **Artifacts and gate:** New raw data, separate reports, exact hashes, and
+  audits are under the `repilot_20261126` namespaces. See
+  `docs/repilot_20261126_report.md` for complete pooled frequency distributions,
+  checks, and offline review commands. Original artifacts are unchanged.
+  The amendment/re-pilot is complete; pre-registration remains unlocked.
+  No new GitHub push, registration tag, main manifest, or main run was made.
+- **Final verification:** Both reports reproduced byte-identically in new
+  temporary folders. Artifact/input hashes, exact manifest/log bindings, clean
+  live-code provenance, shared concurrency, and original-artifact preservation
+  passed. All scientific inputs and engine/test source remain identical to the
+  pre-call preparation commit. Supplied-secret scanning passed for every new or
+  modified artifact. Store completion artifacts in a local commit without a push.

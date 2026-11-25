@@ -34,6 +34,16 @@ original artifacts and keep the new runs separate under
 will supply the eventual registration's comprehension result. Record the
 amendment and results in `docs/decisions.md`; registration remains unlocked.
 
+The revised run completed on 2026-11-26: 240 valid pilot draws and 320 valid
+fresh comprehension draws in 560 HTTP attempts, with no errors or re-asks.
+All four models scored 20/20 in every scored comprehension condition;
+undisclosed answers were all unsure (unscored). The final-prompt check is saved
+at `data/study1/repilot_20261126/comprehension/`; see
+`docs/repilot_20261126_report.md` for pooled pilot observations and
+`docs/repilot_20261126_audit.json` for hashes and execution provenance. No
+further prompt change was made after this re-pilot. The remaining registration
+content, main manifest, lock/tag, and push are still pending the final phase.
+
 ## Pooled P1 bootstrap TOST
 
 The P1 estimand is the equally weighted mean of the four model-specific

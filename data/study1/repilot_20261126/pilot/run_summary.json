@@ -1,0 +1,10 @@
+{
+  "planned": 240,
+  "already_final": 0,
+  "valid": 240,
+  "excluded": 0,
+  "unfinished_trial_ids": [],
+  "calls_started": 240,
+  "recovered_attempts": 0,
+  "attempt_records_written": 240
+}

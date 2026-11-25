@@ -1,0 +1,5 @@
+model,planned_draws,draws_observed,not_started,unfinished,complete,response_attempts,valid_response_rate,parse_rate_pass,truncated,missing_reasoning_counts,missing_input_counts,missing_cache_read_counts,missing_cache_write_counts,zero_cache_required,zero_cache_verified,input_max,all_inputs_below_limit,dictator_all_zero,dictator_varies,ultimatum_proposer_varies,ultimatum_responder_varies
+claude_sonnet_5_5,60,60,0,0,True,60,1,True,0,0,0,0,0,True,True,708,True,False,False,True,True
+gpt_6_1_terra,60,60,0,0,True,60,1,True,0,0,0,0,0,True,True,312,True,False,True,True,True
+gemini_4_hydrogen,60,60,0,0,True,60,1,True,0,0,0,60,60,False,,608,True,False,False,True,True
+kimi_k3_1_pro,60,60,0,0,True,60,1,True,0,0,0,37,0,False,,490,True,False,True,True,True

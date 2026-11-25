@@ -1,0 +1,143 @@
+{
+  "live_code_commit": "4eb04f1764aed2bfe02c1f353878f757ad673b41",
+  "planned_draws": 560,
+  "batches": {
+    "pilot": {
+      "planned": 240,
+      "attempts": 240,
+      "valid": 240,
+      "exclusions": 0,
+      "unfinished": 0,
+      "invalid_responses": 0,
+      "reasked_draws": 0,
+      "manifest_sha256": "0ad3405905e6468523b00a0f8680e0bc0c4f9c96228aa2b8b70042e87d2a4a3e",
+      "attempts_sha256": "e66e80e9d6c0d05da9c5cb29824812b9b10406e1ac5c809681a951ad81d4ad75",
+      "api_errors": []
+    },
+    "comprehension": {
+      "planned": 320,
+      "attempts": 320,
+      "valid": 320,
+      "exclusions": 0,
+      "unfinished": 0,
+      "invalid_responses": 0,
+      "reasked_draws": 0,
+      "manifest_sha256": "92ce5927a501038d4c629e3fe243b643fca7caf660c074f1317c967aca620a13",
+      "attempts_sha256": "fcecdfc1518db4b157713d9a727179911c6e57ad655342993210f8ac6ab77460",
+      "api_errors": []
+    }
+  },
+  "models": {
+    "claude_sonnet_5_5": {
+      "responses": 140,
+      "returned_versions": {
+        "claude-sonnet-5-5": 140
+      },
+      "stop_reasons": {
+        "end_turn": 140
+      },
+      "input_tokens_min": 476,
+      "input_tokens_max": 708,
+      "reasoning_counts_observed": 140,
+      "default_reasoning_text_responses": 0,
+      "cache_read_observed": 140,
+      "cache_read_missing": 0,
+      "cache_write_observed": 140,
+      "cache_write_missing": 0
+    },
+    "gpt_6_1_terra": {
+      "responses": 140,
+      "returned_versions": {
+        "gpt-6.1-terra": 140
+      },
+      "stop_reasons": {
+        "stop": 140
+      },
+      "input_tokens_min": 193,
+      "input_tokens_max": 312,
+      "reasoning_counts_observed": 140,
+      "default_reasoning_text_responses": 0,
+      "cache_read_observed": 140,
+      "cache_read_missing": 0,
+      "cache_write_observed": 140,
+      "cache_write_missing": 0
+    },
+    "gemini_4_hydrogen": {
+      "responses": 140,
+      "returned_versions": {
+        "gemini-4-hydrogen": 140
+      },
+      "stop_reasons": {
+        "STOP": 140
+      },
+      "input_tokens_min": 402,
+      "input_tokens_max": 608,
+      "reasoning_counts_observed": 140,
+      "default_reasoning_text_responses": 0,
+      "cache_read_observed": 0,
+      "cache_read_missing": 140,
+      "cache_write_observed": 0,
+      "cache_write_missing": 140
+    },
+    "kimi_k3_1_pro": {
+      "responses": 140,
+      "returned_versions": {
+        "kimi-k3.1-pro": 140
+      },
+      "stop_reasons": {
+        "stop": 140
+      },
+      "input_tokens_min": 352,
+      "input_tokens_max": 490,
+      "reasoning_counts_observed": 140,
+      "default_reasoning_text_responses": 140,
+      "cache_read_observed": 73,
+      "cache_read_missing": 67,
+      "cache_write_observed": 140,
+      "cache_write_missing": 0
+    }
+  },
+  "observed_concurrency": {
+    "global_max": 4,
+    "per_model_max": {
+      "gemini_4_hydrogen": 1,
+      "gpt_6_1_terra": 1,
+      "claude_sonnet_5_5": 1,
+      "kimi_k3_1_pro": 1
+    }
+  },
+  "actual_attempts": 560,
+  "valid_draws": 560,
+  "invalid_responses": 0,
+  "exclusions": 0,
+  "unfinished_draws": 0,
+  "started_local": "2026-11-26T00:07:36.516456+05:30",
+  "completed_local": "2026-11-26T00:22:43.624778+05:30",
+  "request_integrity": {
+    "draws_compared_to_original": 560,
+    "changed_template_files": [
+      "system_1.txt",
+      "system_2.txt",
+      "system_3.txt"
+    ],
+    "unchanged_template_files": 15,
+    "rendered_review_examples_changed_only_by_sentence_removal": 81,
+    "permitted_request_differences": [
+      "system_prompt final sentence removed",
+      "matching API payload system field updated"
+    ],
+    "permitted_source_differences": [
+      "SHA-256 of the three system templates"
+    ],
+    "all_other_manifest_and_request_fields_identical": true,
+    "original_attempt_logs_sha256": {
+      "pilot": "28ac551d9077db3ab7d823a33e568e4b4d504b946893ae87431ff00aabad5cf0",
+      "comprehension": "e685cc23631700c9000ad02a87d8938ff2d9145a7c98b25c9adb2c0261507fd1"
+    }
+  },
+  "stopping_rule": "Only prompt change in response to the dictator floor; no further prompt change for this reason regardless of re-pilot outcomes.",
+  "pilot_outcome_grouping": [
+    "model",
+    "decision"
+  ]
+}
