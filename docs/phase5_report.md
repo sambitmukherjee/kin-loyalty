@@ -1,5 +1,10 @@
 # Phase 5 — analysis, reports, and reproduction
 
+**Historical verification report.** Later pre-pilot clarifications replaced the
+original basic intervals/null-centered TOST below with count-matched percentile
+intervals and raw-tail TOST. Current specifications are in `analysis.md` and
+`preregistration/study1.md`; the decision log records the approved changes.
+
 Phase 4b commit `3fd70c5` was pushed before this phase, as requested. Phase 5
 implements the complete Study 1 analysis and validates it only on simulated
 data. No additional provider calls were made or observed pilot outcomes analyzed.

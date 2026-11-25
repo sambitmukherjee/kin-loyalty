@@ -98,22 +98,51 @@ the original retained cell size. Offer/belief pairs stay together. Regression
 coefficients are refitted for each draw, including the belief slope. Independent
 model streams are combined by averaging estimates at the same bootstrap index.
 
-The interval convention is the basic (reverse-error) bootstrap. For observed
-estimate `d` and bootstrap errors `e = d_boot - d`, its 95% interval is
-`[d - quantile(e, .975), d - quantile(e, .025)]`. This matches the basic interval
-definition in the [SciPy bootstrap documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.bootstrap.html).
+Every bootstrap interval uses **count-matched empirical percentile endpoints**,
+with no interpolation, centering, or reflection. Sort the same 10,000 bootstrap
+estimates in ascending order:
+
+- 90% interval: the **500th and 9,501st** estimates.
+- 95% interval: the **250th and 9,751st** estimates.
+
+This applies to model-specific and pooled primary/secondary contrasts, adjusted
+S1 contrasts, and the paired unadjusted-minus-adjusted coefficient change.
+It replaces all earlier basic intervals. The [SciPy bootstrap documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.bootstrap.html)
+distinguishes percentile intervals from basic intervals; this project fixes the
+finite-sample endpoint ranks explicitly rather than using interpolation.
+
+For test configurations using `B` resamples, let `a = (1-confidence)/2` and take
+the largest integer `k` satisfying `(k+1)/(B+1) < a`. Use the `(k+1)`th and
+`(B-k)`th sorted estimates (one-based). Exact rational arithmetic defines the
+strict rank boundary. Too few resamples to supply such a rank cause an error.
+Sorting uses a copy so the shared bootstrap indexes remain intact.
 
 Pooled P1 TOST is **always** calculated at the configured bound ±$5, regardless
-of the difference-test result. The researcher approved null-centered bootstrap
-TOST using the same 10,000 stratified draws. The lower null is `d <= -5`, with
-upper-tail probability of `e >= d + 5`; the upper null is `d >= 5`, with lower-tail
-probability of `e <= d - 5`. Both use `(1 + tail_count)/(B + 1)`. Equivalence
-requires both one-sided p-values below .05. The maximum is reported as `p_tost`.
-The accompanying basic 90% interval is reported separately from the 95% contrast
-interval. These are approximate bootstrap tests; no t-test approximation or
-four-model degrees of freedom are inserted. [TOSTER's bootstrap reference](https://aaroncaldwell.us/TOSTERpkg/reference/boot_t_TOST.html)
-describes the method family and matching interval conventions; TOSTER is not a
-dependency or an assertion of numerical equivalence to its implementation.
+of the difference-test result. The researcher specified percentile-bootstrap
+tail probabilities using the same 10,000 stratified estimates already used for
+the P1 confidence interval. No second bootstrap or new seed is used:
+
+```text
+p_lower = (1 + count(d_boot <= -5)) / 10001
+p_upper = (1 + count(d_boot >= +5)) / 10001
+p_tost = max(p_lower, p_upper)
+equivalent = (p_lower < .05) and (p_upper < .05)
+```
+
+Both comparisons to the dollar bounds are inclusive, and the p-value decisions
+are strictly below .05. Counts use the bootstrap estimates directly, without
+centering, reflection, or a floating-point tie tolerance. This replaces the
+earlier null-centered/basic-interval TOST convention before the pilot.
+
+A 90% percentile interval is reported alongside the 95% percentile interval in
+`equivalence.csv`, with both endpoint ranks and method metadata. The researcher
+selected the count-matched ranks above so the corrected p-value rule agrees
+with the 90% interval lying **strictly** inside ±$5. If either endpoint equals
+−$5 or +$5, equivalence is not declared. Ordinary interpolated percentiles can
+disagree with corrected p-values at the cutoff; [NumPy documents these
+interpolation conventions](https://numpy.org/doc/stable/reference/generated/numpy.quantile.html).
+The primary two-sided permutation test is unchanged. Bootstrap inference remains
+approximate; no t-test approximation or four-model degrees of freedom is used.
 
 ## Permutation tests
 

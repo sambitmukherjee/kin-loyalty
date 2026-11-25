@@ -152,10 +152,12 @@ analysis:
   confidence_level: 0.95
   equivalence_bound_dollars: 5
   # Researcher-approved Phase 5 choices; see docs/analysis.md.
-  tost_method: null_centered_basic_bootstrap
+  tost_method: percentile_bootstrap_tail_probabilities
   contrast_permutation_rule: tested_pair_within_model_paraphrase
   adjusted_permutation_rule: freedman_lane_within_model_paraphrase
-  bootstrap_interval: basic
+  # One percentile order-statistic convention for all intervals; no interpolation.
+  # B=10,000: 90% ranks 500/9501; 95% ranks 250/9751 (one-based).
+  bootstrap_interval: percentile_count_matched
   s1_belief_slopes: model_specific
   # Fixed by the researcher before the pilot; do not tune using pilot results.
   s1_belief_estimability:

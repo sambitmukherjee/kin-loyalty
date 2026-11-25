@@ -11,7 +11,7 @@ import statsmodels.formula.api as smf
 import yaml
 
 from kinloyalty.analysis.inference import (
-    belief_cell_counts, belief_estimability, bootstrap_coefficients, bootstrap_interval, bootstrap_tost, coefficients,
+    belief_cell_counts, belief_estimability, bootstrap_coefficients, bootstrap_interval, bootstrap_interval_ranks, bootstrap_tost, coefficients,
     contrast_vector, make_design, permutation_contrasts, two_sided_p,
 )
 from kinloyalty.analysis.loading import load_saved_data
@@ -126,12 +126,67 @@ def test_tost_null_and_equivalence_boundaries(observed: float, equivalent: bool)
         assert result["p_lower"] == pytest.approx(.5, abs=.001)
 
 
-def test_basic_interval_reflects_skewed_bootstrap_errors() -> None:
-    """The interval is the reverse-error interval, not an accidental percentile CI."""
-    samples = np.array([10., 11., 12., 20., 30.])
-    low, high = bootstrap_interval(10, samples, .8)
-    assert low == pytest.approx(20 - np.quantile(samples, .9))
-    assert high == pytest.approx(20 - np.quantile(samples, .1))
+def test_percentile_tost_uses_raw_tail_areas_on_an_asymmetric_distribution() -> None:
+    """A positive upper tail cannot be ignored by reflecting centered bootstrap errors."""
+    samples = np.concatenate([np.zeros(9500), np.full(500, 6.)])
+    result = bootstrap_tost(0, samples, bound=5)
+    assert result["p_lower"] == 1 / 10001
+    assert result["p_upper"] == 501 / 10001
+    assert result["equivalent"] is False
+    # Once the bootstrap estimates are supplied, their tail areas are not recentered.
+    shifted_reported_estimate = bootstrap_tost(2, samples, bound=5)
+    assert shifted_reported_estimate["p_lower"] == result["p_lower"]
+    assert shifted_reported_estimate["p_upper"] == result["p_upper"]
+
+
+def test_percentile_tost_counts_values_exactly_on_each_bound() -> None:
+    samples = np.concatenate([np.full(20, -5.), np.zeros(9960), np.full(20, 5.)])
+    result = bootstrap_tost(0, samples, bound=5)
+    assert result["p_lower"] == result["p_upper"] == 21 / 10001
+    assert result["p_tost"] == 21 / 10001 and result["equivalent"]
+
+
+@pytest.mark.parametrize("tail_count", [499, 500])
+@pytest.mark.parametrize("tail_value", [-6., -5., 5., 6.])
+def test_corrected_tost_and_strict_percentile_endpoints_agree_at_the_cutoff(tail_count: int, tail_value: float) -> None:
+    """The 500th/9,501st limits invert inclusive counts, including exact-bound ties."""
+    samples = np.concatenate([np.zeros(10000 - tail_count), np.full(tail_count, tail_value)])
+    result = bootstrap_tost(0, samples, bound=5)
+    assert result["equivalent"] is (tail_count == 499)
+    assert result["equivalence_ci_strictly_inside"] is result["equivalent"]
+    assert (result["equivalence_ci_lower_rank"], result["equivalence_ci_upper_rank"]) == (500, 9501)
+    assert (result["contrast_ci_lower_rank"], result["contrast_ci_upper_rank"]) == (250, 9751)
+    if tail_count == 500:
+        endpoint = result["equivalence_ci_low"] if tail_value < 0 else result["equivalence_ci_high"]
+        assert endpoint == tail_value
+
+
+def test_tost_plus_one_and_strict_alpha_also_match_with_small_test_counts() -> None:
+    """At B=99, p=.05 must fail; the generalized rank convention respects strictness."""
+    for count, equivalent in [(3, True), (4, False)]:
+        samples = np.concatenate([np.zeros(99 - count), np.full(count, 5.)])
+        result = bootstrap_tost(0, samples, bound=5)
+        assert result["equivalent"] is equivalent
+        assert result["equivalence_ci_strictly_inside"] is equivalent
+    assert bootstrap_interval_ranks(99, .9) == (4, 96)
+
+
+@pytest.mark.parametrize("samples", [np.array([]), np.array([0., np.nan]), np.array([0., np.inf])])
+def test_tost_does_not_silently_drop_missing_or_nonfinite_estimates(samples: np.ndarray) -> None:
+    with pytest.raises(ValueError, match="nonempty finite"):
+        bootstrap_tost(0, samples, bound=5)
+
+
+def test_all_bootstrap_intervals_use_explicit_empirical_ranks_without_interpolation() -> None:
+    """The asymmetric sample exposes reflection/interpolation; original pairing is preserved."""
+    samples = (np.arange(10000, dtype=float) ** 2)[::-1]
+    original = samples.copy()
+    for level, ranks in [(.9, (500, 9501)), (.95, (250, 9751))]:
+        assert bootstrap_interval_ranks(10000, level) == ranks
+        low, high = bootstrap_interval(samples, level)
+        assert (low, high) == ((ranks[0] - 1) ** 2, (ranks[1] - 1) ** 2)
+        assert low in samples and high in samples
+    assert np.array_equal(samples, original)
 
 
 def test_empty_cells_and_unidentifiable_beliefs_fail_explicitly() -> None:
@@ -232,6 +287,16 @@ def test_end_to_end_recovers_effect_and_reproduces_artifacts(batches: tuple[Path
     assert len(estimates) == 150
     assert len(pd.read_csv(first / "s1_coefficient_changes.csv")) == 30
     assert not pd.read_csv(first / "equivalence.csv").equivalent.iloc[0]
+    equivalence = pd.read_csv(first / "equivalence.csv").iloc[0]
+    assert equivalence.contrast_ci_low == pytest.approx(primary.ci_low)
+    assert equivalence.contrast_ci_high == pytest.approx(primary.ci_high)
+    assert primary.ci_method == equivalence.contrast_ci_method == "percentile_count_matched"
+    with np.load(first / "resampling_distributions.npz") as distributions:
+        pooled = distributions["dictator:outcome:unadjusted:own_model-other_lab:pooled:bootstrap"]
+        assert len(pooled) == equivalence.bootstrap_resamples
+        assert equivalence.lower_tail_count == np.count_nonzero(pooled <= -5)
+        assert equivalence.upper_tail_count == np.count_nonzero(pooled >= 5)
+        assert equivalence.equivalence_ci_strictly_inside == equivalence.equivalent
     for name in ["main_distributions", "s1_coefficients", "responder_distributions", "comprehension"]:
         assert (first / f"{name}.pdf").read_bytes().startswith(b"%PDF")
         assert (first / f"{name}.png").read_bytes().startswith(b"\x89PNG")
@@ -418,7 +483,7 @@ def test_s1_difference_interval_uses_the_paired_bootstrap_and_explicit_sign(batc
         difference = result.distributions[prefix + "unadjusted_minus_adjusted" + suffix]
         assert np.array_equal(difference, before - after) or np.allclose(difference, before - after, atol=1e-12)
         row = result.coefficient_changes.query("scope == @scope and left == 'own_model' and right == 'other_lab'").iloc[0]
-        low, high = bootstrap_interval(row.unadjusted_minus_adjusted, difference)
+        low, high = bootstrap_interval(difference)
         assert row.ci_low == pytest.approx(low) and row.ci_high == pytest.approx(high)
         assert "not a causal mediation" in row.interpretation
     assert "share_explained" not in result.coefficient_changes

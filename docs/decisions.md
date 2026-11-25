@@ -382,3 +382,38 @@ and any batch that must be rerun. No post-pilot fixes or deviations exist yet.
   The full-size 10,000-resample mock reproduction passed with unchanged P1.
   Wheel/source builds, draft inclusion, and syntax/public documentation checks
   passed. This clarification is committed locally without a push or new API call.
+
+## 2026-11-25 — Pooled P1 percentile-bootstrap TOST specification
+
+- **Researcher instruction:** Use the existing 10,000 stratified pooled-P1
+  bootstrap estimates and fixed seed; compute inclusive raw-estimate tail areas
+  `(1 + count(d_boot <= -5))/10001` and
+  `(1 + count(d_boot >= +5))/10001`. Declare equivalence only if both p-values
+  are strictly below .05, and report their maximum as the TOST p-value.
+- **Endpoint clarification approved by researcher:** Use the 500th/9,501st
+  sorted estimates for 90%; endpoints must be strictly inside ±$5, so equality
+  to either bound fails equivalence. This exactly matches the inclusive corrected
+  tail counts. Ordinary interpolated percentiles can disagree at the cutoff.
+- **Uniform interval rule prescribed by researcher:** Use the same convention
+  for every bootstrap interval. For 95%, select the 250th/9,751st sorted estimates
+  without interpolation. This includes primary/secondary, model/pooled, adjusted
+  S1, and paired coefficient-change intervals.
+- **Correction:** The earlier implementation used null-centered bootstrap
+  errors and basic intervals. The new instruction replaces those with raw
+  percentile-tail probabilities and count-matched percentile intervals at both
+  90% and 95%. Record this as a pre-pilot method change, not the original behavior.
+- **Unchanged:** Pooled P1 target, model weights, stratification, bootstrap
+  count/seed/streams, confidence levels, and primary two-sided permutation test.
+  TOST reuses the exact confidence-interval estimates; no additional resampling
+  or model-provider calls are needed. S1's paired-resample correlation handling,
+  fixed modal-count criterion, and descriptive interpretation are preserved.
+- **Verification:** 299 offline tests passed, including 47 analysis tests.
+  Asymmetric distributions distinguish the new tail formulas from the earlier
+  centered ones; exact-bound and 499-versus-500 tail-count tests verify strict
+  equivalence and matching empirical endpoints. Rank and pairing tests verify
+  the 90%/95% convention without interpolation or in-place sorting. Full-size
+  mock reproduction confirmed every bootstrap/permutation array is unchanged,
+  every available 95% interval uses ranks 250/9751, and the 90% TOST interval
+  uses ranks 500/9501. Planted/null mock cases agree with the strict interval
+  decision. Both builds and archive/source-integrity checks passed. No new
+  model-provider call, phase, push, or registration lock occurred.

@@ -2,6 +2,7 @@
 
 import hashlib
 from dataclasses import dataclass
+from fractions import Fraction
 from typing import Any
 
 import numpy as np
@@ -171,21 +172,58 @@ def two_sided_p(observed: float, null: np.ndarray) -> float:
     return float((1 + np.count_nonzero(np.abs(null) >= abs(observed) - 1e-12)) / (len(null) + 1))
 
 
-def bootstrap_interval(observed: float, samples: np.ndarray, confidence: float = .95) -> tuple[float, float]:
-    """Return a basic bootstrap interval by reflecting the bootstrap error quantiles."""
-    tail = (1 - confidence) / 2
-    low, high = np.quantile(samples - observed, [tail, 1 - tail])
-    return float(observed - high), float(observed - low)
+def bootstrap_interval_ranks(resamples: int, confidence: float = .95) -> tuple[int, int]:
+    """Return one-based empirical ranks matching strict +1-corrected tail tests.
+
+    For B=10,000: 90% uses ranks 500/9,501 and 95% uses 250/9,751.
+    Exact rational arithmetic avoids rounding the strict tail-count boundary.
+    """
+    if type(resamples) is not int or resamples < 1 or not np.isfinite(confidence) or not 0 < confidence < 1:
+        raise ValueError("Interval count and confidence level must be valid.")
+    tail = (1 - Fraction(str(confidence))) / 2
+    # Largest k satisfying (k+1)/(B+1) < tail, including the strict inequality.
+    maximum_tail_count = (tail.numerator * (resamples + 1) - 1) // tail.denominator - 1
+    if maximum_tail_count < 0:
+        raise ValueError("Too few bootstrap estimates for this confidence level under the +1 convention.")
+    return maximum_tail_count + 1, resamples - maximum_tail_count
+
+
+def _finite_bootstrap_samples(samples: np.ndarray) -> np.ndarray:
+    values = np.asarray(samples, dtype=float)
+    if values.ndim != 1 or len(values) == 0 or not np.isfinite(values).all():
+        raise ValueError("Bootstrap intervals and TOST require a nonempty finite one-dimensional sample.")
+    return values
+
+
+def bootstrap_interval(samples: np.ndarray, confidence: float = .95) -> tuple[float, float]:
+    """Select count-matched percentile order statistics, without interpolation or centering."""
+    values = _finite_bootstrap_samples(samples)
+    low_rank, high_rank = bootstrap_interval_ranks(len(values), confidence)
+    ordered = np.sort(values)  # Sort a copy; shared paired-bootstrap indexes must stay intact.
+    return float(ordered[low_rank - 1]), float(ordered[high_rank - 1])
 
 
 def bootstrap_tost(observed: float, samples: np.ndarray, *, bound: float, alpha: float = .05) -> dict[str, Any]:
-    """Test both equivalence boundaries using null-centered bootstrap errors."""
-    if bound <= 0:
-        raise ValueError("Equivalence bound must be positive.")
-    error = samples - observed
-    lower = (1 + np.count_nonzero(error >= observed + bound - 1e-12)) / (len(error) + 1)
-    upper = (1 + np.count_nonzero(error <= observed - bound + 1e-12)) / (len(error) + 1)
-    low, high = bootstrap_interval(observed, samples, 1 - 2 * alpha)
+    """Use inclusive percentile-bootstrap tail counts for both equivalence bounds."""
+    if not np.isfinite(bound) or bound <= 0 or not np.isfinite(observed) or not np.isfinite(alpha) or not 0 < alpha < .5:
+        raise ValueError("TOST requires a finite estimate, positive bound, and alpha between zero and one half.")
+    samples = _finite_bootstrap_samples(samples)
+    lower_count = int(np.count_nonzero(samples <= -bound))
+    upper_count = int(np.count_nonzero(samples >= bound))
+    lower = (1 + lower_count) / (len(samples) + 1)
+    upper = (1 + upper_count) / (len(samples) + 1)
+    low, high = bootstrap_interval(samples, 1 - 2 * alpha)
+    contrast_low, contrast_high = bootstrap_interval(samples, 1 - alpha)
+    low_rank, high_rank = bootstrap_interval_ranks(len(samples), 1 - 2 * alpha)
+    contrast_low_rank, contrast_high_rank = bootstrap_interval_ranks(len(samples), 1 - alpha)
     return {"estimate": observed, "bound": bound, "p_lower": lower, "p_upper": upper,
             "p_tost": max(lower, upper), "equivalent": bool(lower < alpha and upper < alpha),
-            "equivalence_ci_level": 1 - 2 * alpha, "equivalence_ci_low": low, "equivalence_ci_high": high}
+            "alpha": alpha, "bootstrap_resamples": len(samples),
+            "lower_tail_count": lower_count, "upper_tail_count": upper_count,
+            "equivalence_ci_method": "percentile_count_matched", "equivalence_ci_level": 1 - 2 * alpha,
+            "equivalence_ci_low": low, "equivalence_ci_high": high,
+            "equivalence_ci_lower_rank": low_rank, "equivalence_ci_upper_rank": high_rank,
+            "equivalence_ci_strictly_inside": bool(low > -bound and high < bound),
+            "contrast_ci_method": "percentile_count_matched", "contrast_ci_level": 1 - alpha,
+            "contrast_ci_low": contrast_low, "contrast_ci_high": contrast_high,
+            "contrast_ci_lower_rank": contrast_low_rank, "contrast_ci_upper_rank": contrast_high_rank}

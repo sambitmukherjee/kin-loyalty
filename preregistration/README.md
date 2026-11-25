@@ -1,7 +1,8 @@
 # Study 1 pre-registration
 
-`study1.md` contains an unlocked S1 draft requested by the researcher before the
-pilot, including the fixed cell-modal-count estimability rule. The complete
+`study1.md` contains an unlocked draft requested by the researcher before the
+pilot, including the fixed S1 cell-modal-count rule and pooled P1 bootstrap TOST
+specification. The complete
 pre-registration will be finalized after the pilot, final comprehension check,
 and approved mechanical fixes. The design is not locked at this stage.
 

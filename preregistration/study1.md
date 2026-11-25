@@ -1,10 +1,61 @@
 # Study 1 pre-registration — unlocked draft
 
 **Status:** This is an incomplete, unlocked draft. The researcher requested that
-the S1 specification and its fixed estimability rule be recorded before the
-pilot on 2026-11-25. The remaining protocol, pilot/comprehension results, final
+the S1 specification, its fixed estimability rule, and the pooled P1 bootstrap
+TOST specification be recorded before the pilot on 2026-11-25. The remaining protocol, pilot/comprehension results, final
 prompt/manifest hashes, and analysis commit references will be completed at the
 pre-registration phase. No `prereg-study1` tag or registration push has occurred.
+
+## Pooled P1 bootstrap TOST
+
+The P1 estimand is the equally weighted mean of the four model-specific
+dictator own-model-minus-other-lab contrasts with paraphrase fixed effects.
+Always perform equivalence testing against −$5 and +$5, independently of the
+two-sided difference test's result.
+
+Use exactly the same 10,000 stratified bootstrap estimates used for the P1
+confidence interval: resample draws within each model × label × paraphrase
+cell, refit the model-specific regressions, and average the four model estimates
+with equal quarter-weights at every bootstrap index. Use the existing fixed
+bootstrap seed, `2026112505`, and its existing named model streams. Do not make
+a separate bootstrap run or assign TOST another seed.
+
+For the bootstrap estimates `d_boot`, calculate:
+
+```text
+p_lower = (1 + count(d_boot <= -5)) / 10001
+p_upper = (1 + count(d_boot >= +5)) / 10001
+p_TOST = max(p_lower, p_upper)
+equivalent = (p_lower < 0.05) and (p_upper < 0.05)
+```
+
+Both boundary comparisons are inclusive. The decision uses strict p < .05 for
+each one-sided test. The +1 correction prevents zero p-values. Report both
+one-sided p-values and their maximum. These are percentile-bootstrap tail
+areas of the estimates themselves, not tails of null-centered or reflected
+bootstrap errors. This replaces the earlier null-centered TOST convention.
+
+Sort those same 10,000 bootstrap estimates in ascending order. The 90%
+percentile interval uses the **500th and 9,501st** estimates, with no
+interpolation. Equivalence requires this interval to lie **strictly** inside
+−$5 and +$5: if either endpoint equals its bound exactly, equivalence is not
+declared. These count-matched ranks give the same decision as the corrected
+one-sided p-values above, including values exactly on a bound.
+
+Report the 95% percentile interval alongside it, using the **250th and 9,751st**
+sorted estimates. Use this same no-interpolation percentile convention for
+**every bootstrap interval in the analysis**: per-model and pooled primary and
+secondary contrasts, S1 adjusted contrasts, and paired coefficient changes.
+This replaces the earlier basic 95% intervals as well as the earlier basic 90%
+TOST interval. Confidence levels, bootstrap draws/seeds, regression estimates,
+and the primary two-sided permutation test remain unchanged.
+
+For smaller synthetic-test counts `B`, the rank convention generalizes as
+follows: for interval level `1-2a`, find the largest integer `k` such that
+`(k+1)/(B+1) < a`; use one-based ranks `k+1` and `B-k`. Production inference uses
+10,000 resamples and the specific ranks above. Record tail counts, p-values,
+levels, endpoint ranks, and interval methods in the equivalence output. Sorting
+must preserve the original shared bootstrap order for paired calculations.
 
 ## S1: descriptive comparison of offers and stated beliefs
 
@@ -40,7 +91,8 @@ belief together as a pair. Refit both the adjusted and unadjusted regressions
 on every shared resample. Average the four model-specific estimates with equal
 weights at each bootstrap index for pooled inference.
 
-Report basic bootstrap 95% intervals for both offer contrasts. Define the
+Report count-matched percentile bootstrap 95% intervals for both offer contrasts,
+using the 250th and 9,751st sorted estimates without interpolation. Define the
 descriptive coefficient change as **unadjusted minus adjusted** and calculate
 its interval from the paired difference on every bootstrap resample. Do not
 subtract separate confidence limits or treat the two estimates as independent.

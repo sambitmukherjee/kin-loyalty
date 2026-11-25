@@ -41,10 +41,10 @@ def load_analysis_config(path: str | Path) -> tuple[dict[str, Any], dict[str, An
     study = yaml.safe_load(path.read_text())
     roster = yaml.safe_load((path.parent / study["models_file"]).read_text())["models"]
     spec = study["analysis"]
-    if (spec["tost_method"] != "null_centered_basic_bootstrap"
+    if (spec["tost_method"] != "percentile_bootstrap_tail_probabilities"
         or spec["contrast_permutation_rule"] != "tested_pair_within_model_paraphrase"
         or spec.get("adjusted_permutation_rule") != "freedman_lane_within_model_paraphrase"
-        or spec.get("bootstrap_interval") != "basic"
+        or spec.get("bootstrap_interval") != "percentile_count_matched"
         or spec["accepted_decision_phase"] != "main"):
         raise ValueError("Analysis methods must match the researcher-approved configuration.")
     required = {"primary_decision": "dictator", "primary_contrast": ["own_model", "other_lab"],
@@ -102,8 +102,9 @@ def _estimate_fields(estimate: float, draws: np.ndarray, confidence: float, *, r
     estimable = bool(np.isfinite(estimate))
     unavailable = int(np.count_nonzero(~np.isfinite(draws)))
     interval_available = estimable and unavailable == 0
-    low, high = bootstrap_interval(estimate, draws, confidence) if interval_available else (np.nan, np.nan)
+    low, high = bootstrap_interval(draws, confidence) if interval_available else (np.nan, np.nan)
     return {"estimate": estimate, "ci_low": low, "ci_high": high,
+            "ci_method": "percentile_count_matched", "ci_level": confidence,
             "estimable": estimable, "not_estimable_reason": reason if not estimable else "",
             "interval_available": interval_available,
             "interval_unavailable_reason": "" if interval_available else reason if not estimable else "non_estimable_bootstrap_replicates",
