@@ -57,9 +57,9 @@ the paper. No pre-registration lock exists yet.
 - Before clients: verify every requested model ID, endpoint, effort parameter,
   schema/caching setting, output cap, and required response metadata against
   current official provider documentation. Stop on discrepancies.
-- Before prompts are approved: finalize paraphrases 2/3 and their name pairs.
-- Before the engine is implemented: settle exact pilot allocation, the joint
-  comprehension name/paraphrase rotation, and concurrency/timeouts/retry budgets.
+- Prompt text, schemas, and name pairs were approved on 2026-11-25 (entry below).
+- Pilot allocation and joint comprehension rotation were selected by the
+  researcher before engine implementation; infrastructure defaults are below.
 - Before analysis is implemented: approve the exact TOST procedure and the label
   permutation convention for individual contrasts, retaining the specified
   model-by-paraphrase strata and two-sided difference tests.
@@ -121,3 +121,71 @@ and any batch that must be rerun. No post-pilot fixes or deviations exist yet.
   reproducibility. No provider calls were made.
 - **Status:** Awaiting researcher approval of all prompt text and proposed name
   pairs. Phase 3 is not started; Phase 2 is committed locally only.
+
+## 2026-11-25 — Prompt approval, Phase 2 push, and Phase 3 authorization
+
+- **Approval:** Researcher explicitly approved all prompt text, schemas, and name
+  pairs and authorized Phase 3, directing the coding agent to push Phase 2 first.
+- **Result:** Pushed `a7c7ba9` to the private `sambitmukherjee/kin-loyalty` main
+  branch before starting implementation. This was the authorized Phase 2 push;
+  the new Phase 3 commit is local unless separately authorized for push.
+- **Metadata:** Marked the existing name pairs and prompt review approved. The
+  18 plain-text experimental templates are unchanged from the approved commit.
+  This approval does not lock the pre-registration or authorize real API calls.
+
+## 2026-11-25 — Exact pilot and comprehension allocations
+
+- **Pilot:** Four draws/label within each model × decision; 2/1/1 across its
+  paraphrases with the extra at `(label_index + model_index + decision_index) % 3`
+  in zero-based config order. Overall paraphrase totals rotate 7/7/6. Other-lab
+  names cycle with decision-index offset, yielding 2/1/1 per decision and four
+  mentions/name per model over all three decisions.
+- **Comprehension:** For each model's other-lab checks, use the matrix
+  `[[3,2,2],[2,3,2],[2,2,2]]`: paraphrases as rows and other models in roster order
+  as columns. Both margins are 7/7/6 and every joint combination appears.
+- **Reason:** Resolve the allocations left open in the earlier phase reports
+  without changing total sample sizes or confounding other-lab names perfectly
+  with paraphrases.
+- **Approval:** The researcher selected both proposed allocations through the
+  clarification questions in the Codex chat before the dependent code was built.
+- **Status:** Preserved in YAML and checked by manifest tests.
+
+## 2026-11-25 — Engine infrastructure and persistence
+
+- **Settings:** Four concurrent trials, one per model, 120-second call timeout,
+  four API attempts per response, backoff 1 second ×2 capped at 30. API-error
+  budgets restart on explicit resume; invalid-response counts never reset. The
+  study's one re-ask rule is unchanged.
+- **Reason:** Make concurrency bounded, transient errors recoverable, and every
+  attempt auditable without treating API problems as model exclusions.
+- **Approval:** Infrastructure defaults selected by the coding agent within the
+  authorized Phase 3 and stated in progress commentary; all are configurable.
+- **Persistence:** Freeze full requests in deterministic manifests; append/fsync
+  one JSONL record per attempt; use an atomic pre-call journal and a local
+  advisory lock. Unknown interrupted calls remain unfinished, not exclusions.
+  Reject inconsistent history or a damaged JSONL tail without rewriting it.
+- **Scope:** Shared clients/logging/runner are independent of game mechanics.
+  Only manifest allocation and existing prompt/schema construction are Study 1
+  specific. The CLI exposes mock execution only; tests/demo artifacts are
+  temporary and every mock record is explicitly synthetic.
+- **Validation:** Follow canonical flat JSON schemas, including mathematical
+  integer semantics (1.0 is whole; booleans/fractions are invalid), strict JSON,
+  numeric bounds, and truncation. Field order and sentence count introduce no
+  additional exclusion heuristics beyond the approved schemas.
+- **Status:** Implemented; see `docs/engine.md` and `docs/phase3_report.md`.
+
+## 2026-11-25 — Phase 3 verification
+
+- **Result:** 198 offline tests passed under Python 3.11.5. Exact manifest counts
+  and rotations, strict validation, identical re-asks, exclusions, API retries,
+  timeouts, fail-fast scheduling, concurrency, history integrity, and installed
+  CLI/resume passed. Forced process kills during both initial and re-ask stages
+  recovered without resetting invalid-reply counts or inventing exclusions.
+- **Packaging:** Offline wheel/source builds passed. Archive checks included all
+  engine modules and unchanged experimental templates while excluding local
+  instructions/secrets. Syntax, public docstrings, and Git ignore rules passed.
+- **Demo:** Four valid synthetic smoke records, then zero new calls on rerun.
+  All demo/test artifacts were temporary and explicitly synthetic. No real calls,
+  pilot label-effect comparisons, retained main manifest/data, or lock occurred.
+- **Status:** Phase 3 complete, committed locally. Next phase requires the
+  researcher's approval under the established phase gate.

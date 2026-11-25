@@ -1,8 +1,10 @@
-# Draft Study 1 configuration. No experiment runner exists yet.
-# Prompt text and additional name pairs require approval in the prompt phase.
+# Study 1 configuration; the protocol is not pre-registration-locked yet.
 schema_version: 1
 study: study1
-status: draft
+status: prompts_approved
+prompt_approval:
+  approved_on: "2026-11-25"
+  approved_by: researcher
 # Resolve these paths relative to this YAML file, independent of the shell cwd.
 models_file: models.yaml
 prompt_directory: ../prompts/study1
@@ -54,11 +56,11 @@ paraphrases:
   - id: 2
     principal: Riley
     counterparty: Taylor
-    name_status: proposed_pending_prompt_approval
+    name_status: approved_by_researcher
   - id: 3
     principal: Casey
     counterparty: Morgan
-    name_status: proposed_pending_prompt_approval
+    name_status: approved_by_researcher
 
 main:
   draws_per_model_decision_label_paraphrase: 20
@@ -79,6 +81,12 @@ pilot:
   draws_per_model_decision: 20
   expected_total_draws: 240
   allocation: as_evenly_as_possible_across_labels_and_paraphrases
+  draws_per_label: 4
+  minimum_draws_per_paraphrase: 1
+  extra_paraphrase_rule: label_plus_model_plus_decision_index_modulo_3
+  # Other-lab pilot names cycle across the four draws; the repeated name rotates
+  # across the three decisions, giving each name four mentions per focal model.
+  other_lab_rule: cycle_roster_with_decision_offset
   decision_report_group_by: [model, decision]
   pool_over_labels: true
   allow_label_comparisons: false
@@ -91,6 +99,8 @@ comprehension:
   expected_total_draws: 320
   paraphrase_counts: [7, 7, 6]
   other_lab_name_counts: [7, 7, 6]
+  # Researcher-approved rows: paraphrases; columns: other models in roster order.
+  other_lab_joint_counts: [[3, 2, 2], [2, 3, 2], [2, 2, 2]]
   allowed_answers: ["yes", "no", unsure]
   minimum_correct_per_scored_label: 18
   expected_answers:
@@ -107,8 +117,16 @@ validation:
   api_errors_count_as_invalid_replies: false
   leave_exhausted_api_errors_unfinished: true
 
-# Infrastructure details (concurrency, timeout, and API retry limits/backoff)
-# will be proposed and documented before implementing the runner.
+# Infrastructure defaults selected in the authorized offline engine phase.
+# API retry attempts are separate from the one identical invalid-response re-ask.
+runner:
+  concurrency: 4
+  per_model_concurrency: 1
+  timeout_seconds: 120
+  api_attempts_per_response: 4
+  backoff_initial_seconds: 1
+  backoff_multiplier: 2
+  backoff_max_seconds: 30
 
 # Fixed, distinct seeds selected during Phase 1; no random draws have been run.
 seeds:

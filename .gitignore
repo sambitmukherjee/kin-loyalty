@@ -18,5 +18,8 @@ htmlcov/
 build/
 dist/
 
+# Advisory runner locks are local; manifests and attempt JSONL remain versionable.
+*.jsonl.lock
+
 # Local operating-system files.
 .DS_Store

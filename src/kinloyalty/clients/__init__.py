@@ -1,1 +1,1 @@
-"""Reserved for provider adapters and the offline mock client."""
+"""Shared model-client interface and offline mock; provider adapters follow later."""

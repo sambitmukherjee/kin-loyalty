@@ -40,5 +40,5 @@ def test_offline_cli_reproduces_review_from_another_directory(tmp_path: Path) ->
          "--model", "claude_sonnet_5_5", "--output", str(output)],
         cwd=tmp_path, text=True, capture_output=True, check=True,
     )
-    assert "Wrote draft prompt review" in result.stdout
+    assert "Wrote prompt review" in result.stdout
     assert output.read_bytes() == (ROOT / "docs/study1_prompt_review.md").read_bytes()

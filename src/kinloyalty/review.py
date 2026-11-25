@@ -21,8 +21,13 @@ def build_prompt_review(library: PromptLibrary, *, model: str) -> str:
     check_examples = paraphrases * sum(
         other_count if label == "other_lab" else 1 for label in library.study["comprehension"]["labels"]
     )
+    approval = library.study.get("prompt_approval")
+    status = (
+        f"APPROVED by the researcher on {approval['approved_on']}" if approval
+        else "DRAFT, awaiting researcher approval"
+    )
     sections = [
-        "# Study 1 prompt review — DRAFT, awaiting researcher approval",
+        f"# Study 1 prompt review — {status}",
         (
             f"Focal model: **{self_model['display_name']} ({self_model['lab']})**. "
             "This document contains rendered examples, not calls or observations. "
@@ -37,11 +42,12 @@ def build_prompt_review(library: PromptLibrary, *, model: str) -> str:
         ),
         (
             "Paraphrase 1 reproduces the protocol wording. Paraphrases 2 and 3 "
-            "and their name pairs are proposals. The first system sentence, card "
+            "use the additional name pairs listed below. The first system sentence, card "
             "block, human sentence, and task-specific reply instructions are "
             "protected across paraphrases apart from name substitution. "
             "Messages below have no trailing newline."
         ),
+        "Prompt approval does not lock the pre-registration or authorize real API calls.",
         "## Name pairs",
     ]
     name_table = ["| Paraphrase | Principal | Counterparty | Status |", "| --- | --- | --- | --- |"]

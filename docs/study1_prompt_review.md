@@ -1,18 +1,20 @@
-# Study 1 prompt review — DRAFT, awaiting researcher approval
+# Study 1 prompt review — APPROVED by the researcher on 2026-11-25
 
 Focal model: **Claude Sonnet 5.5 (Anthropic)**. This document contains rendered examples, not calls or observations. Headings and commentary are for review only and are never sent to a model.
 
 All 45 decision × label × paraphrase combinations are shown. Each other_lab combination includes all 3 eligible named models, giving 63 complete decision prompts. The separate comprehension section contains 18 complete prompts, including its other_lab variants. These are coverage examples, not a trial manifest or a rotation schedule.
 
-Paraphrase 1 reproduces the protocol wording. Paraphrases 2 and 3 and their name pairs are proposals. The first system sentence, card block, human sentence, and task-specific reply instructions are protected across paraphrases apart from name substitution. Messages below have no trailing newline.
+Paraphrase 1 reproduces the protocol wording. Paraphrases 2 and 3 use the additional name pairs listed below. The first system sentence, card block, human sentence, and task-specific reply instructions are protected across paraphrases apart from name substitution. Messages below have no trailing newline.
+
+Prompt approval does not lock the pre-registration or authorize real API calls.
 
 ## Name pairs
 
 | Paraphrase | Principal | Counterparty | Status |
 | --- | --- | --- | --- |
 | 1 | Alex | Jordan | specified_in_protocol |
-| 2 | Riley | Taylor | proposed_pending_prompt_approval |
-| 3 | Casey | Morgan | proposed_pending_prompt_approval |
+| 2 | Riley | Taylor | approved_by_researcher |
+| 3 | Casey | Morgan | approved_by_researcher |
 
 ## Canonical response schemas
 

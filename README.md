@@ -10,13 +10,13 @@ outside the current scope.
 
 ## Current status
 
-**Phase 2: prompts and cards implemented; prompt approval pending.** The package
-renders the three decision tasks and separate comprehension check offline, with
-neutral cards and canonical JSON schemas. Paraphrases 2 and 3 and their proposed
-Riley/Taylor and Casey/Morgan name pairs await researcher review. There are no
-provider clients, manifests, runner, API calls, analysis results, or locked
-pre-registration yet. Model IDs and API settings are the requested specification
-and have not been verified against current provider documentation.
+**Phase 3: offline experiment engine.** The researcher has approved the prompt
+text, response schemas, and Riley/Taylor and Casey/Morgan name pairs. The package
+builds balanced, deterministic manifests and executes/resumes them with a mock
+client, durable attempt logs, validation, retries, and one identical re-ask.
+The CLI supports **mock execution only**. No real provider clients or model API
+calls, analysis results, or locked pre-registration exist yet. Model IDs and API
+settings remain unverified until the provider-client phase.
 
 The planned main design has four models, three decisions, five labels, three
 paraphrases, and 20 draws per smallest cell: **3,600 planned draws**. Smoke tests,
@@ -44,7 +44,7 @@ If you already have a supported interpreter, select it explicitly:
 uv sync --locked --python /absolute/path/to/python3.11
 ```
 
-## Review the proposed prompts
+## Inspect the approved prompts
 
 Read [the complete rendered review](docs/study1_prompt_review.md) for Claude
 Sonnet 5.5. It contains all 45 decision/label/paraphrase combinations, expanded to
@@ -64,7 +64,36 @@ uv run --offline --locked kinloyalty review-prompts \
 `--model` accepts any model key in `configs/models.yaml`. Configuration file and
 directory paths are resolved relative to the study YAML file; CLI input/output
 paths are relative to the working directory unless supplied as absolute paths.
-Do not treat tests as researcher approval of the wording.
+Prompt approval was recorded on 2026-11-25; it does not lock the pre-registration.
+
+## Try the offline engine
+
+Create a fresh directory for these synthetic examples, outside the study's real
+data directories. This executes four mock calls and makes no network requests:
+
+```sh
+kinloyalty_demo_dir="$(mktemp -d /private/tmp/kin-loyalty-demo.XXXXXX)"
+uv run --offline --locked kinloyalty manifest --phase smoke \
+  --output "$kinloyalty_demo_dir/manifest.jsonl"
+uv run --offline --locked kinloyalty run --client mock \
+  --manifest "$kinloyalty_demo_dir/manifest.jsonl" \
+  --log "$kinloyalty_demo_dir/attempts.jsonl"
+```
+
+Repeat the `run` command to verify resume: it reports four already-final draws
+and zero new calls. Every mock record has `synthetic: true`; mock token counts
+are synthetic, not provider measurements. Manifests refuse to overwrite an
+existing file. The runner reads frozen requests from the manifest, without
+reloading current prompts or configuration.
+
+`manifest` also supports `pilot`, `comprehension`, and `main`. These build plans
+only. The main manifest has been checked in temporary tests; the pre-registration
+manifest is created at the final lock, and the real main run remains out of scope.
+
+See [engine behavior and recovery](docs/engine.md) and the
+[implemented log dictionary](docs/data_dictionary.md). Locking uses `fcntl` on
+macOS/Linux. A partially written JSONL record causes execution to stop while
+preserving its bytes for recovery.
 
 ## Quickstart A: reproduce the paper
 
@@ -78,7 +107,8 @@ separate report will summarize the comprehension check.
 
 ## Quickstart B: run a new experiment
 
-This workflow will be implemented in subsequent approved phases:
+The offline planning/execution steps are implemented; real provider integration
+will follow in its approved phase:
 
 1. Edit the readable model and study YAML files in `configs/` and the experiment
    templates in `prompts/study1/`.
@@ -91,8 +121,9 @@ This workflow will be implemented in subsequent approved phases:
    approved batch through the manifest-based runner, resuming by trial ID.
 5. Retain the append-only attempt logs and reproduce outputs from those logs.
 
-The planned CLI will include `smoke`, `manifest`, `run`, `report`, `analyze`, and
-`reproduce`. These commands are **not implemented yet**.
+Available commands are `review-prompts`, `manifest`, and mock-only `run`.
+Real `smoke`, reporting, analysis, and reproduction commands are not implemented
+yet. No command in the current package makes paid model calls.
 
 ## Repository layout
 
@@ -101,14 +132,15 @@ The planned CLI will include `smoke`, `manifest`, `run`, `report`, `analyze`, an
 | `configs/models.yaml` | Requested model roster and provider settings; verification pending |
 | `configs/study1.yaml` | Design, conditions, names, counts, fixed seeds, and analysis settings |
 | `prompts/study1/` | Versioned system/game templates, protected blocks and shared JSON instructions |
-| `src/kinloyalty/` | Offline rendering, response schemas, review CLI; reserved client and analysis modules |
+| `src/kinloyalty/` | Prompt/schema tools, manifests, mock client, validation, logging, runner, CLI |
 | `data/study1/` | Separate smoke, pilot, and comprehension batches; main data added later |
 | `results/study1/` | Generated tables and figures, once implemented |
 | `preregistration/` | Reserved for the final Study 1 pre-registration |
 | `docs/data_dictionary.md` | Draft attempt-log and analysis-table contracts |
 | `docs/decisions.md` | Dated decisions, approvals, and later deviations |
 | `docs/study1_prompt_review.md` | Fully rendered draft prompts and schemas for approval |
-| `tests/` | Offline configuration, exact prompt/card text, schema, and review-generation tests |
+| `docs/engine.md` | Allocation rules, retries/re-asks, concurrency, and durable resume |
+| `tests/` | Offline protocol, manifest, validation, logging/resume, and CLI checks; socket connections blocked |
 | `codex_prompts/` | Local coding-agent instructions; always Git-ignored |
 
 `prompts/` and `codex_prompts/` have different purposes. Experiment templates are

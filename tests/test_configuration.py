@@ -123,8 +123,8 @@ def test_protected_card_data(study_config: dict) -> None:
     assert study_config["labels"]["human"]["model_text"] == ""
 
 
-def test_name_pairs_are_distinct_and_marked_as_draft(study_config: dict) -> None:
-    """Retain the specified pair and identify additional names as proposals."""
+def test_name_pairs_are_distinct_and_approved(study_config: dict) -> None:
+    """Retain the specified pair and record the researcher's additional-name approval."""
     paraphrases = study_config["paraphrases"]
     assert [entry["id"] for entry in paraphrases] == [1, 2, 3]
     assert (paraphrases[0]["principal"], paraphrases[0]["counterparty"]) == ("Alex", "Jordan")
@@ -135,9 +135,11 @@ def test_name_pairs_are_distinct_and_marked_as_draft(study_config: dict) -> None
     }
     assert not {name.lower() for name in names} & forbidden
     assert all(
-        entry["name_status"] == "proposed_pending_prompt_approval"
+        entry["name_status"] == "approved_by_researcher"
         for entry in paraphrases[1:]
     )
+    assert study_config["status"] == "prompts_approved"
+    assert study_config["prompt_approval"]["approved_by"] == "researcher"
 
 
 def test_api_defaults_do_not_override_sampling(model_config: dict) -> None:
