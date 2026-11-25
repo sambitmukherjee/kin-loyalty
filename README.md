@@ -10,7 +10,7 @@ outside the current scope.
 
 ## Current status
 
-**Phase 8 registration snapshot prepared; final registration push pending.** The researcher has approved the prompt
+**Study 1 main collection complete; analysis deferred until the Study 2 addendum is committed.** The researcher has approved the prompt
 text, response schemas, and Riley/Taylor and Casey/Morgan name pairs. The package
 builds balanced, deterministic manifests and executes/resumes them with a mock
 client, durable attempt logs, validation, retries, and one identical re-ask.
@@ -43,8 +43,19 @@ result, fixed S1 count rule and paired descriptive comparison, and the pooled
 P1 percentile-bootstrap TOST specification. The
 [hash inventory](preregistration/study1-lock.json) binds all frozen source and
 research artifacts. The `prereg-study1` tag identifies the local registration
-commit; its remote timestamped lock requires the separately approved push of
-that commit and tag. See the [Phase 8 report](docs/phase8_report.md).
+commit, `d4d6ff9`. The researcher approved its push, and GitHub main and the
+annotated tag were verified at that commit before main collection. See the
+[Phase 8 preparation report](docs/phase8_report.md).
+
+The authorized main run then collected all 3,600 valid draws in 3,613 API attempts,
+including 13 API errors and one registered resumption of an unfinished draw.
+Every model × decision × label cell completed 60 valid draws; invalid replies,
+re-asks, exclusions, and unfinished draws are zero throughout. Every attempt
+records the tagged commit and clean-code provenance. See the
+[collection report](docs/study1_main_collection_report.md) and
+[complete 60-cell mechanical counts](data/study1/main/collection_counts.csv).
+No main outcome analysis or amount/belief summary has been produced. Analysis
+waits for the committed Study 2 addendum, as the researcher instructed.
 All bootstrap intervals use empirical ranks without interpolation: 500/9501
 for 90% and 250/9751 for 95%, out of the same 10,000 resamples.
 Label and adjusted-residual permutations exchange only the two tested labels
@@ -54,8 +65,8 @@ permutation p-values and bootstrap TOST decisions.
 The planned main design has four models, three decisions, five labels, three
 paraphrases, and 20 draws per smallest cell: **3,600 planned draws**. Smoke tests,
 the 240-draw pilot, and the 320-draw comprehension check are separate batches.
-Re-asks and API retries add attempts beyond these counts. The main run is outside
-the current authorization.
+Re-asks and API retries add attempts beyond these counts. The separately
+authorized main collection is now complete under that registered plan.
 
 ## Set up the development environment
 
@@ -123,7 +134,8 @@ reloading current prompts or configuration.
 `manifest` also supports `pilot`, `comprehension`, and `main`. These build plans
 only. The exact 3,600-draw main plan now exists at
 `data/study1/main/manifest.jsonl`, generated without API calls and bound by the
-registration hashes. The real main run remains out of scope.
+registration hashes. Its separately authorized collection is complete; fresh
+execution requires its own authorization.
 
 See [engine behavior and recovery](docs/engine.md) and the
 [implemented log dictionary](docs/data_dictionary.md). Locking uses `fcntl` on
@@ -141,8 +153,8 @@ kinloyalty reproduce --data data/study1/main \
   --comprehension data/study1/repilot_20261126/comprehension --output results/study1/generated
 ```
 
-Real main data do not exist yet, so this command currently stops with a missing
-input error. It rejects smoke/pilot/comprehension decisions as main outcomes,
+Main logs are complete, but this command is deferred until the Study 2 addendum
+is committed. It rejects smoke/pilot/comprehension decisions as main outcomes,
 requires every main draw to be terminal, and refuses to overwrite outputs.
 `kinloyalty analyze study1` runs the same pipeline with the same arguments.
 
@@ -192,7 +204,7 @@ makes paid calls.
 | `configs/study1.yaml` | Design, conditions, names, counts, fixed seeds, and analysis settings |
 | `prompts/study1/` | Versioned system/game templates, protected blocks and shared JSON instructions |
 | `src/kinloyalty/` | Prompts/schemas, manifests, clients, validation, logging, runner, saved-log analysis, CLI |
-| `data/study1/` | Separate smoke/pilot/check batches and the frozen main plan; main responses added only after authorization |
+| `data/study1/` | Separate smoke/pilot/check batches, frozen main plan, and completed main collection with mechanical counts |
 | `results/study1/` | Saved pilot/check reports; main tables and figures generated after collection |
 | `preregistration/` | Final Study 1 protocol and machine-readable source/artifact hash inventory |
 | `docs/data_dictionary.md` | Attempt-log and implemented analysis-table contracts |
@@ -204,6 +216,7 @@ makes paid calls.
 | `docs/analysis.md` | Eligibility, approved methods, resampling conventions, reports, and reproduction |
 | `docs/phase6_report.md` | Observed pilot/comprehension results, pooled distributions, mechanical checks, and review flags |
 | `docs/phase8_report.md` | Registration snapshot, verification, and remaining final-push gate |
+| `docs/study1_main_collection_report.md` | Main completion/validation counts and tagged provenance; no outcome summaries |
 | `tests/` | Offline protocol, manifest, validation, logging/resume, and CLI checks; socket connections blocked |
 | `codex_prompts/` | Local coding-agent instructions; always Git-ignored |
 

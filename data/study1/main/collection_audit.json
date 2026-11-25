@@ -1,0 +1,79 @@
+{
+  "scope": "Study 1 main collection mechanics only; outcome analysis deferred until the Study 2 addendum is committed.",
+  "tag": "prereg-study1",
+  "tagged_commit": "d4d6ff9c1f7b84bc2b4f90578873f18dbc9fb98a",
+  "manifest_sha256": "a583fe4366893e74735f22fc7f1e45ee7e8d136be5e06ad5d770dfcc1225ee55",
+  "manifest_hash_matches_registration": true,
+  "attempt_log_sha256": "2cb8b042908437b2e382dd6021a3df43218e1f276f04e1eed6a1e037abd3d9ac",
+  "all_log_records": 3613,
+  "records_with_tagged_commit": 3613,
+  "records_with_clean_code_provenance": 3613,
+  "tagged_checkout_clean_before_import": true,
+  "all_63_registration_hashes_unchanged_after_collection": true,
+  "all_histories_bound_and_revalidated": true,
+  "run_ids": [
+    "b8b1ddbc-6b83-44f4-9998-32e430d89acb",
+    "fc6ec105-85ad-4d2a-987e-ea7f868f82cb"
+  ],
+  "invocation_summaries": [
+    "invocation_summary.json",
+    "resume_01_summary.json"
+  ],
+  "totals": {
+    "planned_draws": 3600,
+    "completed_draws": 3600,
+    "valid_draws": 3600,
+    "api_attempts": 3613,
+    "responses_received": 3600,
+    "invalid_replies": 0,
+    "reasks": 0,
+    "exclusions": 0,
+    "unfinished_draws": 0,
+    "not_started": 0,
+    "api_errors": 13,
+    "api_retries": 13
+  },
+  "observed_concurrency": {
+    "global_max": 4,
+    "per_model_max": {
+      "claude_sonnet_5_5": 1,
+      "kimi_k3_1_pro": 1,
+      "gemini_4_hydrogen": 1,
+      "gpt_6_1_terra": 1
+    }
+  },
+  "per_model_decision_label_cells": 60,
+  "counts_csv_sha256": "890b2bdd65b65eb389591db9866e9da5be3ca4c6d9f326b2fd94c59357c1d5ff",
+  "count_definitions": {
+    "completed_draws": "Terminal planned draws, including valid and excluded draws.",
+    "valid_draws": "Terminal non-excluded draws with a valid reply.",
+    "api_attempts": "Logged SDK/API attempts including errors, retries, and invalid re-asks.",
+    "invalid_replies": "Response attempts rejected by the frozen validator; API errors excluded.",
+    "reasks": "Draws for which the second identical response opportunity was attempted, counted once even if API retries occurred.",
+    "unfinished_draws": "Planned draws without a terminal record, including not_started."
+  },
+  "api_errors_by_model_kind_status": [
+    {
+      "model": "gemini_4_hydrogen",
+      "kind": "timeout",
+      "status_code": null,
+      "count": 1
+    },
+    {
+      "model": "kimi_k3_1_pro",
+      "kind": "rate_limit",
+      "status_code": 429,
+      "count": 11
+    },
+    {
+      "model": "claude_sonnet_5_5",
+      "kind": "connection",
+      "status_code": null,
+      "count": 1
+    }
+  ],
+  "unfinished_trial_ids": [],
+  "analysis_modules_imported": false,
+  "outcome_summaries_computed": false,
+  "credential_scan": "passed"
+}

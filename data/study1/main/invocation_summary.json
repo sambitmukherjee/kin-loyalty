@@ -1,0 +1,31 @@
+{
+  "status": "invocation_finished_with_unfinished_draws",
+  "started_at_utc": "2026-11-25T19:34:14.159811+00:00",
+  "completed_at_utc": "2026-11-25T21:56:01.514864+00:00",
+  "tagged_commit": "d4d6ff9c1f7b84bc2b4f90578873f18dbc9fb98a",
+  "checkout_clean_through_collection": true,
+  "manifest_sha256": "a583fe4366893e74735f22fc7f1e45ee7e8d136be5e06ad5d770dfcc1225ee55",
+  "maximum_http_attempts": 28800,
+  "summary": {
+    "planned": 3600,
+    "already_final": 0,
+    "valid": 3599,
+    "excluded": 0,
+    "unfinished_trial_ids": [
+      "study1:main:kimi_k3_1_pro:dictator:fictional:p1:d004"
+    ],
+    "calls_started": 3612,
+    "recovered_attempts": 0,
+    "attempt_records_written": 3612
+  },
+  "progress": {
+    "completed_draws": 3599,
+    "valid_draws": 3599,
+    "http_attempts": 3612,
+    "api_errors": 13,
+    "invalid_replies": 0,
+    "reasked_draws": 0,
+    "excluded_draws": 0
+  },
+  "outcome_analysis_performed": false
+}

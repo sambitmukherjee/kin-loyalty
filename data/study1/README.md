@@ -26,16 +26,28 @@ fixed no-further-floor-prompt-change rule in `docs/decisions.md`.
 | `comprehension/` | 320 completed card-recognition draws | Separate comprehension report only |
 | `repilot_20261126/pilot/` | 240 revised-prompt pilot draws | Never |
 | `repilot_20261126/comprehension/` | 320 fresh final-prompt card-recognition draws | Final comprehension report only |
-| `main/` | Main-run manifest at lock; 3,600 planned decisions executed only later | Main decisions only |
+| `main/` | Frozen manifest, 3,600 valid collected draws, raw attempts, and mechanical counts/audit | Analysis deferred until Study 2 addendum is committed |
 
 Phase 8 generated `main/manifest.jsonl`: 3,600 planned draws, order seed
 2026112504, SHA-256
 `a583fe4366893e74735f22fc7f1e45ee7e8d136be5e06ad5d770dfcc1225ee55`.
 It regenerates byte-identically and contains the final two-sentence system
-prompts, schemas, settings, and other-lab rotations. The directory contains no
-main attempt log or observed main outcome. No main run is authorized as part of
-this phase plan. Simulated verification data remain outside these real study
-directories and must not be represented as observed data.
+prompts, schemas, settings, and other-lab rotations. The researcher subsequently
+authorized main collection from the clean `prereg-study1` checkout. All 3,600
+draws completed valid in 3,613 API attempts: 13 API errors, no invalid replies,
+re-asks, exclusions, or unfinished draws. One existing retry-exhausted Kimi draw
+was completed through the registered resumption mechanism; no design draw was
+added or replaced.
+
+`main/attempts.jsonl` retains all raw attempts. `main/collection_counts.csv`
+reports every model × decision × label cell (60 completed valid draws each),
+and `main/collection_audit.json` verifies all 3,613 records carry commit
+`d4d6ff9c1f7b84bc2b4f90578873f18dbc9fb98a` and clean-code provenance.
+Both invocations/preflights are retained, with aggregate `main/run_summary.json`.
+The registration inventory remains an immutable snapshot of the pre-collection
+state. No outcome analysis or amount/belief summary was computed; analysis waits
+until the Study 2 addendum is committed. Simulated verification data remain
+outside these real study directories.
 
 Retries and re-asks retain the trial ID and add attempt records. An API-error
 attempt is never an exclusion. Detailed fields follow the contract in

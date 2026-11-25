@@ -1,0 +1,18 @@
+{
+  "status": "completed",
+  "started_at_utc": "2026-11-25T21:56:53.990369+00:00",
+  "completed_at_utc": "2026-11-25T21:57:04.738377+00:00",
+  "tagged_commit": "d4d6ff9c1f7b84bc2b4f90578873f18dbc9fb98a",
+  "checkout_clean_through_collection": true,
+  "summary": {
+    "planned": 3600,
+    "already_final": 3599,
+    "valid": 3600,
+    "excluded": 0,
+    "unfinished_trial_ids": [],
+    "calls_started": 1,
+    "recovered_attempts": 0,
+    "attempt_records_written": 1
+  },
+  "outcome_analysis_performed": false
+}

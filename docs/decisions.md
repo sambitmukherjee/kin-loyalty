@@ -3,8 +3,8 @@
 Record dates in the researcher's timezone (Asia/Kolkata). Each entry identifies
 what changed, why, the approver, and its implementation/verification status.
 Changes after the pre-registration lock must also be reported as deviations in
-the paper. The Phase 8 entry records the prepared local registration snapshot
-and the separate remote-push gate; a local tag alone is not the server lock.
+the paper. The Phase 8 snapshot was subsequently pushed with explicit approval;
+the main-collection entry below records the remote lock and authorized collection.
 
 ## 2026-11-25 — Phase plan and repository setup
 
@@ -697,3 +697,62 @@ and any batch that must be rerun. No post-pilot fixes or deviations exist yet.
   requests, confirming two-sentence systems throughout. Source/test equality,
   parsed-config equality, credential/private-path scans, and absence of main
   responses passed. Machine-readable evidence is in `docs/phase8_audit.json`.
+
+## 2026-11-26 — Remote lock finalized and main Study 1 collection
+
+- **Remote lock approval:** The researcher explicitly approved pushing commit
+  `d4d6ff9` and `prereg-study1` while prohibiting the main run at that time. Pushed
+  the commit and annotated tag atomically; verified GitHub main and the peeled
+  tag both resolve to `d4d6ff9c1f7b84bc2b4f90578873f18dbc9fb98a`. The immutable
+  tag object is `a3d6bd56b93ac996850fd6367868d6a45ae4460d`.
+- **Separate main authorization:** The researcher then explicitly directed the
+  main Study 1 run from the tag and a clean tree, required a pre-start manifest
+  hash check and post-run counts per model × decision × label, and prohibited
+  analysis/outcome summaries until the Study 2 addendum is committed.
+- **Preflight:** Checked out `prereg-study1` in detached HEAD and verified a
+  clean working tree. The actual main manifest SHA-256 matched the value in
+  the registration document and inventory exactly:
+  `a583fe4366893e74735f22fc7f1e45ee7e8d136be5e06ad5d770dfcc1225ee55`.
+  All 63 registration digests matched. Credentials were available without
+  disclosure; no frozen source, prompt, schema, setting, allocation, or seed
+  was modified. Stated scope: 3,600 draws; at most 28,800 attempts under the
+  frozen response/retry policy.
+- **Execution and clean checkout:** Live collection ran on 2026-11-26,
+  01:04:14–03:27:04 IST, including explicit registered resumption. Raw logs and
+  invocation metadata were written outside the checkout, keeping the tagged
+  working tree clean throughout calls. All 3,613 attempt records carry
+  `git_commit: d4d6ff9c1f7b84bc2b4f90578873f18dbc9fb98a` and `code_dirty: false`.
+  Actual concurrency stayed at four globally and one per model.
+- **Retry exhaustion and registered resumption:** The initial invocation
+  produced 3,599 valid draws in 3,612 attempts. Kimi dictator/fictional,
+  paraphrase 1, draw 4 remained unfinished after four retryable HTTP 429 errors.
+  Explicitly resumed only that existing draw using the registered mechanism,
+  preserving its history and invalid-response count, from the same clean tag
+  and frozen plan. All 3,599 final draws were skipped. The resumption was
+  bounded at eight additional attempts and succeeded in one; it added no
+  design draw and repeated no completed draw. Both invocations are preserved.
+- **Final mechanics:** All 3,600 planned draws are valid and terminal. Each of
+  the 60 model × decision × label cells has 60 completed valid draws and zero
+  invalid replies, re-asks, exclusions, unfinished draws, or not-started draws.
+  API attempts total 3,613: Sonnet 901, GPT-6.1 Terra 900, Gemini 901, Kimi 911.
+  The 13 API errors were one Gemini timeout, eleven Kimi HTTP 429s, and one
+  Anthropic connection error; all eventually recovered. API errors/resumption
+  are distinct from invalid re-asks and exclusions.
+- **Data preservation and verification:** After all calls and the external
+  mechanical audit finished, returned to main and copied the raw log, both
+  invocation/preflight records, full 60-cell counts, and audit byte-for-byte
+  into `data/study1/main/`. Saved aggregate `run_summary.json`. Raw-log SHA-256:
+  `2cb8b042908437b2e382dd6021a3df43218e1f276f04e1eed6a1e037abd3d9ac`.
+  Revalidated every history/request/manifest binding, validation flag, counter,
+  and terminal state. All 63 registration digests remained unchanged after
+  collection. Supplied-secret scans passed; `.env` remains ignored with mode
+  0600 and `codex_prompts/` remains ignored/untracked.
+- **Reporting and analysis boundary:** The full requested counts and definitions
+  are in `data/study1/main/collection_counts.csv`, with a readable 60-cell table
+  in `docs/study1_main_collection_report.md`. The mechanical audit imports no
+  analysis module and computes no amount/belief or behavior summary, label
+  effect, regression, resampling result, or figure. Analysis remains deferred
+  until the Study 2 addendum is committed. Preserve raw data and mechanics in a
+  separate local collection commit without moving the registration tag or
+  pushing new data. This is registered collection/resumption, with no scientific
+  protocol or analysis change.

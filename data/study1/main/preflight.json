@@ -1,0 +1,26 @@
+{
+  "tag": "prereg-study1",
+  "tagged_commit": "d4d6ff9c1f7b84bc2b4f90578873f18dbc9fb98a",
+  "clean_detached_checkout": true,
+  "registration_document_sha256": "508275009a93f676ca92a8c8a81dbdf3439172d8ebf4105af022f2d0471a8b2a",
+  "manifest": "data/study1/main/manifest.jsonl",
+  "manifest_sha256": "a583fe4366893e74735f22fc7f1e45ee7e8d136be5e06ad5d770dfcc1225ee55",
+  "manifest_sha256_in_registration": "a583fe4366893e74735f22fc7f1e45ee7e8d136be5e06ad5d770dfcc1225ee55",
+  "all_63_registration_hashes_verified": true,
+  "planned_draws": 3600,
+  "maximum_http_attempts": 28800,
+  "invocations": 1,
+  "automatic_extra_invocation": false,
+  "runner_policy": {
+    "concurrency": 4,
+    "per_model_concurrency": 1,
+    "timeout_seconds": 120,
+    "api_attempts_per_response": 4,
+    "backoff_initial_seconds": 1,
+    "backoff_multiplier": 2,
+    "backoff_max_seconds": 30,
+    "invalid_reasks": 1
+  },
+  "live_output_directory": "/private/tmp/kinloyalty-study1-main-20261126",
+  "report_scope": "Completion and validation counts only; no analysis or outcome summaries before the Study 2 addendum is committed."
+}

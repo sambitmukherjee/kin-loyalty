@@ -1,0 +1,24 @@
+{
+  "reason": "Explicit registered resumption of retry-exhausted API work to complete the authorized 3,600-draw main plan.",
+  "tagged_commit": "d4d6ff9c1f7b84bc2b4f90578873f18dbc9fb98a",
+  "clean_detached_checkout": true,
+  "manifest_sha256": "a583fe4366893e74735f22fc7f1e45ee7e8d136be5e06ad5d770dfcc1225ee55",
+  "existing_attempts": 3612,
+  "existing_final_draws": 3599,
+  "unfinished_draws_to_resume": 1,
+  "maximum_new_attempts": 8,
+  "maximum_total_attempts_for_this_resumption": 3620,
+  "global_attempt_bound": 28800,
+  "new_design_draws": 0,
+  "runner_policy": {
+    "concurrency": 4,
+    "per_model_concurrency": 1,
+    "timeout_seconds": 120,
+    "api_attempts_per_response": 4,
+    "backoff_initial_seconds": 1,
+    "backoff_multiplier": 2,
+    "backoff_max_seconds": 30,
+    "invalid_reasks": 1
+  },
+  "automatic_extra_invocation": false
+}

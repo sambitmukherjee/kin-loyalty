@@ -1,13 +1,15 @@
 # Study 1 results
 
 The saved-log pipeline generates deterministic CSV tables and matplotlib PDF/PNG
-figures, with source/input hashes and saved resampling distributions. No observed
-main results exist yet. Temporary synthetic verification artifacts stay outside
+figures, with source/input hashes and saved resampling distributions. Main
+collection is complete, but no observed main analyses have been produced.
+Analysis is deferred until the Study 2 addendum is committed. Temporary synthetic
+verification artifacts stay outside
 this directory and the real study data folders.
 
 `kinloyalty reproduce --data data/study1/main --comprehension
 data/study1/repilot_20261126/comprehension --output results/study1/generated` will regenerate
-everything when those logs exist. It requires no API keys and refuses to
+everything after that addendum is committed. It requires no API keys and refuses to
 overwrite an existing output directory. See `docs/analysis.md` for an offline
 mock demonstration and `docs/data_dictionary.md` for each output contract.
 
@@ -29,3 +31,10 @@ The original reports remain historical audit artifacts. Read
 `docs/repilot_20261126_report.md` for full pooled distributions, the original
 Gemini constant-$40 observation, and the fixed stopping rule. No pilot label
 comparisons or main inference were computed.
+
+Main collection mechanics are saved separately at
+`data/study1/main/collection_counts.csv` and described in
+`docs/study1_main_collection_report.md`. All 3,600 draws completed valid, with
+zero invalid replies, re-asks, exclusions, or unfinished draws. These are
+collection-status counts only; no outcome summaries or main-analysis artifacts
+have been created in this results directory.
