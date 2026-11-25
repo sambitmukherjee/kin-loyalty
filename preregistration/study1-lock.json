@@ -1,0 +1,229 @@
+{
+  "schema_version": 1,
+  "study": "study1",
+  "registration_snapshot_date": "2026-11-26",
+  "timezone": "Asia/Kolkata",
+  "git_tag": "prereg-study1",
+  "remote": "https://github.com/sambitmukherjee/kin-loyalty.git",
+  "remote_lock_event": "authorized push of registration commit and immutable annotated tag",
+  "analysis_code_commit": "272901599569e229e842a1b1b4128b2c660edbc8",
+  "registration_document": "preregistration/study1.md",
+  "registration_document_sha256": "508275009a93f676ca92a8c8a81dbdf3439172d8ebf4105af022f2d0471a8b2a",
+  "main_manifest": "data/study1/main/manifest.jsonl",
+  "main_manifest_sha256": "a583fe4366893e74735f22fc7f1e45ee7e8d136be5e06ad5d770dfcc1225ee55",
+  "planned_main_draws": 3600,
+  "main_order_seed": 2026112504,
+  "main_run_started": false,
+  "main_api_calls_in_phase8": 0,
+  "final_comprehension": "data/study1/repilot_20261126/comprehension/attempts.jsonl",
+  "final_comprehension_sha256": "fcecdfc1518db4b157713d9a727179911c6e57ad655342993210f8ac6ab77460",
+  "hashes_sha256": {
+    ".python-version": "49a506dd32096b010d75205acf3430c9ae6c40351888129499e5a5e487126c93",
+    "configs/models.yaml": "5baaff356d22b3b7430989a9694cdde0ef83eb8acb48d5ade545d9ffa514d591",
+    "configs/study1.yaml": "443d1e2baa176fee8ddb6de04b92c47b635b9521770ab9326d4e4e370eb69974",
+    "data/study1/main/manifest.jsonl": "a583fe4366893e74735f22fc7f1e45ee7e8d136be5e06ad5d770dfcc1225ee55",
+    "data/study1/repilot_20261126/comprehension/attempts.jsonl": "fcecdfc1518db4b157713d9a727179911c6e57ad655342993210f8ac6ab77460",
+    "data/study1/repilot_20261126/comprehension/manifest.jsonl": "92ce5927a501038d4c629e3fe243b643fca7caf660c074f1317c967aca620a13",
+    "data/study1/repilot_20261126/pilot/attempts.jsonl": "e66e80e9d6c0d05da9c5cb29824812b9b10406e1ac5c809681a951ad81d4ad75",
+    "data/study1/repilot_20261126/pilot/manifest.jsonl": "0ad3405905e6468523b00a0f8680e0bc0c4f9c96228aa2b8b70042e87d2a4a3e",
+    "docs/phase7_closure.json": "9d1b2531b9020d9ecfdd13fd2c92fba69a92913e71b8b869dbb67689e1c96f1b",
+    "docs/repilot_20261126_audit.json": "c5a198feaf899a673dce9ca82ae9fc3307e29ee6c3c440f80bc602737f26f009",
+    "docs/study1_prompt_review.md": "364f85a0451aba5837750f0eca48853f9705bdb822440e869b6ca2c487c1ad6d",
+    "prompts/study1/counterparty_agent.txt": "2c5227ea546508941c93e64d8738f44daf0abdbb447a3e3c4c158c145728df30",
+    "prompts/study1/counterparty_human.txt": "55d41970aa7c1370f5c52d15c719bbfc0380af7600d2da891175248b9c79d54e",
+    "prompts/study1/dictator_1.txt": "978e58cc745b477b341754af04a550580811c490bec64ba4b103a676095aa24d",
+    "prompts/study1/dictator_2.txt": "64eb00cf1622af77882615cc0db4922da7e9ba92fb24eca69075649e24d50f34",
+    "prompts/study1/dictator_3.txt": "9a419170aef929717d86fd40de2c63e50ac9e765c747388662e2d7a7fde62917",
+    "prompts/study1/reply_comprehension.txt": "99132bddacd914f64c959fd8cd5e41db93173c63c7f9fb18d1afeb0bcfb284c4",
+    "prompts/study1/reply_dictator.txt": "f1f2597fe96192222ca03e5352e0b45ee2de55ed1e065263e22e8b468d5b3a3c",
+    "prompts/study1/reply_ultimatum_proposer.txt": "3579bf465fa8853b7678092f41a60311abe56b75956ff8199e43a6657a094d4a",
+    "prompts/study1/reply_ultimatum_responder.txt": "7d9758d064a0e26271e680a48ab68e5b275a45202e25d9408a0320c8831677ea",
+    "prompts/study1/system_1.txt": "f375bf4baaa9c23a2d0eaf93e4db5e6f8227a0e0f8241a4bb93e2a3411ce41cf",
+    "prompts/study1/system_2.txt": "6d1dda5e47e33e54c2eacdc86075aff1ed40532aafe350ab0da2cd257a946efd",
+    "prompts/study1/system_3.txt": "ceeae6982d1faa77374016203bd45e0531d13429f60c8acf48fb7879f060e6a1",
+    "prompts/study1/ultimatum_proposer_1.txt": "cdbf12cfd33f93c1adc1bb0efcda00b22cfafdcff34a76750654cb049fbb19f3",
+    "prompts/study1/ultimatum_proposer_2.txt": "65c587c8630c1c87cb6871be90a37e11933ebe2fa43f711f967d979dec5bca34",
+    "prompts/study1/ultimatum_proposer_3.txt": "40dd4e3b842b56997fe44643912a7236813b7246e4d849e4bd957c1f84f94fa8",
+    "prompts/study1/ultimatum_responder_1.txt": "9077c611e129593bd3f0f8c1048953b69c52c276049908e44b460047080a05a4",
+    "prompts/study1/ultimatum_responder_2.txt": "c453244ae30f71d977b3525a715f3aff7e44434d208f093993cd79af35cc8b7e",
+    "prompts/study1/ultimatum_responder_3.txt": "cbef0c19a81987b4efa089c798a80867d36e22845f0cd8847260f199ecf0ebff",
+    "pyproject.toml": "1f0143f34c69a0d1d0c9eba55b66fa136aaa8ae47a8c78ca6b83fe4f6b3e7291",
+    "results/study1/repilot_20261126/comprehension-report/comprehension.csv": "cef762c19326b149a4a4a2b7fb0ec72965b4540416f4fd15455075a3f359e7f5",
+    "src/kinloyalty/__init__.py": "3c7a110941e18cca276c4a63314ab977c352c4e028d5fbb7a370675d03effc91",
+    "src/kinloyalty/analysis/__init__.py": "6478c3b10b3dec3837d8e3ff8c9b145b65d8ba332ad56fdc7512073dcf4077f5",
+    "src/kinloyalty/analysis/figures.py": "59d0efa410a0de1b64d2c392f09d5a43e6ca4982357f08f4614d38ee7d70290a",
+    "src/kinloyalty/analysis/inference.py": "70f646f3f250104673b526f660f7d2ea181d946b96fbbcab76cee9dfb7dbe7ce",
+    "src/kinloyalty/analysis/loading.py": "2ada258fe416d3e01235662fcb4ef37786beef2af81f30702035593a22101b93",
+    "src/kinloyalty/analysis/pipeline.py": "03847599b398163c3427113df8d2436c64fc4f4aa57af8da202a9ea3ffbdc0d8",
+    "src/kinloyalty/analysis/reports.py": "06ad0d2c5eaac8509630461062a4efdba7f23cb552750f574f65b36abd1e2598",
+    "src/kinloyalty/analysis/simulate.py": "47d24615596136c5ca198243c844e7fe8e9fc376d1bbb4874705aa63fcc58b69",
+    "src/kinloyalty/cards.py": "a232c0be92412422f94239be8ef717bf68aa791d3cd2d12d0ed5bfdec022d641",
+    "src/kinloyalty/cli.py": "6e4c55fedd363ab1f6f075fda7f136e29df7469e73e8e540e87f0e3118a2c138",
+    "src/kinloyalty/clients/__init__.py": "7d479ad68d0321e685729ed8d8c9f0815d17b8e4ed0298a88f3864b0b1d3aa54",
+    "src/kinloyalty/clients/anthropic.py": "03fe5c23daba575e6ae867f6af786f4244bb85b5dd8066df79087a869d34544a",
+    "src/kinloyalty/clients/base.py": "39ef16b5c61e0f10119e1f2c0c20f6510ec014068502003c768534ea5fbce5ea",
+    "src/kinloyalty/clients/factory.py": "f4781d9d26a3dbe0e5649279d32aec9640c3e6868106efc4fd149bab385c8096",
+    "src/kinloyalty/clients/google.py": "8ed047c063de5dced139bef478b1a0d157912d4d83736307b497d1613aeee8d2",
+    "src/kinloyalty/clients/mock.py": "7fc83bd44df54f9d7981e7e36d35894d93fd3ca5c2ee430a9f6f167b13902368",
+    "src/kinloyalty/clients/moonshot.py": "c82c4a75ebbb0476e9ab1969a62b1e6fa430431061be78df098123fda5db313b",
+    "src/kinloyalty/clients/openai.py": "206d49a3aabd4d7b3e9147842de08c5ed3feabd6fcb9154c0b12118bf41a70d5",
+    "src/kinloyalty/clients/payloads.py": "c68a7034d44887fe94ade78b59c91cea0e19421de0e18046b68b075e8504185b",
+    "src/kinloyalty/clients/response_data.py": "b96b652da96d1ef54dff9858579a5d8605ed0909592091fb747690c6662c38ec",
+    "src/kinloyalty/cohort.py": "4d371bdbe4e9fe1433e96532aa61b08c78fcee40aa995c3791adbc1e6570acb2",
+    "src/kinloyalty/logs.py": "bf77f7c5070e3a790404bf67a7ed55d5e9251d67389e9c3f287b903be6ac5038",
+    "src/kinloyalty/manifest.py": "f7337c4074bade63ec4824af9e8bf46a03702f4ad1720d1f769b6ee690ea7c8b",
+    "src/kinloyalty/prompts.py": "c0a4bcf9c18dd3eed3d8964fb1ea251bf82b0525cd01cdea58f74ffd55316e89",
+    "src/kinloyalty/provenance.py": "c39144337f0b575164a57738ba5924bcb5c981fb3df5e4a94bf20d83423c5118",
+    "src/kinloyalty/review.py": "1bb499950959abaf9bbdf4bd3da66c0747829db1da7b22a7a521d2bfda748b3d",
+    "src/kinloyalty/runner.py": "8060247250cba1f6f71ae6b2e9a2cf3776d7108ecea7cc78cd16c80204c23ff0",
+    "src/kinloyalty/schemas.py": "a3135438c3be9468d3595ee252e4a6b7974639ee6432426c4995600097e1d61e",
+    "src/kinloyalty/state.py": "c6bccaaea71de8295d012c12cad8d625a31b5f721956b5524cffea7bcdb0291a",
+    "src/kinloyalty/validate.py": "e62c681f0b316e0b5235da5e590e38b7bc5021ddef26a6d2fccb77be54510b78",
+    "uv.lock": "53fa82811a98525cd6c6b1fb7bd851aade2fb30f1eaa4b8d4c44f6bfc4abe41a"
+  },
+  "canonical_schemas": {
+    "dictator": {
+      "type": "object",
+      "properties": {
+        "amount_to_counterparty": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "reason": {
+          "type": "string",
+          "description": "One sentence explaining the decision."
+        }
+      },
+      "required": [
+        "amount_to_counterparty",
+        "reason"
+      ],
+      "additionalProperties": false
+    },
+    "ultimatum_proposer": {
+      "type": "object",
+      "properties": {
+        "amount_offered_to_counterparty": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "smallest_offer_you_expect_counterparty_to_accept": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "reason": {
+          "type": "string",
+          "description": "One sentence explaining the decision."
+        }
+      },
+      "required": [
+        "amount_offered_to_counterparty",
+        "smallest_offer_you_expect_counterparty_to_accept",
+        "reason"
+      ],
+      "additionalProperties": false
+    },
+    "ultimatum_responder": {
+      "type": "object",
+      "properties": {
+        "smallest_amount_for_your_user_you_will_accept": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "reason": {
+          "type": "string",
+          "description": "One sentence explaining the decision."
+        }
+      },
+      "required": [
+        "smallest_amount_for_your_user_you_will_accept",
+        "reason"
+      ],
+      "additionalProperties": false
+    },
+    "comprehension": {
+      "type": "object",
+      "properties": {
+        "same_model": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no",
+            "unsure"
+          ]
+        }
+      },
+      "required": [
+        "same_model"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "seeds": {
+    "smoke_order": 2026112501,
+    "pilot_order": 2026112502,
+    "comprehension_order": 2026112503,
+    "main_order": 2026112504,
+    "bootstrap": 2026112505,
+    "permutation": 2026112506,
+    "mock": 2026112507
+  },
+  "analysis_settings": {
+    "primary_decision": "dictator",
+    "primary_contrast": [
+      "own_model",
+      "other_lab"
+    ],
+    "model_weighting": "equal",
+    "fixed_effects": "model_by_paraphrase",
+    "bootstrap_resamples": 10000,
+    "bootstrap_strata": [
+      "model",
+      "label",
+      "paraphrase"
+    ],
+    "permutation_resamples": 10000,
+    "permutation_strata": [
+      "model",
+      "paraphrase"
+    ],
+    "alternative": "two_sided",
+    "alpha": 0.05,
+    "confidence_level": 0.95,
+    "equivalence_bound_dollars": 5,
+    "tost_method": "percentile_bootstrap_tail_probabilities",
+    "contrast_permutation_rule": "tested_pair_within_model_paraphrase",
+    "adjusted_permutation_rule": "freedman_lane_tested_pair_within_model_paraphrase",
+    "bootstrap_interval": "percentile_count_matched",
+    "s1_belief_slopes": "model_specific",
+    "s1_belief_estimability": {
+      "minimum_nonmodal_percent": 10,
+      "modal_cell": [
+        "label",
+        "paraphrase"
+      ],
+      "mode_tie_break": "lowest",
+      "denominator": "retained_valid_proposer_draws",
+      "frozen_before_pilot": true
+    },
+    "multiple_comparison_correction": "none",
+    "accepted_decision_phase": "main",
+    "figure_formats": [
+      "pdf",
+      "png"
+    ]
+  },
+  "phase8_validation": {
+    "offline_tests_passed": 312,
+    "main_manifest_regenerates_byte_identically": true,
+    "exact_cell_counts_and_other_lab_rotations": true,
+    "all_3600_frozen_provider_payloads_validated": true,
+    "all_revised_pilot_request_signatures_present_in_main_plan": true,
+    "parsed_scientific_config_unchanged_since_phase7": true,
+    "all_package_source_and_template_bytes_unchanged_since_phase7": true
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "phase": 8,
+  "snapshot_date": "2026-11-26",
+  "initial_push_verified_commit": "272901599569e229e842a1b1b4128b2c660edbc8",
+  "local_tag": "prereg-study1",
+  "remote_registration_push": "pending separate final permission at preparation",
+  "registration_document_sha256": "508275009a93f676ca92a8c8a81dbdf3439172d8ebf4105af022f2d0471a8b2a",
+  "inventory_sha256": "b01c11d0d7a864925fa095299574b944160d47468ae9a136a2fe012e09859362",
+  "main_manifest_sha256": "a583fe4366893e74735f22fc7f1e45ee7e8d136be5e06ad5d770dfcc1225ee55",
+  "planned_main_draws": 3600,
+  "main_api_calls": 0,
+  "main_attempt_logs": 0,
+  "all_inventory_hashes_verified": 63,
+  "full_template_appendix_verified": 18,
+  "canonical_schemas_verified": 4,
+  "frozen_inference_text_preserved": true,
+  "all_main_requests_independently_rendered_and_validated": 3600,
+  "main_manifest_regenerates_byte_identically": true,
+  "two_sentence_systems_for_all_main_requests": true,
+  "source_and_tests_unchanged_since_phase7": true,
+  "parsed_scientific_config_unchanged": true,
+  "offline_tests_passed": 312,
+  "package_builds": [
+    "sdist",
+    "wheel"
+  ],
+  "credential_and_private_path_scans": "passed"
+}

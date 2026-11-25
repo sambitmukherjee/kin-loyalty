@@ -88,7 +88,8 @@ affected model and pooled paired-bootstrap intervals are unavailable. Observed
 identifiable points and their valid permutation tests remain available. Plots
 mark a point with an unavailable interval using `*`.
 
-The same specification is recorded in the unlocked `preregistration/study1.md`.
+The same specification is recorded in `preregistration/study1.md`; the
+`prereg-study1` tag identifies the registration snapshot once created and pushed.
 
 ## Bootstrap intervals and equivalence
 
@@ -200,7 +201,7 @@ figures, provenance, and artifact hashes:
 
 ```sh
 kinloyalty reproduce --config configs/study1.yaml \
-  --data data/study1/main --comprehension data/study1/comprehension \
+  --data data/study1/main --comprehension data/study1/repilot_20261126/comprehension \
   --output results/study1/generated
 ```
 

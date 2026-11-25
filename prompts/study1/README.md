@@ -1,9 +1,12 @@
 # Study 1 experiment templates
 
-The researcher **approved these stimuli, schemas, and name pairs on 2026-11-25**.
-The first paraphrase matches the protocol exactly. The other two use different
-wording with the same economics and protected text. The pre-registration is not
-locked yet.
+The researcher **approved these stimuli, schemas, and name pairs on 2026-11-25**,
+then explicitly approved removal of the principal-interest system sentence in
+all paraphrases on 2026-11-26 as a Phase 7 pre-lock design change. The final
+system prompts contain two sentences. All other stimulus text is unchanged.
+The three paraphrases retain the same economics and protected text. Registration
+status and the immutable snapshot are recorded in `preregistration/study1.md`
+and the `prereg-study1` tag; main execution requires separate authorization.
 
 | Paraphrase | Names | System | Dictator | Proposer | Responder |
 | --- | --- | --- | --- | --- | --- |
@@ -21,7 +24,7 @@ Each game body is followed by two newlines and its shared literal instruction
 file: [dictator](reply_dictator.txt), [proposer](reply_ultimatum_proposer.txt), or
 [responder](reply_ultimatum_responder.txt). JSON braces in these files are never
 treated as template placeholders. The first system sentence is identical across
-paraphrases; only the next two sentences and game-description wording vary.
+paraphrases; the second sentence and game-description wording vary.
 
 The separate comprehension check reuses the dictator system message and body,
 including its card, but replaces the decision instructions with

@@ -3,7 +3,8 @@
 Record dates in the researcher's timezone (Asia/Kolkata). Each entry identifies
 what changed, why, the approver, and its implementation/verification status.
 Changes after the pre-registration lock must also be reported as deviations in
-the paper. No pre-registration lock exists yet.
+the paper. The Phase 8 entry records the prepared local registration snapshot
+and the separate remote-push gate; a local tag alone is not the server lock.
 
 ## 2026-11-25 — Phase plan and repository setup
 
@@ -646,3 +647,53 @@ and any batch that must be rerun. No post-pilot fixes or deviations exist yet.
   previously approved scientific inputs and all raw data remain unchanged.
   Phase 8 has not started; pre-registration remains unlocked, with no tag,
   GitHub push, main manifest, or main run.
+
+## 2026-11-26 — Phase 8 registration preparation and local snapshot
+
+- **Approval and initial push:** The researcher directed "Push the code. Then
+  start Phase 8." Pushed all completed work through Phase 7 commit `2729015`
+  before Phase 8 changes, and verified GitHub main at that exact commit. The
+  remote `prereg-study1` tag was absent.
+- **Main plan, not execution:** Generated `data/study1/main/manifest.jsonl`
+  with 3,600 frozen draws, 900/model, 300/model × decision, 60/model × decision
+  × label, and 20/model × decision × label × paraphrase. Main order seed is
+  2026112504; SHA-256 is
+  `a583fe4366893e74735f22fc7f1e45ee7e8d136be5e06ad5d770dfcc1225ee55`.
+  Other-lab names balance to 20/model × decision × named model, with rotating
+  7/7/6 paraphrase margins. No main API call or main attempt log was created.
+- **Final registration:** Complete `preregistration/study1.md` with P1/P2/S1/S2
+  estimands, outcomes/design, exact roster and observed versions, endpoints/API
+  settings, exclusions/retries, final comprehension rule/results, full final
+  templates and schemas, manifest/source hashes, exact reproduction command,
+  and post-lock deviations policy. `preregistration/study1-lock.json` records
+  the registration document hash, all 62 source/artifact hashes, schemas,
+  seeds, and analysis settings. The registration tag binds both files without
+  a circular self-hash.
+- **Frozen science and implementation:** All package source, test source,
+  model configuration, schemas, and final template bytes remain unchanged from
+  the previously pushed code commit
+  `272901599569e229e842a1b1b4128b2c660edbc8`. The only study-YAML edit changes
+  a stale administrative comment to point at the registration; parsed scientific
+  configuration is identical. The main manifest hashes that final config file.
+  Preserve all approved S1, bootstrap TOST/interval, permutation, and conservative
+  tie conventions, plus the Phase 7 design-change reason and stopping rule.
+- **Verification:** All 312 offline tests and both package builds passed. The
+  complete main manifest regenerates byte-identically. All cell/rotation counts
+  and all 3,600 frozen provider payloads pass validation; revised-pilot request
+  signatures appear in the main plan. Final comprehension remains the separate
+  320-draw revised check. No observed pilot label comparison or main inference
+  was performed.
+- **Commit/tag and remaining gate:** Prepare a local registration commit and
+  annotated `prereg-study1` tag. The project's instruction explicitly requires
+  permission to push that registration commit and tag. The initial requested
+  pre-Phase-8 push is complete; the new registration push is the remaining final
+  step. A local commit/tag does not claim the GitHub server timestamp. Phase 8
+  publication completion awaits that final push; main collection remains a
+  separate authorization. See `docs/phase8_report.md` for the concrete snapshot
+  and offline verification commands.
+- **Final audit:** Verified all 63 digests including the registration document,
+  all 18 complete embedded templates, all four schemas, and preserved inference
+  text. Independently rendered and validated every one of the 3,600 main
+  requests, confirming two-sentence systems throughout. Source/test equality,
+  parsed-config equality, credential/private-path scans, and absence of main
+  responses passed. Machine-readable evidence is in `docs/phase8_audit.json`.

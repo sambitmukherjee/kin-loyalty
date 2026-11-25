@@ -10,7 +10,7 @@ outside the current scope.
 
 ## Current status
 
-**Phase 7 complete: approved pre-lock design amendment and re-pilot verified.** The researcher has approved the prompt
+**Phase 8 registration snapshot prepared; final registration push pending.** The researcher has approved the prompt
 text, response schemas, and Riley/Taylor and Casey/Morgan name pairs. The package
 builds balanced, deterministic manifests and executes/resumes them with a mock
 client, durable attempt logs, validation, retries, and one identical re-ask.
@@ -35,11 +35,16 @@ $40 offers. **This is the only prompt change for the dictator floor; no further
 change will be made for that reason.** See the
 [re-pilot report](docs/repilot_20261126_report.md) for pooled distributions,
 metadata, and offline verification commands. Original artifacts are preserved.
-No pilot label-effect comparison was computed, and pre-registration remains
-unlocked. See [analysis methods and commands](docs/analysis.md).
-The [unlocked pre-registration draft](preregistration/study1.md) records the
-researcher's fixed S1 count rule and paired descriptive comparison, plus the
-pooled P1 percentile-bootstrap TOST specification.
+No pilot label-effect comparison was computed. See
+[analysis methods and commands](docs/analysis.md). The
+[final pre-registration](preregistration/study1.md) includes the full protocol,
+prompt/schema appendices, main manifest and exact hashes, final comprehension
+result, fixed S1 count rule and paired descriptive comparison, and the pooled
+P1 percentile-bootstrap TOST specification. The
+[hash inventory](preregistration/study1-lock.json) binds all frozen source and
+research artifacts. The `prereg-study1` tag identifies the local registration
+commit; its remote timestamped lock requires the separately approved push of
+that commit and tag. See the [Phase 8 report](docs/phase8_report.md).
 All bootstrap intervals use empirical ranks without interpolation: 500/9501
 for 90% and 250/9751 for 95%, out of the same 10,000 resamples.
 Label and adjusted-residual permutations exchange only the two tested labels
@@ -116,8 +121,9 @@ existing file. The runner reads frozen requests from the manifest, without
 reloading current prompts or configuration.
 
 `manifest` also supports `pilot`, `comprehension`, and `main`. These build plans
-only. The main manifest has been checked in temporary tests; the pre-registration
-manifest is created at the final lock, and the real main run remains out of scope.
+only. The exact 3,600-draw main plan now exists at
+`data/study1/main/manifest.jsonl`, generated without API calls and bound by the
+registration hashes. The real main run remains out of scope.
 
 See [engine behavior and recovery](docs/engine.md) and the
 [implemented log dictionary](docs/data_dictionary.md). Locking uses `fcntl` on
@@ -186,17 +192,18 @@ makes paid calls.
 | `configs/study1.yaml` | Design, conditions, names, counts, fixed seeds, and analysis settings |
 | `prompts/study1/` | Versioned system/game templates, protected blocks and shared JSON instructions |
 | `src/kinloyalty/` | Prompts/schemas, manifests, clients, validation, logging, runner, saved-log analysis, CLI |
-| `data/study1/` | Separate smoke, pilot, and comprehension batches; main data added later |
-| `results/study1/` | Generated tables and figures, once implemented |
-| `preregistration/` | Reserved for the final Study 1 pre-registration |
+| `data/study1/` | Separate smoke/pilot/check batches and the frozen main plan; main responses added only after authorization |
+| `results/study1/` | Saved pilot/check reports; main tables and figures generated after collection |
+| `preregistration/` | Final Study 1 protocol and machine-readable source/artifact hash inventory |
 | `docs/data_dictionary.md` | Attempt-log and implemented analysis-table contracts |
 | `docs/decisions.md` | Dated decisions, approvals, and later deviations |
-| `docs/study1_prompt_review.md` | Fully rendered draft prompts and schemas for approval |
+| `docs/study1_prompt_review.md` | Fully rendered final prompts and schemas across all paraphrases |
 | `docs/engine.md` | Allocation rules, retries/re-asks, concurrency, and durable resume |
 | `docs/provider_verification.md` | Official sources, exact API mappings, normalization, and prepared smoke scope |
 | `docs/phase4b_report.md` | Observed smoke metadata, limitations, artifact hashes, and offline inspection commands |
 | `docs/analysis.md` | Eligibility, approved methods, resampling conventions, reports, and reproduction |
 | `docs/phase6_report.md` | Observed pilot/comprehension results, pooled distributions, mechanical checks, and review flags |
+| `docs/phase8_report.md` | Registration snapshot, verification, and remaining final-push gate |
 | `tests/` | Offline protocol, manifest, validation, logging/resume, and CLI checks; socket connections blocked |
 | `codex_prompts/` | Local coding-agent instructions; always Git-ignored |
 

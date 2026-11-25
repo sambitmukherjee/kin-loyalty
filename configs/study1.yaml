@@ -1,4 +1,4 @@
-# Study 1 configuration; the protocol is not pre-registration-locked yet.
+# Study 1 scientific configuration; registration status is in preregistration/study1.md.
 schema_version: 1
 study: study1
 status: prompts_approved

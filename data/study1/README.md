@@ -28,10 +28,14 @@ fixed no-further-floor-prompt-change rule in `docs/decisions.md`.
 | `repilot_20261126/comprehension/` | 320 fresh final-prompt card-recognition draws | Final comprehension report only |
 | `main/` | Main-run manifest at lock; 3,600 planned decisions executed only later | Main decisions only |
 
-The main directory will be created when the main manifest is generated. No main
-run is authorized as part of this project phase plan. Simulated test data will
-be generated under pytest temporary directories and must not be represented as
-observed main data.
+Phase 8 generated `main/manifest.jsonl`: 3,600 planned draws, order seed
+2026112504, SHA-256
+`a583fe4366893e74735f22fc7f1e45ee7e8d136be5e06ad5d770dfcc1225ee55`.
+It regenerates byte-identically and contains the final two-sentence system
+prompts, schemas, settings, and other-lab rotations. The directory contains no
+main attempt log or observed main outcome. No main run is authorized as part of
+this phase plan. Simulated verification data remain outside these real study
+directories and must not be represented as observed data.
 
 Retries and re-asks retain the trial ID and add attempt records. An API-error
 attempt is never an exclusion. Detailed fields follow the contract in
