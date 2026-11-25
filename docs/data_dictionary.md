@@ -220,8 +220,8 @@ in `analysis.md` and the versioned study configuration.
 | `coverage.csv` | Model × decision × label × paraphrase: planned, valid, excluded; inference requires no unfinished/not-started draws |
 | `descriptives.csv` | Model × decision × label: n, mean, median, sample SD, shares at $50 and $0, modal share, distinct values |
 | `attempt_diagnostics.csv` | Model × decision × label: observed draws, valid, re-asked draws, excluded, unfinished, attempts, API errors |
-| `contrasts.csv` | 150 rows: decision, outcome (`outcome`/`belief`), method (`unadjusted`/`belief_adjusted`), left/right labels, family, model/pooled scope, primary/secondary designation, estimate, count-matched percentile bootstrap 95% interval and its method/level, two-sided permutation p-value, resampling counts, interpretation, point/interval availability and reasons, unavailable bootstrap count, non-estimable model names |
-| `equivalence.csv` | Always one pooled P1 row: estimate, bound, alpha, raw lower/upper tail counts, bootstrap count, corrected one-sided p-values, their maximum (`p_tost`), equivalent boolean, strict-inside flag, and both 90%/95% percentile intervals with levels/methods/one-based endpoint ranks |
+| `contrasts.csv` | 150 rows: decision, outcome (`outcome`/`belief`), method (`unadjusted`/`belief_adjusted`), left/right labels, family, model/pooled scope, primary/secondary designation, estimate, count-matched percentile bootstrap 95% interval and its method/level, two-sided permutation p-value and shared tie tolerance, resampling counts, interpretation, point/interval availability and reasons, unavailable bootstrap count, non-estimable model names |
+| `equivalence.csv` | Always one pooled P1 row: estimate, bound, alpha, conservative-tie lower/upper tail counts, shared tie tolerance, bootstrap count, corrected one-sided p-values, their maximum (`p_tost`), equivalent boolean, tolerance-aware strict-inside flag, and both 90%/95% percentile intervals with levels/methods/one-based endpoint ranks |
 | `s1_coefficient_changes.csv` | 30 rows: contrast/scope, `unadjusted_minus_adjusted` offer coefficient and paired count-matched percentile bootstrap 95% interval with method/level; descriptive association, no extra p-value or explained-share ratio; explicit point/interval availability and reasons |
 | `s1_belief_diagnostics.csv` | One row per model: retained valid proposer n, unique beliefs, nonmodal draw count/share, required count/percent, lowest-mode tie rule, rank status, estimability/reason, bootstrap fits attempted and numerical failures |
 | `s1_belief_cell_counts.csv` | Model × label × paraphrase: retained n, lowest tied mode, modal and nonmodal draw counts; audit of the fixed 10% rule |
@@ -239,8 +239,12 @@ All intervals use `ci_method: percentile_count_matched`: for 10,000 draws, 90%
 selects one-based ranks 500/9501 and 95% selects 250/9751, with no interpolation.
 `equivalence.csv` uses `equivalence_ci_*` for 90% and `contrast_ci_*` for 95%.
 The latter agrees with the pooled P1 row in `contrasts.csv`. Equivalence requires
-strictly interior 90% endpoints and both inclusive-tail, +1-corrected p-values
-strictly below .05. No new random draws are generated for TOST or either level.
+90% endpoints beyond the shared numerical tie band and both conservative-tail,
++1-corrected p-values strictly below .05. `INFERENCE_TIE_TOLERANCE = 1e-12`
+is defined once in `inference.py`, reported as `permutation_tie_tolerance` in
+contrasts and `inference_tie_tolerance` in equivalence/provenance. TOST counts
+use `<= -5 + epsilon` and `>= +5 - epsilon`; its 90% check uses `low > -5 + epsilon`
+and `high < +5 - epsilon`. No new random draws are generated for TOST or either level.
 Paired coefficient changes add arrays with method `unadjusted_minus_adjusted`.
 Numerically singular adjusted bootstrap replicates remain NaN, with no deletion
 or redraw. Affected confidence intervals are unavailable, even if the observed

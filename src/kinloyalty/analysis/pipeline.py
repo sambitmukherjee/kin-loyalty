@@ -12,6 +12,7 @@ import pandas as pd
 import yaml
 
 from kinloyalty.analysis.inference import (
+    INFERENCE_TIE_TOLERANCE,
     belief_cell_counts, belief_estimability, bootstrap_coefficients, bootstrap_interval, bootstrap_tost, coefficients,
     contrast_vector, make_design, permutation_contrasts, two_sided_p,
 )
@@ -43,7 +44,7 @@ def load_analysis_config(path: str | Path) -> tuple[dict[str, Any], dict[str, An
     spec = study["analysis"]
     if (spec["tost_method"] != "percentile_bootstrap_tail_probabilities"
         or spec["contrast_permutation_rule"] != "tested_pair_within_model_paraphrase"
-        or spec.get("adjusted_permutation_rule") != "freedman_lane_within_model_paraphrase"
+        or spec.get("adjusted_permutation_rule") != "freedman_lane_tested_pair_within_model_paraphrase"
         or spec.get("bootstrap_interval") != "percentile_count_matched"
         or spec["accepted_decision_phase"] != "main"):
         raise ValueError("Analysis methods must match the researcher-approved configuration.")
@@ -167,6 +168,7 @@ def estimate_all(frame: pd.DataFrame, study: dict[str, Any], models: list[str]) 
                                  **_estimate_fields(estimate, draws, spec["confidence_level"], reason=reason),
                                  "non_estimable_models": ";".join(missing_models) if scope == "pooled" else scope if not np.isfinite(estimate) else "",
                                  "permutation_p": two_sided_p(estimate, permuted) if np.isfinite(estimate) and np.isfinite(permuted).all() else np.nan,
+                                 "permutation_tie_tolerance": INFERENCE_TIE_TOLERANCE,
                                  "bootstrap_resamples": len(draws), "permutation_resamples": len(permuted)})
                     array_key = f"{key}:{method}:{left}-{right}:{scope}"
                     arrays[array_key + ":bootstrap"] = draws
@@ -207,6 +209,7 @@ def _write_metadata(output: Path, data: SavedData, config: Path, *, extra_files:
                 "analysis_config_sha256": file_hash(config),
                 "model_config_sha256": file_hash(model_config),
                 "analysis_settings": study["analysis"], "seeds": study["seeds"],
+                "inference_tie_tolerance": INFERENCE_TIE_TOLERANCE,
                 "package_source_sha256": {str(path.relative_to(source)): file_hash(path) for path in sorted(source.rglob("*.py"))},
                 "packages": {name: version(name) for name in ("numpy", "pandas", "scipy", "statsmodels", "matplotlib", "PyYAML")},
                 **collect_provenance()}

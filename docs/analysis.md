@@ -123,22 +123,25 @@ tail probabilities using the same 10,000 stratified estimates already used for
 the P1 confidence interval. No second bootstrap or new seed is used:
 
 ```text
-p_lower = (1 + count(d_boot <= -5)) / 10001
-p_upper = (1 + count(d_boot >= +5)) / 10001
+epsilon = INFERENCE_TIE_TOLERANCE = 1e-12
+p_lower = (1 + count(d_boot <= -5 + epsilon)) / 10001
+p_upper = (1 + count(d_boot >= +5 - epsilon)) / 10001
 p_tost = max(p_lower, p_upper)
 equivalent = (p_lower < .05) and (p_upper < .05)
 ```
 
-Both comparisons to the dollar bounds are inclusive, and the p-value decisions
-are strictly below .05. Counts use the bootstrap estimates directly, without
-centering, reflection, or a floating-point tie tolerance. This replaces the
+Both comparisons include numerical ties in the conservative direction, and
+the p-value decisions are strictly below .05. Counts use the bootstrap estimates
+directly, without centering or reflection. This replaces the
 earlier null-centered/basic-interval TOST convention before the pilot.
 
 A 90% percentile interval is reported alongside the 95% percentile interval in
 `equivalence.csv`, with both endpoint ranks and method metadata. The researcher
 selected the count-matched ranks above so the corrected p-value rule agrees
-with the 90% interval lying **strictly** inside ±$5. If either endpoint equals
-−$5 or +$5, equivalence is not declared. Ordinary interpolated percentiles can
+with the 90% interval lying **strictly** inside ±$5 after the same conservative
+tie convention: its lower endpoint must exceed `-5 + epsilon` and its upper
+endpoint must be below `+5 - epsilon`. Endpoints within epsilon of a bound fail
+equivalence. Ordinary interpolated percentiles can
 disagree with corrected p-values at the cutoff; [NumPy documents these
 interpolation conventions](https://numpy.org/doc/stable/reference/generated/numpy.quantile.html).
 The primary two-sided permutation test is unchanged. Bootstrap inference remains
@@ -155,19 +158,35 @@ algebraically equivalent here because the fixed-design cross-product is unchange
 
 For belief-adjusted S1, the approved method is Freedman–Lane: merge the tested
 label columns under their equality null, retain all other labels, paraphrases,
-and belief as nuisance regressors, fit that reduced model, permute its residuals
-within model × paraphrase, add the reduced fitted values, and refit the full
-model. Estimated nuisance residuals make this an approximate permutation method.
+and belief as nuisance regressors, fit that reduced model, and permute its
+residuals within model × paraphrase **among the two compared labels only**.
+Residuals belonging to all other labels stay fixed. Add the reduced fitted
+values and refit the full model. Its fixed design permits caching the OLS
+projection, which is algebraically equivalent to repeated full refits and is
+tested against independent statsmodels regressions. Estimated nuisance residuals
+make this an approximate permutation method.
 The procedure follows [Winkler et al. (2014)](https://pmc.ncbi.nlm.nih.gov/articles/PMC4010955/).
 
-Pooled null statistics average the four independently permuted model estimates.
-All p-values are two-sided, using `|T_perm| >= |T_observed|`, with a `1e-12`
-comparison tolerance for floating-point ties. The randomized-test correction is
+For pooled replicate `j`, every stratum of all four models is permuted and the
+four per-model contrasts from that same replicate are averaged equally.
+Per-model RNG streams are independent; their output arrays are aligned by
+replicate index. The procedure never averages per-model p-values.
+All permutation p-values are two-sided, using
+`|T_perm| >= |T_observed| - INFERENCE_TIE_TOLERANCE`. The randomized-test correction is
 `(1 + extreme_count)/(R + 1)`; p-values cannot be zero. The correction is also
 documented by [SciPy](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.permutation_test.html).
 We explicitly use absolute-statistic tails, rather than SciPy's default
 twice-the-smaller-tail convention. Label permutations test exchangeability of
 the two conditions within each stratum; they do not generalize to other models.
+
+`INFERENCE_TIE_TOLERANCE = 1e-12` is defined once in `inference.py`. The same
+absolute tolerance applies conservatively to permutation counts, bootstrap
+TOST counts, and the 90% interval's strict-inside check. Tied values always count
+against significance/equivalence. It does not change the strict `p < .05` rule,
+interval ranks, or any bootstrap draw. The output provenance and relevant tables
+record the constant. No permutation distribution or p-value is computed for
+the S1 unadjusted-minus-adjusted coefficient change; only its paired interval
+is reported.
 
 All RNG streams derive from SHA-256 of the configured seed and named analysis,
 model, contrast, and method. Trial rows are sorted by stable IDs. Output does not

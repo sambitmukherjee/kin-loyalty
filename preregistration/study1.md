@@ -1,8 +1,9 @@
 # Study 1 pre-registration — unlocked draft
 
 **Status:** This is an incomplete, unlocked draft. The researcher requested that
-the S1 specification, its fixed estimability rule, and the pooled P1 bootstrap
-TOST specification be recorded before the pilot on 2026-11-25. The remaining protocol, pilot/comprehension results, final
+the S1 specification, its fixed estimability rule, the pooled P1 bootstrap
+TOST, and the permutation/tie conventions be recorded before the pilot on
+2026-11-25. The remaining protocol, pilot/comprehension results, final
 prompt/manifest hashes, and analysis commit references will be completed at the
 pre-registration phase. No `prereg-study1` tag or registration push has occurred.
 
@@ -23,13 +24,14 @@ a separate bootstrap run or assign TOST another seed.
 For the bootstrap estimates `d_boot`, calculate:
 
 ```text
-p_lower = (1 + count(d_boot <= -5)) / 10001
-p_upper = (1 + count(d_boot >= +5)) / 10001
+epsilon = INFERENCE_TIE_TOLERANCE = 1e-12
+p_lower = (1 + count(d_boot <= -5 + epsilon)) / 10001
+p_upper = (1 + count(d_boot >= +5 - epsilon)) / 10001
 p_TOST = max(p_lower, p_upper)
 equivalent = (p_lower < 0.05) and (p_upper < 0.05)
 ```
 
-Both boundary comparisons are inclusive. The decision uses strict p < .05 for
+Boundary comparisons include numerical ties conservatively. The decision uses strict p < .05 for
 each one-sided test. The +1 correction prevents zero p-values. Report both
 one-sided p-values and their maximum. These are percentile-bootstrap tail
 areas of the estimates themselves, not tails of null-centered or reflected
@@ -37,9 +39,10 @@ bootstrap errors. This replaces the earlier null-centered TOST convention.
 
 Sort those same 10,000 bootstrap estimates in ascending order. The 90%
 percentile interval uses the **500th and 9,501st** estimates, with no
-interpolation. Equivalence requires this interval to lie **strictly** inside
-−$5 and +$5: if either endpoint equals its bound exactly, equivalence is not
-declared. These count-matched ranks give the same decision as the corrected
+interpolation. Equivalence requires the lower endpoint to be **greater than
+−5 + epsilon** and the upper endpoint to be **less than +5 − epsilon**.
+An endpoint exactly on, or within epsilon of, its nominal bound counts against
+equivalence. These count-matched ranks give the same decision as the corrected
 one-sided p-values above, including values exactly on a bound.
 
 Report the 95% percentile interval alongside it, using the **250th and 9,751st**
@@ -56,6 +59,48 @@ follows: for interval level `1-2a`, find the largest integer `k` such that
 10,000 resamples and the specific ranks above. Record tail counts, p-values,
 levels, endpoint ranks, and interval methods in the equivalence output. Sorting
 must preserve the original shared bootstrap order for paired calculations.
+
+## Permutation tests and one numerical tie convention
+
+Use **10,000 permutations** with fixed permutation seed **2026112506**, using
+the existing deterministic named streams per model/contrast/method.
+
+For a two-label contrast, permute only the two compared labels within every
+model × paraphrase stratum, preserving both counts and leaving all other labels
+fixed. Fit the label/paraphrase specification and recompute the contrast. In
+replicate `j`, apply the corresponding permutation in every stratum of all four
+models, then take the equal-weight mean of their four model-specific contrasts
+from that same replicate. Do not average per-model p-values or mix replicate
+indexes. The same pooled-replicate convention applies to adjusted S1.
+
+For belief-adjusted S1, start with each model's full offer regression on label
+indicators, stated belief, and paraphrase fixed effects. Form the reduced model
+by merging the two compared labels, imposing equality of their coefficients,
+while retaining all nuisance terms. Fit this reduced model. Within each
+model × paraphrase stratum, permute reduced-model residuals **among draws of
+the two compared labels only**. Keep the residuals of every other label fixed.
+Add the permuted residuals back to the reduced fitted values, refit the full
+model, and recompute the contrast. Covariates and label counts remain fixed.
+The implementation may reuse the fixed-design OLS projection; this is
+algebraically the same full-model refit and is checked against independent fits.
+
+Calculate the absolute-statistic two-sided p-value with the add-one convention:
+
+```text
+p_two_sided = (1 + count(abs(stat_perm) >= abs(stat_observed) - epsilon)) / 10001
+```
+
+Define **`INFERENCE_TIE_TOLERANCE = 1e-12` once**, in
+`src/kinloyalty/analysis/inference.py`. The three statistic-to-cutoff comparisons
+specified here all read this shared constant. It is an absolute tolerance in the statistic's
+units, used only in the conservative direction: tied replicates count against
+significance or equivalence. It applies to permutation p-values, both bootstrap
+TOST tail counts, and the 90% interval's strict-inside check above. The p-value
+decision remains strictly `p < .05`; interval ranks are unchanged and no
+bootstrap interpolation, centering, or resampling is introduced.
+
+There is **no permutation test for the unadjusted-minus-adjusted S1 contrast
+change**. Report only its paired-bootstrap 95% interval as specified below.
 
 ## S1: descriptive comparison of offers and stated beliefs
 
@@ -99,13 +144,11 @@ subtract separate confidence limits or treat the two estimates as independent.
 Report belief contrasts with the same fixed-effect, cell-bootstrap, and
 equal-weight conventions. No "share of the effect explained" ratio is reported.
 
-Adjusted-contrast p-values use the previously specified two-sided
-Freedman–Lane residual permutation within model × paraphrase strata, retaining
-label/paraphrase/belief nuisance structure. Unadjusted and belief contrasts use
-tested-pair label permutations within these strata. Each uses 10,000
-permutations, the configured fixed seed, absolute-statistic tails, and the
-randomized +1 correction. The coefficient-change table is descriptive and
-introduces no extra hypothesis test.
+Adjusted-contrast p-values use the tested-pair-only Freedman–Lane procedure
+above, retaining label/paraphrase/belief nuisance structure. Unadjusted and
+belief contrasts use tested-pair label permutations. All use the shared
+conservative numerical tie convention. The coefficient-change table remains
+descriptive, with a paired-bootstrap interval and no permutation p-value.
 
 ### Fixed belief-variation rule
 

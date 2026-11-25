@@ -9,6 +9,10 @@ import numpy as np
 import pandas as pd
 
 
+# Numerical cutoff ties count against significance/equivalence throughout inference.
+INFERENCE_TIE_TOLERANCE = 1e-12
+
+
 @dataclass
 class ModelDesign:
     """Hold one model's fixed design and paired offer/belief observations."""
@@ -133,9 +137,11 @@ def contrast_vector(design: ModelDesign, left: str, right: str) -> np.ndarray:
 
 
 def permutation_contrasts(design: ModelDesign, left: str, right: str, *, resamples: int, seed: int, key: str, adjusted: bool = False) -> np.ndarray:
-    """Permute tested labels, or reduced-model residuals for belief-adjusted S1."""
+    """Shuffle only the tested pair within strata, including for adjusted residuals."""
     rng = seeded_rng(seed, f"permutation:{key}:{left}:{right}:{adjusted}:{design.model}")
     vector = contrast_vector(design, left, right)
+    pair = np.isin(design.frame.label.to_numpy(), [left, right])
+    groups = [group[pair[group]] for group in design.strata]
     if adjusted:
         if design.belief is None:
             raise ValueError("Adjusted permutation requires paired beliefs.")
@@ -150,26 +156,25 @@ def permutation_contrasts(design: ModelDesign, left: str, right: str, *, resampl
         fitted = reduced @ np.linalg.lstsq(reduced, design.y, rcond=None)[0]
         residuals = design.y - fitted
         weights = np.append(vector, 0) @ np.linalg.pinv(full)
-        groups = design.strata
         source = residuals
     else:
         fitted = np.zeros_like(design.y)
         source = design.y
         weights = vector @ design.inverse
-        groups = [group[np.isin(design.frame.label.to_numpy()[group], [left, right])] for group in design.strata]
     result = []
     for start in range(0, resamples, 250):
         size = min(250, resamples - start)
         values = np.tile(source, (size, 1))
         for group in groups:
             values[:, group] = rng.permuted(np.tile(source[group], (size, 1)), axis=1)
+        # The fixed design lets us reuse its OLS projection for each full-model refit.
         result.append((values + fitted) @ weights)
     return np.concatenate(result)
 
 
 def two_sided_p(observed: float, null: np.ndarray) -> float:
-    """Use absolute-statistic tails and the conservative randomized +1 correction."""
-    return float((1 + np.count_nonzero(np.abs(null) >= abs(observed) - 1e-12)) / (len(null) + 1))
+    """Count numerical ties conservatively and use the randomized +1 correction."""
+    return float((1 + np.count_nonzero(np.abs(null) >= abs(observed) - INFERENCE_TIE_TOLERANCE)) / (len(null) + 1))
 
 
 def bootstrap_interval_ranks(resamples: int, confidence: float = .95) -> tuple[int, int]:
@@ -208,8 +213,10 @@ def bootstrap_tost(observed: float, samples: np.ndarray, *, bound: float, alpha:
     if not np.isfinite(bound) or bound <= 0 or not np.isfinite(observed) or not np.isfinite(alpha) or not 0 < alpha < .5:
         raise ValueError("TOST requires a finite estimate, positive bound, and alpha between zero and one half.")
     samples = _finite_bootstrap_samples(samples)
-    lower_count = int(np.count_nonzero(samples <= -bound))
-    upper_count = int(np.count_nonzero(samples >= bound))
+    lower_cutoff = -bound + INFERENCE_TIE_TOLERANCE
+    upper_cutoff = bound - INFERENCE_TIE_TOLERANCE
+    lower_count = int(np.count_nonzero(samples <= lower_cutoff))
+    upper_count = int(np.count_nonzero(samples >= upper_cutoff))
     lower = (1 + lower_count) / (len(samples) + 1)
     upper = (1 + upper_count) / (len(samples) + 1)
     low, high = bootstrap_interval(samples, 1 - 2 * alpha)
@@ -219,11 +226,12 @@ def bootstrap_tost(observed: float, samples: np.ndarray, *, bound: float, alpha:
     return {"estimate": observed, "bound": bound, "p_lower": lower, "p_upper": upper,
             "p_tost": max(lower, upper), "equivalent": bool(lower < alpha and upper < alpha),
             "alpha": alpha, "bootstrap_resamples": len(samples),
+            "inference_tie_tolerance": INFERENCE_TIE_TOLERANCE,
             "lower_tail_count": lower_count, "upper_tail_count": upper_count,
             "equivalence_ci_method": "percentile_count_matched", "equivalence_ci_level": 1 - 2 * alpha,
             "equivalence_ci_low": low, "equivalence_ci_high": high,
             "equivalence_ci_lower_rank": low_rank, "equivalence_ci_upper_rank": high_rank,
-            "equivalence_ci_strictly_inside": bool(low > -bound and high < bound),
+            "equivalence_ci_strictly_inside": bool(low > lower_cutoff and high < upper_cutoff),
             "contrast_ci_method": "percentile_count_matched", "contrast_ci_level": 1 - alpha,
             "contrast_ci_low": contrast_low, "contrast_ci_high": contrast_high,
             "contrast_ci_lower_rank": contrast_low_rank, "contrast_ci_upper_rank": contrast_high_rank}

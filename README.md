@@ -29,6 +29,9 @@ researcher's fixed S1 count rule and paired descriptive comparison, plus the
 pooled P1 percentile-bootstrap TOST specification.
 All bootstrap intervals use empirical ranks without interpolation: 500/9501
 for 90% and 250/9751 for 95%, out of the same 10,000 resamples.
+Label and adjusted-residual permutations exchange only the two tested labels
+within strata. One shared conservative numerical tie tolerance applies to
+permutation p-values and bootstrap TOST decisions.
 
 The planned main design has four models, three decisions, five labels, three
 paraphrases, and 20 draws per smallest cell: **3,600 planned draws**. Smoke tests,

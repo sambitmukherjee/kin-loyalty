@@ -11,6 +11,7 @@ import statsmodels.formula.api as smf
 import yaml
 
 from kinloyalty.analysis.inference import (
+    INFERENCE_TIE_TOLERANCE,
     belief_cell_counts, belief_estimability, bootstrap_coefficients, bootstrap_interval, bootstrap_interval_ranks, bootstrap_tost, coefficients,
     contrast_vector, make_design, permutation_contrasts, two_sided_p,
 )
@@ -110,6 +111,66 @@ def test_freedman_lane_retains_belief_nuisance_relationship() -> None:
     design = make_design(frame, "m", ["own_model", "other_lab", "fictional"], [1, 2, 3])
     null = permutation_contrasts(design, "own_model", "other_lab", resamples=100, seed=5, key="nuisance", adjusted=True)
     assert np.max(np.abs(null)) < 1e-10
+
+
+def test_freedman_lane_only_shuffles_tested_pair_and_matches_independent_refits(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Audit shuffle blocks and compare the cached calculation to explicit full OLS fits."""
+    import kinloyalty.analysis.inference as inference
+
+    frame = _frame()
+    design = make_design(frame, "m", ["own_model", "other_lab", "fictional"], [1, 2, 3])
+    reference = design.frame.copy()
+    pair = reference.label.isin(["own_model", "other_lab"])
+    reference["merged_label"] = reference.label.where(~pair, "tested_pair")
+    reduced = smf.ols("outcome ~ C(merged_label) + belief + C(paraphrase_id)", data=reference).fit()
+    fitted, residual = reduced.fittedvalues.to_numpy(), reduced.resid.to_numpy()
+    shuffled = residual.copy()
+    expected_groups = []
+    for paraphrase in [1, 2, 3]:
+        indexes = np.flatnonzero(pair & (reference.paraphrase_id == paraphrase))
+        expected_groups.append(residual[indexes])
+        shuffled[indexes] = residual[indexes[::-1]]
+    reference["permuted_offer"] = fitted + shuffled
+    np.testing.assert_allclose(reference.loc[~pair, "permuted_offer"], reference.loc[~pair, "outcome"], atol=1e-10)
+    full = smf.ols("permuted_offer ~ C(label) + belief + C(paraphrase_id)", data=reference).fit()
+    expected = full.params["C(label)[T.own_model]"] - full.params["C(label)[T.other_lab]"]
+    seen = []
+
+    class ReversePermutation:
+        def permuted(self, values: np.ndarray, axis: int) -> np.ndarray:
+            assert axis == 1
+            seen.append(values.copy())
+            return values[:, ::-1]
+
+    monkeypatch.setattr(inference, "seeded_rng", lambda *args: ReversePermutation())
+    actual = permutation_contrasts(design, "own_model", "other_lab", resamples=7, seed=3, key="audit", adjusted=True)
+    assert len(seen) == 3
+    for values, group in zip(seen, expected_groups, strict=True):
+        assert values.shape == (7, len(group))
+        np.testing.assert_allclose(values, np.tile(group, (7, 1)), atol=1e-10)
+    np.testing.assert_allclose(actual, expected, atol=1e-10)
+
+
+@pytest.mark.parametrize("observed", [-5., 5.])
+def test_permutation_p_counts_numerical_ties_conservatively(observed: float) -> None:
+    epsilon = INFERENCE_TIE_TOLERANCE
+    assert epsilon == 1e-12
+    null = np.array([5 - epsilon / 2, -5 + epsilon / 2,
+                     5 - 2 * epsilon, -5 + 2 * epsilon, 5, -5])
+    assert two_sided_p(observed, null) == 5 / 7
+
+
+@pytest.mark.parametrize("sign", [-1, 1])
+@pytest.mark.parametrize("gap_in_tolerances", [.5, 1., 2.])
+def test_tost_counts_and_interval_checks_share_conservative_tolerance(sign: int, gap_in_tolerances: float) -> None:
+    """Endpoints within epsilon of a bound count against equivalence in both checks."""
+    value = sign * (5 - gap_in_tolerances * INFERENCE_TIE_TOLERANCE)
+    samples = np.concatenate([np.zeros(9500), np.full(500, value)])
+    result = bootstrap_tost(0, samples, bound=5)
+    expected = gap_in_tolerances > 1
+    assert result["equivalent"] is expected
+    assert result["equivalence_ci_strictly_inside"] is expected
+    assert result["inference_tie_tolerance"] == INFERENCE_TIE_TOLERANCE
 
 
 @pytest.mark.parametrize("observed,equivalent", [(0, True), (5, False), (-5, False), (8, False), (-8, False)])
@@ -294,8 +355,8 @@ def test_end_to_end_recovers_effect_and_reproduces_artifacts(batches: tuple[Path
     with np.load(first / "resampling_distributions.npz") as distributions:
         pooled = distributions["dictator:outcome:unadjusted:own_model-other_lab:pooled:bootstrap"]
         assert len(pooled) == equivalence.bootstrap_resamples
-        assert equivalence.lower_tail_count == np.count_nonzero(pooled <= -5)
-        assert equivalence.upper_tail_count == np.count_nonzero(pooled >= 5)
+        assert equivalence.lower_tail_count == np.count_nonzero(pooled <= -5 + INFERENCE_TIE_TOLERANCE)
+        assert equivalence.upper_tail_count == np.count_nonzero(pooled >= 5 - INFERENCE_TIE_TOLERANCE)
         assert equivalence.equivalence_ci_strictly_inside == equivalence.equivalent
     for name in ["main_distributions", "s1_coefficients", "responder_distributions", "comprehension"]:
         assert (first / f"{name}.pdf").read_bytes().startswith(b"%PDF")
@@ -487,6 +548,26 @@ def test_s1_difference_interval_uses_the_paired_bootstrap_and_explicit_sign(batc
         assert row.ci_low == pytest.approx(low) and row.ci_high == pytest.approx(high)
         assert "not a causal mediation" in row.interpretation
     assert "share_explained" not in result.coefficient_changes
+    assert "permutation_p" not in result.coefficient_changes
+    assert not any(":unadjusted_minus_adjusted:" in key and key.endswith(":permutation") for key in result.distributions)
+
+
+def test_pooled_permutation_replicates_average_all_models_at_the_same_index(batches: tuple[Path, Path]) -> None:
+    """Every pooled replicate combines all four model contrasts, not their p-values."""
+    config, directory = batches
+    study, models = load_analysis_config(config)
+    data = load_saved_data([directory / "main"], phase="main", study=study, allow_synthetic=True)
+    result = estimate_all(data.decisions, study, list(models))
+    pooled_rows = result.contrasts[result.contrasts.scope == "pooled"]
+    for row in pooled_rows.itertuples():
+        prefix = f"{row.decision}:{row.outcome}:{row.method}:{row.left}-{row.right}:"
+        per_model = np.column_stack([result.distributions[prefix + model + ":permutation"] for model in models])
+        pooled = result.distributions[prefix + "pooled:permutation"]
+        assert per_model.shape == (study["analysis"]["permutation_resamples"], 4)
+        assert np.array_equal(pooled, per_model.mean(axis=1), equal_nan=True)
+        if np.isfinite(pooled).all():
+            count = np.count_nonzero(np.abs(pooled) >= abs(row.estimate) - INFERENCE_TIE_TOLERANCE)
+            assert row.permutation_p == (1 + count) / (len(pooled) + 1)
 
 
 def test_singular_adjusted_resamples_withhold_ci_but_keep_identifiable_point(batches: tuple[Path, Path]) -> None:

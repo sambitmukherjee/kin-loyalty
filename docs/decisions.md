@@ -417,3 +417,44 @@ and any batch that must be rerun. No post-pilot fixes or deviations exist yet.
   uses ranks 500/9501. Planted/null mock cases agree with the strict interval
   decision. Both builds and archive/source-integrity checks passed. No new
   model-provider call, phase, push, or registration lock occurred.
+
+## 2026-11-25 — Tested-pair Freedman–Lane and shared numerical ties
+
+- **Researcher specification:** For every contrast, permute only its two labels
+  within model × paraphrase strata, preserving counts and leaving other labels
+  fixed. For pooled replicate j, average the four model-specific contrasts from
+  that same replicate after permuting every relevant stratum of every model.
+  Use 10,000 permutations and the existing fixed permutation seed 2026112506.
+- **Freedman–Lane correction:** The reduced model already correctly merged the
+  tested label coefficients while retaining belief/paraphrase/other-label
+  nuisance terms. Previously its residual shuffle included all labels in each
+  stratum. Restrict that shuffle to rows of the two tested labels; other-label
+  residuals remain fixed. Add reduced fitted values and refit the full model.
+  Cached fixed-design OLS projection is algebraically equivalent to those refits.
+- **Confirmed:** Two-sided p-values use absolute-statistic tails and the add-one
+  correction. No permutation test or permutation distribution is computed for
+  the S1 unadjusted-minus-adjusted coefficient change; it keeps its paired
+  bootstrap interval only.
+- **Researcher tolerance clarification:** Retain 1e-12 for numerical ties and
+  define it once as `INFERENCE_TIE_TOLERANCE` in `inference.py`. Apply it in the
+  conservative direction to every listed comparison: permutation extreme counts
+  use `abs(T_perm) >= abs(T_obs) - epsilon`; bootstrap TOST counts use
+  `d_boot <= -5 + epsilon` and `d_boot >= +5 - epsilon`; the 90% interval requires
+  `low > -5 + epsilon` and `high < +5 - epsilon`. Near-cutoff numerical ties count
+  against significance/equivalence. This supersedes the preceding literal
+  TOST/interval-bound comparisons; strict `p < .05` and percentile ranks remain.
+- **Preserved:** Regressions, model weights, bootstrap draws/seeds, the fixed S1
+  estimability criterion, paired coefficient-change inference, and descriptive
+  interpretation. Unadjusted permutation arrays are unchanged; adjusted arrays
+  can change because their residual exchangeability blocks are now restricted.
+  The draft and current method documentation record the exact conventions.
+- **Verification:** 309 offline tests passed, including 57 analysis tests.
+  Independent formula-based reduced/full OLS fits verify the pair-only residual
+  exchange and unchanged other-label rows. Tests verify same-index four-model
+  pooled replicates, conservative numerical ties on both signs of the cutoff,
+  matching TOST/interval decisions within the tolerance band, and absence of a
+  coefficient-change permutation test. Full 10,000-replicate mock reproduction
+  confirmed all bootstrap/unadjusted-permutation arrays unchanged and only the
+  30 adjusted-permutation arrays changed. Every pooled replicate averages the
+  four same-index model statistics. Both builds and archive/source checks passed.
+  No API call, live batch, registration lock, or GitHub push was made.
