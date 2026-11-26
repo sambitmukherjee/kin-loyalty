@@ -1217,3 +1217,37 @@ and any batch that must be rerun. No post-pilot fixes or deviations exist yet.
   Phase 6: 80 blind pilot episodes, up to 960 ordinary calls and a proposed
   7,680-attempt worst-case ceiling including re-asks/retries, requiring explicit
   phase/budget approval and clean committed execution preparation.
+
+## 2026-11-26 — Phase 5 pushed; Study 2 Phase 6 pilot authorized
+
+- **Researcher approval:** "Yes, I approve it. Push the Phase 5 commit. Then
+  proceed with Phase 6." This accepts the proposed 80-episode pilot, up to
+  960 ordinary calls and a cumulative 7,680-attempt ceiling including re-asks,
+  retries, and resumptions. No probes or main collection are authorized.
+- **Push:** Pushed Phase 5 commit
+  `a91efd59f082ee9cb72ea67d6b7e47d6ebce6eec` and independently verified the
+  exact remote `main` tip before beginning pilot preparation.
+- **Preparation:** Added owned Study 2 pilot-only authorization/entry/report
+  modules, extended the owned runner to accept exactly the corresponding
+  smoke/pilot authorization and destination, and fixed replay's pilot contract
+  to the approved 7,680/0 budgets. Existing scientific config, prompts, schemas,
+  model roster, provider adapters and shared Study 1 modules remain unchanged.
+- **Blind reporting:** Pool outcomes by pair over all disclosures. Report
+  validity per model/turn class, role-specific diagnostics, usage, versions,
+  lengths, and acceptance-price mismatches by actual responding model/role.
+  No disclosure comparisons, pilot inference, or automatic fix threshold.
+  Zero-response cells are unobserved coverage flags, not 100% valid.
+- **Frozen plan:** Built only the approved pilot manifest externally, using
+  pilot seeds 2026112603/2026112604. Its SHA-256 is
+  `9e68d40288fc68621359c254c1d30e60d67684f5a09157748f215e6a08f6278e`.
+  All four ignored .env keys were present; no value was printed. The execution
+  plan is `docs/study2_phase6_execution_plan.md`. Actual main seeds remain unused.
+- **Before execution:** Twenty targeted offline tests passed. Complete the
+  full regression suite and preservation checks, commit preparation, then run
+  externally from clean code. Capture all attempts and halt on model drift
+  before further queued dispatch, without silently changing settings.
+- **Preparation verification:** All 554 offline tests passed in 119.15 seconds,
+  including seven new pilot tests. Locked Study 1 manifest/tags, prompt review,
+  frozen science/clients/analysis/addendum, real smoke artifacts, pilot digest,
+  unused main manifest, and ignored/untracked `codex_prompts/` were verified.
+  Commit this tested preparation before the first real pilot call.

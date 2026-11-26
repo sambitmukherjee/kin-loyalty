@@ -1,4 +1,4 @@
-"""Bind the researcher's live smoke authorization to fixed budgets and prior versions."""
+"""Bind approved live smoke/pilot scopes to fixed budgets and prior versions."""
 
 from dataclasses import asdict, dataclass
 from pathlib import Path
@@ -19,6 +19,24 @@ class SmokeAuthorization:
         """Return the immutable collection authorization persisted across resumptions."""
         if self.phase != 'smoke' or self.natural_attempt_cap != 384 or self.probe_attempt_cap != 32:
             raise ValueError('The approved smoke budgets are 384 natural and 32 probe attempts.')
+        return {'manifest_sha256': manifest_sha256, 'execution_mode': 'live', **asdict(self)}
+
+
+@dataclass(frozen=True)
+class PilotAuthorization:
+    """Record the explicitly approved 80-episode, 7,680-attempt pilot ceiling."""
+
+    expected_versions: dict[str, str]
+    natural_attempt_cap: int = 7680
+    probe_attempt_cap: int = 0
+    approved_by: str = 'researcher'
+    approved_on: str = '2026-11-26'
+    phase: str = 'pilot'
+
+    def contract(self, manifest_sha256: str) -> dict:
+        """Persist the phase and cumulative cap; no probes or main collection."""
+        if self.phase != 'pilot' or self.natural_attempt_cap != 7680 or self.probe_attempt_cap != 0:
+            raise ValueError('The approved pilot budget is 7680 natural and zero probe attempts.')
         return {'manifest_sha256': manifest_sha256, 'execution_mode': 'live', **asdict(self)}
 
 

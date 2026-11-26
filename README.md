@@ -14,6 +14,9 @@ and no truncation. See the [smoke report](docs/study2_phase4_report.md).
 The analysis/reproduce pipeline is implemented and verified on synthetic mock
 logs only. The pilot and final addendum lock remain separately gated; the
 addendum currently contains unlocked, researcher-approved analysis definitions.
+The researcher has now approved the 80-episode pilot with a cumulative
+7,680-attempt ceiling. See the [pilot execution plan](docs/study2_phase6_execution_plan.md)
+for its scope, blind report, and clean-code authorization controls.
 
 Study 2 commands are isolated under `kinloyalty study2`: `manifest`, `run`
 (mock only), `replay`, `probe-report`, `simulate`, `analyze`, and `reproduce`. See the

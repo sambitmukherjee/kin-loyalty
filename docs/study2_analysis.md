@@ -29,10 +29,11 @@ are explicitly synthetic fixture values, not measured provider usage.
 
 `analyze` and `reproduce` are aliases for the same replay-first pipeline. Main
 analysis later uses the same arguments without `--allow-synthetic`. No actual
-main manifest has been generated in Phase 5. The collection runner still permits
-live smoke only; read-only replay understands future explicitly approved
-pilot/main contracts so future main inference can use the same verification
-path. This reader support does not enable or authorize live execution.
+main manifest was generated in Phase 5. Read-only replay understands future
+explicitly approved pilot/main contracts so future main inference can use the
+same verification path. Phase 6 adds the separately approved 80-episode pilot
+entry point; live main collection remains disabled. Reader support alone never
+authorizes live execution.
 
 `--resamples N` is available only with explicitly opted-in synthetic input for
 shorter tests; it is rejected for real input. Default analysis uses the frozen

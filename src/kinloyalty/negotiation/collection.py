@@ -25,6 +25,8 @@ def validate_live_contract(contract: dict, *, phase: str) -> None:
     if phase == 'smoke':
         if contract.get('natural_attempt_cap') != 384 or contract.get('probe_attempt_cap') != 32:
             raise ValueError('Live smoke contract differs from the authorized budgets.')
+    if phase == 'pilot' and (contract.get('natural_attempt_cap') != 7680 or contract.get('probe_attempt_cap') != 0):
+        raise ValueError('Live pilot contract differs from the authorized 7680/0 budgets.')
     for field, minimum in (('natural_attempt_cap', 1), ('probe_attempt_cap', 0)):
         if type(contract.get(field)) is not int or contract[field] < minimum:
             raise ValueError('Live replay requires explicit nonnegative authorized budgets.')

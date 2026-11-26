@@ -527,3 +527,38 @@ distributions group by original conditions. Synthetic output is labelled.
 `artifacts.sha256.json` hashes all other result files. Existing outputs and raw
 inputs are never overwritten. No analysis output is an additional source of
 ground-truth negotiation outcomes.
+
+## Study 2 Phase 6 pilot authorization/report
+
+`PilotAuthorization` and `collection.json` fix the approved pilot-only scope,
+7,680 cumulative natural attempts, zero probes, researcher/date approval,
+manifest binding, and prior returned model versions. The owned live entry point
+requires clean committed code and ignored .env-only credentials. Smoke and pilot
+authorizations are not interchangeable; live main remains disabled. Counters,
+unknown interrupted attempts, version-drift halts, and resume contracts follow
+the same durable rules as smoke. Scientific config/prompts/clients are unchanged.
+
+`pilot_audit.json` and `pilot-report.md` contain mechanical checks and pair-pooled
+outcomes only. Validity is split by responding model and first/middle/final
+message class; a second table retains role. Denominators are received responses,
+including invalid replies/re-asks, with API errors separate. Rates must exceed
+95%. A cell with zero responses has null rate and `not_observed` status, with
+a separate coverage flag. Every terminal summary is checked by replay before
+the report is written. Unfinished identities are listed in partial reports.
+
+`pair_pooled_outcomes.csv` has one row per ordered pair, pooling all disclosure
+conditions: completion, deal/impasse/exclusion counts, unclipped shares, valid
+message lengths, mandate counts/rates, and message-12 reach/completion. Rates
+use retained non-excluded episode denominators, including impasse zeros.
+`pair_episode_lengths.csv` retains counts at lengths zero through twelve.
+`accept_price_mismatches_by_model.csv` pools mismatches over all labels/pairs by
+the actual model that sent the valid acceptance; the model/role CSV retains its
+role. Accepting uses the latest opposite offer regardless of the supplied
+price, which remains in the original raw logs. No automatic fix threshold exists.
+
+Per-call usage, missing counts, finish reasons, version strings and code
+provenance are retained. Missing usage is never imputed as zero. Pilot reports
+have no disclosure-grouped outcome tables, P2 estimates, intervals or hypothesis
+tests. The main inference loader still rejects pilot data. Mechanical review
+flags require researcher interpretation and approval before any fix; outcome
+levels never trigger changes.

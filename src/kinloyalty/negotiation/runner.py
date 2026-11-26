@@ -20,25 +20,26 @@ from kinloyalty.negotiation.history import reconstruct, seal, terminal_record, u
 from kinloyalty.negotiation.manifest import read_manifest, spec_from_row
 from kinloyalty.provenance import collect_provenance
 from kinloyalty.runner import RunnerPolicy
-from kinloyalty.negotiation.authorization import ModelDriftError, SmokeAuthorization
+from kinloyalty.negotiation.authorization import ModelDriftError, PilotAuthorization, SmokeAuthorization
 
 
-def check_destination(directory: str | Path, *, live: bool) -> None:
+def check_destination(directory: str | Path, *, live: bool, phase: str = 'smoke') -> None:
     """Reject protected study destinations before creating any collection artifact."""
     directory = Path(directory).resolve()
     root = Path(__file__).resolve().parents[3]
     protected = [root / path for path in ('data/study1', 'prompts/study1', 'results/study1', 'preregistration',
-                                           'data/study2/pilot', 'data/study2/main')]
-    if not live:
-        protected.append(root / 'data/study2/smoke')
+                                           'data/study2/main')]
+    for guarded_phase in ('smoke', 'pilot'):
+        if not live or phase != guarded_phase:
+            protected.append(root / f'data/study2/{guarded_phase}')
     if any(directory.is_relative_to(path.resolve()) for path in protected):
-        raise ValueError('Collection must stay outside real-study artifact directories except approved live smoke.')
+        raise ValueError('Collection must stay outside real-study artifact directories except its approved live phase.')
 
 
 async def run_manifest(
     manifest_path: str | Path, directory: str | Path, clients: dict[str, ModelClient], *,
     sleep: Callable[[float], Awaitable[None]] = asyncio.sleep,
-    authorization: SmokeAuthorization | None = None,
+    authorization: SmokeAuthorization | PilotAuthorization | None = None,
 ) -> dict[str, Any]:
     """Execute/resume a mock plan, validating saved history before any new call.
 
@@ -53,26 +54,27 @@ async def run_manifest(
     mode = next(iter(modes)) if len(modes) == 1 else None
     live = mode == 'live'
     if mode not in {'mock', 'live'} or (live and authorization is None):
-        raise ValueError('Live collection requires the explicit smoke authorization; otherwise use mock clients.')
-    if live and any(row['phase'] != 'smoke' for row in rows):
-        raise ValueError('This authorization permits only the four-episode/16-probe smoke plan.')
+        raise ValueError('Live collection requires an explicit smoke authorization or pilot authorization; otherwise use mock clients.')
+    if live and (not isinstance(authorization, (SmokeAuthorization, PilotAuthorization)) or
+                 any(row['phase'] != authorization.phase for row in rows)):
+        raise ValueError('This authorization permits only its exact smoke or pilot phase, never main collection.')
     if not live and authorization is not None:
         raise ValueError('A live authorization cannot be attached to mock execution.')
     directory = Path(directory)
-    check_destination(directory, live=live)
+    check_destination(directory, live=live, phase=rows[0]['phase'])
     for row in rows:
         spec = spec_from_row(row)
         if any(model not in clients or clients[model].execution_mode != mode for model in {spec.buyer_model, spec.seller_model}):
-            raise ValueError('Phase 3 collection requires mock clients; real calls are not enabled.')
+            raise ValueError('Collection requires matching client modes and both participant models.')
     policy = RunnerPolicy(**config.study['runner'], invalid_reasks=1)
     manifest_hash = file_hash(manifest_path)
     provenance, run_id = collect_provenance(), str(uuid.uuid4())
     contract = authorization.contract(manifest_hash) if live else None
     if live:
         if provenance['code_dirty'] is not False or not provenance['git_commit']:
-            raise ValueError('Real smoke calls require a clean committed code checkout.')
+            raise ValueError('Real calls require a clean committed code checkout.')
         if set(authorization.expected_versions) != {model['api_model_id'] for model in config.models.values()}:
-            raise ValueError('The smoke authorization must name all four prior model versions.')
+            raise ValueError('The authorization must name all four prior model versions.')
     stopped = False
     global_slots = asyncio.Semaphore(policy.concurrency)
     model_slots = {model: asyncio.Semaphore(policy.per_model_concurrency) for model in config.model_order}
