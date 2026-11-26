@@ -47,7 +47,7 @@ def build_turn_request(config: Study2Config, spec: EpisodeSpec, state: EpisodeSt
         trial_id=f"{spec.episode_id}/message-{number:02d}", provider=model["provider"],
         api_model_id=model["api_model_id"], endpoint=model["endpoint"], settings=settings,
         system_prompt=system, user_message=rendered.user_message,
-        json_schema=response_schema(number, state.message_limit),
+        json_schema=deepcopy(config.schemas[str(number)]) if config.schemas is not None else response_schema(number, state.message_limit),
         # Local mock metadata is not sent by any provider adapter. Even here,
         # expose only this role's private limit and the public latest offers.
         context={

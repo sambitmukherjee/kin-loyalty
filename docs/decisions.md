@@ -949,3 +949,85 @@ and any batch that must be rerun. No post-pilot fixes or deviations exist yet.
   logging/recovery, episode records/replay, bounded probes, and backward-
   compatible additive `study2` CLI group. Do not push the Phase 2 commit under
   the earlier Phase 1 push authorization.
+
+## 2026-11-26 — Phase 2 pushed; Study 2 Phase 3 authorized and completed
+
+- **Authorization and remote verification:** The researcher directed, "Push the
+  commit. Then proceed with Phase 3." Pushed
+  `05f4cd99ef48b7294202ce005fe86b8d97e9158e` to `origin/main` and independently
+  verified that exact remote tip. Neither Study 1 tag moved or was pushed.
+  This does not authorize automatically pushing subsequent Phase 3 work.
+- **Shared-code approval:** The approved Phase 3 scope expressly included the
+  backward-compatible additive `study2` CLI group. Added only dispatch/help for
+  this group to `src/kinloyalty/cli.py`; existing Study 1 commands/defaults and
+  handlers remain intact. No other shared implementation module was edited.
+- **Frozen plan:** Added complete balanced manifests with exact study/model
+  YAML, templates, probe fixtures, all per-turn schemas, source digests, row
+  digests, and saved-file bindings. Runtime/resumption reads the snapshot, not
+  current config/template files. Validate seed consistency, all design balances,
+  paired facts, name rotations, and probe positions before calling any client.
+  Synthetic full designs require explicit seeds separate from the main seed;
+  actual main generation is lock-gated and not exposed in the current CLI.
+- **Pilot allocation convention:** Under the approved Phase 3 implementation
+  scope, select one scenario per item in each pair; opener alternates by pair
+  index plus item index. Conditions cycle by those same indices, yielding
+  27/27/26 assignments across 80 episodes. The pilot scenario/order seeds remain
+  separate from main seeds. This is a coding-agent mechanical convention
+  presented for review, not an outcome-based change or a claim that the
+  researcher separately prescribed that exact allocation formula.
+- **Durable collection:** Added per-pair append-only turn logs, pre-call fsynced
+  pending reservations, global/per-model permits acquired before API timeouts,
+  sequential episode turns, immutable request copies, and one collection writer.
+  Reconstruct histories and validate pending candidates before appending
+  recovery records or making new calls. Preserve corrupt tails. Record unknown
+  hard-killed calls as interrupted, never as unseen answers/exclusions. Deduplicate
+  stale completed reservations and repair missing terminal records once.
+- **Replay and outcomes:** Independently revalidate saved responses/actions and
+  pure transitions, reconstruct counters, and compare exact episode summaries.
+  Reject tampered request/validation/outcome/binding fields, duplicates, unknown
+  pair logs, active writers, and unresolved pending records. Episode records
+  carry scenario/card metadata, unclipped surplus, mandate flags, supplied-price
+  mismatch data, and retry/re-ask counts. Model reply JSON is distinguished from
+  transport metadata so arbitrary ignored-price objects are preserved faithfully.
+- **Probes:** Smoke plans contain four natural episodes and sixteen marked
+  fixed-position probes. Stop each probe after a valid response or its invalid
+  re-ask; do not continue after a message-11 offer. Keep unscored probe summaries
+  in `probes.jsonl`, separate from natural `episodes.jsonl`. Reports include
+  exact original system/user messages and hand-written transcript prefixes.
+  The approved 32-attempt probe cap includes API errors/unknown reservations and
+  persists across invocations; rerunning cannot reset it.
+- **Artifacts and CLI:** Added `negotiation/manifest.py`, `history.py`,
+  `collection.py`, `runner.py`, `journal.py`, `probes.py`, and `cli.py`; extended
+  Study 2 config/render/request/engine modules with snapshots and durable hooks.
+  Added `tests/test_study2_manifest.py`, `test_study2_collection.py`, and
+  `test_study2_cli.py`. Updated README, the data dictionary, adding-a-game guide,
+  and `data/study2/README.md`; full report: `docs/study2_phase3_report.md`.
+- **Verification:** Full `.venv/bin/python -m pytest`: **512 passed** in 64.43
+  seconds (485 prior, 27 new). A complete explicitly synthetic 960-episode plan
+  completed in 6,240 mock calls; every outcome replayed, final resumption made
+  zero calls, and per-pair files stayed below 50 MB (about 3 MB maximum).
+  Hard process kills at message 3 during both an original call and a re-ask
+  recovered without losing invalid counts or inventing responses. Other checks
+  cover source removal, journal deduplication, terminal repair, locking,
+  concurrency, partial tails, semantic tampering, CLI behavior, arbitrary
+  ignored-price preservation, and persistent probe budgets.
+- **Preservation:** The Study 1 manifest rebuilt in memory to its unchanged
+  saved/registered SHA-256:
+  `a583fe4366893e74735f22fc7f1e45ee7e8d136be5e06ad5d770dfcc1225ee55`.
+  Phase 1's config/templates/review are unchanged; the review still reproduces
+  byte-identically with SHA-256
+  `efc39ef410303fb9b9275b4a675ef4652638919afd390e0270a35826675aedb9`.
+  Study 1 data, prompts, settings, results, registration, tests, and other
+  implementation/tag state are unchanged. No main response log was inspected
+  or analysed, no real provider call occurred, and the configured Study 2 main
+  scenarios/actual main manifest remain undrawn. `codex_prompts/` remains ignored
+  and untracked.
+- **Next gate and spending proposal:** Commit Phase 3 locally and stop. Phase 4
+  would enable clean committed live-execution glue and run four not-disclosed
+  self-pair smoke episodes plus the already approved probes. Natural episodes
+  have at most 48 ordinary calls and a proposed 384-attempt total allowance
+  including re-asks/retries; probes retain their approved 32 total, for a
+  proposed combined ceiling of 416. The new natural allowance and the phase
+  start require approval; no money is spent under this proposal. Persist any
+  approved smoke budget across resumptions. Stop/report on returned-model drift
+  before proceeding. Phase 3 entry points still refuse live clients.

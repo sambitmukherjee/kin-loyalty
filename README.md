@@ -4,9 +4,19 @@ Does an AI agent give away more of its user's money when a counterparty's agent
 card names the agent's own exact model? Study 1 examines this label effect in a
 dictator game and in the proposer and responder roles of an ultimatum game.
 
-The unit of observation is a fresh, self-contained model call. Counterparties
-are hypothetical. Study 2 will examine negotiation later; its implementation is
-outside the current scope.
+Study 1's unit of observation is a fresh, self-contained model call, with
+hypothetical counterparties. Study 2 adds up to 12-message buyer/seller
+negotiations with buyer-only model-label disclosure. Its offline engine,
+balanced plans, durable mock collection, recovery, and replay are implemented;
+live smoke/pilot work and the final addendum remain separately gated.
+
+Study 2 commands are isolated under `kinloyalty study2`: `manifest`, `run`
+(mock only), `replay`, and `probe-report`. See the
+[Phase 3 report](docs/study2_phase3_report.md) for safe temporary-directory
+examples, the exact artifact contract, and verification. The configured main
+scenario seed has not been used, no actual Study 2 main manifest was generated,
+and no real Study 2 model call or outcome analysis has run. Existing Study 1
+commands and their defaults remain available unchanged.
 
 ## Current status
 

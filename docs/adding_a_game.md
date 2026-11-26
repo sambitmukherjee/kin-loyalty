@@ -37,7 +37,11 @@ arrangements are marked in local metadata and have no Study 2 analysis here.
 `engine.run_episode` executes sequential turns with `NegotiationMockClient`,
 scripted responses/errors, or another client declaring mock execution. Its
 result contains in-memory attempt records and progress for explicit resumption.
-It refuses live clients. Durable logs, manifests, concurrency, pending journals,
-and disk replay are the subsequent Phase 3 work; do not use this Phase 2 entry
-point for real collection. See `docs/study2_phase2_report.md` and the Study 2
-section of `docs/data_dictionary.md` for the current contract and checks.
+It refuses live clients. Phase 3 now adds frozen `manifest.py` plans,
+`runner.py` batch scheduling/journals, independent `history.py` reconstruction,
+`collection.py` replay, and marked single-position probe execution/reporting.
+Use the additive `kinloyalty study2` command group for manifest, mock run/resume,
+replay, and probe-report operations. Existing Study 1 commands are unchanged.
+See `docs/study2_phase3_report.md` and the Study 2 sections of
+`docs/data_dictionary.md` for the current contracts and checks. Real collection
+remains separately gated; these entry points still accept mocks only.

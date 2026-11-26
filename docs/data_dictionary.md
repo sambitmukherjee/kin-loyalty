@@ -298,7 +298,7 @@ These are audit/completion artifacts, not outcome-effect estimates.
 The objects below belong to `kinloyalty.negotiation` and do not change Study 1's
 manifest/attempt schema. They are the current mock engine contract. Durable
 Study 2 JSONL envelopes, manifest bindings, provenance, and replay commands are
-implemented in Phase 3 before any real collection.
+described in the Phase 3 section below. Real collection remains separately gated.
 
 | Object / field | Meaning |
 | --- | --- |
@@ -361,3 +361,84 @@ The engine refuses live clients and returns detached in-memory snapshots. The
 optional attempt observer also receives interrupted-call snapshots before the
 exception propagates. This is not yet a durable pending journal or disk replay
 format. Mock usage counts and planted label effects are explicitly synthetic.
+
+## Study 2 Phase 3 persisted contract (version 1)
+
+These fields extend the Study 2 objects above; they do not modify Study 1's
+manifest or attempt contracts. Current execution is mock-only, with
+`synthetic: true`, and writes outside real-study artifact directories.
+
+| Manifest row field | Meaning |
+| --- | --- |
+| `schema_version`, `study`, `phase` | 1, `study2`, and `synthetic`/`smoke`/`pilot`/later `main` |
+| `spec` | Complete `EpisodeSpec`, including private/public scenario facts and the actual buyer/seller identities |
+| `pair_id`, `execution_position` | Safe pair-file identity and one-based seeded plan position |
+| `scenario_seed`, `order_seed`, `swapped_seed`, `mock_seed` | Explicit design/order/simulation controls; main scenario seeds are not used by synthetic generation |
+| `snapshot.study_yaml`, `models_yaml`, `templates`, `schemas` | Exact source text and all per-turn schema objects; execution/resumption reads these instead of current source files |
+| `source_sha256` | Exact study/model/template UTF-8 digests and a response-schema content digest |
+| `episode_sha256` | Digest of the complete row except this digest field |
+| `is_probe`, `probe_role`, `probe_position` | Explicit forced-position identity; false/null/null for natural episodes |
+| `initial_turns`, `probe_request` | Fixed hand-written prefix and exact request for a probe; empty/null for natural episodes |
+
+Saved natural plans are checked for complete design balance and shared scenario
+facts. Smoke plans contain four natural episodes plus all sixteen model/role/
+position probes. No custom card arrangements enter a Study 2 manifest. The
+low-level engine's optional-card facility remains available separately.
+
+Per-pair turn logs copy every `TurnAttempt` field above and add:
+
+| Attempt envelope field | Meaning |
+| --- | --- |
+| `schema_version`, `study`, `pair_id` | Version/study and the required per-pair placement |
+| `record_id` | Episode identity plus `/attempt-NNNN`, unique and monotonic within the unit |
+| `manifest_sha256`, `episode_sha256`, `source_sha256` | Exact saved plan, assignment, and source bindings |
+| `run_id`, `dispatch_sequence` | Invocation UUID and globally unique one-based actual reservation order |
+| `runner_policy` | Frozen timeout/retry/concurrency policy, including one invalid-response re-ask |
+| `git_commit`, `code_dirty`, `package_version`, `sdk_versions` | Actual execution provenance, collected without reading credentials |
+| `record_sha256` | Digest of all record content except this digest field |
+
+Each pair log has an atomic fsynced `.pending.json` sidecar and an advisory
+`.lock`. Pending records have the same binding/request/identity fields, with
+unknown response/validation/completion fields. On recovery, an unmatched
+reservation becomes one `interrupted` API-error attempt: response and validity
+stay unknown, latency is null, and no answer/exclusion is inferred. A reservation
+already represented by a matching completed record is removed without a duplicate.
+Candidates and all prior histories are validated before recovery appends.
+
+`EpisodeProgress.initial_turn_count` records the number of hand-written messages
+preceding a probe. Those messages do not count as API attempts. A probe stops
+after one final response opportunity, including its permitted invalid re-ask;
+it does not continue an artificial negotiation after a valid message-11 offer.
+Probe attempts have `phase: smoke`, `is_probe: true`. The maximum 32 probe
+attempts counts completed, failed, and uncertain reserved calls across every
+invocation. Budget exhaustion leaves probes unfinished rather than inventing
+responses or granting a new budget on resume.
+
+`episodes.jsonl` stores one terminal natural-episode object. It includes the
+episode/pair/model/self-pair/disclosure identities, exact card text, all scenario
+facts, `outcome`, `deal_price`, `accepted_by`, valid `messages_used`, the failed
+position/role for exclusions, unclipped surplus and mandate flags, cumulative
+attempt/re-ask/retry counts, and `accept_price_mismatch`.
+`accept_supplied_price_json` losslessly serializes any supplied acceptance price;
+the full raw value also remains in the accepting attempt's parsed reply and
+response. Completion time is taken from the terminal attempt, allowing exact
+summary reconstruction. Binding and integrity fields accompany each summary.
+
+`probes.jsonl` instead stores unscored terminal probe status (`valid`/`excluded`),
+responding model/role, message number, final parsed action when valid, and call
+counts/bindings. It contains no buyer surplus or mandate score. Probe reports
+include exact system/user requests and original transcript prefixes. No probe
+is added to `episodes.jsonl` or to hypothesis analysis.
+
+`run_summary.json` is a replaceable mechanical summary of planned/already-final
+units, new calls, recovered attempts, repaired summaries, completed episodes/
+probes, budget usage, unfinished identities, and pair-log byte sizes. It is not
+an analysis input or the source of outcomes.
+
+`kinloyalty study2 replay` revalidates responses and pure transitions from saved
+turns, reconstructs counters, and compares every terminal summary. It refuses
+active writers, pending calls, corrupt tails, unknown pair logs, changed
+bindings/requests/decisions, and duplicate identities. Missing terminal summaries
+can be repaired once by explicit runner resumption. Reply JSON content is kept
+separate from transport metadata checks so the approved ignored-price exception
+cannot be invalidated by arbitrary keys inside a model-supplied price object.

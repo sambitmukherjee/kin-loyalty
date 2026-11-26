@@ -1,6 +1,10 @@
 """Load Study 2 design data without changing the shared model configuration."""
 
 from dataclasses import dataclass
+from copy import deepcopy
+from functools import lru_cache
+import json
+import re
 from pathlib import Path
 from typing import Any
 
@@ -16,6 +20,8 @@ class Study2Config:
     roster: dict[str, Any]
     model_path: Path
     template_directory: Path
+    templates: dict[str, str] | None = None
+    schemas: dict[str, dict[str, Any]] | None = None
 
     @property
     def model_order(self) -> tuple[str, ...]:
@@ -47,6 +53,31 @@ def load_config(path: str | Path = "configs/study2.yaml") -> Study2Config:
     return config
 
 
+def template_text(config: Study2Config, filename: str) -> str:
+    """Read exact template bytes from a frozen snapshot when one is available."""
+    if config.templates is not None:
+        return config.templates[filename]
+    return (config.template_directory / filename).read_text(encoding="utf-8")
+
+
+def config_from_snapshot(snapshot: dict[str, Any]) -> Study2Config:
+    """Load a self-contained frozen configuration without consulting current files."""
+    return deepcopy(_parse_snapshot(snapshot['study_yaml'], snapshot['models_yaml'],
+                                    tuple(sorted(snapshot['templates'].items())),
+                                    json.dumps(snapshot['schemas'], separators=(',', ':'))))
+
+
+@lru_cache(maxsize=8)
+def _parse_snapshot(study_yaml: str, models_yaml: str, templates: tuple[tuple[str, str], ...], schemas: str) -> Study2Config:
+    config = Study2Config(
+        Path('/frozen/configs/study2.yaml'), yaml.safe_load(study_yaml),
+        yaml.safe_load(models_yaml), Path('/frozen/configs/models.yaml'),
+        Path('/frozen/prompts/study2'), dict(templates), json.loads(schemas),
+    )
+    _validate(config)
+    return config
+
+
 def _validate(config: Study2Config) -> None:
     study = config.study
     order = config.model_order
@@ -54,6 +85,8 @@ def _validate(config: Study2Config) -> None:
         raise ValueError("Expected Study 2 configuration schema version 1.")
     if len(order) < 2 or len(set(order)) != len(order) or set(order) != set(config.models):
         raise ValueError("model_order must contain every roster model exactly once.")
+    if any(not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.-]*', key) for key in order):
+        raise ValueError('Model keys must be safe filename components.')
     if study["pairs"] != "all_ordered_including_self":
         raise ValueError("Unsupported ordered-pair allocation.")
     if study["conditions"] != ["not_disclosed", "true", "swapped"]:

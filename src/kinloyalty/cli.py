@@ -3,6 +3,7 @@
 import argparse
 import asyncio
 import json
+import sys
 from collections.abc import Sequence
 from dataclasses import asdict
 from pathlib import Path
@@ -12,12 +13,19 @@ from kinloyalty import __version__
 
 def main(argv: Sequence[str] | None = None) -> None:
     """Run a selected offline command; no CLI command contacts a model provider."""
+    arguments = list(sys.argv[1:] if argv is None else argv)
+    if arguments and arguments[0] == 'study2':
+        from kinloyalty.negotiation.cli import main as study2_main
+
+        study2_main(arguments[1:])
+        return
     parser = argparse.ArgumentParser(
         prog="kinloyalty",
         description="Study 1 tools. Execution currently supports the offline mock client only.",
     )
     parser.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
     commands = parser.add_subparsers(dest="command")
+    commands.add_parser('study2', help='Isolated Study 2 manifest, mock-run, replay, and probe tools.')
     review = commands.add_parser("review-prompts", help="Write complete rendered prompts for review.")
     review.add_argument("--config", type=Path, default=Path("configs/study1.yaml"))
     review.add_argument("--model", required=True, help="Focal model key in the configured roster.")

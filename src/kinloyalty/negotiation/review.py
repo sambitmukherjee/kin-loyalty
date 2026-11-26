@@ -11,7 +11,7 @@ import yaml
 
 from kinloyalty.logs import file_hash
 from kinloyalty.negotiation import Role
-from kinloyalty.negotiation.config import Study2Config, load_config
+from kinloyalty.negotiation.config import Study2Config, load_config, template_text
 from kinloyalty.negotiation.prompts import render_turn_prompt
 from kinloyalty.negotiation.scenarios import Scenario, pair_id
 from kinloyalty.negotiation.transcript import TranscriptTurn, other_role
@@ -46,7 +46,7 @@ class FixedPositions:
 def load_fixed_positions(config: Study2Config) -> FixedPositions:
     """Read fixed review/probe prefixes and reject non-offer or non-alternating histories."""
     source = config.template_directory / config.study["smoke"]["probes"]["transcript_file"]
-    data = yaml.safe_load(source.read_text(encoding="utf-8"))
+    data = yaml.safe_load(template_text(config, source.name))
     if data["schema_version"] != 1 or set(data["transcripts"]) != {"buyer", "seller"}:
         raise ValueError("Expected fixed transcript schema version 1 with both openers.")
     transcripts = {}

@@ -6,7 +6,7 @@ from dataclasses import dataclass
 
 from kinloyalty.negotiation import Role
 from kinloyalty.negotiation.cards import Disclosure, seller_disclosure
-from kinloyalty.negotiation.config import Study2Config
+from kinloyalty.negotiation.config import Study2Config, template_text
 from kinloyalty.negotiation.scenarios import Scenario, pair_id
 from kinloyalty.negotiation.transcript import TranscriptTurn, other_role, render_transcript
 
@@ -22,7 +22,7 @@ class RenderedPrompt:
 
 def render_template(config: Study2Config, filename: str, values: Mapping[str, object]) -> str:
     """Replace uppercase placeholders once, preserving literal JSON and whitespace."""
-    template = (config.template_directory / filename).read_text(encoding="utf-8").removesuffix("\n")
+    template = template_text(config, filename).removesuffix("\n")
 
     def substitute(match: re.Match[str]) -> str:
         name = match.group(1)

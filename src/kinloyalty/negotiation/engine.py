@@ -32,6 +32,7 @@ class EpisodeProgress:
     reask_started: bool = False
     retry_pending: bool = False
     pending_request: ModelRequest | None = None
+    initial_turn_count: int = 0
 
 
 @dataclass(frozen=True)
@@ -55,8 +56,8 @@ class TurnAttempt:
     excluded: bool
     accept_price_mismatch: bool
     timestamp_utc: str
-    completed_at_utc: str
-    latency_seconds: float
+    completed_at_utc: str | None
+    latency_seconds: float | None
     synthetic: bool = True
     execution_mode: str = "mock"
     is_probe: bool = False
@@ -81,7 +82,9 @@ def _check_progress(config: Study2Config, spec: EpisodeSpec, progress: EpisodePr
     for value in (progress.attempts, progress.reasks, progress.retries, progress.invalid_replies):
         if type(value) is not int or value < 0:
             raise ValueError("Progress counters must be nonnegative integers.")
-    if (progress.attempts < len(progress.state.turns) + progress.invalid_replies
+    if type(progress.initial_turn_count) is not int or not 0 <= progress.initial_turn_count <= len(progress.state.turns):
+        raise ValueError('Invalid fixed-prefix message count.')
+    if (progress.attempts < len(progress.state.turns) - progress.initial_turn_count + progress.invalid_replies
             or progress.reasks + progress.retries > progress.attempts):
         raise ValueError("Progress counters cannot account for the committed history.")
     if progress.invalid_replies > 1 and not (
@@ -116,12 +119,18 @@ async def run_episode(
     progress: EpisodeProgress | None = None, policy: RunnerPolicy | None = None,
     sleep: Callable[[float], Awaitable[None]] = asyncio.sleep,
     on_attempt: Callable[[TurnAttempt, EpisodeProgress], None] | None = None,
+    on_start: Callable[[TurnAttempt, EpisodeProgress], None] | None = None,
+    acquire: Callable[[str], Awaitable[None]] | None = None,
+    release: Callable[[str], None] | None = None,
+    single_turn: bool = False,
+    can_start: Callable[[], bool] | None = None,
 ) -> EpisodeResult:
     """Execute sequential mock turns, preserving invalid counts through API failures.
 
-    Durable journals, concurrent episode scheduling, and disk replay belong to
-    Phase 3. This Phase 2 entry point refuses live clients. An optional observer
-    receives detached attempt/progress snapshots, including interrupted calls.
+    Phase 3 supplies durable start/completion hooks and per-call permits. Permit
+    waiting occurs before the API timeout. single_turn executes one marked probe
+    position; can_start enforces a shared attempt cap before reservation/calling.
+    This entry point continues to refuse live clients.
     """
     for model in {spec.buyer_model, spec.seller_model}:
         if model not in clients or clients[model].execution_mode != "mock":
@@ -131,6 +140,8 @@ async def run_episode(
     )
     if policy.invalid_reasks != 1:
         raise ValueError("Study 2 permits exactly one invalid-response re-ask.")
+    if (acquire is None) != (release is None):
+        raise ValueError('Call permit acquisition and release must be supplied together.')
     progress = deepcopy(progress) if progress is not None else EpisodeProgress(
         spec=deepcopy(spec), state=EpisodeState(spec.scenario, config.message_limit),
     )
@@ -149,69 +160,97 @@ async def run_episode(
         model = spec.buyer_model if role == "buyer" else spec.seller_model
         number = len(progress.state.turns) + 1
         for api_index in range(1, policy.api_attempts_per_response + 1):
-            is_reask = progress.invalid_replies == 1
-            progress = replace(
-                progress, attempts=progress.attempts + 1,
-                reasks=progress.reasks + int(is_reask and not progress.reask_started),
-                reask_started=progress.reask_started or is_reask,
-                retries=progress.retries + int(progress.retry_pending),
-            )
-            response = None
-            validation = None
-            error = None
-            final_for_turn = False
-            excluded = False
-            mismatch = False
-            interrupted = None
-            timestamp = datetime.now(timezone.utc).isoformat()
-            started = time.perf_counter()
+            if acquire is not None:
+                await acquire(model)
             try:
-                # A client cannot mutate the canonical request used by a re-ask.
-                response = await asyncio.wait_for(clients[model].complete(deepcopy(request)), policy.timeout_seconds)
-            except ClientError as failure:
-                error = {"kind": failure.kind, "retryable": failure.retryable, "status_code": failure.status_code}
-            except TimeoutError:
-                error = {"kind": "timeout", "retryable": True, "status_code": None}
-            except BaseException as failure:
-                error = {"kind": "interrupted", "retryable": True, "status_code": None}
-                interrupted = failure
-            completed = datetime.now(timezone.utc).isoformat()
-            latency = time.perf_counter() - started
-            if error is not None:
-                progress = replace(progress, retry_pending=True)
-            else:
-                validation = validate_response(
-                    response, role=role, message_number=number, message_limit=progress.state.message_limit,
+                if can_start is not None and not can_start():
+                    return EpisodeResult(progress, tuple(attempts))
+                progress, attempt, interrupted = await _call(
+                    config, spec, progress, clients[model], request, role, model, number,
+                    api_index, policy, single_turn, on_start,
                 )
-                if validation.valid:
-                    state = apply_turn(progress.state, validation.turn)
-                    mismatch = state.outcome.accept_price_mismatch if state.outcome is not None else False
-                    final_for_turn = True
-                    progress = replace(progress, state=state, invalid_replies=0,
-                                       reask_started=False, retry_pending=False, pending_request=None)
-                else:
-                    invalids = progress.invalid_replies + 1
-                    excluded = invalids == 2
-                    final_for_turn = excluded
-                    progress = replace(
-                        progress, invalid_replies=invalids, retry_pending=False,
-                        state=exclude_episode(progress.state) if excluded else progress.state,
-                    )
-            record(TurnAttempt(
-                episode_id=spec.episode_id, phase=spec.phase, message_number=number, role=role, model=model,
-                attempt_number=progress.attempts, response_number=2 if is_reask else 1, api_retry_index=api_index,
-                allowed_actions=allowed_actions(number, progress.state.message_limit), request=deepcopy(request),
-                response=deepcopy(response), validation=validation, api_error=error,
-                is_final_for_turn=final_for_turn, excluded=excluded, accept_price_mismatch=mismatch,
-                timestamp_utc=timestamp, completed_at_utc=completed, latency_seconds=latency,
-            ))
+                record(attempt)
+            finally:
+                if release is not None:
+                    release(model)
             if interrupted is not None:
                 raise interrupted
-            if error is None:
+            if attempt.api_error is None:
+                if single_turn and attempt.is_final_for_turn:
+                    return EpisodeResult(progress, tuple(attempts))
                 break
-            if not error["retryable"] or api_index == policy.api_attempts_per_response:
+            if not attempt.api_error['retryable'] or api_index == policy.api_attempts_per_response:
                 return EpisodeResult(progress, tuple(attempts))
             delay = min(policy.backoff_initial_seconds * policy.backoff_multiplier ** (api_index - 1),
                         policy.backoff_max_seconds)
             await sleep(delay)
     return EpisodeResult(progress, tuple(attempts))
+
+
+async def _call(config, spec, progress, client, request, role, model, number, api_index,
+        policy, is_probe, on_start):
+    is_reask = progress.invalid_replies == 1
+    progress = replace(
+        progress, attempts=progress.attempts + 1,
+        reasks=progress.reasks + int(is_reask and not progress.reask_started),
+        reask_started=progress.reask_started or is_reask,
+        retries=progress.retries + int(progress.retry_pending),
+    )
+    response = None
+    validation = None
+    error = None
+    final_for_turn = False
+    excluded = False
+    mismatch = False
+    interrupted = None
+    timestamp = datetime.now(timezone.utc).isoformat()
+    reservation = TurnAttempt(
+        spec.episode_id, spec.phase, number, role, model, progress.attempts,
+        2 if is_reask else 1, api_index, allowed_actions(number, progress.state.message_limit),
+        deepcopy(request), None, None, None, False, False, False, timestamp, None, None,
+        is_probe=is_probe,
+    )
+    if on_start is not None:
+        on_start(deepcopy(reservation), deepcopy(progress))
+    started = time.perf_counter()
+    try:
+        # A client cannot mutate the canonical request used by a re-ask.
+        response = await asyncio.wait_for(client.complete(deepcopy(request)), policy.timeout_seconds)
+    except ClientError as failure:
+        error = {"kind": failure.kind, "retryable": failure.retryable, "status_code": failure.status_code}
+    except TimeoutError:
+        error = {"kind": "timeout", "retryable": True, "status_code": None}
+    except BaseException as failure:
+        error = {"kind": "interrupted", "retryable": True, "status_code": None}
+        interrupted = failure
+    completed = datetime.now(timezone.utc).isoformat()
+    latency = time.perf_counter() - started
+    if error is not None:
+        progress = replace(progress, retry_pending=True)
+    else:
+        validation = validate_response(
+            response, role=role, message_number=number, message_limit=progress.state.message_limit,
+        )
+        if validation.valid:
+            state = apply_turn(progress.state, validation.turn)
+            mismatch = state.outcome.accept_price_mismatch if state.outcome is not None else False
+            final_for_turn = True
+            progress = replace(progress, state=state, invalid_replies=0,
+                               reask_started=False, retry_pending=False, pending_request=None)
+        else:
+            invalids = progress.invalid_replies + 1
+            excluded = invalids == 2
+            final_for_turn = excluded
+            progress = replace(
+                progress, invalid_replies=invalids, retry_pending=False,
+                state=exclude_episode(progress.state) if excluded else progress.state,
+            )
+    attempt = TurnAttempt(
+        episode_id=spec.episode_id, phase=spec.phase, message_number=number, role=role, model=model,
+        attempt_number=progress.attempts, response_number=2 if is_reask else 1, api_retry_index=api_index,
+        allowed_actions=allowed_actions(number, progress.state.message_limit), request=deepcopy(request),
+        response=deepcopy(response), validation=validation, api_error=error,
+        is_final_for_turn=final_for_turn, excluded=excluded, accept_price_mismatch=mismatch,
+        timestamp_utc=timestamp, completed_at_utc=completed, latency_seconds=latency, is_probe=is_probe,
+    )
+    return progress, attempt, interrupted
