@@ -1326,3 +1326,61 @@ and any batch that must be rerun. No post-pilot fixes or deviations exist yet.
 - **Next gate:** Commit this phase locally and stop before Phase 8. The final
   addendum, actual main-manifest draw, annotated registration tag and any push
   each remain within the later approved lock scope. No main run is authorized.
+
+## 2026-11-26 — Phase 7 pushed; Study 2 Phase 8 registration authorized
+
+- **Researcher authorization:** "Push the Phase 7 commit. Then proceed to
+  Phase 8." Pushed `aa115dd7038cefe94b7014b9e3826c9e0f27b549` and independently
+  verified that exact remote `main` tip before building the lock. The new
+  Phase 8 commit/tag push and any main run remain separately permissioned.
+- **First main draw:** Built the actual 960-episode main manifest only now,
+  after the approved blind pilot and no-fix review. It has 320 scenarios and
+  16 ordered pairs, exact item/opener/condition balance and rotated self-pair
+  7/7/6 alternative names. Seeds: scenarios 2026112605, order 2026112606,
+  swapped names 2026112610. Saved to `data/study2/main/manifest.jsonl`, SHA-256
+  `293fecc0f30249e46a794d3d4e1d7d2eacb51e3ad2e13b2113da7067e0a7b814`.
+  This is an unexecuted plan; no main response, outcome, or paid call exists.
+- **Registration:** Complete `preregistration/study2.md` and
+  `preregistration/study2-lock.json` with exact prompts/cards/schemas, sources,
+  model/pilot versions, limitations, approved methods, prior analysis/runtime
+  revisions, seed/balance, logging/resume, reproduction command, no post-pilot
+  fixes and deviations policy. Retain all three approved clarifications and
+  Gemini/cache limitations. Scientific settings/sources remain unchanged.
+- **Lock verification tooling:** Add only an owned offline registration checker
+  and tests, preserving canonical schema property order. Disposable offer
+  prefixes validate all 11,520 request positions without making calls, creating
+  outcomes, or storing mock data in the main directory. Check original source
+  and artifact bytes, deterministic manifest regeneration and annotated-tag
+  contents. Synthetic reproduction uses independent non-main fixture seeds.
+- **Gate:** Finish regression/preservation/synthetic checks, commit and annotate
+  local tag `prereg-study2`, then stop for explicit push permission. No model
+  collection or inference on real data is part of this phase. A local tag is
+  distinct from the remotely timestamped registration lock.
+
+## 2026-11-26 — Study 2 Phase 8 verified for local registration lock
+
+- **Final checks:** All 558 offline tests passed in 132.55 seconds, including
+  four new registration checks and all prior Study 1/Study 2 tests. Verified
+  exact regeneration/balance/rotation of the 960-episode main plan and all
+  11,520 possible request-position payloads, with zero API calls or outcomes.
+  Ordered canonical schemas and complete exact prompt appendices are checked.
+- **Synthetic-only inference:** Two independent reproduce outputs from the
+  same explicit non-main mock log fixture, each using 10,000 bootstrap and
+  permutation replications, have 27 byte-identical artifacts. Recovered the
+  known −0.20/+0.20 share/concession effects and zero interaction within 1e-12.
+  These are simulated checks only. The record is
+  `docs/study2_phase8_validation.json`; no real main or pilot inference ran.
+- **Preservation:** Scientific configuration, prompts, provider adapters,
+  engine/runner and Phase 5 analysis remain unchanged. Verified the locked
+  Study 1 main manifest hash in memory and immutable tags; all 48 original
+  smoke/pilot artifact digests, rendered prompt review and approved method
+  definitions remain preserved. `codex_prompts/` stays ignored/untracked.
+- **Final state:** The main directory contains only its frozen manifest;
+  Phase 8 made no paid API call and starts no main collection. This phase adds
+  registration documents/metadata, offline lock verification/tests, and the
+  approved main plan only, not a mechanical or scientific fix.
+- **Commit/tag boundary:** Create the local Phase 8 commit and annotated
+  `prereg-study2` tag, then verify its contents against every registered byte.
+  Record the concrete commit/tag in the final report to the researcher.
+  No Phase 8 push has been authorized; a separate permissioned push establishes
+  the remote lock. A main run and its budget remain a separate later request.

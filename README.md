@@ -18,8 +18,9 @@ See the [blind pilot report](docs/study2_phase6_report.md) for diagnostics,
 pair-pooled outcomes and Gemini's unobserved natural final-turn coverage.
 Phase 7's [mechanical review](docs/study2_phase7_report.md) retained the protocol
 with no fixes or additional calls, preserving that coverage limitation. The
-final addendum lock remains separately gated; the draft contains unlocked,
-researcher-approved analysis definitions and the review note. The
+Phase 8 prepares the [final addendum](preregistration/study2.md), the frozen
+960-episode main manifest, and local annotated registration tag. The concrete
+commit/tag still require permission to push; the main run remains unstarted. The
 [execution plan](docs/study2_phase6_execution_plan.md) records the approved scope
 and clean-code/budget controls.
 
@@ -27,8 +28,8 @@ Study 2 commands are isolated under `kinloyalty study2`: `manifest`, `run`
 (mock only), `replay`, `probe-report`, `simulate`, `analyze`, and `reproduce`. See the
 [Phase 3 report](docs/study2_phase3_report.md) for safe temporary-directory
 examples, the exact artifact contract, and verification. The configured main
-scenario seed has not been used, no actual Study 2 main manifest was generated,
-and no real Study 2 outcome analysis has run. Existing Study 1
+scenario seed was first used in the approved Phase 8 lock. The main manifest is
+an unexecuted plan, and no real Study 2 hypothesis analysis has run. Existing Study 1
 commands and their defaults remain available unchanged.
 
 The [Study 2 analysis guide](docs/study2_analysis.md) gives independent reproduce

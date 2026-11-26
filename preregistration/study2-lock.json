@@ -1,0 +1,628 @@
+{
+  "schema_version": 1,
+  "study": "study2",
+  "registration_snapshot_date": "2026-11-26",
+  "timezone": "Asia/Kolkata",
+  "git_tag": "prereg-study2",
+  "remote": "https://github.com/sambitmukherjee/kin-loyalty.git",
+  "remote_lock_event": "separately authorized push of registration commit and immutable annotated tag",
+  "remote_status_at_snapshot": "not_pushed_pending_researcher_permission",
+  "registration_document": "preregistration/study2.md",
+  "registration_document_sha256": "46df78045d8bb0a36e2b3b45c0571541cd0c6832c85b5f00860d2faf2fd7d627",
+  "analysis_code_commit": "a91efd59f082ee9cb72ea67d6b7e47d6ebce6eec",
+  "negotiation_code_commit": "0872a2f0d0e9225525834b0e1e093b4968f3946d",
+  "phase7_review_commit": "aa115dd7038cefe94b7014b9e3826c9e0f27b549",
+  "main_manifest": "data/study2/main/manifest.jsonl",
+  "main_manifest_sha256": "293fecc0f30249e46a794d3d4e1d7d2eacb51e3ad2e13b2113da7067e0a7b814",
+  "planned_main_episodes": 960,
+  "unique_main_scenarios": 320,
+  "ordered_pairs": 16,
+  "scenarios_per_pair": 20,
+  "episodes_per_pair_condition": 20,
+  "episodes_per_original_condition": {
+    "not_disclosed": 320,
+    "swapped": 320,
+    "true": 320
+  },
+  "buyer_openers_per_pair_condition": 10,
+  "item_episodes_per_pair_condition": 4,
+  "main_run_started_at_snapshot": false,
+  "main_api_calls_in_phase8": 0,
+  "phase8_paid_api_calls": 0,
+  "seeds": {
+    "smoke_scenarios": 2026112601,
+    "smoke_order": 2026112602,
+    "pilot_scenarios": 2026112603,
+    "pilot_order": 2026112604,
+    "main_scenarios": 2026112605,
+    "main_order": 2026112606,
+    "bootstrap": 2026112607,
+    "permutation": 2026112608,
+    "mock": 2026112609,
+    "swapped_names": 2026112610
+  },
+  "analysis_settings": {
+    "accepted_phase": "main",
+    "allow_probes": false,
+    "bootstrap_resamples": 10000,
+    "permutation_resamples": 10000,
+    "equivalence_bound": 0.05,
+    "alpha": 0.05,
+    "numerical_tolerance": 1e-12,
+    "interval_method": "count_matched_order_statistics"
+  },
+  "canonical_schemas": {
+    "1": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "offer",
+            "walk_away"
+          ]
+        },
+        "price": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        }
+      },
+      "required": [
+        "message",
+        "action",
+        "price"
+      ],
+      "additionalProperties": false
+    },
+    "2": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "offer",
+            "accept",
+            "walk_away"
+          ]
+        },
+        "price": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        }
+      },
+      "required": [
+        "message",
+        "action",
+        "price"
+      ],
+      "additionalProperties": false
+    },
+    "3": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "offer",
+            "accept",
+            "walk_away"
+          ]
+        },
+        "price": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        }
+      },
+      "required": [
+        "message",
+        "action",
+        "price"
+      ],
+      "additionalProperties": false
+    },
+    "4": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "offer",
+            "accept",
+            "walk_away"
+          ]
+        },
+        "price": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        }
+      },
+      "required": [
+        "message",
+        "action",
+        "price"
+      ],
+      "additionalProperties": false
+    },
+    "5": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "offer",
+            "accept",
+            "walk_away"
+          ]
+        },
+        "price": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        }
+      },
+      "required": [
+        "message",
+        "action",
+        "price"
+      ],
+      "additionalProperties": false
+    },
+    "6": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "offer",
+            "accept",
+            "walk_away"
+          ]
+        },
+        "price": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        }
+      },
+      "required": [
+        "message",
+        "action",
+        "price"
+      ],
+      "additionalProperties": false
+    },
+    "7": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "offer",
+            "accept",
+            "walk_away"
+          ]
+        },
+        "price": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        }
+      },
+      "required": [
+        "message",
+        "action",
+        "price"
+      ],
+      "additionalProperties": false
+    },
+    "8": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "offer",
+            "accept",
+            "walk_away"
+          ]
+        },
+        "price": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        }
+      },
+      "required": [
+        "message",
+        "action",
+        "price"
+      ],
+      "additionalProperties": false
+    },
+    "9": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "offer",
+            "accept",
+            "walk_away"
+          ]
+        },
+        "price": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        }
+      },
+      "required": [
+        "message",
+        "action",
+        "price"
+      ],
+      "additionalProperties": false
+    },
+    "10": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "offer",
+            "accept",
+            "walk_away"
+          ]
+        },
+        "price": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        }
+      },
+      "required": [
+        "message",
+        "action",
+        "price"
+      ],
+      "additionalProperties": false
+    },
+    "11": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "offer",
+            "accept",
+            "walk_away"
+          ]
+        },
+        "price": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        }
+      },
+      "required": [
+        "message",
+        "action",
+        "price"
+      ],
+      "additionalProperties": false
+    },
+    "12": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "accept",
+            "walk_away"
+          ]
+        },
+        "price": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        }
+      },
+      "required": [
+        "message",
+        "action",
+        "price"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "source_sha256": {
+    "study_config": "265b3be45492474038a8231d5dbcd5b90ea860c1c7f831fa1b18e0d74dd87b59",
+    "model_config": "5baaff356d22b3b7430989a9694cdde0ef83eb8acb48d5ade545d9ffa514d591",
+    "templates": {
+      "agent_card.txt": "c4e052b4da463ad8af8ede5088bc9f78a2409c0885f6a84d54004655dec2f0a8",
+      "buyer_system.txt": "56bf429962005b3f859f0d9d4b69af2a25c124d62ef225800019120d78b23e9b",
+      "counterparty_with_card.txt": "5c2687f8c6aff6915eb89e65630f5316c3d5d56dbc86ad27da94a589be78f67b",
+      "counterparty_without_card.txt": "0e858cb48d5695e0892a29f7745d7b721b672e583003c3260df58d0dec321836",
+      "final_message.txt": "6bfcc38b56d4ad3e4a14ba890069826b644a34f26f659e35329be5e2680f5c1f",
+      "last_offer.txt": "df646ec1fbf012dafa8b236c6008efedd5aac92cdeb6ab59e00ade1f6840e993",
+      "opening.txt": "c6337ba80b30b84211ec22811e6cec7ebce043782f28cee34c72845e8c4d5083",
+      "seller_system.txt": "c40c23d038736f7cbe2079e13c0295d24a2df3fac0c220bb09fa2a1b51e422fb",
+      "transcript_heading.txt": "4b4fd168789c49bd9a87539b4c837c6915dcea44c271890b5c9ae0dff1e08d81",
+      "turn.txt": "ecd3a9c68a7955ccbf87fa6791609a45d343c5cbe3b6d147be805541005b0c5e",
+      "smoke_probe_transcripts.yaml": "eb445a26d591e616c13f5f449e3f641abe15cb09b458441d776a0876b5d61450"
+    },
+    "response_schemas": "b804a04fb22a5947d24a82db94f3f80befb9dc7d91ab930a416d7046c3a0f7db"
+  },
+  "pilot_manifest": "data/study2/pilot/manifest.jsonl",
+  "pilot_manifest_sha256": "9e68d40288fc68621359c254c1d30e60d67684f5a09157748f215e6a08f6278e",
+  "pilot_returned_versions": {
+    "claude_sonnet_5_5": [
+      "claude-sonnet-5-5"
+    ],
+    "gpt_6_1_terra": [
+      "gpt-6.1-terra"
+    ],
+    "gemini_4_hydrogen": [
+      "gemini-4-hydrogen"
+    ],
+    "kimi_k3_1_pro": [
+      "kimi-k3.1-pro"
+    ]
+  },
+  "pilot_coverage_limitation": "Gemini natural message 12 unobserved; rate undefined. Forced probes remain separate mechanical evidence.",
+  "post_pilot_mechanical_fixes": [],
+  "approved_clarifications": {
+    "concessions": "Mean signed consecutive own buyer offer change/(b-s), undefined below two; report eligibility per condition.",
+    "missing_outcomes": "All eligible OLS/bootstrap rows retained; swap only complete tested pairs, irrespective of third condition; report all stratum counts.",
+    "figure2": "Displayed same, other, none.",
+    "interaction": "(same-other in self-pairs)-(same-other in cross-pairs), card x self coefficients with pair/opener controls; bootstrap CI only."
+  },
+  "study1_preservation": {
+    "prereg-study1_target": "d4d6ff9c1f7b84bc2b4f90578873f18dbc9fb98a",
+    "study1-data_target": "f7dd0a690a5089b245fff365acf002fcfd7b056a",
+    "locked_main_manifest_sha256": "a583fe4366893e74735f22fc7f1e45ee7e8d136be5e06ad5d770dfcc1225ee55",
+    "main_outcomes_analysed": false
+  },
+  "hashes_sha256": {
+    ".python-version": "49a506dd32096b010d75205acf3430c9ae6c40351888129499e5a5e487126c93",
+    "configs/models.yaml": "5baaff356d22b3b7430989a9694cdde0ef83eb8acb48d5ade545d9ffa514d591",
+    "configs/study2.yaml": "265b3be45492474038a8231d5dbcd5b90ea860c1c7f831fa1b18e0d74dd87b59",
+    "data/study2/main/manifest.jsonl": "293fecc0f30249e46a794d3d4e1d7d2eacb51e3ad2e13b2113da7067e0a7b814",
+    "data/study2/pilot/collection.json": "e7cdd78d232474373b9612bef90a63659af0216986efdda45792be775d3f30be",
+    "data/study2/pilot/episodes.jsonl": "3dfe8b22215c2aadfab0ed77251a64efe3afa7560e1d22733f7f6b156402df9b",
+    "data/study2/pilot/manifest.jsonl": "9e68d40288fc68621359c254c1d30e60d67684f5a09157748f215e6a08f6278e",
+    "data/study2/pilot/preflight.json": "629419aa9e8f816cef2cf0b366c0826ec157446682d58a9679d80cc5fab7bed2",
+    "data/study2/pilot/run_summary.json": "f09e13359854c3231fcaecd76e9e4fd1fa5ceebb1a08a935b94500992a496faf",
+    "data/study2/pilot/turns/claude_sonnet_5_5__claude_sonnet_5_5.jsonl": "ad36934bf2455cf34f18a5281a1b69204b3e0f0ca060412daad39ca0421a903e",
+    "data/study2/pilot/turns/claude_sonnet_5_5__gemini_4_hydrogen.jsonl": "7e96755fd5284b3bc07028d42fed0716e3b786889a59c1dd62361dd20f256651",
+    "data/study2/pilot/turns/claude_sonnet_5_5__gpt_6_1_terra.jsonl": "9a4b8ba45a6a71965d10ba6d73e7a308129fd8f00f8d34cd108b21f1f9cab75e",
+    "data/study2/pilot/turns/claude_sonnet_5_5__kimi_k3_1_pro.jsonl": "69b437b4376efcb94c746314b2702920ae8120b0cbc56e94c4109e3cf2b0f9ac",
+    "data/study2/pilot/turns/gemini_4_hydrogen__claude_sonnet_5_5.jsonl": "4a13487807f04e0a3936a42a86438409b2d746d83bd0e7ead08d8863f5132f3d",
+    "data/study2/pilot/turns/gemini_4_hydrogen__gemini_4_hydrogen.jsonl": "5d10970753dae403fb30880b6305a4f35800c3e09acb7c872da9bbb60570dc95",
+    "data/study2/pilot/turns/gemini_4_hydrogen__gpt_6_1_terra.jsonl": "d03f101e196233de105cb2b295d5cbb319c76cdbb350d663eda493194eca01ae",
+    "data/study2/pilot/turns/gemini_4_hydrogen__kimi_k3_1_pro.jsonl": "f02c66f4a9f37307686bafb720ceba2ae6e5a2b7df5a59637ec53d8cd9704e91",
+    "data/study2/pilot/turns/gpt_6_1_terra__claude_sonnet_5_5.jsonl": "da06f5c50970924a68149efacddce3d3c3b6f0abab1e8578cb8b94de4e561859",
+    "data/study2/pilot/turns/gpt_6_1_terra__gemini_4_hydrogen.jsonl": "318292e00c4d919be2e89ec486f1a0d8461b45eb08e7bb3b8fdbb97b6334dc59",
+    "data/study2/pilot/turns/gpt_6_1_terra__gpt_6_1_terra.jsonl": "913b7a5581be6496e616925547492ff0080ec39ee184b404ac1d2f49d7cb29be",
+    "data/study2/pilot/turns/gpt_6_1_terra__kimi_k3_1_pro.jsonl": "f20c4ace7c98c2662f3ef64eb370dc700932152414cac71a1342fe016e4c7061",
+    "data/study2/pilot/turns/kimi_k3_1_pro__claude_sonnet_5_5.jsonl": "811290d32b56533916a57e043fe91879be2a2f946934a9aaf95c80edbf7551b3",
+    "data/study2/pilot/turns/kimi_k3_1_pro__gemini_4_hydrogen.jsonl": "9179e443ca83d962a860abdfcf44ec34354224ff0b2580d9f803e1fc31afa67b",
+    "data/study2/pilot/turns/kimi_k3_1_pro__gpt_6_1_terra.jsonl": "00e6489f391a8ea7b0b1762c419cacfe9b6438fba1cde89a706b9c028c224c4f",
+    "data/study2/pilot/turns/kimi_k3_1_pro__kimi_k3_1_pro.jsonl": "538338135616af0f5e02a96a6ea43e6cbafce325433d68c16e40fdd81089556a",
+    "data/study2/smoke/collection.json": "e07b1807ee938ec4f936ae61c0ff68c5a0d981cfa0a08a853e0881c78b96e954",
+    "data/study2/smoke/episodes.jsonl": "e29b84db180d0b66df85015f4c8b6b283e4953d22db4602e47ac50fbca2a6f1a",
+    "data/study2/smoke/manifest.jsonl": "5bc7fd7065eca30be44c4ff9de8b0b43143e5e0a40ce7f9a74f982d4768321eb",
+    "data/study2/smoke/preflight.json": "797d28471b84d629d3d94c8b27cb6120477125483e5905e0c9f97dfe759d4e24",
+    "data/study2/smoke/probes.jsonl": "ff1981115eb90454e54b6d43f653496449db2cf3e82bbfbdc4cdfec1d3f287d8",
+    "data/study2/smoke/run_summary.json": "bb782a695205e737daa653433fc4fb84e71436382982f00267550912b13f241d",
+    "data/study2/smoke/turns/claude_sonnet_5_5__claude_sonnet_5_5.jsonl": "c3bf78d0d887259ec30c16bd883c0ea0c4075cfd882d96a1b6155e07d936a8b8",
+    "data/study2/smoke/turns/gemini_4_hydrogen__gemini_4_hydrogen.jsonl": "577824a04b3fbbf5d98c299bc5fede7f0f95ad3d5bc3b9f1e632859a36c82e6d",
+    "data/study2/smoke/turns/gpt_6_1_terra__gpt_6_1_terra.jsonl": "4c3b7e4805e519fd5c4b5f2bcc016bc6b62af229c50d969e8739e361c76028c6",
+    "data/study2/smoke/turns/kimi_k3_1_pro__kimi_k3_1_pro.jsonl": "4db02dfe7dbbea9b3f26925160d43d9599e9c3aec61b7e64f445f2142fd7e53e",
+    "docs/decisions.md": "b9acd6c8572e45f3b98effc3d07017367039beb5a93e5b1eb0b499e989b4a592",
+    "docs/study2_analysis.md": "b0057b69d86c603e8aece66d013da6c84ee3cf00027f1a41460dfbcfb4cb879a",
+    "docs/study2_phase4_execution_plan.md": "6fe507fb4c8e744e646ec97e79427cfa51af492af694a4dd926ab2ed2c128ce9",
+    "docs/study2_phase4_report.md": "c2d81660233744940dd6ea0d6d117dc65cc5e0fd07a81b13860cd2bb05932860",
+    "docs/study2_phase5_progress.md": "5349c2e1f2e080b8bcf04af3f98d56318e267e2af7a39535c22ae48a62cd05d4",
+    "docs/study2_phase5_report.md": "271e6f2743999c45ca57e0ddeb6d9e73f1f4bf519d957a6552200dd938d76441",
+    "docs/study2_phase5_verification.json": "c22993b14a63aca2b2b9702695151a41bd3a56b6ae4628e5ea2f4b3f07df7a8d",
+    "docs/study2_phase6_execution_plan.md": "5d749d5d50bb5084384924ee3290e4372747855bda826c299321598e9b7e1a66",
+    "docs/study2_phase6_report.md": "b99e2c8977d0780a8395f1b396b83a24224e9bceb286d18215d6a494b3ce9882",
+    "docs/study2_phase7_report.md": "42fc1c3c25eb336e1f88d39a38d2a67e8c6a3c11a5f3f63234318705877cd45c",
+    "docs/study2_phase8_report.md": "7750b115e323b08a18af5435e9545106221f2907ec2248cb31d31fdead15de76",
+    "docs/study2_phase8_validation.json": "3be246985d649144ce29c14112e4cd55acc9094e2e303af2eef40c9577116adb",
+    "docs/study2_prompt_review.md": "efc39ef410303fb9b9275b4a675ef4652638919afd390e0270a35826675aedb9",
+    "preregistration/study1-lock.json": "b01c11d0d7a864925fa095299574b944160d47468ae9a136a2fe012e09859362",
+    "preregistration/study1.md": "508275009a93f676ca92a8c8a81dbdf3439172d8ebf4105af022f2d0471a8b2a",
+    "preregistration/study2.md": "46df78045d8bb0a36e2b3b45c0571541cd0c6832c85b5f00860d2faf2fd7d627",
+    "prompts/study2/README.md": "84f136825b22e3dc0645c36206f35d5b7d24091ba9dd70561f83e9187848d021",
+    "prompts/study2/agent_card.txt": "c4e052b4da463ad8af8ede5088bc9f78a2409c0885f6a84d54004655dec2f0a8",
+    "prompts/study2/buyer_system.txt": "56bf429962005b3f859f0d9d4b69af2a25c124d62ef225800019120d78b23e9b",
+    "prompts/study2/counterparty_with_card.txt": "5c2687f8c6aff6915eb89e65630f5316c3d5d56dbc86ad27da94a589be78f67b",
+    "prompts/study2/counterparty_without_card.txt": "0e858cb48d5695e0892a29f7745d7b721b672e583003c3260df58d0dec321836",
+    "prompts/study2/final_message.txt": "6bfcc38b56d4ad3e4a14ba890069826b644a34f26f659e35329be5e2680f5c1f",
+    "prompts/study2/last_offer.txt": "df646ec1fbf012dafa8b236c6008efedd5aac92cdeb6ab59e00ade1f6840e993",
+    "prompts/study2/opening.txt": "c6337ba80b30b84211ec22811e6cec7ebce043782f28cee34c72845e8c4d5083",
+    "prompts/study2/seller_system.txt": "c40c23d038736f7cbe2079e13c0295d24a2df3fac0c220bb09fa2a1b51e422fb",
+    "prompts/study2/smoke_probe_transcripts.yaml": "eb445a26d591e616c13f5f449e3f641abe15cb09b458441d776a0876b5d61450",
+    "prompts/study2/transcript_heading.txt": "4b4fd168789c49bd9a87539b4c837c6915dcea44c271890b5c9ae0dff1e08d81",
+    "prompts/study2/turn.txt": "ecd3a9c68a7955ccbf87fa6791609a45d343c5cbe3b6d147be805541005b0c5e",
+    "pyproject.toml": "1f0143f34c69a0d1d0c9eba55b66fa136aaa8ae47a8c78ca6b83fe4f6b3e7291",
+    "results/study2/pilot-report/accept_price_mismatches_by_model.csv": "7092f568ddcd183b02b0b77ac75441f2ac5779d6a6bf459f09ec2dd9fbb04222",
+    "results/study2/pilot-report/accept_price_mismatches_by_model_role.csv": "2aea06be4540c83016794d6b1fdf73137b116def2acd2ae4c9d62bb7863627b5",
+    "results/study2/pilot-report/artifacts.sha256.json": "a6debc5d560f77e56e186cb8b3f625ba601f51797a0515b2de9b9d4bdb27e291",
+    "results/study2/pilot-report/pair_episode_lengths.csv": "ada8d6fa131da5c00e50825149fe3905532786d7b0138c58ef82ec6c893f8430",
+    "results/study2/pilot-report/pair_pooled_outcomes.csv": "cb572b8e83b489088e9bde9fda521034ba13a2bee6062d55655abb4d872e923a",
+    "results/study2/pilot-report/pilot-report.md": "03aa5e9e7fac238dee9e5a58ffbdd04d9afd03e0fe7f41cb8033e46714068b7b",
+    "results/study2/pilot-report/pilot_audit.json": "683f70c85581423be701e093112e4a75e27086e880356291dfda2a189d58b747",
+    "results/study2/pilot-report/usage_calls.csv": "7abe2417d3aaf0797fbb016a22453427c88b279badb04b06d54da56f29df8830",
+    "results/study2/pilot-report/validity_by_model_role_turn_class.csv": "60374157148fb76722afe2dffd8074afeb9e8c5219fb77477d1a2ddde9c05da8",
+    "results/study2/pilot-report/validity_by_model_turn_class.csv": "5168e5693c9250879a55ce7d1e7ca97e6705691298bb255e3dab2fcf17ebe036",
+    "results/study2/smoke-report/artifacts.sha256.json": "f461a4cd08cedc35afb53e46f1043e86b6c8beb4335e4e4aef319de177fce228",
+    "results/study2/smoke-report/probe-report.json": "37958398f2fa13ca3fe8b3f75508ede0bc8a1941885b5a5a5e771fc76f222cab",
+    "results/study2/smoke-report/smoke-report.md": "67fb382e365426b9d90eaf7230f4ee4ad5b682ce3efd4c974d375305abfc2a13",
+    "results/study2/smoke-report/smoke_audit.json": "3f4e9b6ab2933f80ab0d3cc0d3a1663160d8e8bdf8da362a0ef5e517a5e0e13b",
+    "results/study2/smoke-report/usage_calls.csv": "d03358ff3ef47c4bfaf59617fa3e6c6d77e764fff8e865975099331fc4019169",
+    "src/kinloyalty/__init__.py": "3c7a110941e18cca276c4a63314ab977c352c4e028d5fbb7a370675d03effc91",
+    "src/kinloyalty/analysis/__init__.py": "6478c3b10b3dec3837d8e3ff8c9b145b65d8ba332ad56fdc7512073dcf4077f5",
+    "src/kinloyalty/analysis/figures.py": "59d0efa410a0de1b64d2c392f09d5a43e6ca4982357f08f4614d38ee7d70290a",
+    "src/kinloyalty/analysis/inference.py": "70f646f3f250104673b526f660f7d2ea181d946b96fbbcab76cee9dfb7dbe7ce",
+    "src/kinloyalty/analysis/loading.py": "2ada258fe416d3e01235662fcb4ef37786beef2af81f30702035593a22101b93",
+    "src/kinloyalty/analysis/pipeline.py": "03847599b398163c3427113df8d2436c64fc4f4aa57af8da202a9ea3ffbdc0d8",
+    "src/kinloyalty/analysis/reports.py": "06ad0d2c5eaac8509630461062a4efdba7f23cb552750f574f65b36abd1e2598",
+    "src/kinloyalty/analysis/simulate.py": "47d24615596136c5ca198243c844e7fe8e9fc376d1bbb4874705aa63fcc58b69",
+    "src/kinloyalty/analysis/study2/__init__.py": "3c9e6f3ae2d97a8bb22815c990c5543aa025025f63fba7aad5d39830bc9c3f8a",
+    "src/kinloyalty/analysis/study2/core.py": "f43c6f5e749aa5c2167aa7212d9549973049ad14c3922738e8f7d46a09575f9e",
+    "src/kinloyalty/analysis/study2/figures.py": "00baae383a5864ca037c5018f0bc1cd4b5bae54c841e2f363f4bf3cbae0d8c3d",
+    "src/kinloyalty/analysis/study2/inference.py": "53826a374cded026287aefb711e00ae7c2bc9a28fca12cd2d00fb8134209b44f",
+    "src/kinloyalty/analysis/study2/loading.py": "a37c917bf916478b0782b5362d5c07c7e9a0916b61ee4083dbf8ec9457b8df70",
+    "src/kinloyalty/analysis/study2/outcomes.py": "deed6728dbf7a98ff674d2df8f56fdea0538f789220b84d63aa4d302eb5e1426",
+    "src/kinloyalty/analysis/study2/pipeline.py": "6efa83ff88a9ea6fdcbd874cd7fae372590320179792e4c339840e971d98514d",
+    "src/kinloyalty/analysis/study2/reports.py": "91341fa56ebdb4b9990d44176093abc013bdc0023d56879788c2e6c2803b0ccb",
+    "src/kinloyalty/analysis/study2/simulate.py": "e0e0d857bb8e9c44a261a1e216b6bdd44fec44110d61caa217a771154e5b1119",
+    "src/kinloyalty/cards.py": "a232c0be92412422f94239be8ef717bf68aa791d3cd2d12d0ed5bfdec022d641",
+    "src/kinloyalty/cli.py": "cdfe0719d90198f492584d315a09ab8d650f91169a3bd1a7dbf99f253add9293",
+    "src/kinloyalty/clients/__init__.py": "7d479ad68d0321e685729ed8d8c9f0815d17b8e4ed0298a88f3864b0b1d3aa54",
+    "src/kinloyalty/clients/anthropic.py": "03fe5c23daba575e6ae867f6af786f4244bb85b5dd8066df79087a869d34544a",
+    "src/kinloyalty/clients/base.py": "39ef16b5c61e0f10119e1f2c0c20f6510ec014068502003c768534ea5fbce5ea",
+    "src/kinloyalty/clients/factory.py": "f4781d9d26a3dbe0e5649279d32aec9640c3e6868106efc4fd149bab385c8096",
+    "src/kinloyalty/clients/google.py": "8ed047c063de5dced139bef478b1a0d157912d4d83736307b497d1613aeee8d2",
+    "src/kinloyalty/clients/mock.py": "7fc83bd44df54f9d7981e7e36d35894d93fd3ca5c2ee430a9f6f167b13902368",
+    "src/kinloyalty/clients/moonshot.py": "c82c4a75ebbb0476e9ab1969a62b1e6fa430431061be78df098123fda5db313b",
+    "src/kinloyalty/clients/openai.py": "206d49a3aabd4d7b3e9147842de08c5ed3feabd6fcb9154c0b12118bf41a70d5",
+    "src/kinloyalty/clients/payloads.py": "c68a7034d44887fe94ade78b59c91cea0e19421de0e18046b68b075e8504185b",
+    "src/kinloyalty/clients/response_data.py": "b96b652da96d1ef54dff9858579a5d8605ed0909592091fb747690c6662c38ec",
+    "src/kinloyalty/cohort.py": "4d371bdbe4e9fe1433e96532aa61b08c78fcee40aa995c3791adbc1e6570acb2",
+    "src/kinloyalty/logs.py": "bf77f7c5070e3a790404bf67a7ed55d5e9251d67389e9c3f287b903be6ac5038",
+    "src/kinloyalty/manifest.py": "f7337c4074bade63ec4824af9e8bf46a03702f4ad1720d1f769b6ee690ea7c8b",
+    "src/kinloyalty/negotiation/__init__.py": "fae003334e101ffa48b884f8bb19607e1e941aa1ac1f3f5bfb22bb590e9e82b1",
+    "src/kinloyalty/negotiation/authorization.py": "787e6aec3bbab0843df483a5eb6bb066b868562667036ab8768ae1a8d0650e10",
+    "src/kinloyalty/negotiation/cards.py": "2fd8163df21e420c1901dad02d880305a73ffc9e148310edf1744c7fdbfe5344",
+    "src/kinloyalty/negotiation/cli.py": "6ea51a1794ee51044e405fe1595a1ea4c6f502d030c0c7af5b1ebdcf7311ab66",
+    "src/kinloyalty/negotiation/collection.py": "2a481bacb3b8c78a1794f72885ca0850cea428bcb101382ff47af8a8bc1fc52d",
+    "src/kinloyalty/negotiation/config.py": "4b68bc16394b84b1e955c8ca6c305d977e70ae446a6998496f3027adb141af62",
+    "src/kinloyalty/negotiation/engine.py": "6f1420b98d5cc3d5be17335de2d7aa79e677afbc3d6b03056f289cfde7ef2de5",
+    "src/kinloyalty/negotiation/history.py": "d2eae33cc009aff946ed88ee4f817465626ea3d54654f2ee82dcaadb6ca3474b",
+    "src/kinloyalty/negotiation/journal.py": "b256e0c36dfca5a42be35283e0d425ad5b7fa3e7487cd9b38047ef97bf3def45",
+    "src/kinloyalty/negotiation/manifest.py": "c7b61089b2eb0973e6781937242f7dd87cca1dc0f65160acd4dbb52ec1d1aec1",
+    "src/kinloyalty/negotiation/mock.py": "7367857bc994f35cc3a9e3832f2688eaf74096a3a69753529d0342e294bf2019",
+    "src/kinloyalty/negotiation/pilot.py": "755684a796637e239ed97f258aa442062bc6f17534b1b28916080b3bfa52017c",
+    "src/kinloyalty/negotiation/pilot_report.py": "7ce9cbacca93ac450ff5febb0693fa264beb03a20027a1b3d803b0d54fde0f5f",
+    "src/kinloyalty/negotiation/probes.py": "b69fdc0445c0e5157260ccde4b7af0ecbc1a816aeeac8172b059475e9f17e6e6",
+    "src/kinloyalty/negotiation/prompts.py": "476c7d22a4ba9ee70571ada86458a595ac8fe237f2b9b18ac03111d336da9dea",
+    "src/kinloyalty/negotiation/registration.py": "a65eebdb6cb63cfd9d50e7a0d84195a4ddea698de6211f727725d2a2562be4bf",
+    "src/kinloyalty/negotiation/requests.py": "d2408facb97f5d3322f4e171a340b81547a8dd8c468f811e7d7691635826897a",
+    "src/kinloyalty/negotiation/review.py": "eece9985b9cee41a0159299a297107820bd05f2d5f3d3bc8ff2daed76ce5f0e0",
+    "src/kinloyalty/negotiation/rules.py": "ec443cb78be259f3804e1f19a618fca38b82ae5c2f7f63b131ecd643a5bb8f44",
+    "src/kinloyalty/negotiation/runner.py": "271214f42cf634b6dd93e2f2bc4a797cfca9527287d9e8e3baa1eedc5e186969",
+    "src/kinloyalty/negotiation/scenarios.py": "dc99c2be3d8ea5dd5e55cb3cac7a1a435d743152a34ddc664e5a27aa52dda052",
+    "src/kinloyalty/negotiation/schemas.py": "9f9ce41106c8b7235e1f8600638e5c2042aae1298c4374114ca7527f895b18a9",
+    "src/kinloyalty/negotiation/smoke.py": "e935902470713bb8a9efc66cdf6229d340fd55f64bccaaecef5ea0a41399977e",
+    "src/kinloyalty/negotiation/smoke_report.py": "bb8dc03e0fa4384c94ad037e082ce0e90f54399aeb88962d21a21c0b5f621918",
+    "src/kinloyalty/negotiation/state.py": "fbf648424ceed0dd73a02a0acd799749a3f509b131ee98b6af288796eb859184",
+    "src/kinloyalty/negotiation/transcript.py": "51161d61543bc71c05404e3719a307e56551468d9d63003be3cf52f034aaa52e",
+    "src/kinloyalty/negotiation/validate.py": "0b71cfd610c8631c4aef1f693ccd67bf1ad6afce66e978bac31064230fc8c2d9",
+    "src/kinloyalty/prompts.py": "c0a4bcf9c18dd3eed3d8964fb1ea251bf82b0525cd01cdea58f74ffd55316e89",
+    "src/kinloyalty/provenance.py": "c39144337f0b575164a57738ba5924bcb5c981fb3df5e4a94bf20d83423c5118",
+    "src/kinloyalty/review.py": "1bb499950959abaf9bbdf4bd3da66c0747829db1da7b22a7a521d2bfda748b3d",
+    "src/kinloyalty/runner.py": "8060247250cba1f6f71ae6b2e9a2cf3776d7108ecea7cc78cd16c80204c23ff0",
+    "src/kinloyalty/schemas.py": "a3135438c3be9468d3595ee252e4a6b7974639ee6432426c4995600097e1d61e",
+    "src/kinloyalty/state.py": "c6bccaaea71de8295d012c12cad8d625a31b5f721956b5524cffea7bcdb0291a",
+    "src/kinloyalty/validate.py": "e62c681f0b316e0b5235da5e590e38b7bc5021ddef26a6d2fccb77be54510b78",
+    "tests/test_study2_analysis.py": "b17d605eab3326bcc337ae112ed91ac961b4e5fdad1ea700f02ccc97a46e6826",
+    "tests/test_study2_cli.py": "01e4629d6dcd9d3f0c7869acadf0a3d7f232aef48b856f8b5840e1531691f658",
+    "tests/test_study2_collection.py": "822e7f555de1cb156e41a8991cfdd31f090d884b4155bf5e056bf863123b6958",
+    "tests/test_study2_configuration.py": "975ced308280374dc823926b155790d5e73ccdca5f2edf509d06cfef7b58954c",
+    "tests/test_study2_engine.py": "ef830e9b23ab47f360c7f4a82b006ea42d470b9f514924c8ad8832924cd5532f",
+    "tests/test_study2_inference.py": "20ab8a0b2816af5249258d6549c4eae2c024c2377f6386492bc1e34f73eb2476",
+    "tests/test_study2_manifest.py": "1e57741fdf93c7245f5768b92f3c80f425b3b943ba3671557bb761b55f946c2a",
+    "tests/test_study2_pilot.py": "963f0b5efa43f1d78200c890bfb3b72105cdc6000b8dc71e8d91cef0ae5cd734",
+    "tests/test_study2_prompts.py": "6c209467f9cfcadbb7d819ba38360b302eaa381453370aab30a9a493c723e1f8",
+    "tests/test_study2_registration.py": "4bf40c904285fbc044d4ee6bffb44f16ada161ab100730a92282361db2ba5bc5",
+    "tests/test_study2_requests.py": "39e1358467d63b94850d7389e9a05481af3bc300cc5fb92ef0d118148b679550",
+    "tests/test_study2_rules.py": "89cd74ed432d944e5027ec26e8216e3a3b6ea998f3b1bacbfbc3bd515fa931d6",
+    "tests/test_study2_scenarios.py": "abaad8951246afc838018f9e7648e601c30caf51f7532c12ff9410f657b23184",
+    "tests/test_study2_smoke.py": "f58155d57efd25e9887b33fef7e1020d29cd44c3d151652c33f9cd95ff4d54eb",
+    "tests/test_study2_validation.py": "ba763859acd4422addb96f415d54a9c35770a08381b2d451b094a99a7ed921b6",
+    "uv.lock": "53fa82811a98525cd6c6b1fb7bd851aade2fb30f1eaa4b8d4c44f6bfc4abe41a"
+  },
+  "phase8_validation": {
+    "status": "passed",
+    "offline_tests_passed": 558,
+    "offline_tests_seconds": 132.55,
+    "main_manifest_regenerates_byte_identically": true,
+    "all_11520_request_positions_validated": true,
+    "main_directory_unrun": true,
+    "canonical_schema_property_order_preserved": true,
+    "synthetic_reproduction_replicates": 10000,
+    "synthetic_artifacts_byte_identical": 27,
+    "study1_locked_hash_and_tags_preserved": true,
+    "main_api_calls": 0,
+    "phase8_paid_api_calls": 0,
+    "annotated_tag_contents_must_be_verified_after_commit": true
+  }
+}

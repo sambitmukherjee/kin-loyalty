@@ -53,3 +53,24 @@ clean committed code, persists natural/probe budgets, and halts on returned
 version drift after logging the response. `smoke_report.py` reports mechanical
 checks and exact probe transcripts from saved logs. See
 `docs/study2_phase4_execution_plan.md` and `docs/study2_phase4_report.md`.
+
+The approved Phase 6 pilot uses its separate `kinloyalty.negotiation.pilot`
+entry point and blind `pilot_report` module. Current live collection is limited
+to explicitly authorized smoke/pilot scopes, not main. The default `study2 run`
+CLI remains mock-only. Main inference and reproduction live independently in
+`src/kinloyalty/analysis/study2/` and reject smoke/pilot/probes.
+
+Study 2's Phase 8 lock freezes an unexecuted main manifest plus complete
+`preregistration/study2.md` and `study2-lock.json`. To verify its registered
+sources, byte-identical main generation, every turn-position payload and the
+annotated local tag without API keys or analysis, use:
+
+```sh
+.venv/bin/python -m kinloyalty.negotiation.registration --require-unrun --tag
+```
+
+The `--require-unrun` check is for the lock gate, when the main directory must
+contain only its manifest. A future main collection needs separate scope/budget
+approval and any post-lock execution glue must be logged as a deviation; the
+registration itself never starts that collection. Other researchers should
+create new study namespaces/configs and preserve all existing locked artifacts.

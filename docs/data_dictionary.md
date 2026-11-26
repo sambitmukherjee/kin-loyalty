@@ -572,3 +572,31 @@ Kimi 429). Every call records clean preparation commit
 cell is unobserved/null; all observed class rates are 100%. Acceptance-price
 mismatch counts are zero for all four responding models. These observations
 are pooled over disclosure conditions; no pilot inference is performed.
+
+## Study 2 Phase 8 registration snapshot
+
+`data/study2/main/manifest.jsonl` freezes 960 natural main episode assignments,
+320 scenarios and sixteen ordered pairs. It is an unexecuted plan, not outcome
+data. Its SHA-256 is
+`293fecc0f30249e46a794d3d4e1d7d2eacb51e3ad2e13b2113da7067e0a7b814`.
+Rows use main scenario/order/swapped seeds 2026112605/2026112606/2026112610;
+all frozen source facts, hashes and per-turn schemas follow the existing
+manifest contract. No main attempt/episode/usage store is created by this lock.
+
+`preregistration/study2-lock.json` stores the complete registration document
+digest, all critical per-file digests, prior analysis/runtime code commits,
+main/pilot manifest identities, seed and analysis settings, ordered canonical
+schemas, observed pilot version strings, approved clarifications, retained
+coverage/cache limitations, no post-pilot fixes, and a validation snapshot.
+The lock JSON excludes its own digest; the annotated `prereg-study2` tag binds
+it and all other registered bytes. Canonical schema property order is preserved.
+The snapshot's remote status is historical: a separate authorized push creates
+the remote lock, without rewriting the snapshot or moving its tag.
+
+`docs/study2_phase8_validation.json` records offline lock and synthetic checks.
+`kinloyalty.negotiation.registration` checks those registered file bytes,
+regenerates the main manifest in memory, validates all 11,520 possible request
+positions with disposable offer prefixes, and optionally verifies the annotated
+tag. It does not load credentials, make API calls, generate outcomes, or run
+inference. `--require-unrun` additionally requires only the manifest in the main
+directory. No placeholder negotiation output is written there.
