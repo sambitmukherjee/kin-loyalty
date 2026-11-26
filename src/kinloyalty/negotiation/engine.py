@@ -124,17 +124,20 @@ async def run_episode(
     release: Callable[[str], None] | None = None,
     single_turn: bool = False,
     can_start: Callable[[], bool] | None = None,
+    allow_live: bool = False,
 ) -> EpisodeResult:
     """Execute sequential mock turns, preserving invalid counts through API failures.
 
     Phase 3 supplies durable start/completion hooks and per-call permits. Permit
     waiting occurs before the API timeout. single_turn executes one marked probe
     position; can_start enforces a shared attempt cap before reservation/calling.
-    This entry point continues to refuse live clients.
+    Live calls require the explicit smoke authorization supplied by the runner.
     """
     for model in {spec.buyer_model, spec.seller_model}:
-        if model not in clients or clients[model].execution_mode != "mock":
+        if model not in clients or clients[model].execution_mode not in ({'mock', 'live'} if allow_live else {'mock'}):
             raise ValueError("Phase 2 requires a mock client for each participating model.")
+    if len({clients[model].execution_mode for model in {spec.buyer_model, spec.seller_model}}) != 1:
+        raise ValueError('An episode cannot mix live and mock clients.')
     policy = policy or RunnerPolicy(
         **config.study["runner"], invalid_reasks=config.study["validation"]["identical_reasks_per_invalid_turn"],
     )
@@ -154,6 +157,8 @@ async def run_episode(
             on_attempt(deepcopy(attempt), deepcopy(progress))
 
     while not progress.state.final:
+        pending_before = progress.pending_request
+        turn_attempt_start = progress.attempts
         request = progress.pending_request or build_turn_request(config, spec, progress.state)
         progress = replace(progress, pending_request=deepcopy(request))
         role = next_role(progress.state)
@@ -164,6 +169,8 @@ async def run_episode(
                 await acquire(model)
             try:
                 if can_start is not None and not can_start():
+                    if progress.attempts == turn_attempt_start and pending_before is None:
+                        progress = replace(progress, pending_request=None)
                     return EpisodeResult(progress, tuple(attempts))
                 progress, attempt, interrupted = await _call(
                     config, spec, progress, clients[model], request, role, model, number,
@@ -208,7 +215,7 @@ async def _call(config, spec, progress, client, request, role, model, number, ap
         spec.episode_id, spec.phase, number, role, model, progress.attempts,
         2 if is_reask else 1, api_index, allowed_actions(number, progress.state.message_limit),
         deepcopy(request), None, None, None, False, False, False, timestamp, None, None,
-        is_probe=is_probe,
+        is_probe=is_probe, synthetic=client.execution_mode == 'mock', execution_mode=client.execution_mode,
     )
     if on_start is not None:
         on_start(deepcopy(reservation), deepcopy(progress))
@@ -252,5 +259,6 @@ async def _call(config, spec, progress, client, request, role, model, number, ap
         response=deepcopy(response), validation=validation, api_error=error,
         is_final_for_turn=final_for_turn, excluded=excluded, accept_price_mismatch=mismatch,
         timestamp_utc=timestamp, completed_at_utc=completed, latency_seconds=latency, is_probe=is_probe,
+        synthetic=client.execution_mode == 'mock', execution_mode=client.execution_mode,
     )
     return progress, attempt, interrupted

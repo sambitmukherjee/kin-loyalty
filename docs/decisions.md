@@ -1031,3 +1031,42 @@ and any batch that must be rerun. No post-pilot fixes or deviations exist yet.
   start require approval; no money is spent under this proposal. Persist any
   approved smoke budget across resumptions. Stop/report on returned-model drift
   before proceeding. Phase 3 entry points still refuse live clients.
+
+## 2026-11-26 — Phase 3 pushed and Phase 4 live smoke authorized/prepared
+
+- **Researcher approval:** In response to the explicit proposal of 384 natural
+  attempts plus the previously approved 32 probe attempts, the researcher said,
+  "Yes go ahead. But before that, push the Phase 3 commit." Pushed
+  `2fc94d4576d4aeb565ea8f78a05dd7d201404433` and independently verified the
+  remote `main` tip before preparing live execution. No Study 1 tag moved.
+- **Scope:** Four natural not-disclosed self-pair episodes and sixteen marked
+  fixed-position probes, at most 64 ordinary calls and a total 416-attempt
+  ceiling including re-asks/retries/unknown interrupted reservations. Persist
+  caps across resumptions; no new pilot/main phase or actual main manifest is
+  authorized. The scientific configuration and exact prompt text are unchanged.
+- **New Study 2 glue:** Add a smoke-only authorization, live mode support to the
+  owned engine/runner/replay modules, immutable collection budget contracts,
+  clean-code gating, and a safe drift halt after the original response is
+  durably recorded. Reuse existing provider adapters without editing shared
+  clients. Credential loading uses ignored `.env` only, with `environ={}`;
+  no credential value or HTTP header is printed or stored.
+- **Historical administrative flag:** Preserve Phase 1 config text, including
+  its then-false natural-execution approval flag. The current dated researcher
+  authorization/preflight contract supersedes that flag only for this approved
+  smoke run; it does not alter any scientific setting or imply later approval.
+- **Plan:** `docs/study2_phase4_execution_plan.md` records the scope, manifest
+  hash, baseline version strings, budget enforcement, .env-only construction,
+  clean committed execution, stop conditions, reports, and next gate. Live
+  artifacts will first be external to the checkout to preserve clean provenance,
+  then copied unchanged into `data/study2/smoke/` after collection.
+- **Before paid execution:** Validate with offline live-mode fixtures, including
+  a changed-version halt, clean-checkout requirement, immutable budgets across
+  24 resumptions, .env-only loading, exact transcript reports, and partial halted
+  reports. Run the full suite and locked Study 1 manifest check, then commit
+  preparation before making any real call. Preparation itself makes no real
+  provider calls; observed results will be recorded in a later entry.
+- **Preparation verification:** All 520 offline tests passed in 70.81 seconds
+  (512 prior, eight new). All four ignored .env credentials were available;
+  no value was printed or stored. The external manifest has SHA-256
+  `5bc7fd7065eca30be44c4ff9de8b0b43143e5e0a40ce7f9a74f982d4768321eb`.
+  Commit this tested preparation before invoking any real provider.

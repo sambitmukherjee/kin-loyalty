@@ -30,5 +30,6 @@ def write_probe_report(manifest_path: str | Path, directory: str | Path, output:
     output = Path(output)
     output.parent.mkdir(parents=True, exist_ok=True)
     with output.open('x', encoding='utf-8') as stream:
-        json.dump({'synthetic': True, 'inference_eligible': False, 'replay': replay, 'probes': probes}, stream, indent=2)
+        modes = {record['execution_mode'] for record in terminals.values()}
+        json.dump({'synthetic': modes != {'live'}, 'inference_eligible': False, 'replay': replay, 'probes': probes}, stream, indent=2)
         stream.write('\n')

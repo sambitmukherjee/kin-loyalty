@@ -4,6 +4,7 @@ from contextlib import ExitStack
 from copy import deepcopy
 from datetime import datetime, timezone
 from pathlib import Path
+import json
 from typing import Any
 
 from kinloyalty.logs import content_hash, file_hash, read_jsonl
@@ -19,7 +20,7 @@ def turn_path(directory: Path, row: dict[str, Any]) -> Path:
 
 
 def load_histories(rows: list[dict[str, Any]], records_by_pair: dict[str, list[dict[str, Any]]],
-                   manifest_hash: str) -> tuple[dict[str, list[dict[str, Any]]], dict[str, EpisodeProgress]]:
+                   manifest_hash: str, *, execution_mode: str = 'mock') -> tuple[dict[str, list[dict[str, Any]]], dict[str, EpisodeProgress]]:
     """Validate pair placement, unique dispatch IDs, and every unit's attempt history."""
     row_map = {spec_from_row(row).episode_id: row for row in rows}
     histories = {identity: [] for identity in row_map}
@@ -34,7 +35,7 @@ def load_histories(rows: list[dict[str, Any]], records_by_pair: dict[str, list[d
                 raise ValueError('Attempt dispatch identities must be positive and globally unique.')
             dispatches.add(dispatch)
             histories[identity].append(record)
-    progress = {identity: reconstruct(row_map[identity], history, manifest_hash) for identity, history in histories.items()}
+    progress = {identity: reconstruct(row_map[identity], history, manifest_hash, execution_mode=execution_mode) for identity, history in histories.items()}
     return histories, progress
 
 
@@ -42,7 +43,7 @@ def recovery_candidates(stores: dict[str, AttemptLog]) -> tuple[dict[str, list[d
     """Prepare interrupted records without modifying any artifact before validation."""
     candidates, additions = {}, []
     mutable = {'record_sha256', 'response', 'validation', 'api_error', 'is_final_for_turn',
-               'excluded', 'accept_price_mismatch', 'completed_at_utc', 'latency_seconds'}
+               'excluded', 'accept_price_mismatch', 'completed_at_utc', 'latency_seconds', 'model_drift'}
     for pair, store in stores.items():
         records = list(store.records)
         existing = {record['record_id']: record for record in records}
@@ -105,7 +106,28 @@ def replay_collection(manifest_path: str | Path, directory: str | Path) -> dict[
             if path.with_name(path.name + '.pending.json').exists():
                 raise ValueError('Pending calls require explicit runner recovery before replay.')
         manifest_hash = file_hash(manifest_path)
-        histories, progress = load_histories(rows, {pair: read_jsonl(path) for pair, path in paths.items()}, manifest_hash)
+        contract_path = directory / 'collection.json'
+        contract = json.loads(contract_path.read_text()) if contract_path.exists() else {'execution_mode': 'mock'}
+        mode = contract['execution_mode']
+        if mode not in {'mock', 'live'} or contract.get('manifest_sha256', manifest_hash) != manifest_hash:
+            raise ValueError('Invalid collection mode or manifest binding.')
+        histories, progress = load_histories(rows, {pair: read_jsonl(path) for pair, path in paths.items()}, manifest_hash, execution_mode=mode)
+        if mode == 'live':
+            if contract.get('phase') != 'smoke' or contract.get('natural_attempt_cap') != 384 or contract.get('probe_attempt_cap') != 32:
+                raise ValueError('Live smoke contract differs from the authorized budgets.')
+            natural = probes_used = 0
+            for history in histories.values():
+                for record in history:
+                    expected = contract['expected_versions'][record['request']['api_model_id']]
+                    observed = record['response']['returned_model_version'] if record['response'] is not None else expected
+                    if record.get('expected_model_version') != expected or record.get('model_drift') != (observed != expected):
+                        raise ValueError('Saved model-version diagnostic differs from the authorized baseline.')
+                    if record['is_probe']:
+                        probes_used += 1
+                    else:
+                        natural += 1
+            if natural > contract['natural_attempt_cap'] or probes_used > contract['probe_attempt_cap']:
+                raise ValueError('Saved live attempts exceed their authorized collection budgets.')
         episodes, probes = read_jsonl(directory / 'episodes.jsonl'), read_jsonl(directory / 'probes.jsonl')
         check_terminals(rows, histories, progress, manifest_hash, episodes, probe=False, allow_missing=False)
         check_terminals(rows, histories, progress, manifest_hash, probes, probe=True, allow_missing=False)

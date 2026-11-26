@@ -45,6 +45,7 @@ def unit_complete(row: dict[str, Any], progress: EpisodeProgress, records: list[
 
 def reconstruct(
     row: dict[str, Any], records: list[dict[str, Any]], manifest_sha256: str,
+    *, execution_mode: str = 'mock',
 ) -> EpisodeProgress:
     """Revalidate every reply and transition; saved decisions are never trusted directly."""
     config = config_from_snapshot(row['snapshot'])
@@ -68,7 +69,7 @@ def reconstruct(
             'message_number': number, 'role': role, 'model': model,
             'attempt_number': progress.attempts + 1, 'response_number': 2 if progress.invalid_replies else 1,
             'allowed_actions': list(allowed_actions(number, config.message_limit)),
-            'request': asdict(request), 'synthetic': True, 'execution_mode': 'mock',
+            'request': asdict(request), 'synthetic': execution_mode == 'mock', 'execution_mode': execution_mode,
             'runner_policy': asdict(RunnerPolicy(**config.study['runner'], invalid_reasks=1)),
         }
         for key, value in expected_fields.items():
@@ -133,7 +134,7 @@ def terminal_record(
     base = {'record_id': spec.episode_id, 'episode_id': spec.episode_id, 'phase': spec.phase,
             'pair_id': row['pair_id'], 'manifest_sha256': manifest_sha256,
             'episode_sha256': row['episode_sha256'], 'is_probe': row['is_probe'],
-            'synthetic': True, 'execution_mode': 'mock', 'attempts': progress.attempts,
+            'synthetic': records[-1]['synthetic'], 'execution_mode': records[-1]['execution_mode'], 'attempts': progress.attempts,
             'reasks': progress.reasks, 'retries': progress.retries,
             'completed_at_utc': records[-1]['completed_at_utc']}
     if row['is_probe']:
