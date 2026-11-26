@@ -562,3 +562,13 @@ have no disclosure-grouped outcome tables, P2 estimates, intervals or hypothesis
 tests. The main inference loader still rejects pilot data. Mechanical review
 flags require researcher interpretation and approval before any fix; outcome
 levels never trigger changes.
+
+Observed Phase 6 artifacts are in `data/study2/pilot/` and
+`results/study2/pilot-report/`. The frozen manifest digest is
+`9e68d40288fc68621359c254c1d30e60d67684f5a09157748f215e6a08f6278e`.
+All 80 summaries replay from 707 attempts (706 valid replies, one recovered
+Kimi 429). Every call records clean preparation commit
+`0872a2f0d0e9225525834b0e1e093b4968f3946d`. Gemini's natural final-message
+cell is unobserved/null; all observed class rates are 100%. Acceptance-price
+mismatch counts are zero for all four responding models. These observations
+are pooled over disclosure conditions; no pilot inference is performed.

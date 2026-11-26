@@ -1,0 +1,9 @@
+model,role,valid_accepts,accept_price_mismatches
+claude_sonnet_5_5,buyer,6,0
+claude_sonnet_5_5,seller,5,0
+gpt_6_1_terra,buyer,9,0
+gpt_6_1_terra,seller,10,0
+gemini_4_hydrogen,buyer,13,0
+gemini_4_hydrogen,seller,16,0
+kimi_k3_1_pro,buyer,8,0
+kimi_k3_1_pro,seller,13,0

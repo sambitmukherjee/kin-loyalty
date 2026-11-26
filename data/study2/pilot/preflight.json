@@ -1,0 +1,31 @@
+{
+  "authorization": {
+    "expected_versions": {
+      "claude-sonnet-5-5": "claude-sonnet-5-5",
+      "gpt-6.1-terra": "gpt-6.1-terra",
+      "gemini-4-hydrogen": "gemini-4-hydrogen",
+      "kimi-k3.1-pro": "kimi-k3.1-pro"
+    },
+    "natural_attempt_cap": 7680,
+    "probe_attempt_cap": 0,
+    "approved_by": "researcher",
+    "approved_on": "2026-11-26",
+    "phase": "pilot"
+  },
+  "provenance": {
+    "git_commit": "0872a2f0d0e9225525834b0e1e093b4968f3946d",
+    "code_dirty": false,
+    "package_version": "0.1.0",
+    "sdk_versions": {
+      "anthropic": "2.14.0",
+      "openai": "3.59.0",
+      "google-genai": "3.6.1"
+    }
+  },
+  "planned_natural_episodes": 80,
+  "planned_probes": 0,
+  "ordinary_call_ceiling": 960,
+  "total_attempt_cap": 7680,
+  "credential_source": "ignored .env only; process values excluded",
+  "report_policy": "Outcomes per pair pooled over all disclosures; no condition comparisons or inference."
+}

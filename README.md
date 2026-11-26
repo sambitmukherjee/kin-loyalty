@@ -12,11 +12,14 @@ The approved live smoke completed four natural episodes and sixteen probes in
 51 valid calls, with exact returned-version matches, no errors/re-asks/retries,
 and no truncation. See the [smoke report](docs/study2_phase4_report.md).
 The analysis/reproduce pipeline is implemented and verified on synthetic mock
-logs only. The pilot and final addendum lock remain separately gated; the
-addendum currently contains unlocked, researcher-approved analysis definitions.
-The researcher has now approved the 80-episode pilot with a cumulative
-7,680-attempt ceiling. See the [pilot execution plan](docs/study2_phase6_execution_plan.md)
-for its scope, blind report, and clean-code authorization controls.
+logs only. The approved pilot completed all 80 episodes in 707 attempts,
+including one recovered rate limit, with no invalid reply or version drift.
+See the [blind pilot report](docs/study2_phase6_report.md) for diagnostics,
+pair-pooled outcomes and Gemini's unobserved natural final-turn coverage.
+Phase 7 review and the final addendum lock remain separately gated; the addendum
+contains unlocked, researcher-approved analysis definitions. The
+[execution plan](docs/study2_phase6_execution_plan.md) records the approved scope
+and clean-code/budget controls.
 
 Study 2 commands are isolated under `kinloyalty study2`: `manifest`, `run`
 (mock only), `replay`, `probe-report`, `simulate`, `analyze`, and `reproduce`. See the

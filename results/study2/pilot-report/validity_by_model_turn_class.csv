@@ -1,0 +1,13 @@
+model,role,turn_class,attempts,responses,valid,invalid,api_errors,valid_rate,status
+claude_sonnet_5_5,all,first,18,18,18,0,0,1.0,pass
+claude_sonnet_5_5,all,middle,156,156,156,0,0,1.0,pass
+claude_sonnet_5_5,all,final,1,1,1,0,0,1.0,pass
+gpt_6_1_terra,all,first,22,22,22,0,0,1.0,pass
+gpt_6_1_terra,all,middle,176,176,176,0,0,1.0,pass
+gpt_6_1_terra,all,final,3,3,3,0,0,1.0,pass
+gemini_4_hydrogen,all,first,18,18,18,0,0,1.0,pass
+gemini_4_hydrogen,all,middle,137,137,137,0,0,1.0,pass
+gemini_4_hydrogen,all,final,0,0,0,0,0,,not_observed
+kimi_k3_1_pro,all,first,22,22,22,0,0,1.0,pass
+kimi_k3_1_pro,all,middle,153,152,152,0,1,1.0,pass
+kimi_k3_1_pro,all,final,1,1,1,0,0,1.0,pass

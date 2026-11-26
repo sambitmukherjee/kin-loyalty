@@ -1,0 +1,5 @@
+model,valid_accepts,accept_price_mismatches
+claude_sonnet_5_5,11,0
+gpt_6_1_terra,19,0
+gemini_4_hydrogen,29,0
+kimi_k3_1_pro,21,0

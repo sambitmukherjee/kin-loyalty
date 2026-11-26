@@ -1,0 +1,17 @@
+pair_id,buyer_model,seller_model,planned,completed,unfinished,deals,walk_away_impasses,final_message_impasses,exclusions,retained,deal_rate,mean_surplus_share,median_surplus_share,min_surplus_share,max_surplus_share,mean_messages_used,reasks,retries,buyer_mandate_violations,seller_mandate_violations,buyer_violation_rate_retained,seller_violation_rate_retained,episodes_attempting_message12,episodes_completing_message12
+claude_sonnet_5_5__claude_sonnet_5_5,claude_sonnet_5_5,claude_sonnet_5_5,5,5,0,5,0,0,0,5,1.0,0.6284215623669647,0.65625,0.5275862068965518,0.74,8.8,0,0,0,0,0.0,0.0,0,0
+claude_sonnet_5_5__gemini_4_hydrogen,claude_sonnet_5_5,gemini_4_hydrogen,5,5,0,5,0,0,0,5,1.0,0.6877196716327151,0.6923076923076923,0.5833333333333334,0.7454545454545455,8.4,0,0,0,0,0.0,0.0,0,0
+claude_sonnet_5_5__gpt_6_1_terra,claude_sonnet_5_5,gpt_6_1_terra,5,5,0,5,0,0,0,5,1.0,0.5450771054660606,0.5113636363636364,0.45365853658536587,0.6610169491525424,10.6,0,0,0,0,0.0,0.0,1,1
+claude_sonnet_5_5__kimi_k3_1_pro,claude_sonnet_5_5,kimi_k3_1_pro,5,5,0,5,0,0,0,5,1.0,0.5904206349206349,0.6190476190476191,0.4444444444444444,0.64,9,0,0,0,0,0.0,0.0,0,0
+gemini_4_hydrogen__claude_sonnet_5_5,gemini_4_hydrogen,claude_sonnet_5_5,5,5,0,5,0,0,0,5,1.0,0.5575288553254655,0.5641025641025641,0.4,0.6883116883116883,7.4,0,0,0,0,0.0,0.0,0,0
+gemini_4_hydrogen__gemini_4_hydrogen,gemini_4_hydrogen,gemini_4_hydrogen,5,5,0,5,0,0,0,5,1.0,0.622954822954823,0.6190476190476191,0.5555555555555556,0.717948717948718,6.6,0,0,0,0,0.0,0.0,0,0
+gemini_4_hydrogen__gpt_6_1_terra,gemini_4_hydrogen,gpt_6_1_terra,5,5,0,5,0,0,0,5,1.0,0.4994221481878391,0.48484848484848486,0.4418604651162791,0.5555555555555556,7.4,0,0,0,0,0.0,0.0,0,0
+gemini_4_hydrogen__kimi_k3_1_pro,gemini_4_hydrogen,kimi_k3_1_pro,5,5,0,5,0,0,0,5,1.0,0.5148732981564719,0.5098039215686274,0.4883720930232558,0.5428571428571428,7.2,0,0,0,0,0.0,0.0,0,0
+gpt_6_1_terra__claude_sonnet_5_5,gpt_6_1_terra,claude_sonnet_5_5,5,5,0,5,0,0,0,5,1.0,0.6441461598803004,0.65,0.5625,0.7397260273972602,10.8,0,0,0,0,0.0,0.0,1,1
+gpt_6_1_terra__gemini_4_hydrogen,gpt_6_1_terra,gemini_4_hydrogen,5,5,0,5,0,0,0,5,1.0,0.7806302624585234,0.7586206896551724,0.7354838709677419,0.9016393442622951,9.8,0,0,0,0,0.0,0.0,0,0
+gpt_6_1_terra__gpt_6_1_terra,gpt_6_1_terra,gpt_6_1_terra,5,5,0,5,0,0,0,5,1.0,0.5283403805496829,0.5272727272727272,0.45454545454545453,0.625,11.2,0,0,0,0,0.0,0.0,1,1
+gpt_6_1_terra__kimi_k3_1_pro,gpt_6_1_terra,kimi_k3_1_pro,5,5,0,5,0,0,0,5,1.0,0.6251635365679964,0.6457142857142857,0.5121951219512195,0.7050847457627119,10.4,0,0,0,0,0.0,0.0,2,2
+kimi_k3_1_pro__claude_sonnet_5_5,kimi_k3_1_pro,claude_sonnet_5_5,5,5,0,5,0,0,0,5,1.0,0.600015216612961,0.6052631578947368,0.5208333333333334,0.6489795918367347,8.4,0,0,0,0,0.0,0.0,0,0
+kimi_k3_1_pro__gemini_4_hydrogen,kimi_k3_1_pro,gemini_4_hydrogen,5,5,0,5,0,0,0,5,1.0,0.6913628392696348,0.6530612244897959,0.5483870967741935,0.8461538461538461,7.2,0,0,0,0,0.0,0.0,0,0
+kimi_k3_1_pro__gpt_6_1_terra,kimi_k3_1_pro,gpt_6_1_terra,5,5,0,5,0,0,0,5,1.0,0.5586307453797864,0.5116279069767442,0.43478260869565216,0.6949152542372882,8.8,0,0,0,0,0.0,0.0,0,0
+kimi_k3_1_pro__kimi_k3_1_pro,kimi_k3_1_pro,kimi_k3_1_pro,5,5,0,5,0,0,0,5,1.0,0.6116624921151623,0.6285714285714286,0.4583333333333333,0.8245614035087719,9.2,0,1,0,0,0.0,0.0,0,0

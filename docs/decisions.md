@@ -1251,3 +1251,46 @@ and any batch that must be rerun. No post-pilot fixes or deviations exist yet.
   frozen science/clients/analysis/addendum, real smoke artifacts, pilot digest,
   unused main manifest, and ignored/untracked `codex_prompts/` were verified.
   Commit this tested preparation before the first real pilot call.
+
+## 2026-11-26 — Study 2 Phase 6 blind pilot completed
+
+- **Provenance:** Committed tested preparation as
+  `0872a2f0d0e9225525834b0e1e093b4968f3946d`. Every real attempt records that
+  revision with `code_dirty: false`. Reused the frozen external pilot manifest,
+  unchanged scientific sources/provider adapters and .env-only credentials.
+- **Execution:** Completed all 80 natural episodes in 707 attempts, yielding
+  706 valid replies. One Kimi seller/message-3 request returned retryable HTTP
+  429 and its existing automatic retry succeeded. No invalid replies, re-asks,
+  exclusions, truncations, version drift, impossible state, unfinished episode,
+  probe, or external resumption occurred. Used 707/7,680 attempts and 0/0 probes.
+- **Blind report:** All outcomes are pooled by pair over all disclosures. No
+  disclosure comparison, P2 contrast, inference pipeline or hypothesis test was
+  computed on the pilot. All 80 episodes ended in deals, with zero mandate
+  violations; these descriptive levels did not inform a design change.
+- **Validity/coverage:** Every observed model/turn-class cell is 100% valid.
+  Five natural episodes reached message 12: Claude one, GPT three, Kimi one.
+  Gemini had no natural final-message response, so its rate remains null and
+  a coverage review flag is retained. Earlier forced-position smoke probes
+  remain separate evidence, never added to pilot denominators or outcomes.
+- **Versions/usage:** All returned strings match the prior baseline. Reasoning
+  and input counts were present in all 706 replies; longest input was 1,514
+  tokens. OpenAI/Anthropic cache fields were zero. Google omitted both caches
+  in all 155 replies; Kimi omitted reads in 41 and writes in two of 175 replies.
+  Missing values remain null under the approved policy. No parameter fix made.
+- **Acceptance prices:** Zero mismatches for every actual responding model:
+  Claude 0/11 valid accepts, GPT 0/19, Gemini 0/29, Kimi 0/21. Raw supplied
+  prices remain recorded/ignored, role breakdowns retained, no automatic fix
+  threshold or semantic interpretation introduced.
+- **Preservation/reproduction:** Copied 21 raw/provenance files unchanged into
+  `data/study2/pilot/`, independently replayed all 707 attempts/80 summaries,
+  re-generated nine blind report files byte-identically, and scanned exact
+  credential values without printing them. Reports are in
+  `results/study2/pilot-report/`; `docs/study2_phase6_report.md` contains phase
+  scope, counts, pooled tables, limitations, and inspection commands. No source
+  code changed during/after collection; all 554 offline checks passed before it.
+- **Next gate:** No mechanical code/prompt fix is proposed. The researcher
+  should review Gemini's unobserved natural final-message cell as a coverage
+  limitation, in light of the earlier forced-schema probes. No extra call or
+  protocol change is proposed without approval. Commit Phase 6 results locally
+  and stop before Phase 7. No Phase 6 push, main draw/manifest/run, addendum lock,
+  registration tag, Study 1 analysis, or change to `codex_prompts/` is authorized.
