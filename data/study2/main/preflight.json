@@ -1,0 +1,38 @@
+{
+  "registration_git_commit": "c277054e182eb3a81a475108fa3439e96e869bb0",
+  "execution_git_commit": "4e088670c0cc8386eccf8fff01d93d353a230bda",
+  "manifest_sha256": "293fecc0f30249e46a794d3d4e1d7d2eacb51e3ad2e13b2113da7067e0a7b814",
+  "provenance": {
+    "git_commit": "4e088670c0cc8386eccf8fff01d93d353a230bda",
+    "code_dirty": false,
+    "package_version": "0.1.0",
+    "sdk_versions": {
+      "anthropic": "2.14.0",
+      "openai": "3.59.0",
+      "google-genai": "3.6.1"
+    }
+  },
+  "authorization": {
+    "manifest_sha256": "293fecc0f30249e46a794d3d4e1d7d2eacb51e3ad2e13b2113da7067e0a7b814",
+    "execution_mode": "live",
+    "expected_versions": {
+      "claude-sonnet-5-5": "claude-sonnet-5-5",
+      "gpt-6.1-terra": "gpt-6.1-terra",
+      "gemini-4-hydrogen": "gemini-4-hydrogen",
+      "kimi-k3.1-pro": "kimi-k3.1-pro"
+    },
+    "execution_git_commit": "4e088670c0cc8386eccf8fff01d93d353a230bda",
+    "registration_git_commit": "c277054e182eb3a81a475108fa3439e96e869bb0",
+    "natural_attempt_cap": null,
+    "probe_attempt_cap": 0,
+    "approved_by": "researcher",
+    "approved_on": "2026-11-26",
+    "phase": "main"
+  },
+  "ordinary_turn_call_ceiling": 11520,
+  "api_attempts_per_response_opportunity": 4,
+  "identical_invalid_reasks": 1,
+  "aggregate_attempt_cap": null,
+  "resume_policy": "Researcher requested resumption until all 960 terminate; stop on model drift/nonretryable error.",
+  "report_policy": "Collection mechanics only; no outcome statistics or inference."
+}
