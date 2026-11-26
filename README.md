@@ -16,8 +16,10 @@ logs only. The approved pilot completed all 80 episodes in 707 attempts,
 including one recovered rate limit, with no invalid reply or version drift.
 See the [blind pilot report](docs/study2_phase6_report.md) for diagnostics,
 pair-pooled outcomes and Gemini's unobserved natural final-turn coverage.
-Phase 7 review and the final addendum lock remain separately gated; the addendum
-contains unlocked, researcher-approved analysis definitions. The
+Phase 7's [mechanical review](docs/study2_phase7_report.md) retained the protocol
+with no fixes or additional calls, preserving that coverage limitation. The
+final addendum lock remains separately gated; the draft contains unlocked,
+researcher-approved analysis definitions and the review note. The
 [execution plan](docs/study2_phase6_execution_plan.md) records the approved scope
 and clean-code/budget controls.
 

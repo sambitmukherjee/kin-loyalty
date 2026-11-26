@@ -56,3 +56,24 @@ a more positive same-minus-other label effect in actual self-pairs. State this
 sign convention in outputs. Report its scenario-bootstrap 95% interval only,
 with **no permutation test**. The actual-kinship two-by-two mean table remains
 descriptive, without a test.
+
+## Post-pilot mechanical review — 2026-11-26 (still unlocked)
+
+The researcher authorized Phase 7 after the blind pilot report and the
+explanation of Gemini's unobserved natural final-message cell. The review
+retains the existing protocol, prompts/cards, schemas, validation, output cap,
+retry rules, provider parameters, and analysis. **No post-pilot mechanical fix
+was made, and no additional API call or re-pilot was performed.** See
+`docs/study2_phase7_report.md` and the dated entry in `docs/decisions.md`.
+
+Gemini sent no natural pilot reply at message 12. Its validity rate for that
+cell remains undefined, not a pass or failure. Existing forced-position smoke
+probes separately verified schema acceptance and valid replies at messages
+11/12 for Gemini in both roles. These probes do not enter pilot denominators
+or inference and do not estimate a natural final-turn validity rate. Retain
+this coverage limitation in the final addendum. Preserve omitted provider cache
+counts as null under the approved policy; they remain distinct from zero.
+
+This note records the review only. Final protocol/source hashes, pilot version
+table, analysis revision, actual main manifest and its hash, full prompt
+appendix, and registration lock/tag still require the Phase 8 gate.

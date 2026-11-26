@@ -1294,3 +1294,35 @@ and any batch that must be rerun. No post-pilot fixes or deviations exist yet.
   protocol change is proposed without approval. Commit Phase 6 results locally
   and stop before Phase 7. No Phase 6 push, main draw/manifest/run, addendum lock,
   registration tag, Study 1 analysis, or change to `codex_prompts/` is authorized.
+
+## 2026-11-26 — Phase 6 pushed; Study 2 Phase 7 review completed without fixes
+
+- **Researcher authorization:** After the proposed no-fix Phase 7 review and
+  an explanation of Gemini's missing natural final-turn observation, the
+  researcher instructed: "Push the Phase 6 commits. Then proceed to Phase 7."
+  Pushed `0872a2f` and `46d1496`; independently verified remote `main` at
+  `46d1496` before recording this review.
+- **Coverage disposition:** Retain Gemini's unobserved natural message-12
+  cell as a documented limitation, with null validity rate, without treating
+  it as a pass/failure. The four existing Phase 4 Gemini probes verify valid
+  schema acceptance at messages 11/12 in both roles. Those probes remain
+  separate, never pooled into pilot denominators or used for inference.
+- **Mechanical review:** Validity/completion/replay, truncation, acceptance-
+  price mismatches, versions, usage and request lengths identify no fix to
+  apply. The single recovered Kimi 429 follows the existing retry policy.
+  Preserve omitted provider cache counts as null under the approved policy.
+  No parser, validation, prompt/card/schema, cap, concurrency, endpoint,
+  provider parameter, analysis, or scientific-design change was made. Outcome
+  levels and disclosure comparisons did not inform a change.
+- **Post-pilot changes:** Documentation only: this log, the Phase 7 report,
+  an unlocked addendum review note, and README status. No mechanical fix and
+  no additional paid call or re-pilot. The three approved analysis definitions
+  are unchanged; the addendum remains incomplete and unlocked.
+- **Verification:** Rechecked 32 artifact digests and independently replayed
+  all 707 attempts/80 pilot summaries. Checked the prior Gemini mechanical
+  probe audit without semantic coding or inference.
+  Runtime remains the source already covered by 554 passing offline tests;
+  no repeat full suite or new tests are needed for these documentation edits.
+- **Next gate:** Commit this phase locally and stop before Phase 8. The final
+  addendum, actual main-manifest draw, annotated registration tag and any push
+  each remain within the later approved lock scope. No main run is authorized.
