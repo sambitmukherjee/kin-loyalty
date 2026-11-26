@@ -475,3 +475,55 @@ the sixteen exact probe requests/prefixes, the generated report, and a digest
 inventory. `docs/study2_phase4_report.md` adds phase authorization/provenance,
 usage caveats, replay instructions, and the next gate. These reports contain no
 hypothesis comparisons; real smoke/probe data never enter main inference.
+
+## Study 2 analysis outputs (Phase 5)
+
+The isolated pipeline accepts replay-verified main collections or explicitly
+opted-in synthetic collections. It refuses smoke/pilot/probes. The live runner
+is still smoke-only; read-only replay also validates future pilot/main contracts
+against their phase, approval metadata, expected versions, and explicit budgets.
+It does not authorize collection. See `docs/study2_analysis.md` for all methods.
+
+`tables/episodes.csv` is a replay-verified derived table, not a replacement for
+append-only source logs. It adds `excluded`, `deal`, `buyer_opens`, both card
+indicators, `surplus_share`, `within_deal_share`, `messages_to_agreement`,
+`buyer_offer_count`, `buyer_first_offer_position`, and `buyer_average_concession`.
+The last is mean `(later-earlier)/(b-s)` over consecutive own buyer offers,
+including negative values, undefined below two offers. Acceptances never count
+as offers. Every outcome is unavailable for exclusions; deal-only outcomes are
+unavailable for impasses. Mandate flags use all retained episodes as denominators.
+
+`tables/outcome_eligibility.csv` reports planned/eligible/excluded/undefined counts
+per outcome by original `condition` and displayed `card_says`. Concession
+eligibility is therefore visible separately for each original disclosure condition.
+`tables/contrasts.csv` reports primary/secondary designations, outcome notes,
+sign conventions, sample sizes, estimates, estimability, count-matched 95%
+intervals, bootstrap failure counts, and permutation counts/p-values. Each
+permutation test includes `planned_strata`, `complete_swap_strata`,
+`incomplete_strata`, `singleton_strata`, `neither_eligible_strata`, and fixed-row
+counts. Only the two tested episodes determine a possible swap; missing third
+episodes are irrelevant. Eligible singleton rows remain in OLS/bootstrap.
+
+The interaction row is labelled `(same-other in self-pairs) - (same-other in
+cross-pairs)`, adjusted for pair/opener. It has a bootstrap interval, zero
+permutation replications, and no permutation p-value. Its absence of a test is
+intentional. The actual-kinship means are descriptive only.
+
+`resamples.npz` stores shared scenario indices and every bootstrap/permutation
+statistic, preserving NaNs for unavailable draws. `tables/scenario_index.csv`
+maps zero-based draw columns to sorted pair/scenario identities. Intervals/TOST
+are unavailable if a requested bootstrap estimate is unavailable; no redraws
+or silent reduction in replication counts occurs. The 10,000-draw 95% and 90%
+intervals use ranks 250/9,751 and 500/9,501. TOST uses the same primary draws,
+±0.05 bounds, conservative 1e-12 ties, inclusive add-one tails, and strict
+90% containment. `metadata.json` retains full TOST/robustness results, methods,
+package/Git provenance, input hashes, code hashes, and replay counts.
+
+Usage tables retain nulls separately from zeros; reasoning/token summaries are
+per model/role and cache summaries per provider. Message diagnostics are lengths
+and structured actions/prices, with no semantic coding. `figures/` contains four
+PDF/PNG pairs. Figure 2 groups by displayed same/other/none; appendix share
+distributions group by original conditions. Synthetic output is labelled.
+`artifacts.sha256.json` hashes all other result files. Existing outputs and raw
+inputs are never overwritten. No analysis output is an additional source of
+ground-truth negotiation outcomes.

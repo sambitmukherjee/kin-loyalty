@@ -1122,3 +1122,98 @@ and any batch that must be rerun. No post-pilot fixes or deviations exist yet.
   digests in the artifact inventory, including the phase report/execution plan.
   Exact credential-value scans passed without exposing values. No additional
   API call or analysis was made for these checks.
+
+## 2026-11-26 — Study 2 Phase 4 pushed; Phase 5 started
+
+- **Researcher authorization:** "Push the Phase 4 commits. Then proceed to
+  Phase 5." Pushed both Phase 4 commits and independently verified remote
+  `main` at `dd72fe0a24eb8117952dd566279777fee5a361c2`.
+- **Scope:** Write and verify the isolated Study 2 analysis on synthetic mock
+  logs only. No paid calls, real smoke/pilot inference, main scenarios, or
+  Study 1 analysis are authorized by this phase.
+- **Progress:** Implemented primary inference, shared-resample TOST, buyer/
+  baseline contrasts, robustness/descriptive diagnostics, input guards, mock
+  planted-effect generation, and plotting helpers. A complete 960-episode
+  synthetic log fixture recovers its planted −0.20 P2 contrast with the full
+  10,000-replication settings. The 17 new offline tests pass. This does not
+  complete Phase 5 or freeze any outstanding secondary definition.
+- **Pending clarification:** Asked the researcher to specify concession sign/
+  eligibility, treatment of incomplete tested-label strata (including the
+  unavailable-third-condition interpretation), and displayed-label figure
+  grouping/interaction contrast. No answers or approval have been inferred.
+  `docs/study2_phase5_progress.md` records the concrete progress and questions.
+- **Next:** Resolve those definitions, finish secondary analyses, all figures,
+  standalone analyze/reproduce commands and documentation, verify, then commit
+  the completed phase locally and stop before the pilot gate.
+- **Regression verification:** All 537 offline tests passed in 90.79 seconds.
+  The locked Study 1 manifest SHA-256 and immutable tags, the byte-identical
+  Phase 1 prompt review, and ignored/untracked `codex_prompts/` were verified.
+  No shared Study 1 module was edited. Phase 5 remains in progress/uncommitted
+  pending the researcher definitions above.
+
+## 2026-11-26 — Researcher confirmed Study 2 analysis definitions
+
+- **Approval:** The researcher explicitly confirmed all three pending questions
+  and instructed that each be recorded here and in the addendum. These are
+  pre-pilot definitions, not choices informed by real study outcome comparisons.
+- **Signed concessions:** Average `(later own buyer offer - earlier own buyer
+  offer)/(b-s)` over consecutive offers by the buyer agent itself. Acceptance
+  is not an offer. Preserve negative values and all magnitudes without clipping.
+  Fewer than two buyer offers makes the outcome undefined; omit that episode
+  only for this outcome and report eligibility per condition.
+- **Missing outcomes:** Keep every eligible episode in OLS and the scenario
+  bootstrap. Swap labels only when both tested episodes have the outcome;
+  hold incomplete tested pairs fixed and report complete/incomplete counts for
+  every test. The third episode is irrelevant, including a missing `none` in
+  a same/other test. This explicitly interprets Section 6.3's exclusion sentence
+  and applies equally to the primary outcome and disclosure-baseline tests.
+- **Figure/interaction:** Group Figure 2 by displayed `same`, `other`, `none`.
+  With pair/opener adjustment and both card × self-pair terms, report the
+  difference of interaction coefficients: `(same-other in self-pairs) -
+  (same-other in cross-pairs)`. Label its sign, give the scenario-bootstrap
+  interval only, and perform no permutation test of the interaction.
+- **Addendum status:** Added these exact definitions to
+  `preregistration/study2.md`, explicitly marked an incomplete/unlocked draft.
+  The pilot, full addendum lock, main manifest, tag, and push remain separately
+  gated. No scientific configuration, prompt, provider parameter, or Study 1
+  module changed as part of these clarifications.
+
+## 2026-11-26 — Study 2 Phase 5 verified and completed
+
+- **Implementation:** Completed isolated primary/secondary inference,
+  shared-bootstrap TOST, the specified pair-cluster robustness check, signed
+  concession/first-offer derivation, every outcome's eligibility, missing tested-
+  pair counts, approved interaction, descriptives/usage, four PDF/PNG figures,
+  and standalone `study2 analyze` / `reproduce` commands. Added mock `simulate`
+  and explicit mixed-outcome fixtures. No shared Study 1 module was edited.
+- **Read-only compatibility:** The owned collection reader validates future
+  pilot/main phase contracts, approval metadata, model baselines, and budgets;
+  the runner still refuses live execution outside the approved smoke phase.
+  This enables eventual main reproduction without authorizing new collection.
+- **Synthetic verification:** Through installed CLI commands, generated 960
+  explicitly synthetic episodes / 4,320 mock calls, then reproduced twice using
+  10,000 bootstraps and permutations each. All 27 result artifacts were byte-
+  identical, including all four PDF/PNG pairs and resampling arrays. Recovered
+  planted P2 −0.20, signed concessions +0.20, and interaction zero within 1e-12.
+  Count-matched ranks, TOST, per-buyer/pooled stratum counts, and every condition's
+  eligibility were checked. These are simulated test results, not study findings.
+- **Edge cases:** Independent row-refit tests cover exclusions, undefined
+  outcomes, tested-pair-only swaps, interaction sign, singular resamples,
+  equivalence boundaries, null/reversed effects, and fresh deterministic outputs.
+  A separate mixed-outcome mock log fixture replays exclusions, both impasse
+  types, re-asks, signed concessions, and negative/above-one shares. Nonfinite
+  robustness inference is explicitly unavailable; primary inference remains
+  independent of this diagnostic. Missing usage values remain distinct from zero.
+- **Checks:** All 547 offline tests passed in 121.41 seconds. Verified the locked
+  Study 1 manifest hash in memory, unchanged Study 1 tags/artifacts, original
+  Study 2 config/roster/prompts and rendered review, unchanged real smoke logs/
+  reports, no actual main manifest/tag, and ignored/untracked `codex_prompts/`.
+  No real data analysis, paid call, or actual Study 2 main draw occurred.
+- **Deliverables and gate:** `docs/study2_phase5_report.md`,
+  `docs/study2_analysis.md`, and `docs/study2_phase5_verification.json` record
+  methods, commands, limitations, checked source/output hashes, and results.
+  All three researcher definitions are in the unlocked addendum draft.
+  Commit this completed phase locally; no push is authorized. Stop before
+  Phase 6: 80 blind pilot episodes, up to 960 ordinary calls and a proposed
+  7,680-attempt worst-case ceiling including re-asks/retries, requiring explicit
+  phase/budget approval and clean committed execution preparation.

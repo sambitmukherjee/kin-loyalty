@@ -14,6 +14,27 @@ from kinloyalty.negotiation.manifest import read_manifest, spec_from_row
 from kinloyalty.negotiation.engine import EpisodeProgress
 
 
+def validate_live_contract(contract: dict, *, phase: str) -> None:
+    """Validate read-only replay contracts, including future pilot/main collections.
+
+    This reader does not authorize or enable collection. The runner remains
+    smoke-only until a separate approved execution phase implements its contract.
+    """
+    if phase not in {'smoke', 'pilot', 'main'} or contract.get('phase') != phase:
+        raise ValueError('Live collection contract must match its manifest phase.')
+    if phase == 'smoke':
+        if contract.get('natural_attempt_cap') != 384 or contract.get('probe_attempt_cap') != 32:
+            raise ValueError('Live smoke contract differs from the authorized budgets.')
+    for field, minimum in (('natural_attempt_cap', 1), ('probe_attempt_cap', 0)):
+        if type(contract.get(field)) is not int or contract[field] < minimum:
+            raise ValueError('Live replay requires explicit nonnegative authorized budgets.')
+    if not contract.get('approved_by') or not contract.get('approved_on'):
+        raise ValueError('Live replay requires recorded researcher approval metadata.')
+    versions = contract.get('expected_versions')
+    if not isinstance(versions, dict) or not versions or any(not isinstance(value, str) or not value for value in versions.values()):
+        raise ValueError('Live replay requires an explicit model-version baseline.')
+
+
 def turn_path(directory: Path, row: dict[str, Any]) -> Path:
     """Return a manifest-derived pair path without trusting arbitrary log filenames."""
     return directory / 'turns' / f"{row['pair_id']}.jsonl"
@@ -113,8 +134,7 @@ def replay_collection(manifest_path: str | Path, directory: str | Path) -> dict[
             raise ValueError('Invalid collection mode or manifest binding.')
         histories, progress = load_histories(rows, {pair: read_jsonl(path) for pair, path in paths.items()}, manifest_hash, execution_mode=mode)
         if mode == 'live':
-            if contract.get('phase') != 'smoke' or contract.get('natural_attempt_cap') != 384 or contract.get('probe_attempt_cap') != 32:
-                raise ValueError('Live smoke contract differs from the authorized budgets.')
+            validate_live_contract(contract, phase=rows[0]['phase'])
             natural = probes_used = 0
             for history in histories.values():
                 for record in history:

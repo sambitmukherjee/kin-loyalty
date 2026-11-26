@@ -11,16 +11,23 @@ balanced plans, durable collection, recovery, and replay are implemented.
 The approved live smoke completed four natural episodes and sixteen probes in
 51 valid calls, with exact returned-version matches, no errors/re-asks/retries,
 and no truncation. See the [smoke report](docs/study2_phase4_report.md).
-Analysis construction on mock data, the pilot, and the final addendum remain
-separately gated.
+The analysis/reproduce pipeline is implemented and verified on synthetic mock
+logs only. The pilot and final addendum lock remain separately gated; the
+addendum currently contains unlocked, researcher-approved analysis definitions.
 
 Study 2 commands are isolated under `kinloyalty study2`: `manifest`, `run`
-(mock only), `replay`, and `probe-report`. See the
+(mock only), `replay`, `probe-report`, `simulate`, `analyze`, and `reproduce`. See the
 [Phase 3 report](docs/study2_phase3_report.md) for safe temporary-directory
 examples, the exact artifact contract, and verification. The configured main
 scenario seed has not been used, no actual Study 2 main manifest was generated,
 and no real Study 2 outcome analysis has run. Existing Study 1
 commands and their defaults remain available unchanged.
+
+The [Study 2 analysis guide](docs/study2_analysis.md) gives independent reproduce
+commands, outcome eligibility, signed concessions, tested-pair missingness,
+the interaction sign, and the complete table/figure contract. Synthetic inputs
+require `--allow-synthetic`; inference rejects smoke/pilot/probes. Each reproduce
+run verifies saved outcomes against turn attempts before calculating results.
 
 ## Current status
 
