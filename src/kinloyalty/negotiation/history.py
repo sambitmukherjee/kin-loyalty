@@ -15,6 +15,22 @@ from kinloyalty.negotiation.requests import build_turn_request
 from kinloyalty.negotiation.rules import allowed_actions, apply_turn, exclude_episode, next_role, score_outcome
 from kinloyalty.negotiation.validate import validate_response
 from kinloyalty.runner import RunnerPolicy
+from kinloyalty.negotiation.authorization import REGISTRATION_COMMIT
+
+
+def main_provenance(records: list[dict[str, Any]]) -> dict[str, str]:
+    """Require one truthful execution revision and the preserved registration on every attempt."""
+    if not records:
+        return {}
+    execution = records[0].get('execution_git_commit')
+    if not isinstance(execution, str) or len(execution) != 40 or any(c not in '0123456789abcdef' for c in execution):
+        raise ValueError('Main attempts require a full execution commit hash.')
+    for record in records:
+        if (record.get('registration_git_commit') != REGISTRATION_COMMIT or
+                record.get('execution_git_commit') != execution or record.get('git_commit') != execution or
+                record.get('code_dirty') is not False):
+            raise ValueError('Main attempt registration/execution provenance is inconsistent.')
+    return {'git_commit': execution, 'execution_git_commit': execution, 'registration_git_commit': REGISTRATION_COMMIT}
 
 
 def seal(record: dict[str, Any]) -> dict[str, Any]:
@@ -50,6 +66,8 @@ def reconstruct(
     """Revalidate every reply and transition; saved decisions are never trusted directly."""
     config = config_from_snapshot(row['snapshot'])
     progress = initial_progress(row)
+    if row['phase'] == 'main':
+        main_provenance(records)
     previous = None
     for record in records:
         check_signature(record)
@@ -137,6 +155,8 @@ def terminal_record(
             'synthetic': records[-1]['synthetic'], 'execution_mode': records[-1]['execution_mode'], 'attempts': progress.attempts,
             'reasks': progress.reasks, 'retries': progress.retries,
             'completed_at_utc': records[-1]['completed_at_utc']}
+    if row['phase'] == 'main':
+        base.update(main_provenance(records))
     if row['is_probe']:
         return seal({**base, 'model': records[-1]['model'], 'role': row['probe_role'],
                      'message_number': row['probe_position'], 'status': 'excluded' if records[-1]['excluded'] else 'valid',

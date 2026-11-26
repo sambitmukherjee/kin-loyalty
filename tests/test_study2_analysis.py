@@ -141,14 +141,14 @@ def test_all_secondary_outputs_and_eligibility(synthetic_data):
 
 
 def test_live_read_only_contract_support_does_not_draw_main_scenarios():
-    contract = {'phase': 'main', 'natural_attempt_cap': 100, 'probe_attempt_cap': 0,
-                'approved_by': 'fixture', 'approved_on': 'fixture', 'expected_versions': {'fixture': 'fixture'}}
+    from kinloyalty.negotiation.authorization import MainAuthorization, MAIN_MANIFEST_SHA256
+    contract = MainAuthorization({'fixture': 'fixture'}, 'e' * 40).contract(MAIN_MANIFEST_SHA256)
     validate_live_contract(contract, phase='main')
     with pytest.raises(ValueError, match='manifest phase'):
         validate_live_contract(contract, phase='pilot')
     with pytest.raises(ValueError, match='authorized budgets'):
         validate_live_contract({**contract, 'phase': 'smoke'}, phase='smoke')
-    with pytest.raises(ValueError, match='budgets'):
+    with pytest.raises(ValueError, match='Main authorization'):
         validate_live_contract({**contract, 'natural_attempt_cap': True}, phase='main')
 
 

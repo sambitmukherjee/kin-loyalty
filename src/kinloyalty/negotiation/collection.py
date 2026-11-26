@@ -12,6 +12,7 @@ from kinloyalty.negotiation.journal import Study2Log as AttemptLog
 from kinloyalty.negotiation.history import check_signature, reconstruct, seal, terminal_record, unit_complete
 from kinloyalty.negotiation.manifest import read_manifest, spec_from_row
 from kinloyalty.negotiation.engine import EpisodeProgress
+from kinloyalty.negotiation.authorization import MainAuthorization
 
 
 def validate_live_contract(contract: dict, *, phase: str) -> None:
@@ -27,7 +28,13 @@ def validate_live_contract(contract: dict, *, phase: str) -> None:
             raise ValueError('Live smoke contract differs from the authorized budgets.')
     if phase == 'pilot' and (contract.get('natural_attempt_cap') != 7680 or contract.get('probe_attempt_cap') != 0):
         raise ValueError('Live pilot contract differs from the authorized 7680/0 budgets.')
+    if phase == 'main':
+        MainAuthorization(**{key: contract[key] for key in (
+            'expected_versions', 'execution_git_commit', 'registration_git_commit',
+            'natural_attempt_cap', 'probe_attempt_cap', 'approved_by', 'approved_on', 'phase')}).contract(contract['manifest_sha256'])
     for field, minimum in (('natural_attempt_cap', 1), ('probe_attempt_cap', 0)):
+        if phase == 'main' and field == 'natural_attempt_cap':
+            continue
         if type(contract.get(field)) is not int or contract[field] < minimum:
             raise ValueError('Live replay requires explicit nonnegative authorized budgets.')
     if not contract.get('approved_by') or not contract.get('approved_on'):
@@ -144,11 +151,13 @@ def replay_collection(manifest_path: str | Path, directory: str | Path) -> dict[
                     observed = record['response']['returned_model_version'] if record['response'] is not None else expected
                     if record.get('expected_model_version') != expected or record.get('model_drift') != (observed != expected):
                         raise ValueError('Saved model-version diagnostic differs from the authorized baseline.')
+                    if rows[0]['phase'] == 'main' and any(record.get(key) != contract[key] for key in ('registration_git_commit', 'execution_git_commit')):
+                        raise ValueError('Main attempt provenance differs from the immutable collection contract.')
                     if record['is_probe']:
                         probes_used += 1
                     else:
                         natural += 1
-            if natural > contract['natural_attempt_cap'] or probes_used > contract['probe_attempt_cap']:
+            if (contract['natural_attempt_cap'] is not None and natural > contract['natural_attempt_cap']) or probes_used > contract['probe_attempt_cap']:
                 raise ValueError('Saved live attempts exceed their authorized collection budgets.')
         episodes, probes = read_jsonl(directory / 'episodes.jsonl'), read_jsonl(directory / 'probes.jsonl')
         check_terminals(rows, histories, progress, manifest_hash, episodes, probe=False, allow_missing=False)

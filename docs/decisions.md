@@ -1384,3 +1384,44 @@ and any batch that must be rerun. No post-pilot fixes or deviations exist yet.
   Record the concrete commit/tag in the final report to the researcher.
   No Phase 8 push has been authorized; a separate permissioned push establishes
   the remote lock. A main run and its budget remain a separate later request.
+
+## 2026-11-26 — Main run and two post-lock mechanical changes authorized
+
+- **Researcher approval:** After authorizing all 960 main episodes, the
+  researcher explicitly approved enabling main execution and adding provenance:
+  "make those two mechanical changes. Preserve prereg-study2, test and commit
+  the patch, and record both hashes in every turn and episode record. Then run
+  all 960 episodes under my previous instructions."
+- **Preserved registration:** Keep annotated `prereg-study2` and its target
+  `c277054e182eb3a81a475108fa3439e96e869bb0` unchanged. Retain the addendum,
+  locked manifest/hash, scientific configuration, prompts/cards/schemas,
+  providers, pure protocol/scoring and analysis bytes. This is an approved
+  mechanical deviation, not a rewritten registration or hidden tag movement.
+- **Main scope:** Main-only authorization requires the exact registered
+  960-episode manifest; retain one invalid re-ask, four API attempts/opportunity,
+  registered timeouts/backoffs, concurrency and recovery. Resume unfinished
+  episodes from the same clean committed execution revision until terminal;
+  pause on drift before continuing. There are up to 11,520 ordinary turn calls
+  plus registered re-asks/retries/resumptions. The researcher gave no cumulative
+  attempt cap and required completion; the main contract records this explicitly
+  without changing the per-opportunity retry tolerance or any earlier budget.
+- **Provenance:** Main turn and episode records carry `registration_git_commit`
+  plus `execution_git_commit`; legacy `git_commit` denotes actual execution.
+  Replay validates both and rejects a changed execution contract on resume.
+  Smoke/pilot formats and past records remain unchanged.
+- **Testing/reporting:** Add main launch/collection-only report tools and tests.
+  Adjust the frozen-registration test to validate original bytes from the
+  preserved tag; adapt the former future-main contract fixture to the newly
+  approved contract. No inference method/test is changed. Report only mechanical
+  completion/error/resumption metadata per pair/condition, never outcomes.
+- **Execution/freeze boundary:** Commit and test first; collect externally from
+  that clean revision with ignored .env-only keys. Do not edit code/prompts/
+  configuration during the run. At completion, check keys/file sizes/replay,
+  commit logs and run report only, create annotated `study2-data`, request push
+  permission, and stop without analysis. Details are in
+  `docs/study2_main_execution_patch.md`.
+- **Pre-run verification:** All 565 offline tests passed in 158.78 seconds.
+  The original registered snapshot is checked directly from the unchanged tag;
+  main scope/hash, dual provenance, drift halt, automatic resumption and
+  collection-only report whitelisting pass. Commit this tested extension before
+  the first paid main call, then pin that full execution commit for all resumes.

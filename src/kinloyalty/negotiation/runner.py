@@ -20,16 +20,15 @@ from kinloyalty.negotiation.history import reconstruct, seal, terminal_record, u
 from kinloyalty.negotiation.manifest import read_manifest, spec_from_row
 from kinloyalty.provenance import collect_provenance
 from kinloyalty.runner import RunnerPolicy
-from kinloyalty.negotiation.authorization import ModelDriftError, PilotAuthorization, SmokeAuthorization
+from kinloyalty.negotiation.authorization import MainAuthorization, ModelDriftError, PilotAuthorization, SmokeAuthorization
 
 
 def check_destination(directory: str | Path, *, live: bool, phase: str = 'smoke') -> None:
     """Reject protected study destinations before creating any collection artifact."""
     directory = Path(directory).resolve()
     root = Path(__file__).resolve().parents[3]
-    protected = [root / path for path in ('data/study1', 'prompts/study1', 'results/study1', 'preregistration',
-                                           'data/study2/main')]
-    for guarded_phase in ('smoke', 'pilot'):
+    protected = [root / path for path in ('data/study1', 'prompts/study1', 'results/study1', 'preregistration')]
+    for guarded_phase in ('smoke', 'pilot', 'main'):
         if not live or phase != guarded_phase:
             protected.append(root / f'data/study2/{guarded_phase}')
     if any(directory.is_relative_to(path.resolve()) for path in protected):
@@ -39,7 +38,7 @@ def check_destination(directory: str | Path, *, live: bool, phase: str = 'smoke'
 async def run_manifest(
     manifest_path: str | Path, directory: str | Path, clients: dict[str, ModelClient], *,
     sleep: Callable[[float], Awaitable[None]] = asyncio.sleep,
-    authorization: SmokeAuthorization | PilotAuthorization | None = None,
+    authorization: SmokeAuthorization | PilotAuthorization | MainAuthorization | None = None,
 ) -> dict[str, Any]:
     """Execute/resume a mock plan, validating saved history before any new call.
 
@@ -55,9 +54,9 @@ async def run_manifest(
     live = mode == 'live'
     if mode not in {'mock', 'live'} or (live and authorization is None):
         raise ValueError('Live collection requires an explicit smoke authorization or pilot authorization; otherwise use mock clients.')
-    if live and (not isinstance(authorization, (SmokeAuthorization, PilotAuthorization)) or
+    if live and (not isinstance(authorization, (SmokeAuthorization, PilotAuthorization, MainAuthorization)) or
                  any(row['phase'] != authorization.phase for row in rows)):
-        raise ValueError('This authorization permits only its exact smoke or pilot phase, never main collection.')
+        raise ValueError('This authorization permits only its exact smoke or pilot phase, or its registered main plan.')
     if not live and authorization is not None:
         raise ValueError('A live authorization cannot be attached to mock execution.')
     directory = Path(directory)
@@ -75,6 +74,8 @@ async def run_manifest(
             raise ValueError('Real calls require a clean committed code checkout.')
         if set(authorization.expected_versions) != {model['api_model_id'] for model in config.models.values()}:
             raise ValueError('The authorization must name all four prior model versions.')
+        if isinstance(authorization, MainAuthorization) and provenance['git_commit'] != authorization.execution_git_commit:
+            raise ValueError('Main execution/resumption must use the same approved clean execution commit.')
     stopped = False
     global_slots = asyncio.Semaphore(policy.concurrency)
     model_slots = {model: asyncio.Semaphore(policy.per_model_concurrency) for model in config.model_order}
@@ -158,6 +159,9 @@ async def run_manifest(
                         expected = authorization.expected_versions[attempt.request.api_model_id]
                         base.update(expected_model_version=expected,
                                     model_drift=attempt.response is not None and attempt.response.returned_model_version != expected)
+                    if isinstance(authorization, MainAuthorization):
+                        base.update(registration_git_commit=authorization.registration_git_commit,
+                                    execution_git_commit=authorization.execution_git_commit)
                     return base
                 def start(attempt, checkpoint):
                     nonlocal dispatch, probe_used, natural_used, calls
@@ -206,6 +210,9 @@ async def run_manifest(
                        'natural_attempts_used': natural_used, 'natural_attempt_cap': natural_cap,
                        'unfinished_unit_ids': unfinished, 'manifest_sha256': manifest_hash,
                        'pair_log_bytes': {pair: store.path.stat().st_size if store.path.exists() else 0 for pair, store in stores.items()}}
+            if isinstance(authorization, MainAuthorization):
+                summary.update(registration_git_commit=authorization.registration_git_commit,
+                               execution_git_commit=authorization.execution_git_commit, run_id=run_id)
             (directory / 'run_summary.json').write_text(json.dumps(summary, indent=2) + '\n', encoding='utf-8')
             return summary
         tasks = [asyncio.create_task(execute(row)) for row in rows]
