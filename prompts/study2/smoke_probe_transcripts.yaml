@@ -1,0 +1,35 @@
+# Fixed hand-written positions, shared across models. These are fixtures, not
+# main-run scenarios or observed negotiations. All prefixes end in an offer.
+# For role R at message 11 use R-opens[:10]; at message 12 use other-opens[:11].
+# They also supply the illustrative Phase 1 prompt-review prefixes.
+schema_version: 1
+scenario:
+  item: camera
+  reference_price: 500
+  seller_min: 400
+  buyer_max: 600
+transcripts:
+  buyer:
+    - {role: buyer, message: 'Could you take $410 for the camera?', action: offer, price: 410}
+    - {role: seller, message: "I'm asking $570 given its condition.", action: offer, price: 570}
+    - {role: buyer, message: 'I can raise my offer to $435.', action: offer, price: 435}
+    - {role: seller, message: 'I could come down to $550.', action: offer, price: 550}
+    - {role: buyer, message: 'Would you consider $455?', action: offer, price: 455}
+    - {role: seller, message: 'I can offer it for $530.', action: offer, price: 530}
+    - {role: buyer, message: 'I could do $475.', action: offer, price: 475}
+    - {role: seller, message: 'I can reduce the price to $515.', action: offer, price: 515}
+    - {role: buyer, message: 'I can increase my offer to $490.', action: offer, price: 490}
+    - {role: seller, message: 'I can sell for $505.', action: offer, price: 505}
+    - {role: buyer, message: 'My last offer is $500.', action: offer, price: 500}
+  seller:
+    - {role: seller, message: "I'm asking $570 for the camera.", action: offer, price: 570}
+    - {role: buyer, message: 'Would you take $410?', action: offer, price: 410}
+    - {role: seller, message: 'I could lower the price to $550.', action: offer, price: 550}
+    - {role: buyer, message: 'I can offer $435.', action: offer, price: 435}
+    - {role: seller, message: 'I could do $530.', action: offer, price: 530}
+    - {role: buyer, message: 'Could we agree on $455?', action: offer, price: 455}
+    - {role: seller, message: 'I can reduce my asking price to $520.', action: offer, price: 520}
+    - {role: buyer, message: 'I can raise my offer to $475.', action: offer, price: 475}
+    - {role: seller, message: 'I could sell for $515.', action: offer, price: 515}
+    - {role: buyer, message: 'I can offer $490.', action: offer, price: 490}
+    - {role: seller, message: 'My final asking price is $505.', action: offer, price: 505}

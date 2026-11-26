@@ -1,0 +1,142 @@
+# Study 2 build configuration. The final addendum/manifest are locked in Phase 8.
+schema_version: 1
+study: study2
+status: phase1_for_review
+models_file: models.yaml
+prompt_directory: ../prompts/study2
+data_directory: ../data/study2
+results_directory: ../results/study2
+
+# Reuse the unchanged Study 1 roster and API settings. This order also defines
+# the cyclic rotation of alternative names on swapped self-pair cards.
+model_order:
+  - claude_sonnet_5_5
+  - gpt_6_1_terra
+  - gemini_4_hydrogen
+  - kimi_k3_1_pro
+pairs: all_ordered_including_self
+conditions: [not_disclosed, 'true', swapped]
+not_disclosed_model_text: not disclosed
+names:
+  buyer: Alex
+  seller: Jordan
+
+items:
+  - {name: guitar, reference_price: 300}
+  - {name: bicycle, reference_price: 400}
+  - {name: camera, reference_price: 500}
+  - {name: laptop, reference_price: 700}
+  - {name: sofa, reference_price: 900}
+limits:
+  seller_multiplier: [0.75, 0.85]
+  buyer_multiplier: [1.15, 1.25]
+  rounding_increment: 5
+  # Decimal nearest-multiple rounding; an exact positive half-step rounds up.
+  rounding: half_up
+scenario_design:
+  openers: [buyer, seller]
+  replicates_per_item_opener: {buyer: 2, seller: 2}
+  shared_across_conditions: true
+  random_stream: sha256_seed_pair_purpose_python_random
+  execution_order: seeded_shuffle_interleaving_pairs_and_conditions
+  self_pair_swapped_names:
+    allocation: as_evenly_as_possible
+    # With 20 scenarios: the next model gets six, the other two get seven.
+    shortfall: next_model_in_cyclic_roster
+    assignment: seeded_shuffle
+main:
+  scenarios_per_pair: 20
+  episodes_per_pair_condition: 20
+  expected_pairs: 16
+  expected_episodes: 960
+
+protocol:
+  message_limit: 12
+  price_unit: whole_dollars
+  enforce_private_limits: false
+  transcript_message_encoding: json_string
+  requests: stateless_system_and_single_user_message
+cards:
+  # Only the buyer sees a card in Study 2. The text template fixes field order
+  # and indentation; these values add no quality or trustworthiness signals.
+  buyer:
+    represents: Jordan (private seller)
+    agent_type: selling agent
+    agent_id: agt-30417
+    protocol: A2A
+  seller: null
+
+smoke:
+  natural_episodes_per_model: 1
+  natural_pairing: self
+  natural_condition: not_disclosed
+  natural_expected_episodes: 4
+  natural_execution_approved: false
+  probes:
+    positions: [11, 12]
+    roles: [buyer, seller]
+    buyer_condition: not_disclosed
+    transcript_file: smoke_probe_transcripts.yaml
+    phase: smoke
+    flag: is_probe
+    analyze: false
+    expected_calls: 16
+    max_identical_reasks: 16
+    max_total_attempts: 32
+    budget_approved_by: researcher
+    budget_approved_on: '2026-11-26'
+pilot:
+  episodes_per_pair: 5
+  expected_episodes: 80
+  condition_assignment: cyclic_across_pair_and_episode_index
+  pool_outcomes_over_conditions: true
+  allow_condition_comparisons: false
+  parse_rate_must_exceed: 0.95
+  validity_turn_classes: [first, middle, final]
+  prompt_tokens_must_be_below: 4096
+  accept_price_mismatch:
+    flag: accept_price_mismatch
+    retain_supplied_price: true
+    report_counts_by: responding_model
+    pool_over_conditions: true
+    retain_role: true
+    automatic_fix_threshold: null
+validation:
+  identical_reasks_per_invalid_turn: 1
+  exclude_only_after_two_invalid_replies: true
+  truncation_is_invalid: true
+  ignore_and_record_nonoffer_price: true
+  flag_accept_price_mismatch: true
+  api_errors_count_as_invalid_replies: false
+  leave_exhausted_api_errors_unfinished: true
+runner:
+  concurrency: 4
+  per_model_concurrency: 1
+  timeout_seconds: 120
+  api_attempts_per_response: 4
+  backoff_initial_seconds: 1
+  backoff_multiplier: 2
+  backoff_max_seconds: 30
+analysis:
+  accepted_phase: main
+  allow_probes: false
+  bootstrap_resamples: 10000
+  permutation_resamples: 10000
+  equivalence_bound: 0.05
+  alpha: 0.05
+  numerical_tolerance: 1.0e-12
+  interval_method: count_matched_order_statistics
+
+# These are scheduling/design controls, never provider sampling parameters.
+# Phase 1 tests/review use explicit synthetic seeds/fixtures, not main draws.
+seeds:
+  smoke_scenarios: 2026112601
+  smoke_order: 2026112602
+  pilot_scenarios: 2026112603
+  pilot_order: 2026112604
+  main_scenarios: 2026112605
+  main_order: 2026112606
+  bootstrap: 2026112607
+  permutation: 2026112608
+  mock: 2026112609
+  swapped_names: 2026112610

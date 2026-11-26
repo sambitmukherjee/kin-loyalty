@@ -829,3 +829,57 @@ and any batch that must be rerun. No post-pilot fixes or deviations exist yet.
   `a583fe4366893e74735f22fc7f1e45ee7e8d136be5e06ad5d770dfcc1225ee55`.
   No real calls or main outcome analysis were made. Commit the follow-up
   locally without pushing or starting Phase 1.
+
+## 2026-11-26 — Study 2 Phase 1 authorized and completed
+
+- **Authorization:** The researcher explicitly said, "Yes, proceed with Phase 1."
+  This approves configuration, scenario generation, exact templates, rendered
+  review examples, and their offline verification. It does not approve Phase 2,
+  a real run, a push, or changes to shared Study 1 implementation.
+- **Deliverables:** Added `configs/study2.yaml`, the prompt and fixed-transcript
+  files under `prompts/study2/`, isolated modules under
+  `src/kinloyalty/negotiation/`, three Study 2 test files, and the 48 complete
+  system/user requests in `docs/study2_prompt_review.md`. The report is
+  `docs/study2_phase1_report.md`; the Phase 0 plan now points to it.
+- **Implementation conventions:** Under the approved plan, use decimal
+  nearest-$5 half-up rounding; derive independent scenario/name streams from
+  SHA-256 of compact JSON `[seed, pair_id, purpose]`; draw seller then buyer
+  limits in canonical item/opener/replicate order; and keep execution shuffling
+  separate for the manifest phase. Default opener replication is buyer: 2,
+  seller: 2 per item, with separate configuration counts for reuse. These are
+  coding-agent implementation choices presented for Phase 1 review, not a claim
+  that the researcher separately prescribed the exact seed numbers.
+- **Self-pair alternative names:** Implement the previously proposed cyclic
+  next-model shortfall: Claude's six-count alternative is GPT, GPT's is Gemini,
+  Gemini's is Kimi, and Kimi's is Claude. Other alternatives get seven each.
+  Seed-shuffle the assignments; require the scheduled model explicitly when
+  rendering a swapped self-pair.
+- **Seed values:** Smoke scenario/order: 2026112601/2026112602; pilot
+  scenario/order: 2026112603/2026112604; main scenario/order:
+  2026112605/2026112606; bootstrap/permutation: 2026112607/2026112608;
+  mock/swapped names: 2026112609/2026112610. All are distinct local controls,
+  never provider sampling parameters. The configured main scenario seed was
+  not used and the main manifest was not generated. Review/probe fixtures are
+  hand-written (camera, P=$500, s=$400, b=$600); tests use synthetic seeds.
+- **Exact rendering and approved diagnostics:** Preserve the specified system,
+  card, and turn wording, literal JSON, private-limit separation, and one-line
+  JSON-escaped transcript messages. Low-level rendering supports optional cards
+  for reuse; Study 2's wrapper always shows a buyer card and no seller card.
+  Configuration carries forward the approved ignored non-offer prices,
+  acceptance-price mismatch flag/per-model pilot counts, and the 16+16 smoke
+  probe budget. Their runtime implementation belongs to subsequent phases.
+- **Verification:** Final `.venv/bin/python -m pytest`: 347 passed in 32.83
+  seconds (312 existing, 35 new). CLI regeneration in a fresh temporary directory
+  is byte-identical to the review; SHA-256:
+  `efc39ef410303fb9b9275b4a675ef4652638919afd390e0270a35826675aedb9`.
+  A synthetic full-design check verifies 320 scenarios/960 condition assignments,
+  item/opener/rotation balance, and paired facts. The Study 1 rebuilt/saved main
+  manifest still matches its registered SHA-256:
+  `a583fe4366893e74735f22fc7f1e45ee7e8d136be5e06ad5d770dfcc1225ee55`.
+- **Preservation and next gate:** No existing Study 1 source, test, configuration,
+  prompt, data, result, registration, or tag changed in Phase 1. No main outcome
+  log was read or analysed, no paid call or push occurred, and `codex_prompts/`
+  stays ignored/untracked. Commit Phase 1 locally and stop. Request explicit
+  approval for Phase 2: pure state/rules, schemas, validation/scoring, negotiation
+  mocks, and the episode engine with offline tests, including the approved
+  acceptance-price mismatch behavior.

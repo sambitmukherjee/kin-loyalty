@@ -4,8 +4,9 @@ Date: 2026-11-26 (Asia/Kolkata).
 
 Status: Phase 0 review finished. On 2026-11-26 the researcher approved the three
 clarifications/corrections below and the forced-position smoke-probe budget.
-Approval to start Phase 1 remains pending. This document proposes phase work;
-specific approvals recorded below do not authorize starting another phase.
+The researcher subsequently explicitly approved Phase 1; its implementation and
+review deliverables are documented in `docs/study2_phase1_report.md`. Later phase
+starts still require explicit approval.
 
 ## Review and baseline
 
@@ -263,4 +264,5 @@ Study 1 artifact.
 The initial Phase 0 commit created this plan and appended its review status to
 `docs/decisions.md`. This follow-up records the researcher's decisions and makes
 the one approved test assertion correction. It changes no production code,
-configuration, prompt, data, result, or tag. Phase 1 has not started.
+configuration, prompt, data, result, or tag. Phase 1 had not started at that
+follow-up; its later authorization and work are recorded in the Phase 1 report.
