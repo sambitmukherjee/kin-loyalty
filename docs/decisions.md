@@ -786,3 +786,46 @@ and any batch that must be rerun. No post-pilot fixes or deviations exist yet.
 - **Preservation:** No Study 1 main response logs/outcome tables were inspected
   and no main outcome analysis was run. All Study 1 artifacts and tags remain
   unchanged. `codex_prompts/` remains ignored and untracked.
+
+## 2026-11-26 — Researcher clarified Study 2 protocol and approved smoke probes
+
+- **Approver and scope:** The researcher explicitly answered yes to the three
+  Phase 0 questions and specified additional smoke probes. Record these
+  decisions and apply the approved test-only correction now. Approval to start
+  Phase 1 is still pending; do not begin it or make paid calls at this point.
+- **Registration order:** The Study 2 addendum must be locked before main-run
+  collection. Approved smoke and pilot collection may precede the lock and
+  never enter inference. Preserve the original Study 1 registration unchanged.
+- **Supplied non-offer prices:** Replies with a supplied price on `accept` or
+  `walk_away` remain valid. Preserve the raw price and ignore it for scoring;
+  acceptance always implements the counterparty's latest offer. Additionally
+  flag an `accept` carrying a non-null price that differs from that offer, and
+  report counts per responding model in the blind pilot report, pooled across
+  disclosure conditions. Retain the accepting role. The researcher, not an
+  automatic threshold, decides whether frequent mismatches warrant a mechanical
+  fix. Implement these requirements in the later approved engine/logging/report
+  phases; they do not authorize changing the exact prompt text.
+- **Approved test correction:** At `tests/test_analysis.py:383`, change only the
+  assertion that the real main directory does not exist to an assertion that
+  the attempted `data/study1/main/synthetic` subdirectory does not exist. The
+  reason is completed real collection, not a change to the production synthetic
+  write protection. No Study 1 implementation or research artifact is changed.
+- **Approved smoke probes:** For every model and each buyer/seller role, make
+  one fixed-position call at message 11 and one at message 12: 16 calls, plus
+  at most 16 identical re-asks. Use fixed hand-written plausible transcript
+  prefixes; buyer probes use `not_disclosed`, sellers see no card. Log each
+  attempt with `phase: smoke` and `is_probe: true`, exclude probes from analysis,
+  check both schema variants and final-turn actions, and reproduce the exact
+  transcripts in the smoke report. No extra probe retry allowance is approved;
+  cap total probe attempts at 32 unless the researcher expands the budget.
+  The approval persists for Phase 4; natural smoke episodes, phase starts, and
+  other real runs retain their separate gates.
+- **Plan update:** `docs/study2_phase0_plan.md` incorporates these approved
+  requirements into the relevant phases. `codex_prompts/` stays ignored and
+  untracked, and the local instruction file is not edited or committed.
+- **Verification:** `.venv/bin/python -m pytest` passed all 312 tests in 32.03
+  seconds after the assertion correction. The in-memory rebuilt and saved
+  Study 1 main manifests still have the registered SHA-256
+  `a583fe4366893e74735f22fc7f1e45ee7e8d136be5e06ad5d770dfcc1225ee55`.
+  No real calls or main outcome analysis were made. Commit the follow-up
+  locally without pushing or starting Phase 1.

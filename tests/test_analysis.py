@@ -380,7 +380,7 @@ def test_cli_reproduce_refuses_missing_and_ineligible_data(batches: tuple[Path, 
 def test_simulation_cannot_write_into_real_study_directories(tmp_path: Path) -> None:
     with pytest.raises(ValueError, match="outside real study"):
         asyncio.run(simulate_study1(ROOT / "configs/study1.yaml", ROOT / "data/study1/main/synthetic"))
-    assert not (ROOT / "data/study1/main").exists()
+    assert not (ROOT / "data/study1/main/synthetic").exists()
 
 
 def test_api_retry_then_two_invalid_replies_remain_excluded_not_zero(batches: tuple[Path, Path], tmp_path: Path) -> None:

@@ -2,9 +2,10 @@
 
 Date: 2026-11-26 (Asia/Kolkata).
 
-Status: Phase 0 review finished; researcher responses and approval to start
-Phase 1 are pending. This document proposes work, not approval to implement it.
-The researcher requested following the local Study 2 coding-agent instructions.
+Status: Phase 0 review finished. On 2026-11-26 the researcher approved the three
+clarifications/corrections below and the forced-position smoke-probe budget.
+Approval to start Phase 1 remains pending. This document proposes phase work;
+specific approvals recorded below do not authorize starting another phase.
 
 ## Review and baseline
 
@@ -29,7 +30,12 @@ The researcher requested following the local Study 2 coding-agent instructions.
   `tests/test_analysis.py::test_simulation_cannot_write_into_real_study_directories`,
   line 383. Its expected rejection of synthetic output succeeds, but its final
   assertion assumes the real `data/study1/main` directory does not exist.
-  Collection has since created that directory. No test correction was made.
+  Collection has since created that directory. This was the initial baseline;
+  the researcher subsequently approved checking that the attempted `synthetic`
+  subdirectory was not created instead. Only that assertion has been corrected.
+- After that approved correction, `.venv/bin/python -m pytest` returned
+  **312 passed** in 32.03 seconds. The in-memory rebuilt and saved Study 1 main
+  manifest digests still match the registered SHA-256 above.
 - Analysis tests use generated synthetic fixtures in temporary directories.
   No Study 1 main response logs or outcome tables were inspected, and no main
   outcome analysis or summary was computed.
@@ -61,31 +67,44 @@ byte-identical Study 1 manifest check. Other shared changes require their own
 explanation and approval before editing. A new negotiation mock client can
 implement the existing interface without changing Study 1's mock behavior.
 
-## Questions requiring researcher decisions
+## Researcher decisions approved on 2026-11-26
 
 1. **Registration order.** Study 1 Section 1 says Study 2 details will be
    registered before its "data collection". The new instructions explicitly
-   require smoke and pilot collection before locking the addendum. Proposed
+   require smoke and pilot collection before locking the addendum. Approved
    clarification: the addendum precedes **main-run collection**, while approved
    smoke and pilot data are permitted beforehand and excluded from inference.
-   Preserve the original registration and record the researcher's clarification.
+   The original Study 1 registration remains unchanged.
 2. **Price on non-offer actions.** Study 2 Section 3.4 says the price is null
    for `accept` and `walk_away`, while Section 3.7 says a supplied price is
-   ignored and recorded, rather than invalidating the reply. Proposed resolution:
+   ignored and recorded, rather than invalidating the reply. Approved resolution:
    preserve the null instruction, retain the raw supplied price, and let the
-   explicit Section 3.7 exception govern local validation/scoring. Confirm this
-   precedence before finalizing schemas and validation.
-3. **Existing test failure.** Request permission for a test-only correction:
+   explicit Section 3.7 exception govern local validation/scoring. Keep such
+   replies valid. An `accept` always uses the counterparty's latest offer price.
+   Additionally record a flag when an `accept` supplies a non-null price that
+   differs from that offer. Report the count per responding model, across both
+   roles and pooled over disclosure conditions, in the pilot report. Retain the
+   role for diagnostics. No frequency threshold or automatic fix is authorized;
+   the researcher decides whether frequent mismatches imply misunderstanding.
+3. **Existing test failure.** The researcher approved a test-only correction:
    assert that the attempted `data/study1/main/synthetic` output was not created,
-   rather than asserting the real collection directory is absent. This must
-   not alter production code or any Study 1 research artifact. If permission is
-   withheld, preserve the test and continue to report the baseline failure.
+   rather than asserting the real collection directory is absent. No production
+   code or Study 1 research artifact is changed.
 
-Additional smoke-test limitation: four natural negotiations cannot guarantee
-that every provider reaches message 12. Thus they may not exercise the final-turn
-schema. Report observed schema coverage explicitly. If coverage is incomplete,
-stop and request approval for a bounded set of schema probes before making any
-additional paid calls; do not prolong a negotiation or change its rules.
+4. **Forced-position smoke probes.** Four natural negotiations cannot guarantee
+   that every provider reaches message 12. The researcher approved adding one
+   probe for each model, role (buyer/seller), and position (message 11/12):
+   **16 calls, plus at most 16 identical re-asks**. Use fixed, hand-written,
+   plausible transcript prefixes; buyer probes use the `not_disclosed` card.
+   Log every attempt with `phase: smoke` and `is_probe: true`; probes never enter
+   analysis or episode outcome summaries. Verify provider acceptance of both
+   schemas and that message-12 replies are only `accept` or `walk_away`. Include
+   the full transcripts used in the smoke report. Preserve the mismatch flag
+   for applicable probe replies too, without mixing them into pilot counts.
+   No additional probe API-error retry allowance or budget increase is implied;
+   do not exceed 32 total probe call attempts without explicit permission.
+   This approval is retained for the smoke phase, not an instruction to make
+   calls now or approval for the four natural smoke episodes.
 
 ## Proposed phases and acceptance checks
 
@@ -125,6 +144,9 @@ replies, API errors, and a configurable planted label effect.
 Test all turn/action boundaries; escaped one-line transcripts; latest-offer
 acceptance; all four terminal outcomes; shares outside [0, 1]; both mandate
 violations; exactly one identical re-ask; and separate API retry accounting.
+Test that non-offer supplied prices remain valid and are retained but ignored
+in scoring, and that the acceptance-price mismatch flag follows the approved
+rule without changing the agreed price.
 Preserve Study 1's four-attempt retry policy, 120-second timeout, and 1/2/4-second
 backoffs. Make no real calls.
 
@@ -134,6 +156,9 @@ Implement deterministic Study 2 manifests, concurrent episodes with sequential
 turns, per-model call limits, one append-only turn log per pair, episode
 records, durable pending-attempt recovery, and replay from the turn logs.
 Add the approved additive Study 2 CLI group for these operations.
+Implement fixed-position smoke probe execution and explicit probe markers, with
+offline checks of role/position coverage, fixed transcript provenance, the
+approved attempt cap, and exclusion from normal episode collection/inference.
 
 Use synthetic seeds to verify a complete 960-episode design: 16 ordered pairs,
 20 scenarios/pair reused across all three conditions, exact item/opener balance,
@@ -151,11 +176,22 @@ API retries budgeted separately before execution. These are not an unconditional
 48-attempt ceiling. Read credentials only from the ignored `.env`, without
 logging keys or headers.
 
+Also execute the already approved **16 forced-position schema probes**, with at
+most one identical re-ask per probe (16 maximum), within 32 total probe attempts.
+For each of the four models, probe buyer and seller at both message 11 and
+message 12 using fixed hand-written plausible transcripts. Buyer probes use the
+`not_disclosed` card; seller probes have no card. Preserve the exact transcripts
+in the smoke report and requests in the logs. Label attempts `phase: smoke` and
+`is_probe: true`. These probes are never analysed. Stop rather than exceeding
+the approved probe budget; report any incomplete probe work.
+
 Check provider acceptance, schema coverage, usage/reasoning/cache fields,
 finish reasons, token lengths, model version strings, and replay. Compare every
 returned model string with the Study 1 registration's recorded strings. Stop
 on drift; report missing token fields as missing, never invent zeros. Report
-incomplete schema coverage and seek a separate probe budget if necessary.
+schema acceptance per model/role/position, and verify that message-12 responses
+contain only `accept` or `walk_away`. Preserve failed attempts/re-asks and report
+incomplete coverage. Any extra probes require separate approval.
 
 ### Phase 5: complete analysis using mock data only
 
@@ -184,6 +220,10 @@ Complete or explicitly account for all unfinished episodes before closing the
 pilot. Produce a mechanical report with validity by model/turn class, re-asks,
 exclusions, API failures, token/cache/reasoning/version availability, longest
 provider-counted prompt, episode lengths/final-turn coverage, and replay checks.
+Include the number of acceptances carrying a non-null price different from the
+counterparty's latest offer, per responding model across both roles and pooled
+over disclosure conditions. Keep supplied prices and mismatch flags in the logs;
+let the researcher decide whether their frequency warrants a mechanical fix.
 Report substantive outcome distributions by pair pooled across disclosure
 conditions only. Do not compute pilot disclosure comparisons or hypothesis tests.
 
@@ -211,8 +251,8 @@ timestamped lock. Stop after the addendum lock; the main Study 2 run is separate
 
 ## How to check Phase 0
 
-Run `.venv/bin/python -m pytest` to reproduce the baseline result. Inspect the
-single failing assertion at `tests/test_analysis.py:383`. Use
+Run `.venv/bin/python -m pytest` to verify the approved assertion correction.
+The original baseline result above predates that correction. Use
 `git rev-parse 'prereg-study1^{}' 'study1-data^{}'` to check the preserved tags,
 and `git check-ignore -v codex_prompts/study2-coding-agent-prompt.md` plus
 `git ls-files -- codex_prompts` to verify the local instruction folder is ignored
@@ -220,5 +260,7 @@ and untracked. The manifest hash check used `build_manifest` and `json_line`
 in memory and compared the result with the saved file's digest; it wrote no
 Study 1 artifact.
 
-Phase 0 creates this plan and appends its review status to `docs/decisions.md`.
-It changes no implementation, test, configuration, prompt, data, result, or tag.
+The initial Phase 0 commit created this plan and appended its review status to
+`docs/decisions.md`. This follow-up records the researcher's decisions and makes
+the one approved test assertion correction. It changes no production code,
+configuration, prompt, data, result, or tag. Phase 1 has not started.
