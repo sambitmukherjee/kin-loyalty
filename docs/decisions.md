@@ -1070,3 +1070,55 @@ and any batch that must be rerun. No post-pilot fixes or deviations exist yet.
   no value was printed or stored. The external manifest has SHA-256
   `5bc7fd7065eca30be44c4ff9de8b0b43143e5e0a40ce7f9a74f982d4768321eb`.
   Commit this tested preparation before invoking any real provider.
+
+## 2026-11-26 — Study 2 Phase 4 live smoke completed
+
+- **Execution provenance:** After all 520 offline tests and preservation checks
+  passed, committed preparation as
+  `2fd5a59b77e4d9e689f0d5fe921c482d44ec872a`. Executed the approved external
+  frozen manifest from that clean checkout. Every real attempt records that
+  exact commit and `code_dirty: false`. Source configuration, templates,
+  schemas, provider adapters, low-effort/default-sampling settings, and 8,192
+  output caps were not changed during execution.
+- **Scope and actual calls:** Completed all four natural not-disclosed self-pair
+  episodes and sixteen marked model/role/message-11/12 probes in **51 calls**:
+  35 natural turns and 16 probe calls. No API error, invalid reply, re-ask,
+  retry, exclusion, output-cap truncation, or unfinished unit occurred. Budgets
+  used were 35/384 natural and 16/32 probe attempts, with no resumption needed.
+- **Schema/version checks:** Every provider accepted both forced-position
+  schemas in each role. Every message-12 probe replied only `accept` or
+  `walk_away`. Returned strings exactly matched the four baseline aliases on
+  every response: `claude-sonnet-5-5`, `gpt-6.1-terra`, `gemini-4-hydrogen`,
+  and `kimi-k3.1-pro`. No drift halt, model substitution, or parameter/prompt
+  fix was necessary. Natural lengths were Claude 10, GPT 11, Gemini 6, Kimi 8;
+  none reached message 12, confirming the usefulness of the fixed probes.
+- **Usage metadata:** Reasoning counts were present in all 51 calls, including
+  Anthropic's reported zeros. OpenAI and Anthropic cache reads/writes were zero
+  throughout. Google omitted both cache counts in all 10 calls; Kimi omitted
+  cache reads in four of 12 calls and reported writes in all 12. Available
+  Kimi reads/writes were 256/512. Missing fields remain null, distinct from
+  zero. Maximum provider-reported input was 1,389 tokens, below 4,096.
+- **Preservation and replay:** Copied external raw artifacts and generated
+  reports byte-for-byte into `data/study2/smoke/` and
+  `results/study2/smoke-report/`; exact key-value scans passed without exposing
+  credentials. The copied manifest hash is
+  `5bc7fd7065eca30be44c4ff9de8b0b43143e5e0a40ce7f9a74f982d4768321eb`.
+  Independent replay verified all 4 natural summaries, 16 unscored probe
+  summaries, and 51 attempts. Probes remain separate/ineligible for inference.
+  Full hand-written transcript prefixes are included in the report and exact
+  system/user requests in the probe report/manifest.
+- **Report and next gate:** `docs/study2_phase4_report.md` records mechanical
+  outcomes, model/usage checks, raw artifact paths, hash inventory, replay
+  commands, and the next phase. No unresolved mechanical issue remains; known
+  omitted cache fields follow the established missing-data policy. Commit
+  data/reports locally and stop for approval before Phase 5's analysis pipeline,
+  which must be tested only on synthetic mock logs, not real smoke/pilot data.
+  Do not push these new commits without permission. Study 1 artifacts/tags and
+  the locked manifest remain unchanged; no Study 1 main outcome log was read
+  or analysed, no actual Study 2 main scenarios/manifest were drawn, and
+  `codex_prompts/` stays ignored/untracked.
+- **Final artifact check:** Re-generated all four mechanical report files from
+  the repository copy and verified byte-identical output. Verified all sixteen
+  digests in the artifact inventory, including the phase report/execution plan.
+  Exact credential-value scans passed without exposing values. No additional
+  API call or analysis was made for these checks.

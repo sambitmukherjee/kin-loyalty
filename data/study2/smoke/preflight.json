@@ -1,0 +1,31 @@
+{
+  "authorization": {
+    "expected_versions": {
+      "claude-sonnet-5-5": "claude-sonnet-5-5",
+      "gpt-6.1-terra": "gpt-6.1-terra",
+      "gemini-4-hydrogen": "gemini-4-hydrogen",
+      "kimi-k3.1-pro": "kimi-k3.1-pro"
+    },
+    "natural_attempt_cap": 384,
+    "probe_attempt_cap": 32,
+    "approved_by": "researcher",
+    "approved_on": "2026-11-26",
+    "phase": "smoke"
+  },
+  "provenance": {
+    "git_commit": "2fd5a59b77e4d9e689f0d5fe921c482d44ec872a",
+    "code_dirty": false,
+    "package_version": "0.1.0",
+    "sdk_versions": {
+      "anthropic": "2.14.0",
+      "openai": "3.59.0",
+      "google-genai": "3.6.1"
+    }
+  },
+  "planned_natural_episodes": 4,
+  "planned_probes": 16,
+  "ordinary_call_ceiling": 64,
+  "total_attempt_cap": 416,
+  "credential_source": "ignored .env only; process values excluded",
+  "scientific_config_approval_note": "Phase 1 administrative flag is superseded by this dated researcher authorization."
+}

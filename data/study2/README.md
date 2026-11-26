@@ -1,8 +1,9 @@
 # Study 2 artifacts
 
-Real smoke, pilot, and main artifacts will be stored in separate phase
-directories only after their respective approvals. No real calls or actual main
-manifest have been produced during the build phases.
+Real smoke, pilot, and main artifacts use separate phase directories after
+their respective approvals. The approved smoke is complete under `smoke/`:
+four natural episodes and sixteen probes, 51 calls, with raw logs and replayable
+summaries. No pilot or main calls and no actual main manifest have been produced.
 
 Each approved run uses:
 
@@ -30,5 +31,7 @@ the later lock phase, using its separate seed.
 
 Build/test data are synthetic and belong in a temporary directory or a separate
 synthetic directory, outside real smoke/pilot/main folders. Current CLI execution
-accepts mocks only and rejects real-study output destinations. See
+accepts mocks only and rejects real-study output destinations. The separately
+approved `kinloyalty.negotiation.smoke` module supports live smoke only, with
+persisted 384/32 natural/probe caps, version-drift halts, and .env-only keys. See
 `docs/study2_phase3_report.md` for safe demonstration/replay commands.

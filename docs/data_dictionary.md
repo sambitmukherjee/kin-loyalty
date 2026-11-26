@@ -442,3 +442,36 @@ bindings/requests/decisions, and duplicate identities. Missing terminal summarie
 can be repaired once by explicit runner resumption. Reply JSON content is kept
 separate from transport metadata checks so the approved ignored-price exception
 cannot be invalidated by arbitrary keys inside a model-supplied price object.
+
+## Study 2 Phase 4 live smoke authorization and observations
+
+`collection.json` binds `execution_mode: live`, the exact manifest digest,
+the researcher/date/phase approval, `natural_attempt_cap: 384`,
+`probe_attempt_cap: 32`, and the prior `expected_versions` map from Study 1's
+registration. It is immutable across resumptions. Every live attempt has
+`synthetic: false`, the actual live mode, `expected_model_version`, and
+`model_drift`. Changed or missing returned strings are logged before dispatch
+halts. Existing drift prevents further live resumption without researcher
+review. Mixed modes, other live phases, and dirty/uncommitted code are rejected.
+
+`preflight.json` retains clean-code provenance, the authorization, the 4+16
+planned units, ordinary/total call ceilings, and .env-only credential policy.
+No key or header is captured. The dated authorization supersedes the historical
+false administrative approval flag in the unchanged Phase 1 source config,
+solely for smoke execution. Counters include API errors and uncertain calls;
+both budgets persist across retries and resumes. `run_summary.json` now also
+records status/mode and natural attempt usage/cap, including halted runs.
+
+Real smoke artifacts are in `data/study2/smoke/`. The completed run has 4 natural
+episode records, 16 separate unscored probe records, and 51 valid attempts, all
+from clean code commit `2fd5a59b77e4d9e689f0d5fe921c482d44ec872a`. All returned
+versions match the registration. Cache counts stay null where omitted: Google
+omitted reads/writes on all 10 responses; Kimi omitted reads on 4 of 12 and
+reported writes on all 12. OpenAI/Anthropic reported zero reads/writes. Every
+reasoning count was present, including Anthropic's observed zero values.
+
+`results/study2/smoke-report/` contains a mechanical audit, per-call usage CSV,
+the sixteen exact probe requests/prefixes, the generated report, and a digest
+inventory. `docs/study2_phase4_report.md` adds phase authorization/provenance,
+usage caveats, replay instructions, and the next gate. These reports contain no
+hypothesis comparisons; real smoke/probe data never enter main inference.

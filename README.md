@@ -7,15 +7,19 @@ dictator game and in the proposer and responder roles of an ultimatum game.
 Study 1's unit of observation is a fresh, self-contained model call, with
 hypothetical counterparties. Study 2 adds up to 12-message buyer/seller
 negotiations with buyer-only model-label disclosure. Its offline engine,
-balanced plans, durable mock collection, recovery, and replay are implemented;
-live smoke/pilot work and the final addendum remain separately gated.
+balanced plans, durable collection, recovery, and replay are implemented.
+The approved live smoke completed four natural episodes and sixteen probes in
+51 valid calls, with exact returned-version matches, no errors/re-asks/retries,
+and no truncation. See the [smoke report](docs/study2_phase4_report.md).
+Analysis construction on mock data, the pilot, and the final addendum remain
+separately gated.
 
 Study 2 commands are isolated under `kinloyalty study2`: `manifest`, `run`
 (mock only), `replay`, and `probe-report`. See the
 [Phase 3 report](docs/study2_phase3_report.md) for safe temporary-directory
 examples, the exact artifact contract, and verification. The configured main
 scenario seed has not been used, no actual Study 2 main manifest was generated,
-and no real Study 2 model call or outcome analysis has run. Existing Study 1
+and no real Study 2 outcome analysis has run. Existing Study 1
 commands and their defaults remain available unchanged.
 
 ## Current status

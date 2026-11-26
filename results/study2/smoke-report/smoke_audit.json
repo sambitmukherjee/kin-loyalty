@@ -1,0 +1,362 @@
+{
+  "phase": "smoke",
+  "execution_mode": "live",
+  "manifest_sha256": "5bc7fd7065eca30be44c4ff9de8b0b43143e5e0a40ce7f9a74f982d4768321eb",
+  "attempts": 51,
+  "natural_attempts": 35,
+  "probe_attempts": 16,
+  "api_errors": 0,
+  "invalid_responses": 0,
+  "truncated_responses": 0,
+  "model_drift_responses": 0,
+  "max_input_tokens": 1389,
+  "models": {
+    "claude_sonnet_5_5": {
+      "requested_api_id": "claude-sonnet-5-5",
+      "expected_version": "claude-sonnet-5-5",
+      "returned_versions": [
+        "claude-sonnet-5-5"
+      ],
+      "responses": 14,
+      "valid_responses": 14,
+      "reasoning_missing": 0,
+      "reasoning_values": [
+        0
+      ],
+      "cache_read_missing": 0,
+      "cache_write_missing": 0,
+      "cache_read_values": [
+        0
+      ],
+      "cache_write_values": [
+        0
+      ],
+      "max_input_tokens": 1389,
+      "stop_reasons": {
+        "end_turn": 14
+      }
+    },
+    "gpt_6_1_terra": {
+      "requested_api_id": "gpt-6.1-terra",
+      "expected_version": "gpt-6.1-terra",
+      "returned_versions": [
+        "gpt-6.1-terra"
+      ],
+      "responses": 15,
+      "valid_responses": 15,
+      "reasoning_missing": 0,
+      "reasoning_values": [
+        0,
+        7,
+        12,
+        13,
+        15,
+        17,
+        20,
+        23,
+        26,
+        29,
+        45,
+        63
+      ],
+      "cache_read_missing": 0,
+      "cache_write_missing": 0,
+      "cache_read_values": [
+        0
+      ],
+      "cache_write_values": [
+        0
+      ],
+      "max_input_tokens": 679,
+      "stop_reasons": {
+        "stop": 15
+      }
+    },
+    "gemini_4_hydrogen": {
+      "requested_api_id": "gemini-4-hydrogen",
+      "expected_version": "gemini-4-hydrogen",
+      "returned_versions": [
+        "gemini-4-hydrogen"
+      ],
+      "responses": 10,
+      "valid_responses": 10,
+      "reasoning_missing": 0,
+      "reasoning_values": [
+        98,
+        108,
+        115,
+        119,
+        142,
+        158,
+        186,
+        200,
+        311
+      ],
+      "cache_read_missing": 10,
+      "cache_write_missing": 10,
+      "cache_read_values": [],
+      "cache_write_values": [],
+      "max_input_tokens": 870,
+      "stop_reasons": {
+        "STOP": 10
+      }
+    },
+    "kimi_k3_1_pro": {
+      "requested_api_id": "kimi-k3.1-pro",
+      "expected_version": "kimi-k3.1-pro",
+      "returned_versions": [
+        "kimi-k3.1-pro"
+      ],
+      "responses": 12,
+      "valid_responses": 12,
+      "reasoning_missing": 0,
+      "reasoning_values": [
+        13,
+        23,
+        63,
+        71,
+        93,
+        107,
+        117,
+        126,
+        130,
+        153,
+        190
+      ],
+      "cache_read_missing": 4,
+      "cache_write_missing": 0,
+      "cache_read_values": [
+        256,
+        512
+      ],
+      "cache_write_values": [
+        256,
+        512
+      ],
+      "max_input_tokens": 795,
+      "stop_reasons": {
+        "stop": 12
+      }
+    }
+  },
+  "probes": [
+    {
+      "episode_id": "study2:smoke:probe:kimi_k3_1_pro:seller:k11",
+      "model": "kimi_k3_1_pro",
+      "role": "seller",
+      "message_number": 11,
+      "attempts": 1,
+      "provider_accepted_schema": true,
+      "valid_final_reply": true,
+      "observed_actions": [
+        "accept"
+      ]
+    },
+    {
+      "episode_id": "study2:smoke:probe:gpt_6_1_terra:buyer:k11",
+      "model": "gpt_6_1_terra",
+      "role": "buyer",
+      "message_number": 11,
+      "attempts": 1,
+      "provider_accepted_schema": true,
+      "valid_final_reply": true,
+      "observed_actions": [
+        "offer"
+      ]
+    },
+    {
+      "episode_id": "study2:smoke:probe:gemini_4_hydrogen:seller:k12",
+      "model": "gemini_4_hydrogen",
+      "role": "seller",
+      "message_number": 12,
+      "attempts": 1,
+      "provider_accepted_schema": true,
+      "valid_final_reply": true,
+      "observed_actions": [
+        "accept"
+      ]
+    },
+    {
+      "episode_id": "study2:smoke:probe:gemini_4_hydrogen:buyer:k12",
+      "model": "gemini_4_hydrogen",
+      "role": "buyer",
+      "message_number": 12,
+      "attempts": 1,
+      "provider_accepted_schema": true,
+      "valid_final_reply": true,
+      "observed_actions": [
+        "accept"
+      ]
+    },
+    {
+      "episode_id": "study2:smoke:probe:kimi_k3_1_pro:buyer:k12",
+      "model": "kimi_k3_1_pro",
+      "role": "buyer",
+      "message_number": 12,
+      "attempts": 1,
+      "provider_accepted_schema": true,
+      "valid_final_reply": true,
+      "observed_actions": [
+        "accept"
+      ]
+    },
+    {
+      "episode_id": "study2:smoke:probe:gpt_6_1_terra:seller:k12",
+      "model": "gpt_6_1_terra",
+      "role": "seller",
+      "message_number": 12,
+      "attempts": 1,
+      "provider_accepted_schema": true,
+      "valid_final_reply": true,
+      "observed_actions": [
+        "accept"
+      ]
+    },
+    {
+      "episode_id": "study2:smoke:probe:gpt_6_1_terra:buyer:k12",
+      "model": "gpt_6_1_terra",
+      "role": "buyer",
+      "message_number": 12,
+      "attempts": 1,
+      "provider_accepted_schema": true,
+      "valid_final_reply": true,
+      "observed_actions": [
+        "accept"
+      ]
+    },
+    {
+      "episode_id": "study2:smoke:probe:gemini_4_hydrogen:buyer:k11",
+      "model": "gemini_4_hydrogen",
+      "role": "buyer",
+      "message_number": 11,
+      "attempts": 1,
+      "provider_accepted_schema": true,
+      "valid_final_reply": true,
+      "observed_actions": [
+        "accept"
+      ]
+    },
+    {
+      "episode_id": "study2:smoke:probe:kimi_k3_1_pro:buyer:k11",
+      "model": "kimi_k3_1_pro",
+      "role": "buyer",
+      "message_number": 11,
+      "attempts": 1,
+      "provider_accepted_schema": true,
+      "valid_final_reply": true,
+      "observed_actions": [
+        "offer"
+      ]
+    },
+    {
+      "episode_id": "study2:smoke:probe:claude_sonnet_5_5:buyer:k11",
+      "model": "claude_sonnet_5_5",
+      "role": "buyer",
+      "message_number": 11,
+      "attempts": 1,
+      "provider_accepted_schema": true,
+      "valid_final_reply": true,
+      "observed_actions": [
+        "offer"
+      ]
+    },
+    {
+      "episode_id": "study2:smoke:probe:claude_sonnet_5_5:buyer:k12",
+      "model": "claude_sonnet_5_5",
+      "role": "buyer",
+      "message_number": 12,
+      "attempts": 1,
+      "provider_accepted_schema": true,
+      "valid_final_reply": true,
+      "observed_actions": [
+        "accept"
+      ]
+    },
+    {
+      "episode_id": "study2:smoke:probe:gpt_6_1_terra:seller:k11",
+      "model": "gpt_6_1_terra",
+      "role": "seller",
+      "message_number": 11,
+      "attempts": 1,
+      "provider_accepted_schema": true,
+      "valid_final_reply": true,
+      "observed_actions": [
+        "offer"
+      ]
+    },
+    {
+      "episode_id": "study2:smoke:probe:gemini_4_hydrogen:seller:k11",
+      "model": "gemini_4_hydrogen",
+      "role": "seller",
+      "message_number": 11,
+      "attempts": 1,
+      "provider_accepted_schema": true,
+      "valid_final_reply": true,
+      "observed_actions": [
+        "accept"
+      ]
+    },
+    {
+      "episode_id": "study2:smoke:probe:claude_sonnet_5_5:seller:k11",
+      "model": "claude_sonnet_5_5",
+      "role": "seller",
+      "message_number": 11,
+      "attempts": 1,
+      "provider_accepted_schema": true,
+      "valid_final_reply": true,
+      "observed_actions": [
+        "offer"
+      ]
+    },
+    {
+      "episode_id": "study2:smoke:probe:claude_sonnet_5_5:seller:k12",
+      "model": "claude_sonnet_5_5",
+      "role": "seller",
+      "message_number": 12,
+      "attempts": 1,
+      "provider_accepted_schema": true,
+      "valid_final_reply": true,
+      "observed_actions": [
+        "accept"
+      ]
+    },
+    {
+      "episode_id": "study2:smoke:probe:kimi_k3_1_pro:seller:k12",
+      "model": "kimi_k3_1_pro",
+      "role": "seller",
+      "message_number": 12,
+      "attempts": 1,
+      "provider_accepted_schema": true,
+      "valid_final_reply": true,
+      "observed_actions": [
+        "accept"
+      ]
+    }
+  ],
+  "replay": {
+    "planned_units": 20,
+    "episodes_verified": 4,
+    "probes_verified": 16,
+    "unfinished_unit_ids": [],
+    "attempts_verified": 51,
+    "manifest_sha256": "5bc7fd7065eca30be44c4ff9de8b0b43143e5e0a40ce7f9a74f982d4768321eb"
+  },
+  "code_commits": [
+    "2fd5a59b77e4d9e689f0d5fe921c482d44ec872a"
+  ],
+  "all_calls_from_clean_code": true,
+  "status": "complete",
+  "checks": {
+    "all_units_complete": true,
+    "all_probe_schemas_accepted": true,
+    "all_probes_valid": true,
+    "message12_actions_only_accept_or_walk": true,
+    "all_responses_valid": true,
+    "no_model_drift": true,
+    "no_truncation": true,
+    "reasoning_counts_present": true,
+    "inputs_below_4096": true,
+    "openai_anthropic_zero_cache": true,
+    "within_approved_budgets": true
+  }
+}

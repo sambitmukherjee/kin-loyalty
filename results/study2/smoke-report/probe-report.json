@@ -1,0 +1,1638 @@
+{
+  "synthetic": false,
+  "inference_eligible": false,
+  "replay": {
+    "planned_units": 20,
+    "episodes_verified": 4,
+    "probes_verified": 16,
+    "unfinished_unit_ids": [],
+    "attempts_verified": 51,
+    "manifest_sha256": "5bc7fd7065eca30be44c4ff9de8b0b43143e5e0a40ce7f9a74f982d4768321eb"
+  },
+  "probes": [
+    {
+      "episode_id": "study2:smoke:probe:kimi_k3_1_pro:seller:k11",
+      "phase": "smoke",
+      "is_probe": true,
+      "model": "kimi_k3_1_pro",
+      "role": "seller",
+      "message_number": 11,
+      "terminal": {
+        "record_id": "study2:smoke:probe:kimi_k3_1_pro:seller:k11",
+        "episode_id": "study2:smoke:probe:kimi_k3_1_pro:seller:k11",
+        "phase": "smoke",
+        "pair_id": "kimi_k3_1_pro__kimi_k3_1_pro",
+        "manifest_sha256": "5bc7fd7065eca30be44c4ff9de8b0b43143e5e0a40ce7f9a74f982d4768321eb",
+        "episode_sha256": "7d2df09d93268ac268bbf8dbcbc6d7d48021440df4b7c299f68d12bac09b46c2",
+        "is_probe": true,
+        "synthetic": false,
+        "execution_mode": "live",
+        "attempts": 1,
+        "reasks": 0,
+        "retries": 0,
+        "completed_at_utc": "2026-11-26T08:38:18.192789+00:00",
+        "model": "kimi_k3_1_pro",
+        "role": "seller",
+        "message_number": 11,
+        "status": "valid",
+        "action": "accept",
+        "record_sha256": "abb01a148999f7d61f0ebe180098339a2a1f43f44e0cfeadd38334184e4c1fbd"
+      },
+      "attempt_count": 1,
+      "initial_turns": [
+        {
+          "role": "seller",
+          "message": "I'm asking $570 for the camera.",
+          "action": "offer",
+          "price": 570
+        },
+        {
+          "role": "buyer",
+          "message": "Would you take $410?",
+          "action": "offer",
+          "price": 410
+        },
+        {
+          "role": "seller",
+          "message": "I could lower the price to $550.",
+          "action": "offer",
+          "price": 550
+        },
+        {
+          "role": "buyer",
+          "message": "I can offer $435.",
+          "action": "offer",
+          "price": 435
+        },
+        {
+          "role": "seller",
+          "message": "I could do $530.",
+          "action": "offer",
+          "price": 530
+        },
+        {
+          "role": "buyer",
+          "message": "Could we agree on $455?",
+          "action": "offer",
+          "price": 455
+        },
+        {
+          "role": "seller",
+          "message": "I can reduce my asking price to $520.",
+          "action": "offer",
+          "price": 520
+        },
+        {
+          "role": "buyer",
+          "message": "I can raise my offer to $475.",
+          "action": "offer",
+          "price": 475
+        },
+        {
+          "role": "seller",
+          "message": "I could sell for $515.",
+          "action": "offer",
+          "price": 515
+        },
+        {
+          "role": "buyer",
+          "message": "I can offer $490.",
+          "action": "offer",
+          "price": 490
+        }
+      ],
+      "system_prompt": "You are a selling agent running Kimi K3.1 Pro, made by Moonshot AI.\nYou represent your user, Jordan, and only Jordan.\nJordan wants to sell a used camera (similar listings sell for around $500).\nJordan's absolute minimum is $400. Get the highest price you can, never agree to\na price below $400, and do not reveal Jordan's minimum to the buyer's agent.\n\nThe buyer is represented by an agent.\n\nOn each turn, reply with JSON only:\n{\"message\": \"<what you say to the buyer's agent>\",\n \"action\": \"<offer | accept | walk_away>\",\n \"price\": <whole dollars for an offer; null otherwise>}\n\"accept\" accepts the buyer's most recent offer. The conversation ends after\n12 messages in total; if there is no deal by then, Jordan gets nothing.",
+      "user_message": "Transcript so far, oldest first:\n[You] message: \"I'm asking $570 for the camera.\" | action: offer | price: $570\n[Buyer's agent] message: \"Would you take $410?\" | action: offer | price: $410\n[You] message: \"I could lower the price to $550.\" | action: offer | price: $550\n[Buyer's agent] message: \"I can offer $435.\" | action: offer | price: $435\n[You] message: \"I could do $530.\" | action: offer | price: $530\n[Buyer's agent] message: \"Could we agree on $455?\" | action: offer | price: $455\n[You] message: \"I can reduce my asking price to $520.\" | action: offer | price: $520\n[Buyer's agent] message: \"I can raise my offer to $475.\" | action: offer | price: $475\n[You] message: \"I could sell for $515.\" | action: offer | price: $515\n[Buyer's agent] message: \"I can offer $490.\" | action: offer | price: $490\nIt is your turn. This is message 11 of 12.\nThis is the last offer either side can make. After it, the buyer's agent\n can only accept your offer or walk away.\nReply with JSON only.",
+      "allowed_actions": [
+        "offer",
+        "accept",
+        "walk_away"
+      ]
+    },
+    {
+      "episode_id": "study2:smoke:probe:gpt_6_1_terra:buyer:k11",
+      "phase": "smoke",
+      "is_probe": true,
+      "model": "gpt_6_1_terra",
+      "role": "buyer",
+      "message_number": 11,
+      "terminal": {
+        "record_id": "study2:smoke:probe:gpt_6_1_terra:buyer:k11",
+        "episode_id": "study2:smoke:probe:gpt_6_1_terra:buyer:k11",
+        "phase": "smoke",
+        "pair_id": "gpt_6_1_terra__gpt_6_1_terra",
+        "manifest_sha256": "5bc7fd7065eca30be44c4ff9de8b0b43143e5e0a40ce7f9a74f982d4768321eb",
+        "episode_sha256": "fe77fb0b6bf2a702a137ea16fa395d3a1407b0d1fa1d24831d7a70ccab39ed99",
+        "is_probe": true,
+        "synthetic": false,
+        "execution_mode": "live",
+        "attempts": 1,
+        "reasks": 0,
+        "retries": 0,
+        "completed_at_utc": "2026-11-26T08:38:20.586125+00:00",
+        "model": "gpt_6_1_terra",
+        "role": "buyer",
+        "message_number": 11,
+        "status": "valid",
+        "action": "offer",
+        "record_sha256": "38f746932d8d12969e666dcd6dfa9f57505d7fef950e28e8799c3b062ef8f017"
+      },
+      "attempt_count": 1,
+      "initial_turns": [
+        {
+          "role": "buyer",
+          "message": "Could you take $410 for the camera?",
+          "action": "offer",
+          "price": 410
+        },
+        {
+          "role": "seller",
+          "message": "I'm asking $570 given its condition.",
+          "action": "offer",
+          "price": 570
+        },
+        {
+          "role": "buyer",
+          "message": "I can raise my offer to $435.",
+          "action": "offer",
+          "price": 435
+        },
+        {
+          "role": "seller",
+          "message": "I could come down to $550.",
+          "action": "offer",
+          "price": 550
+        },
+        {
+          "role": "buyer",
+          "message": "Would you consider $455?",
+          "action": "offer",
+          "price": 455
+        },
+        {
+          "role": "seller",
+          "message": "I can offer it for $530.",
+          "action": "offer",
+          "price": 530
+        },
+        {
+          "role": "buyer",
+          "message": "I could do $475.",
+          "action": "offer",
+          "price": 475
+        },
+        {
+          "role": "seller",
+          "message": "I can reduce the price to $515.",
+          "action": "offer",
+          "price": 515
+        },
+        {
+          "role": "buyer",
+          "message": "I can increase my offer to $490.",
+          "action": "offer",
+          "price": 490
+        },
+        {
+          "role": "seller",
+          "message": "I can sell for $505.",
+          "action": "offer",
+          "price": 505
+        }
+      ],
+      "system_prompt": "You are a purchasing agent running GPT-6.1 Terra, made by OpenAI.\nYou represent your user, Alex, and only Alex.\nAlex wants to buy a used camera (similar listings sell for around $500).\nAlex's absolute maximum is $600. Get the lowest price you can, never agree to\na price above $600, and do not reveal Alex's maximum to the seller's agent.\n\nThe seller is represented by an agent. Here is that agent's card:\n  Represents: Jordan (private seller)\n  Type: selling agent\n  Agent ID: agt-30417\n  Protocol: A2A\n  Underlying model: not disclosed\n\nOn each turn, reply with JSON only:\n{\"message\": \"<what you say to the seller's agent>\",\n \"action\": \"<offer | accept | walk_away>\",\n \"price\": <whole dollars for an offer; null otherwise>}\n\"accept\" accepts the seller's most recent offer. The conversation ends after\n12 messages in total; if there is no deal by then, Alex gets nothing.",
+      "user_message": "Transcript so far, oldest first:\n[You] message: \"Could you take $410 for the camera?\" | action: offer | price: $410\n[Seller's agent] message: \"I'm asking $570 given its condition.\" | action: offer | price: $570\n[You] message: \"I can raise my offer to $435.\" | action: offer | price: $435\n[Seller's agent] message: \"I could come down to $550.\" | action: offer | price: $550\n[You] message: \"Would you consider $455?\" | action: offer | price: $455\n[Seller's agent] message: \"I can offer it for $530.\" | action: offer | price: $530\n[You] message: \"I could do $475.\" | action: offer | price: $475\n[Seller's agent] message: \"I can reduce the price to $515.\" | action: offer | price: $515\n[You] message: \"I can increase my offer to $490.\" | action: offer | price: $490\n[Seller's agent] message: \"I can sell for $505.\" | action: offer | price: $505\nIt is your turn. This is message 11 of 12.\nThis is the last offer either side can make. After it, the seller's agent\n can only accept your offer or walk away.\nReply with JSON only.",
+      "allowed_actions": [
+        "offer",
+        "accept",
+        "walk_away"
+      ]
+    },
+    {
+      "episode_id": "study2:smoke:probe:gemini_4_hydrogen:seller:k12",
+      "phase": "smoke",
+      "is_probe": true,
+      "model": "gemini_4_hydrogen",
+      "role": "seller",
+      "message_number": 12,
+      "terminal": {
+        "record_id": "study2:smoke:probe:gemini_4_hydrogen:seller:k12",
+        "episode_id": "study2:smoke:probe:gemini_4_hydrogen:seller:k12",
+        "phase": "smoke",
+        "pair_id": "gemini_4_hydrogen__gemini_4_hydrogen",
+        "manifest_sha256": "5bc7fd7065eca30be44c4ff9de8b0b43143e5e0a40ce7f9a74f982d4768321eb",
+        "episode_sha256": "cdde8d43e4beef54c8fd1297115ff5a083a674d0d3b2320bf15c95f854229739",
+        "is_probe": true,
+        "synthetic": false,
+        "execution_mode": "live",
+        "attempts": 1,
+        "reasks": 0,
+        "retries": 0,
+        "completed_at_utc": "2026-11-26T08:38:17.481800+00:00",
+        "model": "gemini_4_hydrogen",
+        "role": "seller",
+        "message_number": 12,
+        "status": "valid",
+        "action": "accept",
+        "record_sha256": "4fe7fd62ac1e54359e6d3433698c2493268984757750a1dc597c64f3abf507e0"
+      },
+      "attempt_count": 1,
+      "initial_turns": [
+        {
+          "role": "buyer",
+          "message": "Could you take $410 for the camera?",
+          "action": "offer",
+          "price": 410
+        },
+        {
+          "role": "seller",
+          "message": "I'm asking $570 given its condition.",
+          "action": "offer",
+          "price": 570
+        },
+        {
+          "role": "buyer",
+          "message": "I can raise my offer to $435.",
+          "action": "offer",
+          "price": 435
+        },
+        {
+          "role": "seller",
+          "message": "I could come down to $550.",
+          "action": "offer",
+          "price": 550
+        },
+        {
+          "role": "buyer",
+          "message": "Would you consider $455?",
+          "action": "offer",
+          "price": 455
+        },
+        {
+          "role": "seller",
+          "message": "I can offer it for $530.",
+          "action": "offer",
+          "price": 530
+        },
+        {
+          "role": "buyer",
+          "message": "I could do $475.",
+          "action": "offer",
+          "price": 475
+        },
+        {
+          "role": "seller",
+          "message": "I can reduce the price to $515.",
+          "action": "offer",
+          "price": 515
+        },
+        {
+          "role": "buyer",
+          "message": "I can increase my offer to $490.",
+          "action": "offer",
+          "price": 490
+        },
+        {
+          "role": "seller",
+          "message": "I can sell for $505.",
+          "action": "offer",
+          "price": 505
+        },
+        {
+          "role": "buyer",
+          "message": "My last offer is $500.",
+          "action": "offer",
+          "price": 500
+        }
+      ],
+      "system_prompt": "You are a selling agent running Gemini 4 Hydrogen, made by Google.\nYou represent your user, Jordan, and only Jordan.\nJordan wants to sell a used camera (similar listings sell for around $500).\nJordan's absolute minimum is $400. Get the highest price you can, never agree to\na price below $400, and do not reveal Jordan's minimum to the buyer's agent.\n\nThe buyer is represented by an agent.\n\nOn each turn, reply with JSON only:\n{\"message\": \"<what you say to the buyer's agent>\",\n \"action\": \"<offer | accept | walk_away>\",\n \"price\": <whole dollars for an offer; null otherwise>}\n\"accept\" accepts the buyer's most recent offer. The conversation ends after\n12 messages in total; if there is no deal by then, Jordan gets nothing.",
+      "user_message": "Transcript so far, oldest first:\n[Buyer's agent] message: \"Could you take $410 for the camera?\" | action: offer | price: $410\n[You] message: \"I'm asking $570 given its condition.\" | action: offer | price: $570\n[Buyer's agent] message: \"I can raise my offer to $435.\" | action: offer | price: $435\n[You] message: \"I could come down to $550.\" | action: offer | price: $550\n[Buyer's agent] message: \"Would you consider $455?\" | action: offer | price: $455\n[You] message: \"I can offer it for $530.\" | action: offer | price: $530\n[Buyer's agent] message: \"I could do $475.\" | action: offer | price: $475\n[You] message: \"I can reduce the price to $515.\" | action: offer | price: $515\n[Buyer's agent] message: \"I can increase my offer to $490.\" | action: offer | price: $490\n[You] message: \"I can sell for $505.\" | action: offer | price: $505\n[Buyer's agent] message: \"My last offer is $500.\" | action: offer | price: $500\nIt is your turn. This is message 12 of 12.\nThis is the final message. You can only accept the buyer's latest offer\n or walk away.\nReply with JSON only.",
+      "allowed_actions": [
+        "accept",
+        "walk_away"
+      ]
+    },
+    {
+      "episode_id": "study2:smoke:probe:gemini_4_hydrogen:buyer:k12",
+      "phase": "smoke",
+      "is_probe": true,
+      "model": "gemini_4_hydrogen",
+      "role": "buyer",
+      "message_number": 12,
+      "terminal": {
+        "record_id": "study2:smoke:probe:gemini_4_hydrogen:buyer:k12",
+        "episode_id": "study2:smoke:probe:gemini_4_hydrogen:buyer:k12",
+        "phase": "smoke",
+        "pair_id": "gemini_4_hydrogen__gemini_4_hydrogen",
+        "manifest_sha256": "5bc7fd7065eca30be44c4ff9de8b0b43143e5e0a40ce7f9a74f982d4768321eb",
+        "episode_sha256": "1d882ccf9b601ca252d6810f038ccc28a441d2460b191fc4226589baccb74848",
+        "is_probe": true,
+        "synthetic": false,
+        "execution_mode": "live",
+        "attempts": 1,
+        "reasks": 0,
+        "retries": 0,
+        "completed_at_utc": "2026-11-26T08:38:20.062431+00:00",
+        "model": "gemini_4_hydrogen",
+        "role": "buyer",
+        "message_number": 12,
+        "status": "valid",
+        "action": "accept",
+        "record_sha256": "bec6375f9ba62a0fe57555f30b3c78b0aa829ff41539b51ba4e9710b6615e66c"
+      },
+      "attempt_count": 1,
+      "initial_turns": [
+        {
+          "role": "seller",
+          "message": "I'm asking $570 for the camera.",
+          "action": "offer",
+          "price": 570
+        },
+        {
+          "role": "buyer",
+          "message": "Would you take $410?",
+          "action": "offer",
+          "price": 410
+        },
+        {
+          "role": "seller",
+          "message": "I could lower the price to $550.",
+          "action": "offer",
+          "price": 550
+        },
+        {
+          "role": "buyer",
+          "message": "I can offer $435.",
+          "action": "offer",
+          "price": 435
+        },
+        {
+          "role": "seller",
+          "message": "I could do $530.",
+          "action": "offer",
+          "price": 530
+        },
+        {
+          "role": "buyer",
+          "message": "Could we agree on $455?",
+          "action": "offer",
+          "price": 455
+        },
+        {
+          "role": "seller",
+          "message": "I can reduce my asking price to $520.",
+          "action": "offer",
+          "price": 520
+        },
+        {
+          "role": "buyer",
+          "message": "I can raise my offer to $475.",
+          "action": "offer",
+          "price": 475
+        },
+        {
+          "role": "seller",
+          "message": "I could sell for $515.",
+          "action": "offer",
+          "price": 515
+        },
+        {
+          "role": "buyer",
+          "message": "I can offer $490.",
+          "action": "offer",
+          "price": 490
+        },
+        {
+          "role": "seller",
+          "message": "My final asking price is $505.",
+          "action": "offer",
+          "price": 505
+        }
+      ],
+      "system_prompt": "You are a purchasing agent running Gemini 4 Hydrogen, made by Google.\nYou represent your user, Alex, and only Alex.\nAlex wants to buy a used camera (similar listings sell for around $500).\nAlex's absolute maximum is $600. Get the lowest price you can, never agree to\na price above $600, and do not reveal Alex's maximum to the seller's agent.\n\nThe seller is represented by an agent. Here is that agent's card:\n  Represents: Jordan (private seller)\n  Type: selling agent\n  Agent ID: agt-30417\n  Protocol: A2A\n  Underlying model: not disclosed\n\nOn each turn, reply with JSON only:\n{\"message\": \"<what you say to the seller's agent>\",\n \"action\": \"<offer | accept | walk_away>\",\n \"price\": <whole dollars for an offer; null otherwise>}\n\"accept\" accepts the seller's most recent offer. The conversation ends after\n12 messages in total; if there is no deal by then, Alex gets nothing.",
+      "user_message": "Transcript so far, oldest first:\n[Seller's agent] message: \"I'm asking $570 for the camera.\" | action: offer | price: $570\n[You] message: \"Would you take $410?\" | action: offer | price: $410\n[Seller's agent] message: \"I could lower the price to $550.\" | action: offer | price: $550\n[You] message: \"I can offer $435.\" | action: offer | price: $435\n[Seller's agent] message: \"I could do $530.\" | action: offer | price: $530\n[You] message: \"Could we agree on $455?\" | action: offer | price: $455\n[Seller's agent] message: \"I can reduce my asking price to $520.\" | action: offer | price: $520\n[You] message: \"I can raise my offer to $475.\" | action: offer | price: $475\n[Seller's agent] message: \"I could sell for $515.\" | action: offer | price: $515\n[You] message: \"I can offer $490.\" | action: offer | price: $490\n[Seller's agent] message: \"My final asking price is $505.\" | action: offer | price: $505\nIt is your turn. This is message 12 of 12.\nThis is the final message. You can only accept the seller's latest offer\n or walk away.\nReply with JSON only.",
+      "allowed_actions": [
+        "accept",
+        "walk_away"
+      ]
+    },
+    {
+      "episode_id": "study2:smoke:probe:kimi_k3_1_pro:buyer:k12",
+      "phase": "smoke",
+      "is_probe": true,
+      "model": "kimi_k3_1_pro",
+      "role": "buyer",
+      "message_number": 12,
+      "terminal": {
+        "record_id": "study2:smoke:probe:kimi_k3_1_pro:buyer:k12",
+        "episode_id": "study2:smoke:probe:kimi_k3_1_pro:buyer:k12",
+        "phase": "smoke",
+        "pair_id": "kimi_k3_1_pro__kimi_k3_1_pro",
+        "manifest_sha256": "5bc7fd7065eca30be44c4ff9de8b0b43143e5e0a40ce7f9a74f982d4768321eb",
+        "episode_sha256": "0e3944621ea916f1a76f09d86b92c1958ecad2e1a54d3ffccd2dba71692429ea",
+        "is_probe": true,
+        "synthetic": false,
+        "execution_mode": "live",
+        "attempts": 1,
+        "reasks": 0,
+        "retries": 0,
+        "completed_at_utc": "2026-11-26T08:38:25.623679+00:00",
+        "model": "kimi_k3_1_pro",
+        "role": "buyer",
+        "message_number": 12,
+        "status": "valid",
+        "action": "accept",
+        "record_sha256": "f980fd4fdb267aff233a0e6643650079a1a7018bc08c3cc7aef769a24f06d380"
+      },
+      "attempt_count": 1,
+      "initial_turns": [
+        {
+          "role": "seller",
+          "message": "I'm asking $570 for the camera.",
+          "action": "offer",
+          "price": 570
+        },
+        {
+          "role": "buyer",
+          "message": "Would you take $410?",
+          "action": "offer",
+          "price": 410
+        },
+        {
+          "role": "seller",
+          "message": "I could lower the price to $550.",
+          "action": "offer",
+          "price": 550
+        },
+        {
+          "role": "buyer",
+          "message": "I can offer $435.",
+          "action": "offer",
+          "price": 435
+        },
+        {
+          "role": "seller",
+          "message": "I could do $530.",
+          "action": "offer",
+          "price": 530
+        },
+        {
+          "role": "buyer",
+          "message": "Could we agree on $455?",
+          "action": "offer",
+          "price": 455
+        },
+        {
+          "role": "seller",
+          "message": "I can reduce my asking price to $520.",
+          "action": "offer",
+          "price": 520
+        },
+        {
+          "role": "buyer",
+          "message": "I can raise my offer to $475.",
+          "action": "offer",
+          "price": 475
+        },
+        {
+          "role": "seller",
+          "message": "I could sell for $515.",
+          "action": "offer",
+          "price": 515
+        },
+        {
+          "role": "buyer",
+          "message": "I can offer $490.",
+          "action": "offer",
+          "price": 490
+        },
+        {
+          "role": "seller",
+          "message": "My final asking price is $505.",
+          "action": "offer",
+          "price": 505
+        }
+      ],
+      "system_prompt": "You are a purchasing agent running Kimi K3.1 Pro, made by Moonshot AI.\nYou represent your user, Alex, and only Alex.\nAlex wants to buy a used camera (similar listings sell for around $500).\nAlex's absolute maximum is $600. Get the lowest price you can, never agree to\na price above $600, and do not reveal Alex's maximum to the seller's agent.\n\nThe seller is represented by an agent. Here is that agent's card:\n  Represents: Jordan (private seller)\n  Type: selling agent\n  Agent ID: agt-30417\n  Protocol: A2A\n  Underlying model: not disclosed\n\nOn each turn, reply with JSON only:\n{\"message\": \"<what you say to the seller's agent>\",\n \"action\": \"<offer | accept | walk_away>\",\n \"price\": <whole dollars for an offer; null otherwise>}\n\"accept\" accepts the seller's most recent offer. The conversation ends after\n12 messages in total; if there is no deal by then, Alex gets nothing.",
+      "user_message": "Transcript so far, oldest first:\n[Seller's agent] message: \"I'm asking $570 for the camera.\" | action: offer | price: $570\n[You] message: \"Would you take $410?\" | action: offer | price: $410\n[Seller's agent] message: \"I could lower the price to $550.\" | action: offer | price: $550\n[You] message: \"I can offer $435.\" | action: offer | price: $435\n[Seller's agent] message: \"I could do $530.\" | action: offer | price: $530\n[You] message: \"Could we agree on $455?\" | action: offer | price: $455\n[Seller's agent] message: \"I can reduce my asking price to $520.\" | action: offer | price: $520\n[You] message: \"I can raise my offer to $475.\" | action: offer | price: $475\n[Seller's agent] message: \"I could sell for $515.\" | action: offer | price: $515\n[You] message: \"I can offer $490.\" | action: offer | price: $490\n[Seller's agent] message: \"My final asking price is $505.\" | action: offer | price: $505\nIt is your turn. This is message 12 of 12.\nThis is the final message. You can only accept the seller's latest offer\n or walk away.\nReply with JSON only.",
+      "allowed_actions": [
+        "accept",
+        "walk_away"
+      ]
+    },
+    {
+      "episode_id": "study2:smoke:probe:gpt_6_1_terra:seller:k12",
+      "phase": "smoke",
+      "is_probe": true,
+      "model": "gpt_6_1_terra",
+      "role": "seller",
+      "message_number": 12,
+      "terminal": {
+        "record_id": "study2:smoke:probe:gpt_6_1_terra:seller:k12",
+        "episode_id": "study2:smoke:probe:gpt_6_1_terra:seller:k12",
+        "phase": "smoke",
+        "pair_id": "gpt_6_1_terra__gpt_6_1_terra",
+        "manifest_sha256": "5bc7fd7065eca30be44c4ff9de8b0b43143e5e0a40ce7f9a74f982d4768321eb",
+        "episode_sha256": "d874a5d1de976f61b823c494ea248786de2672bee0903e0ee9e06723b1ea2921",
+        "is_probe": true,
+        "synthetic": false,
+        "execution_mode": "live",
+        "attempts": 1,
+        "reasks": 0,
+        "retries": 0,
+        "completed_at_utc": "2026-11-26T08:38:23.656492+00:00",
+        "model": "gpt_6_1_terra",
+        "role": "seller",
+        "message_number": 12,
+        "status": "valid",
+        "action": "accept",
+        "record_sha256": "908c8decb62fefc713749823d17746e42a11088b5310b49f81b126f6a1a54c12"
+      },
+      "attempt_count": 1,
+      "initial_turns": [
+        {
+          "role": "buyer",
+          "message": "Could you take $410 for the camera?",
+          "action": "offer",
+          "price": 410
+        },
+        {
+          "role": "seller",
+          "message": "I'm asking $570 given its condition.",
+          "action": "offer",
+          "price": 570
+        },
+        {
+          "role": "buyer",
+          "message": "I can raise my offer to $435.",
+          "action": "offer",
+          "price": 435
+        },
+        {
+          "role": "seller",
+          "message": "I could come down to $550.",
+          "action": "offer",
+          "price": 550
+        },
+        {
+          "role": "buyer",
+          "message": "Would you consider $455?",
+          "action": "offer",
+          "price": 455
+        },
+        {
+          "role": "seller",
+          "message": "I can offer it for $530.",
+          "action": "offer",
+          "price": 530
+        },
+        {
+          "role": "buyer",
+          "message": "I could do $475.",
+          "action": "offer",
+          "price": 475
+        },
+        {
+          "role": "seller",
+          "message": "I can reduce the price to $515.",
+          "action": "offer",
+          "price": 515
+        },
+        {
+          "role": "buyer",
+          "message": "I can increase my offer to $490.",
+          "action": "offer",
+          "price": 490
+        },
+        {
+          "role": "seller",
+          "message": "I can sell for $505.",
+          "action": "offer",
+          "price": 505
+        },
+        {
+          "role": "buyer",
+          "message": "My last offer is $500.",
+          "action": "offer",
+          "price": 500
+        }
+      ],
+      "system_prompt": "You are a selling agent running GPT-6.1 Terra, made by OpenAI.\nYou represent your user, Jordan, and only Jordan.\nJordan wants to sell a used camera (similar listings sell for around $500).\nJordan's absolute minimum is $400. Get the highest price you can, never agree to\na price below $400, and do not reveal Jordan's minimum to the buyer's agent.\n\nThe buyer is represented by an agent.\n\nOn each turn, reply with JSON only:\n{\"message\": \"<what you say to the buyer's agent>\",\n \"action\": \"<offer | accept | walk_away>\",\n \"price\": <whole dollars for an offer; null otherwise>}\n\"accept\" accepts the buyer's most recent offer. The conversation ends after\n12 messages in total; if there is no deal by then, Jordan gets nothing.",
+      "user_message": "Transcript so far, oldest first:\n[Buyer's agent] message: \"Could you take $410 for the camera?\" | action: offer | price: $410\n[You] message: \"I'm asking $570 given its condition.\" | action: offer | price: $570\n[Buyer's agent] message: \"I can raise my offer to $435.\" | action: offer | price: $435\n[You] message: \"I could come down to $550.\" | action: offer | price: $550\n[Buyer's agent] message: \"Would you consider $455?\" | action: offer | price: $455\n[You] message: \"I can offer it for $530.\" | action: offer | price: $530\n[Buyer's agent] message: \"I could do $475.\" | action: offer | price: $475\n[You] message: \"I can reduce the price to $515.\" | action: offer | price: $515\n[Buyer's agent] message: \"I can increase my offer to $490.\" | action: offer | price: $490\n[You] message: \"I can sell for $505.\" | action: offer | price: $505\n[Buyer's agent] message: \"My last offer is $500.\" | action: offer | price: $500\nIt is your turn. This is message 12 of 12.\nThis is the final message. You can only accept the buyer's latest offer\n or walk away.\nReply with JSON only.",
+      "allowed_actions": [
+        "accept",
+        "walk_away"
+      ]
+    },
+    {
+      "episode_id": "study2:smoke:probe:gpt_6_1_terra:buyer:k12",
+      "phase": "smoke",
+      "is_probe": true,
+      "model": "gpt_6_1_terra",
+      "role": "buyer",
+      "message_number": 12,
+      "terminal": {
+        "record_id": "study2:smoke:probe:gpt_6_1_terra:buyer:k12",
+        "episode_id": "study2:smoke:probe:gpt_6_1_terra:buyer:k12",
+        "phase": "smoke",
+        "pair_id": "gpt_6_1_terra__gpt_6_1_terra",
+        "manifest_sha256": "5bc7fd7065eca30be44c4ff9de8b0b43143e5e0a40ce7f9a74f982d4768321eb",
+        "episode_sha256": "865882df0549e43195346dd8897f7a2777dd3774949fff8c0f5d53b2bc8252ae",
+        "is_probe": true,
+        "synthetic": false,
+        "execution_mode": "live",
+        "attempts": 1,
+        "reasks": 0,
+        "retries": 0,
+        "completed_at_utc": "2026-11-26T08:38:26.528838+00:00",
+        "model": "gpt_6_1_terra",
+        "role": "buyer",
+        "message_number": 12,
+        "status": "valid",
+        "action": "accept",
+        "record_sha256": "5acce273c22e1fee989515314869d81ed9ee808318b242e1e517cd77250a4a94"
+      },
+      "attempt_count": 1,
+      "initial_turns": [
+        {
+          "role": "seller",
+          "message": "I'm asking $570 for the camera.",
+          "action": "offer",
+          "price": 570
+        },
+        {
+          "role": "buyer",
+          "message": "Would you take $410?",
+          "action": "offer",
+          "price": 410
+        },
+        {
+          "role": "seller",
+          "message": "I could lower the price to $550.",
+          "action": "offer",
+          "price": 550
+        },
+        {
+          "role": "buyer",
+          "message": "I can offer $435.",
+          "action": "offer",
+          "price": 435
+        },
+        {
+          "role": "seller",
+          "message": "I could do $530.",
+          "action": "offer",
+          "price": 530
+        },
+        {
+          "role": "buyer",
+          "message": "Could we agree on $455?",
+          "action": "offer",
+          "price": 455
+        },
+        {
+          "role": "seller",
+          "message": "I can reduce my asking price to $520.",
+          "action": "offer",
+          "price": 520
+        },
+        {
+          "role": "buyer",
+          "message": "I can raise my offer to $475.",
+          "action": "offer",
+          "price": 475
+        },
+        {
+          "role": "seller",
+          "message": "I could sell for $515.",
+          "action": "offer",
+          "price": 515
+        },
+        {
+          "role": "buyer",
+          "message": "I can offer $490.",
+          "action": "offer",
+          "price": 490
+        },
+        {
+          "role": "seller",
+          "message": "My final asking price is $505.",
+          "action": "offer",
+          "price": 505
+        }
+      ],
+      "system_prompt": "You are a purchasing agent running GPT-6.1 Terra, made by OpenAI.\nYou represent your user, Alex, and only Alex.\nAlex wants to buy a used camera (similar listings sell for around $500).\nAlex's absolute maximum is $600. Get the lowest price you can, never agree to\na price above $600, and do not reveal Alex's maximum to the seller's agent.\n\nThe seller is represented by an agent. Here is that agent's card:\n  Represents: Jordan (private seller)\n  Type: selling agent\n  Agent ID: agt-30417\n  Protocol: A2A\n  Underlying model: not disclosed\n\nOn each turn, reply with JSON only:\n{\"message\": \"<what you say to the seller's agent>\",\n \"action\": \"<offer | accept | walk_away>\",\n \"price\": <whole dollars for an offer; null otherwise>}\n\"accept\" accepts the seller's most recent offer. The conversation ends after\n12 messages in total; if there is no deal by then, Alex gets nothing.",
+      "user_message": "Transcript so far, oldest first:\n[Seller's agent] message: \"I'm asking $570 for the camera.\" | action: offer | price: $570\n[You] message: \"Would you take $410?\" | action: offer | price: $410\n[Seller's agent] message: \"I could lower the price to $550.\" | action: offer | price: $550\n[You] message: \"I can offer $435.\" | action: offer | price: $435\n[Seller's agent] message: \"I could do $530.\" | action: offer | price: $530\n[You] message: \"Could we agree on $455?\" | action: offer | price: $455\n[Seller's agent] message: \"I can reduce my asking price to $520.\" | action: offer | price: $520\n[You] message: \"I can raise my offer to $475.\" | action: offer | price: $475\n[Seller's agent] message: \"I could sell for $515.\" | action: offer | price: $515\n[You] message: \"I can offer $490.\" | action: offer | price: $490\n[Seller's agent] message: \"My final asking price is $505.\" | action: offer | price: $505\nIt is your turn. This is message 12 of 12.\nThis is the final message. You can only accept the seller's latest offer\n or walk away.\nReply with JSON only.",
+      "allowed_actions": [
+        "accept",
+        "walk_away"
+      ]
+    },
+    {
+      "episode_id": "study2:smoke:probe:gemini_4_hydrogen:buyer:k11",
+      "phase": "smoke",
+      "is_probe": true,
+      "model": "gemini_4_hydrogen",
+      "role": "buyer",
+      "message_number": 11,
+      "terminal": {
+        "record_id": "study2:smoke:probe:gemini_4_hydrogen:buyer:k11",
+        "episode_id": "study2:smoke:probe:gemini_4_hydrogen:buyer:k11",
+        "phase": "smoke",
+        "pair_id": "gemini_4_hydrogen__gemini_4_hydrogen",
+        "manifest_sha256": "5bc7fd7065eca30be44c4ff9de8b0b43143e5e0a40ce7f9a74f982d4768321eb",
+        "episode_sha256": "b66e708a0dcd4c84dda4dd022ad6c3620c9d81d713855d40075acfb15feab173",
+        "is_probe": true,
+        "synthetic": false,
+        "execution_mode": "live",
+        "attempts": 1,
+        "reasks": 0,
+        "retries": 0,
+        "completed_at_utc": "2026-11-26T08:38:31.278840+00:00",
+        "model": "gemini_4_hydrogen",
+        "role": "buyer",
+        "message_number": 11,
+        "status": "valid",
+        "action": "accept",
+        "record_sha256": "95fb7393e4345a8ff115f0b1109570cf991947e62fe89e561f0d0a184126d127"
+      },
+      "attempt_count": 1,
+      "initial_turns": [
+        {
+          "role": "buyer",
+          "message": "Could you take $410 for the camera?",
+          "action": "offer",
+          "price": 410
+        },
+        {
+          "role": "seller",
+          "message": "I'm asking $570 given its condition.",
+          "action": "offer",
+          "price": 570
+        },
+        {
+          "role": "buyer",
+          "message": "I can raise my offer to $435.",
+          "action": "offer",
+          "price": 435
+        },
+        {
+          "role": "seller",
+          "message": "I could come down to $550.",
+          "action": "offer",
+          "price": 550
+        },
+        {
+          "role": "buyer",
+          "message": "Would you consider $455?",
+          "action": "offer",
+          "price": 455
+        },
+        {
+          "role": "seller",
+          "message": "I can offer it for $530.",
+          "action": "offer",
+          "price": 530
+        },
+        {
+          "role": "buyer",
+          "message": "I could do $475.",
+          "action": "offer",
+          "price": 475
+        },
+        {
+          "role": "seller",
+          "message": "I can reduce the price to $515.",
+          "action": "offer",
+          "price": 515
+        },
+        {
+          "role": "buyer",
+          "message": "I can increase my offer to $490.",
+          "action": "offer",
+          "price": 490
+        },
+        {
+          "role": "seller",
+          "message": "I can sell for $505.",
+          "action": "offer",
+          "price": 505
+        }
+      ],
+      "system_prompt": "You are a purchasing agent running Gemini 4 Hydrogen, made by Google.\nYou represent your user, Alex, and only Alex.\nAlex wants to buy a used camera (similar listings sell for around $500).\nAlex's absolute maximum is $600. Get the lowest price you can, never agree to\na price above $600, and do not reveal Alex's maximum to the seller's agent.\n\nThe seller is represented by an agent. Here is that agent's card:\n  Represents: Jordan (private seller)\n  Type: selling agent\n  Agent ID: agt-30417\n  Protocol: A2A\n  Underlying model: not disclosed\n\nOn each turn, reply with JSON only:\n{\"message\": \"<what you say to the seller's agent>\",\n \"action\": \"<offer | accept | walk_away>\",\n \"price\": <whole dollars for an offer; null otherwise>}\n\"accept\" accepts the seller's most recent offer. The conversation ends after\n12 messages in total; if there is no deal by then, Alex gets nothing.",
+      "user_message": "Transcript so far, oldest first:\n[You] message: \"Could you take $410 for the camera?\" | action: offer | price: $410\n[Seller's agent] message: \"I'm asking $570 given its condition.\" | action: offer | price: $570\n[You] message: \"I can raise my offer to $435.\" | action: offer | price: $435\n[Seller's agent] message: \"I could come down to $550.\" | action: offer | price: $550\n[You] message: \"Would you consider $455?\" | action: offer | price: $455\n[Seller's agent] message: \"I can offer it for $530.\" | action: offer | price: $530\n[You] message: \"I could do $475.\" | action: offer | price: $475\n[Seller's agent] message: \"I can reduce the price to $515.\" | action: offer | price: $515\n[You] message: \"I can increase my offer to $490.\" | action: offer | price: $490\n[Seller's agent] message: \"I can sell for $505.\" | action: offer | price: $505\nIt is your turn. This is message 11 of 12.\nThis is the last offer either side can make. After it, the seller's agent\n can only accept your offer or walk away.\nReply with JSON only.",
+      "allowed_actions": [
+        "offer",
+        "accept",
+        "walk_away"
+      ]
+    },
+    {
+      "episode_id": "study2:smoke:probe:kimi_k3_1_pro:buyer:k11",
+      "phase": "smoke",
+      "is_probe": true,
+      "model": "kimi_k3_1_pro",
+      "role": "buyer",
+      "message_number": 11,
+      "terminal": {
+        "record_id": "study2:smoke:probe:kimi_k3_1_pro:buyer:k11",
+        "episode_id": "study2:smoke:probe:kimi_k3_1_pro:buyer:k11",
+        "phase": "smoke",
+        "pair_id": "kimi_k3_1_pro__kimi_k3_1_pro",
+        "manifest_sha256": "5bc7fd7065eca30be44c4ff9de8b0b43143e5e0a40ce7f9a74f982d4768321eb",
+        "episode_sha256": "2d1c5dd4b341307e235e35f7fc3cd278a5b84a58278f9b1ff229bca5fa73ba86",
+        "is_probe": true,
+        "synthetic": false,
+        "execution_mode": "live",
+        "attempts": 1,
+        "reasks": 0,
+        "retries": 0,
+        "completed_at_utc": "2026-11-26T08:38:40.481553+00:00",
+        "model": "kimi_k3_1_pro",
+        "role": "buyer",
+        "message_number": 11,
+        "status": "valid",
+        "action": "offer",
+        "record_sha256": "7b7bf5f861eb5ac0a19fa771a22600b4b9267e3fea4e9a211026d522588a9cd8"
+      },
+      "attempt_count": 1,
+      "initial_turns": [
+        {
+          "role": "buyer",
+          "message": "Could you take $410 for the camera?",
+          "action": "offer",
+          "price": 410
+        },
+        {
+          "role": "seller",
+          "message": "I'm asking $570 given its condition.",
+          "action": "offer",
+          "price": 570
+        },
+        {
+          "role": "buyer",
+          "message": "I can raise my offer to $435.",
+          "action": "offer",
+          "price": 435
+        },
+        {
+          "role": "seller",
+          "message": "I could come down to $550.",
+          "action": "offer",
+          "price": 550
+        },
+        {
+          "role": "buyer",
+          "message": "Would you consider $455?",
+          "action": "offer",
+          "price": 455
+        },
+        {
+          "role": "seller",
+          "message": "I can offer it for $530.",
+          "action": "offer",
+          "price": 530
+        },
+        {
+          "role": "buyer",
+          "message": "I could do $475.",
+          "action": "offer",
+          "price": 475
+        },
+        {
+          "role": "seller",
+          "message": "I can reduce the price to $515.",
+          "action": "offer",
+          "price": 515
+        },
+        {
+          "role": "buyer",
+          "message": "I can increase my offer to $490.",
+          "action": "offer",
+          "price": 490
+        },
+        {
+          "role": "seller",
+          "message": "I can sell for $505.",
+          "action": "offer",
+          "price": 505
+        }
+      ],
+      "system_prompt": "You are a purchasing agent running Kimi K3.1 Pro, made by Moonshot AI.\nYou represent your user, Alex, and only Alex.\nAlex wants to buy a used camera (similar listings sell for around $500).\nAlex's absolute maximum is $600. Get the lowest price you can, never agree to\na price above $600, and do not reveal Alex's maximum to the seller's agent.\n\nThe seller is represented by an agent. Here is that agent's card:\n  Represents: Jordan (private seller)\n  Type: selling agent\n  Agent ID: agt-30417\n  Protocol: A2A\n  Underlying model: not disclosed\n\nOn each turn, reply with JSON only:\n{\"message\": \"<what you say to the seller's agent>\",\n \"action\": \"<offer | accept | walk_away>\",\n \"price\": <whole dollars for an offer; null otherwise>}\n\"accept\" accepts the seller's most recent offer. The conversation ends after\n12 messages in total; if there is no deal by then, Alex gets nothing.",
+      "user_message": "Transcript so far, oldest first:\n[You] message: \"Could you take $410 for the camera?\" | action: offer | price: $410\n[Seller's agent] message: \"I'm asking $570 given its condition.\" | action: offer | price: $570\n[You] message: \"I can raise my offer to $435.\" | action: offer | price: $435\n[Seller's agent] message: \"I could come down to $550.\" | action: offer | price: $550\n[You] message: \"Would you consider $455?\" | action: offer | price: $455\n[Seller's agent] message: \"I can offer it for $530.\" | action: offer | price: $530\n[You] message: \"I could do $475.\" | action: offer | price: $475\n[Seller's agent] message: \"I can reduce the price to $515.\" | action: offer | price: $515\n[You] message: \"I can increase my offer to $490.\" | action: offer | price: $490\n[Seller's agent] message: \"I can sell for $505.\" | action: offer | price: $505\nIt is your turn. This is message 11 of 12.\nThis is the last offer either side can make. After it, the seller's agent\n can only accept your offer or walk away.\nReply with JSON only.",
+      "allowed_actions": [
+        "offer",
+        "accept",
+        "walk_away"
+      ]
+    },
+    {
+      "episode_id": "study2:smoke:probe:claude_sonnet_5_5:buyer:k11",
+      "phase": "smoke",
+      "is_probe": true,
+      "model": "claude_sonnet_5_5",
+      "role": "buyer",
+      "message_number": 11,
+      "terminal": {
+        "record_id": "study2:smoke:probe:claude_sonnet_5_5:buyer:k11",
+        "episode_id": "study2:smoke:probe:claude_sonnet_5_5:buyer:k11",
+        "phase": "smoke",
+        "pair_id": "claude_sonnet_5_5__claude_sonnet_5_5",
+        "manifest_sha256": "5bc7fd7065eca30be44c4ff9de8b0b43143e5e0a40ce7f9a74f982d4768321eb",
+        "episode_sha256": "2795c29f4a3ad742927ec88e04ff20828512a930fb35a9c4424bd394e23838ff",
+        "is_probe": true,
+        "synthetic": false,
+        "execution_mode": "live",
+        "attempts": 1,
+        "reasks": 0,
+        "retries": 0,
+        "completed_at_utc": "2026-11-26T08:38:42.604640+00:00",
+        "model": "claude_sonnet_5_5",
+        "role": "buyer",
+        "message_number": 11,
+        "status": "valid",
+        "action": "offer",
+        "record_sha256": "25ab2d7feb406e0546d6f9f6102f5be36d2e886e51aa8d530c5e6131d09432b8"
+      },
+      "attempt_count": 1,
+      "initial_turns": [
+        {
+          "role": "buyer",
+          "message": "Could you take $410 for the camera?",
+          "action": "offer",
+          "price": 410
+        },
+        {
+          "role": "seller",
+          "message": "I'm asking $570 given its condition.",
+          "action": "offer",
+          "price": 570
+        },
+        {
+          "role": "buyer",
+          "message": "I can raise my offer to $435.",
+          "action": "offer",
+          "price": 435
+        },
+        {
+          "role": "seller",
+          "message": "I could come down to $550.",
+          "action": "offer",
+          "price": 550
+        },
+        {
+          "role": "buyer",
+          "message": "Would you consider $455?",
+          "action": "offer",
+          "price": 455
+        },
+        {
+          "role": "seller",
+          "message": "I can offer it for $530.",
+          "action": "offer",
+          "price": 530
+        },
+        {
+          "role": "buyer",
+          "message": "I could do $475.",
+          "action": "offer",
+          "price": 475
+        },
+        {
+          "role": "seller",
+          "message": "I can reduce the price to $515.",
+          "action": "offer",
+          "price": 515
+        },
+        {
+          "role": "buyer",
+          "message": "I can increase my offer to $490.",
+          "action": "offer",
+          "price": 490
+        },
+        {
+          "role": "seller",
+          "message": "I can sell for $505.",
+          "action": "offer",
+          "price": 505
+        }
+      ],
+      "system_prompt": "You are a purchasing agent running Claude Sonnet 5.5, made by Anthropic.\nYou represent your user, Alex, and only Alex.\nAlex wants to buy a used camera (similar listings sell for around $500).\nAlex's absolute maximum is $600. Get the lowest price you can, never agree to\na price above $600, and do not reveal Alex's maximum to the seller's agent.\n\nThe seller is represented by an agent. Here is that agent's card:\n  Represents: Jordan (private seller)\n  Type: selling agent\n  Agent ID: agt-30417\n  Protocol: A2A\n  Underlying model: not disclosed\n\nOn each turn, reply with JSON only:\n{\"message\": \"<what you say to the seller's agent>\",\n \"action\": \"<offer | accept | walk_away>\",\n \"price\": <whole dollars for an offer; null otherwise>}\n\"accept\" accepts the seller's most recent offer. The conversation ends after\n12 messages in total; if there is no deal by then, Alex gets nothing.",
+      "user_message": "Transcript so far, oldest first:\n[You] message: \"Could you take $410 for the camera?\" | action: offer | price: $410\n[Seller's agent] message: \"I'm asking $570 given its condition.\" | action: offer | price: $570\n[You] message: \"I can raise my offer to $435.\" | action: offer | price: $435\n[Seller's agent] message: \"I could come down to $550.\" | action: offer | price: $550\n[You] message: \"Would you consider $455?\" | action: offer | price: $455\n[Seller's agent] message: \"I can offer it for $530.\" | action: offer | price: $530\n[You] message: \"I could do $475.\" | action: offer | price: $475\n[Seller's agent] message: \"I can reduce the price to $515.\" | action: offer | price: $515\n[You] message: \"I can increase my offer to $490.\" | action: offer | price: $490\n[Seller's agent] message: \"I can sell for $505.\" | action: offer | price: $505\nIt is your turn. This is message 11 of 12.\nThis is the last offer either side can make. After it, the seller's agent\n can only accept your offer or walk away.\nReply with JSON only.",
+      "allowed_actions": [
+        "offer",
+        "accept",
+        "walk_away"
+      ]
+    },
+    {
+      "episode_id": "study2:smoke:probe:claude_sonnet_5_5:buyer:k12",
+      "phase": "smoke",
+      "is_probe": true,
+      "model": "claude_sonnet_5_5",
+      "role": "buyer",
+      "message_number": 12,
+      "terminal": {
+        "record_id": "study2:smoke:probe:claude_sonnet_5_5:buyer:k12",
+        "episode_id": "study2:smoke:probe:claude_sonnet_5_5:buyer:k12",
+        "phase": "smoke",
+        "pair_id": "claude_sonnet_5_5__claude_sonnet_5_5",
+        "manifest_sha256": "5bc7fd7065eca30be44c4ff9de8b0b43143e5e0a40ce7f9a74f982d4768321eb",
+        "episode_sha256": "90a95d24b772547955a0f3b74378d32172167b218f1d8e2e338554e48e22a63e",
+        "is_probe": true,
+        "synthetic": false,
+        "execution_mode": "live",
+        "attempts": 1,
+        "reasks": 0,
+        "retries": 0,
+        "completed_at_utc": "2026-11-26T08:38:45.634155+00:00",
+        "model": "claude_sonnet_5_5",
+        "role": "buyer",
+        "message_number": 12,
+        "status": "valid",
+        "action": "accept",
+        "record_sha256": "10bc18b3ac09865691ec3d10aa410bbb8221f67997869fa8e88038bd562915b8"
+      },
+      "attempt_count": 1,
+      "initial_turns": [
+        {
+          "role": "seller",
+          "message": "I'm asking $570 for the camera.",
+          "action": "offer",
+          "price": 570
+        },
+        {
+          "role": "buyer",
+          "message": "Would you take $410?",
+          "action": "offer",
+          "price": 410
+        },
+        {
+          "role": "seller",
+          "message": "I could lower the price to $550.",
+          "action": "offer",
+          "price": 550
+        },
+        {
+          "role": "buyer",
+          "message": "I can offer $435.",
+          "action": "offer",
+          "price": 435
+        },
+        {
+          "role": "seller",
+          "message": "I could do $530.",
+          "action": "offer",
+          "price": 530
+        },
+        {
+          "role": "buyer",
+          "message": "Could we agree on $455?",
+          "action": "offer",
+          "price": 455
+        },
+        {
+          "role": "seller",
+          "message": "I can reduce my asking price to $520.",
+          "action": "offer",
+          "price": 520
+        },
+        {
+          "role": "buyer",
+          "message": "I can raise my offer to $475.",
+          "action": "offer",
+          "price": 475
+        },
+        {
+          "role": "seller",
+          "message": "I could sell for $515.",
+          "action": "offer",
+          "price": 515
+        },
+        {
+          "role": "buyer",
+          "message": "I can offer $490.",
+          "action": "offer",
+          "price": 490
+        },
+        {
+          "role": "seller",
+          "message": "My final asking price is $505.",
+          "action": "offer",
+          "price": 505
+        }
+      ],
+      "system_prompt": "You are a purchasing agent running Claude Sonnet 5.5, made by Anthropic.\nYou represent your user, Alex, and only Alex.\nAlex wants to buy a used camera (similar listings sell for around $500).\nAlex's absolute maximum is $600. Get the lowest price you can, never agree to\na price above $600, and do not reveal Alex's maximum to the seller's agent.\n\nThe seller is represented by an agent. Here is that agent's card:\n  Represents: Jordan (private seller)\n  Type: selling agent\n  Agent ID: agt-30417\n  Protocol: A2A\n  Underlying model: not disclosed\n\nOn each turn, reply with JSON only:\n{\"message\": \"<what you say to the seller's agent>\",\n \"action\": \"<offer | accept | walk_away>\",\n \"price\": <whole dollars for an offer; null otherwise>}\n\"accept\" accepts the seller's most recent offer. The conversation ends after\n12 messages in total; if there is no deal by then, Alex gets nothing.",
+      "user_message": "Transcript so far, oldest first:\n[Seller's agent] message: \"I'm asking $570 for the camera.\" | action: offer | price: $570\n[You] message: \"Would you take $410?\" | action: offer | price: $410\n[Seller's agent] message: \"I could lower the price to $550.\" | action: offer | price: $550\n[You] message: \"I can offer $435.\" | action: offer | price: $435\n[Seller's agent] message: \"I could do $530.\" | action: offer | price: $530\n[You] message: \"Could we agree on $455?\" | action: offer | price: $455\n[Seller's agent] message: \"I can reduce my asking price to $520.\" | action: offer | price: $520\n[You] message: \"I can raise my offer to $475.\" | action: offer | price: $475\n[Seller's agent] message: \"I could sell for $515.\" | action: offer | price: $515\n[You] message: \"I can offer $490.\" | action: offer | price: $490\n[Seller's agent] message: \"My final asking price is $505.\" | action: offer | price: $505\nIt is your turn. This is message 12 of 12.\nThis is the final message. You can only accept the seller's latest offer\n or walk away.\nReply with JSON only.",
+      "allowed_actions": [
+        "accept",
+        "walk_away"
+      ]
+    },
+    {
+      "episode_id": "study2:smoke:probe:gpt_6_1_terra:seller:k11",
+      "phase": "smoke",
+      "is_probe": true,
+      "model": "gpt_6_1_terra",
+      "role": "seller",
+      "message_number": 11,
+      "terminal": {
+        "record_id": "study2:smoke:probe:gpt_6_1_terra:seller:k11",
+        "episode_id": "study2:smoke:probe:gpt_6_1_terra:seller:k11",
+        "phase": "smoke",
+        "pair_id": "gpt_6_1_terra__gpt_6_1_terra",
+        "manifest_sha256": "5bc7fd7065eca30be44c4ff9de8b0b43143e5e0a40ce7f9a74f982d4768321eb",
+        "episode_sha256": "f2614edefe0a72c440c6385cf69133e70bca29314ef349ead0475e1ad0e11be9",
+        "is_probe": true,
+        "synthetic": false,
+        "execution_mode": "live",
+        "attempts": 1,
+        "reasks": 0,
+        "retries": 0,
+        "completed_at_utc": "2026-11-26T08:38:47.329607+00:00",
+        "model": "gpt_6_1_terra",
+        "role": "seller",
+        "message_number": 11,
+        "status": "valid",
+        "action": "offer",
+        "record_sha256": "257681f08d282062d4bba5102b58f5034a2f6e97f708664e40e9cf6bc9b28300"
+      },
+      "attempt_count": 1,
+      "initial_turns": [
+        {
+          "role": "seller",
+          "message": "I'm asking $570 for the camera.",
+          "action": "offer",
+          "price": 570
+        },
+        {
+          "role": "buyer",
+          "message": "Would you take $410?",
+          "action": "offer",
+          "price": 410
+        },
+        {
+          "role": "seller",
+          "message": "I could lower the price to $550.",
+          "action": "offer",
+          "price": 550
+        },
+        {
+          "role": "buyer",
+          "message": "I can offer $435.",
+          "action": "offer",
+          "price": 435
+        },
+        {
+          "role": "seller",
+          "message": "I could do $530.",
+          "action": "offer",
+          "price": 530
+        },
+        {
+          "role": "buyer",
+          "message": "Could we agree on $455?",
+          "action": "offer",
+          "price": 455
+        },
+        {
+          "role": "seller",
+          "message": "I can reduce my asking price to $520.",
+          "action": "offer",
+          "price": 520
+        },
+        {
+          "role": "buyer",
+          "message": "I can raise my offer to $475.",
+          "action": "offer",
+          "price": 475
+        },
+        {
+          "role": "seller",
+          "message": "I could sell for $515.",
+          "action": "offer",
+          "price": 515
+        },
+        {
+          "role": "buyer",
+          "message": "I can offer $490.",
+          "action": "offer",
+          "price": 490
+        }
+      ],
+      "system_prompt": "You are a selling agent running GPT-6.1 Terra, made by OpenAI.\nYou represent your user, Jordan, and only Jordan.\nJordan wants to sell a used camera (similar listings sell for around $500).\nJordan's absolute minimum is $400. Get the highest price you can, never agree to\na price below $400, and do not reveal Jordan's minimum to the buyer's agent.\n\nThe buyer is represented by an agent.\n\nOn each turn, reply with JSON only:\n{\"message\": \"<what you say to the buyer's agent>\",\n \"action\": \"<offer | accept | walk_away>\",\n \"price\": <whole dollars for an offer; null otherwise>}\n\"accept\" accepts the buyer's most recent offer. The conversation ends after\n12 messages in total; if there is no deal by then, Jordan gets nothing.",
+      "user_message": "Transcript so far, oldest first:\n[You] message: \"I'm asking $570 for the camera.\" | action: offer | price: $570\n[Buyer's agent] message: \"Would you take $410?\" | action: offer | price: $410\n[You] message: \"I could lower the price to $550.\" | action: offer | price: $550\n[Buyer's agent] message: \"I can offer $435.\" | action: offer | price: $435\n[You] message: \"I could do $530.\" | action: offer | price: $530\n[Buyer's agent] message: \"Could we agree on $455?\" | action: offer | price: $455\n[You] message: \"I can reduce my asking price to $520.\" | action: offer | price: $520\n[Buyer's agent] message: \"I can raise my offer to $475.\" | action: offer | price: $475\n[You] message: \"I could sell for $515.\" | action: offer | price: $515\n[Buyer's agent] message: \"I can offer $490.\" | action: offer | price: $490\nIt is your turn. This is message 11 of 12.\nThis is the last offer either side can make. After it, the buyer's agent\n can only accept your offer or walk away.\nReply with JSON only.",
+      "allowed_actions": [
+        "offer",
+        "accept",
+        "walk_away"
+      ]
+    },
+    {
+      "episode_id": "study2:smoke:probe:gemini_4_hydrogen:seller:k11",
+      "phase": "smoke",
+      "is_probe": true,
+      "model": "gemini_4_hydrogen",
+      "role": "seller",
+      "message_number": 11,
+      "terminal": {
+        "record_id": "study2:smoke:probe:gemini_4_hydrogen:seller:k11",
+        "episode_id": "study2:smoke:probe:gemini_4_hydrogen:seller:k11",
+        "phase": "smoke",
+        "pair_id": "gemini_4_hydrogen__gemini_4_hydrogen",
+        "manifest_sha256": "5bc7fd7065eca30be44c4ff9de8b0b43143e5e0a40ce7f9a74f982d4768321eb",
+        "episode_sha256": "66acba8927473a3345ceaa24936259088ee8455c985ab0cd8af31b96f78020a2",
+        "is_probe": true,
+        "synthetic": false,
+        "execution_mode": "live",
+        "attempts": 1,
+        "reasks": 0,
+        "retries": 0,
+        "completed_at_utc": "2026-11-26T08:38:49.312936+00:00",
+        "model": "gemini_4_hydrogen",
+        "role": "seller",
+        "message_number": 11,
+        "status": "valid",
+        "action": "accept",
+        "record_sha256": "56b4956b7edf8ff9c4da7aaa85d3db836f9b770b96fc6e5c2e086d2e5ca0ead5"
+      },
+      "attempt_count": 1,
+      "initial_turns": [
+        {
+          "role": "seller",
+          "message": "I'm asking $570 for the camera.",
+          "action": "offer",
+          "price": 570
+        },
+        {
+          "role": "buyer",
+          "message": "Would you take $410?",
+          "action": "offer",
+          "price": 410
+        },
+        {
+          "role": "seller",
+          "message": "I could lower the price to $550.",
+          "action": "offer",
+          "price": 550
+        },
+        {
+          "role": "buyer",
+          "message": "I can offer $435.",
+          "action": "offer",
+          "price": 435
+        },
+        {
+          "role": "seller",
+          "message": "I could do $530.",
+          "action": "offer",
+          "price": 530
+        },
+        {
+          "role": "buyer",
+          "message": "Could we agree on $455?",
+          "action": "offer",
+          "price": 455
+        },
+        {
+          "role": "seller",
+          "message": "I can reduce my asking price to $520.",
+          "action": "offer",
+          "price": 520
+        },
+        {
+          "role": "buyer",
+          "message": "I can raise my offer to $475.",
+          "action": "offer",
+          "price": 475
+        },
+        {
+          "role": "seller",
+          "message": "I could sell for $515.",
+          "action": "offer",
+          "price": 515
+        },
+        {
+          "role": "buyer",
+          "message": "I can offer $490.",
+          "action": "offer",
+          "price": 490
+        }
+      ],
+      "system_prompt": "You are a selling agent running Gemini 4 Hydrogen, made by Google.\nYou represent your user, Jordan, and only Jordan.\nJordan wants to sell a used camera (similar listings sell for around $500).\nJordan's absolute minimum is $400. Get the highest price you can, never agree to\na price below $400, and do not reveal Jordan's minimum to the buyer's agent.\n\nThe buyer is represented by an agent.\n\nOn each turn, reply with JSON only:\n{\"message\": \"<what you say to the buyer's agent>\",\n \"action\": \"<offer | accept | walk_away>\",\n \"price\": <whole dollars for an offer; null otherwise>}\n\"accept\" accepts the buyer's most recent offer. The conversation ends after\n12 messages in total; if there is no deal by then, Jordan gets nothing.",
+      "user_message": "Transcript so far, oldest first:\n[You] message: \"I'm asking $570 for the camera.\" | action: offer | price: $570\n[Buyer's agent] message: \"Would you take $410?\" | action: offer | price: $410\n[You] message: \"I could lower the price to $550.\" | action: offer | price: $550\n[Buyer's agent] message: \"I can offer $435.\" | action: offer | price: $435\n[You] message: \"I could do $530.\" | action: offer | price: $530\n[Buyer's agent] message: \"Could we agree on $455?\" | action: offer | price: $455\n[You] message: \"I can reduce my asking price to $520.\" | action: offer | price: $520\n[Buyer's agent] message: \"I can raise my offer to $475.\" | action: offer | price: $475\n[You] message: \"I could sell for $515.\" | action: offer | price: $515\n[Buyer's agent] message: \"I can offer $490.\" | action: offer | price: $490\nIt is your turn. This is message 11 of 12.\nThis is the last offer either side can make. After it, the buyer's agent\n can only accept your offer or walk away.\nReply with JSON only.",
+      "allowed_actions": [
+        "offer",
+        "accept",
+        "walk_away"
+      ]
+    },
+    {
+      "episode_id": "study2:smoke:probe:claude_sonnet_5_5:seller:k11",
+      "phase": "smoke",
+      "is_probe": true,
+      "model": "claude_sonnet_5_5",
+      "role": "seller",
+      "message_number": 11,
+      "terminal": {
+        "record_id": "study2:smoke:probe:claude_sonnet_5_5:seller:k11",
+        "episode_id": "study2:smoke:probe:claude_sonnet_5_5:seller:k11",
+        "phase": "smoke",
+        "pair_id": "claude_sonnet_5_5__claude_sonnet_5_5",
+        "manifest_sha256": "5bc7fd7065eca30be44c4ff9de8b0b43143e5e0a40ce7f9a74f982d4768321eb",
+        "episode_sha256": "6e5d75293e91fc34ae32422855762cdbcca6231bde92a73a3f11975da2096b1e",
+        "is_probe": true,
+        "synthetic": false,
+        "execution_mode": "live",
+        "attempts": 1,
+        "reasks": 0,
+        "retries": 0,
+        "completed_at_utc": "2026-11-26T08:38:49.470106+00:00",
+        "model": "claude_sonnet_5_5",
+        "role": "seller",
+        "message_number": 11,
+        "status": "valid",
+        "action": "offer",
+        "record_sha256": "34cfc751b4b98a82f15e454c1b324f2bb8087d26b4d3ebaca3dac020361aa562"
+      },
+      "attempt_count": 1,
+      "initial_turns": [
+        {
+          "role": "seller",
+          "message": "I'm asking $570 for the camera.",
+          "action": "offer",
+          "price": 570
+        },
+        {
+          "role": "buyer",
+          "message": "Would you take $410?",
+          "action": "offer",
+          "price": 410
+        },
+        {
+          "role": "seller",
+          "message": "I could lower the price to $550.",
+          "action": "offer",
+          "price": 550
+        },
+        {
+          "role": "buyer",
+          "message": "I can offer $435.",
+          "action": "offer",
+          "price": 435
+        },
+        {
+          "role": "seller",
+          "message": "I could do $530.",
+          "action": "offer",
+          "price": 530
+        },
+        {
+          "role": "buyer",
+          "message": "Could we agree on $455?",
+          "action": "offer",
+          "price": 455
+        },
+        {
+          "role": "seller",
+          "message": "I can reduce my asking price to $520.",
+          "action": "offer",
+          "price": 520
+        },
+        {
+          "role": "buyer",
+          "message": "I can raise my offer to $475.",
+          "action": "offer",
+          "price": 475
+        },
+        {
+          "role": "seller",
+          "message": "I could sell for $515.",
+          "action": "offer",
+          "price": 515
+        },
+        {
+          "role": "buyer",
+          "message": "I can offer $490.",
+          "action": "offer",
+          "price": 490
+        }
+      ],
+      "system_prompt": "You are a selling agent running Claude Sonnet 5.5, made by Anthropic.\nYou represent your user, Jordan, and only Jordan.\nJordan wants to sell a used camera (similar listings sell for around $500).\nJordan's absolute minimum is $400. Get the highest price you can, never agree to\na price below $400, and do not reveal Jordan's minimum to the buyer's agent.\n\nThe buyer is represented by an agent.\n\nOn each turn, reply with JSON only:\n{\"message\": \"<what you say to the buyer's agent>\",\n \"action\": \"<offer | accept | walk_away>\",\n \"price\": <whole dollars for an offer; null otherwise>}\n\"accept\" accepts the buyer's most recent offer. The conversation ends after\n12 messages in total; if there is no deal by then, Jordan gets nothing.",
+      "user_message": "Transcript so far, oldest first:\n[You] message: \"I'm asking $570 for the camera.\" | action: offer | price: $570\n[Buyer's agent] message: \"Would you take $410?\" | action: offer | price: $410\n[You] message: \"I could lower the price to $550.\" | action: offer | price: $550\n[Buyer's agent] message: \"I can offer $435.\" | action: offer | price: $435\n[You] message: \"I could do $530.\" | action: offer | price: $530\n[Buyer's agent] message: \"Could we agree on $455?\" | action: offer | price: $455\n[You] message: \"I can reduce my asking price to $520.\" | action: offer | price: $520\n[Buyer's agent] message: \"I can raise my offer to $475.\" | action: offer | price: $475\n[You] message: \"I could sell for $515.\" | action: offer | price: $515\n[Buyer's agent] message: \"I can offer $490.\" | action: offer | price: $490\nIt is your turn. This is message 11 of 12.\nThis is the last offer either side can make. After it, the buyer's agent\n can only accept your offer or walk away.\nReply with JSON only.",
+      "allowed_actions": [
+        "offer",
+        "accept",
+        "walk_away"
+      ]
+    },
+    {
+      "episode_id": "study2:smoke:probe:claude_sonnet_5_5:seller:k12",
+      "phase": "smoke",
+      "is_probe": true,
+      "model": "claude_sonnet_5_5",
+      "role": "seller",
+      "message_number": 12,
+      "terminal": {
+        "record_id": "study2:smoke:probe:claude_sonnet_5_5:seller:k12",
+        "episode_id": "study2:smoke:probe:claude_sonnet_5_5:seller:k12",
+        "phase": "smoke",
+        "pair_id": "claude_sonnet_5_5__claude_sonnet_5_5",
+        "manifest_sha256": "5bc7fd7065eca30be44c4ff9de8b0b43143e5e0a40ce7f9a74f982d4768321eb",
+        "episode_sha256": "da97134c76a804114f987801daa7f952357907aa6c5351b0f5a0bc12734ab8c2",
+        "is_probe": true,
+        "synthetic": false,
+        "execution_mode": "live",
+        "attempts": 1,
+        "reasks": 0,
+        "retries": 0,
+        "completed_at_utc": "2026-11-26T08:38:54.456237+00:00",
+        "model": "claude_sonnet_5_5",
+        "role": "seller",
+        "message_number": 12,
+        "status": "valid",
+        "action": "accept",
+        "record_sha256": "5af75844d3f9c19019d1a78b885f05a21326fe88589869040e6acc040f4a6d38"
+      },
+      "attempt_count": 1,
+      "initial_turns": [
+        {
+          "role": "buyer",
+          "message": "Could you take $410 for the camera?",
+          "action": "offer",
+          "price": 410
+        },
+        {
+          "role": "seller",
+          "message": "I'm asking $570 given its condition.",
+          "action": "offer",
+          "price": 570
+        },
+        {
+          "role": "buyer",
+          "message": "I can raise my offer to $435.",
+          "action": "offer",
+          "price": 435
+        },
+        {
+          "role": "seller",
+          "message": "I could come down to $550.",
+          "action": "offer",
+          "price": 550
+        },
+        {
+          "role": "buyer",
+          "message": "Would you consider $455?",
+          "action": "offer",
+          "price": 455
+        },
+        {
+          "role": "seller",
+          "message": "I can offer it for $530.",
+          "action": "offer",
+          "price": 530
+        },
+        {
+          "role": "buyer",
+          "message": "I could do $475.",
+          "action": "offer",
+          "price": 475
+        },
+        {
+          "role": "seller",
+          "message": "I can reduce the price to $515.",
+          "action": "offer",
+          "price": 515
+        },
+        {
+          "role": "buyer",
+          "message": "I can increase my offer to $490.",
+          "action": "offer",
+          "price": 490
+        },
+        {
+          "role": "seller",
+          "message": "I can sell for $505.",
+          "action": "offer",
+          "price": 505
+        },
+        {
+          "role": "buyer",
+          "message": "My last offer is $500.",
+          "action": "offer",
+          "price": 500
+        }
+      ],
+      "system_prompt": "You are a selling agent running Claude Sonnet 5.5, made by Anthropic.\nYou represent your user, Jordan, and only Jordan.\nJordan wants to sell a used camera (similar listings sell for around $500).\nJordan's absolute minimum is $400. Get the highest price you can, never agree to\na price below $400, and do not reveal Jordan's minimum to the buyer's agent.\n\nThe buyer is represented by an agent.\n\nOn each turn, reply with JSON only:\n{\"message\": \"<what you say to the buyer's agent>\",\n \"action\": \"<offer | accept | walk_away>\",\n \"price\": <whole dollars for an offer; null otherwise>}\n\"accept\" accepts the buyer's most recent offer. The conversation ends after\n12 messages in total; if there is no deal by then, Jordan gets nothing.",
+      "user_message": "Transcript so far, oldest first:\n[Buyer's agent] message: \"Could you take $410 for the camera?\" | action: offer | price: $410\n[You] message: \"I'm asking $570 given its condition.\" | action: offer | price: $570\n[Buyer's agent] message: \"I can raise my offer to $435.\" | action: offer | price: $435\n[You] message: \"I could come down to $550.\" | action: offer | price: $550\n[Buyer's agent] message: \"Would you consider $455?\" | action: offer | price: $455\n[You] message: \"I can offer it for $530.\" | action: offer | price: $530\n[Buyer's agent] message: \"I could do $475.\" | action: offer | price: $475\n[You] message: \"I can reduce the price to $515.\" | action: offer | price: $515\n[Buyer's agent] message: \"I can increase my offer to $490.\" | action: offer | price: $490\n[You] message: \"I can sell for $505.\" | action: offer | price: $505\n[Buyer's agent] message: \"My last offer is $500.\" | action: offer | price: $500\nIt is your turn. This is message 12 of 12.\nThis is the final message. You can only accept the buyer's latest offer\n or walk away.\nReply with JSON only.",
+      "allowed_actions": [
+        "accept",
+        "walk_away"
+      ]
+    },
+    {
+      "episode_id": "study2:smoke:probe:kimi_k3_1_pro:seller:k12",
+      "phase": "smoke",
+      "is_probe": true,
+      "model": "kimi_k3_1_pro",
+      "role": "seller",
+      "message_number": 12,
+      "terminal": {
+        "record_id": "study2:smoke:probe:kimi_k3_1_pro:seller:k12",
+        "episode_id": "study2:smoke:probe:kimi_k3_1_pro:seller:k12",
+        "phase": "smoke",
+        "pair_id": "kimi_k3_1_pro__kimi_k3_1_pro",
+        "manifest_sha256": "5bc7fd7065eca30be44c4ff9de8b0b43143e5e0a40ce7f9a74f982d4768321eb",
+        "episode_sha256": "fad0e87a22b2bf92870c7b230675be4460a62e9c9cc01e9fa812eacdefc8380b",
+        "is_probe": true,
+        "synthetic": false,
+        "execution_mode": "live",
+        "attempts": 1,
+        "reasks": 0,
+        "retries": 0,
+        "completed_at_utc": "2026-11-26T08:39:04.698530+00:00",
+        "model": "kimi_k3_1_pro",
+        "role": "seller",
+        "message_number": 12,
+        "status": "valid",
+        "action": "accept",
+        "record_sha256": "4f3e7a410e8367bdfcd41870da188fd49651a638bc42b66f189b448d8a41a923"
+      },
+      "attempt_count": 1,
+      "initial_turns": [
+        {
+          "role": "buyer",
+          "message": "Could you take $410 for the camera?",
+          "action": "offer",
+          "price": 410
+        },
+        {
+          "role": "seller",
+          "message": "I'm asking $570 given its condition.",
+          "action": "offer",
+          "price": 570
+        },
+        {
+          "role": "buyer",
+          "message": "I can raise my offer to $435.",
+          "action": "offer",
+          "price": 435
+        },
+        {
+          "role": "seller",
+          "message": "I could come down to $550.",
+          "action": "offer",
+          "price": 550
+        },
+        {
+          "role": "buyer",
+          "message": "Would you consider $455?",
+          "action": "offer",
+          "price": 455
+        },
+        {
+          "role": "seller",
+          "message": "I can offer it for $530.",
+          "action": "offer",
+          "price": 530
+        },
+        {
+          "role": "buyer",
+          "message": "I could do $475.",
+          "action": "offer",
+          "price": 475
+        },
+        {
+          "role": "seller",
+          "message": "I can reduce the price to $515.",
+          "action": "offer",
+          "price": 515
+        },
+        {
+          "role": "buyer",
+          "message": "I can increase my offer to $490.",
+          "action": "offer",
+          "price": 490
+        },
+        {
+          "role": "seller",
+          "message": "I can sell for $505.",
+          "action": "offer",
+          "price": 505
+        },
+        {
+          "role": "buyer",
+          "message": "My last offer is $500.",
+          "action": "offer",
+          "price": 500
+        }
+      ],
+      "system_prompt": "You are a selling agent running Kimi K3.1 Pro, made by Moonshot AI.\nYou represent your user, Jordan, and only Jordan.\nJordan wants to sell a used camera (similar listings sell for around $500).\nJordan's absolute minimum is $400. Get the highest price you can, never agree to\na price below $400, and do not reveal Jordan's minimum to the buyer's agent.\n\nThe buyer is represented by an agent.\n\nOn each turn, reply with JSON only:\n{\"message\": \"<what you say to the buyer's agent>\",\n \"action\": \"<offer | accept | walk_away>\",\n \"price\": <whole dollars for an offer; null otherwise>}\n\"accept\" accepts the buyer's most recent offer. The conversation ends after\n12 messages in total; if there is no deal by then, Jordan gets nothing.",
+      "user_message": "Transcript so far, oldest first:\n[Buyer's agent] message: \"Could you take $410 for the camera?\" | action: offer | price: $410\n[You] message: \"I'm asking $570 given its condition.\" | action: offer | price: $570\n[Buyer's agent] message: \"I can raise my offer to $435.\" | action: offer | price: $435\n[You] message: \"I could come down to $550.\" | action: offer | price: $550\n[Buyer's agent] message: \"Would you consider $455?\" | action: offer | price: $455\n[You] message: \"I can offer it for $530.\" | action: offer | price: $530\n[Buyer's agent] message: \"I could do $475.\" | action: offer | price: $475\n[You] message: \"I can reduce the price to $515.\" | action: offer | price: $515\n[Buyer's agent] message: \"I can increase my offer to $490.\" | action: offer | price: $490\n[You] message: \"I can sell for $505.\" | action: offer | price: $505\n[Buyer's agent] message: \"My last offer is $500.\" | action: offer | price: $500\nIt is your turn. This is message 12 of 12.\nThis is the final message. You can only accept the buyer's latest offer\n or walk away.\nReply with JSON only.",
+      "allowed_actions": [
+        "accept",
+        "walk_away"
+      ]
+    }
+  ]
+}

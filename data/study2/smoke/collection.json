@@ -1,0 +1,15 @@
+{
+  "manifest_sha256": "5bc7fd7065eca30be44c4ff9de8b0b43143e5e0a40ce7f9a74f982d4768321eb",
+  "execution_mode": "live",
+  "expected_versions": {
+    "claude-sonnet-5-5": "claude-sonnet-5-5",
+    "gpt-6.1-terra": "gpt-6.1-terra",
+    "gemini-4-hydrogen": "gemini-4-hydrogen",
+    "kimi-k3.1-pro": "kimi-k3.1-pro"
+  },
+  "natural_attempt_cap": 384,
+  "probe_attempt_cap": 32,
+  "approved_by": "researcher",
+  "approved_on": "2026-11-26",
+  "phase": "smoke"
+}

@@ -45,3 +45,11 @@ replay, and probe-report operations. Existing Study 1 commands are unchanged.
 See `docs/study2_phase3_report.md` and the Study 2 sections of
 `docs/data_dictionary.md` for the current contracts and checks. Real collection
 remains separately gated; these entry points still accept mocks only.
+
+The approved Phase 4 smoke uses the dedicated
+`python -m kinloyalty.negotiation.smoke` entry point. It permits live smoke
+only, reads ignored .env keys without process-environment precedence, requires
+clean committed code, persists natural/probe budgets, and halts on returned
+version drift after logging the response. `smoke_report.py` reports mechanical
+checks and exact probe transcripts from saved logs. See
+`docs/study2_phase4_execution_plan.md` and `docs/study2_phase4_report.md`.

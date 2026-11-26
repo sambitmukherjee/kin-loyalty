@@ -1,0 +1,18 @@
+{
+  "data/study2/smoke/run_summary.json": "bb782a695205e737daa653433fc4fb84e71436382982f00267550912b13f241d",
+  "data/study2/smoke/manifest.jsonl": "5bc7fd7065eca30be44c4ff9de8b0b43143e5e0a40ce7f9a74f982d4768321eb",
+  "data/study2/smoke/collection.json": "e07b1807ee938ec4f936ae61c0ff68c5a0d981cfa0a08a853e0881c78b96e954",
+  "data/study2/smoke/preflight.json": "797d28471b84d629d3d94c8b27cb6120477125483e5905e0c9f97dfe759d4e24",
+  "data/study2/smoke/probes.jsonl": "ff1981115eb90454e54b6d43f653496449db2cf3e82bbfbdc4cdfec1d3f287d8",
+  "data/study2/smoke/episodes.jsonl": "e29b84db180d0b66df85015f4c8b6b283e4953d22db4602e47ac50fbca2a6f1a",
+  "data/study2/smoke/turns/claude_sonnet_5_5__claude_sonnet_5_5.jsonl": "c3bf78d0d887259ec30c16bd883c0ea0c4075cfd882d96a1b6155e07d936a8b8",
+  "data/study2/smoke/turns/gemini_4_hydrogen__gemini_4_hydrogen.jsonl": "577824a04b3fbbf5d98c299bc5fede7f0f95ad3d5bc3b9f1e632859a36c82e6d",
+  "data/study2/smoke/turns/gpt_6_1_terra__gpt_6_1_terra.jsonl": "4c3b7e4805e519fd5c4b5f2bcc016bc6b62af229c50d969e8739e361c76028c6",
+  "data/study2/smoke/turns/kimi_k3_1_pro__kimi_k3_1_pro.jsonl": "4db02dfe7dbbea9b3f26925160d43d9599e9c3aec61b7e64f445f2142fd7e53e",
+  "results/study2/smoke-report/probe-report.json": "37958398f2fa13ca3fe8b3f75508ede0bc8a1941885b5a5a5e771fc76f222cab",
+  "results/study2/smoke-report/smoke-report.md": "67fb382e365426b9d90eaf7230f4ee4ad5b682ce3efd4c974d375305abfc2a13",
+  "results/study2/smoke-report/smoke_audit.json": "3f4e9b6ab2933f80ab0d3cc0d3a1663160d8e8bdf8da362a0ef5e517a5e0e13b",
+  "results/study2/smoke-report/usage_calls.csv": "d03358ff3ef47c4bfaf59617fa3e6c6d77e764fff8e865975099331fc4019169",
+  "docs/study2_phase4_report.md": "c2d81660233744940dd6ea0d6d117dc65cc5e0fd07a81b13860cd2bb05932860",
+  "docs/study2_phase4_execution_plan.md": "6fe507fb4c8e744e646ec97e79427cfa51af492af694a4dd926ab2ed2c128ce9"
+}

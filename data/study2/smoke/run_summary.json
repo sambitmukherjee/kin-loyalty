@@ -1,0 +1,23 @@
+{
+  "status": "complete",
+  "execution_mode": "live",
+  "planned_units": 20,
+  "already_final": 0,
+  "new_calls": 51,
+  "recovered_attempts": 0,
+  "repaired_terminal_records": 0,
+  "episodes_complete": 4,
+  "probes_complete": 16,
+  "probe_attempts_used": 16,
+  "probe_attempt_cap": 32,
+  "natural_attempts_used": 35,
+  "natural_attempt_cap": 384,
+  "unfinished_unit_ids": [],
+  "manifest_sha256": "5bc7fd7065eca30be44c4ff9de8b0b43143e5e0a40ce7f9a74f982d4768321eb",
+  "pair_log_bytes": {
+    "claude_sonnet_5_5__claude_sonnet_5_5": 143979,
+    "gemini_4_hydrogen__gemini_4_hydrogen": 99128,
+    "gpt_6_1_terra__gpt_6_1_terra": 139230,
+    "kimi_k3_1_pro__kimi_k3_1_pro": 120863
+  }
+}
