@@ -756,3 +756,33 @@ and any batch that must be rerun. No post-pilot fixes or deviations exist yet.
   separate local collection commit without moving the registration tag or
   pushing new data. This is registered collection/resumption, with no scientific
   protocol or analysis change.
+
+## 2026-11-26 — Study 2 Phase 0 review and proposed plan
+
+- **Authorization and boundary:** The researcher instructed the coding agent to
+  follow the new local Study 2 instructions. Those instructions authorize the
+  initial review/plan and require explicit approval before Phase 1 and at every
+  later phase boundary. No Study 2 implementation, paid call, push, or main run
+  is authorized by this review.
+- **Repository checks:** Both existing annotated Study 1 tags remain present.
+  The Study 1 main manifest rebuilt in memory to its exact locked SHA-256,
+  `a583fe4366893e74735f22fc7f1e45ee7e8d136be5e06ad5d770dfcc1225ee55`.
+  The full existing offline suite returned 311 passed and one failed. The
+  failure at `tests/test_analysis.py:383` assumes the real main-data directory
+  does not exist, although collection is complete. Its synthetic-write
+  rejection succeeds. No test or production correction has been made.
+- **Proposals awaiting approval:** Clarify whether the Study 1 reference to
+  registering Study 2 before data collection means before main collection;
+  resolve null-price wording versus the explicit ignore-price exception for
+  non-offer actions; and approve or decline the narrowly scoped correction to
+  the outdated test assertion. The additive Study 2 CLI extension and any other
+  shared-code changes require approval before editing. No new scientific
+  decision is recorded as approved.
+- **Deliverable and next gate:** `docs/study2_phase0_plan.md` records the review,
+  compatibility findings, questions, proposed phases 1–8, acceptance checks,
+  spending boundaries, and the smoke final-schema coverage limitation. Await
+  researcher answers and explicit approval to start Phase 1. Commit this review
+  locally as required by the instructions; do not push.
+- **Preservation:** No Study 1 main response logs/outcome tables were inspected
+  and no main outcome analysis was run. All Study 1 artifacts and tags remain
+  unchanged. `codex_prompts/` remains ignored and untracked.
