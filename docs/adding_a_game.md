@@ -18,3 +18,26 @@ from the transport-independent runner, card renderer, clients, and attempt logs.
 
 Study 2 will add a separate multi-turn negotiation engine later. Do not implement
 its bargaining protocol as part of Study 1.
+
+## Study 2 negotiation components
+
+Study 2's offline protocol now lives separately under
+`src/kinloyalty/negotiation/`. `state.py` defines scenario/assignment state;
+`rules.py` supplies pure `allowed_actions`, `apply_turn`, `exclude_episode`,
+`validate_state`, and `score_outcome`. `schemas.py` builds a schema for each
+message number, and `validate.py` implements strict reply parsing with Study 2's
+explicit non-offer-price exception. Study 1's validator is unchanged.
+
+`requests.py` combines the exact templates, role-relative public transcript,
+current mover's private limit, turn schema, and unchanged provider payload
+builder. `EpisodeSpec.custom_cards` optionally supplies buyer/seller card text
+for engine reuse; leave it unset for the Study 2 buyer-only assignment. Custom
+arrangements are marked in local metadata and have no Study 2 analysis here.
+
+`engine.run_episode` executes sequential turns with `NegotiationMockClient`,
+scripted responses/errors, or another client declaring mock execution. Its
+result contains in-memory attempt records and progress for explicit resumption.
+It refuses live clients. Durable logs, manifests, concurrency, pending journals,
+and disk replay are the subsequent Phase 3 work; do not use this Phase 2 entry
+point for real collection. See `docs/study2_phase2_report.md` and the Study 2
+section of `docs/data_dictionary.md` for the current contract and checks.

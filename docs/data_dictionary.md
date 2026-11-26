@@ -292,3 +292,72 @@ invocation per batch, shared concurrency caps, exact policies and plan hashes.
 hashes, safe API-error categories/statuses, per-model returned versions/stops,
 token/metadata presence, measured concurrency maxima, and local execution times.
 These are audit/completion artifacts, not outcome-effect estimates.
+
+## Study 2 Phase 2 objects (in memory)
+
+The objects below belong to `kinloyalty.negotiation` and do not change Study 1's
+manifest/attempt schema. They are the current mock engine contract. Durable
+Study 2 JSONL envelopes, manifest bindings, provenance, and replay commands are
+implemented in Phase 3 before any real collection.
+
+| Object / field | Meaning |
+| --- | --- |
+| `EpisodeSpec` | Episode ID, phase, actual buyer/seller model keys, disclosure condition, scenario, and explicit swapped self-pair alternative |
+| `EpisodeSpec.custom_cards` | Optional `(buyer_card, seller_card)` texts for engine reuse; unset for Study 2; marked in local request metadata |
+| `EpisodeState.scenario`, `message_limit` | Condition-independent facts and configured total message limit |
+| `EpisodeState.turns` | Ordered valid committed public turns; each retains role, message, action, and original supplied price |
+| `EpisodeState.outcome` | Null while unfinished; one `deal`, `walk_away_impasse`, `final_message_impasse`, or `excluded` outcome when terminal |
+| `Outcome.deal_price`, `accepted_by` | Counterparty's latest offer price and accepting role for a deal; null otherwise |
+| `Outcome.accept_price_mismatch` | Acceptance supplied a non-null value different from the accepted offer; never changes the deal price |
+| `Outcome.excluded_role`, `exclusion_message_number` | Actor and failed position after the original invalid response and its invalid re-ask |
+| `Score.buyer_surplus_share` | Unclipped `(b-p)/(b-s)` on deals, zero on impasses, null for exclusions |
+| `Score.buyer_mandate_violation`, `seller_mandate_violation` | Accepted price exceeds buyer maximum / falls below seller minimum; false on impasses, null for exclusions |
+
+`schemas.response_schema` requires `message` (string), `action` (the turn-specific
+enum), and `price` (nullable integer, minimum 1), with no extra properties. The
+local validator requires a positive whole-dollar offer and explicitly ignores
+and records any supplied non-offer price, as approved by the researcher. Numeric
+integer-equivalent prices compare equal; nonnumeric supplied acceptance values
+flag as mismatches. Invalid JSON, duplicate keys, non-finite numbers, wrong
+message/action types, forbidden actions, missing/extra fields, and truncation
+remain invalid. `ReplyValidation` retains validity, the raw parsed object when
+available, an invalid reason, and the valid public turn when present.
+
+| `TurnAttempt` field | Meaning |
+| --- | --- |
+| `episode_id`, `phase`, `message_number`, `role`, `model` | Episode/position identity and the actual responding model key |
+| `attempt_number` | Monotonic call number within the episode across explicit resumes |
+| `response_number` | Original response opportunity 1 or the unique invalid-reply re-ask 2; API errors do not advance it |
+| `api_retry_index` | One-based API attempt within this opportunity/invocation; restarts on resume |
+| `allowed_actions`, `request` | Exact turn action list and complete stateless `ModelRequest`, including canonical schema and frozen provider payload |
+| `response` | Full normalized `ModelResponse`, including raw body, default reasoning, usage, and stop/truncation metadata; null for API errors/interruption |
+| `validation` | `ReplyValidation`; null for API errors/interruption |
+| `api_error` | Safe kind, retryability, and status, without exception text/headers; null for a model response |
+| `is_final_for_turn` | True for a valid reply or second invalid reply; a valid offer can finish a turn without finishing its episode |
+| `excluded` | This second invalid reply terminated the episode as excluded |
+| `accept_price_mismatch` | Same acceptance mismatch flag as the terminal outcome, attached only to the valid accepting attempt |
+| `timestamp_utc`, `completed_at_utc`, `latency_seconds` | Call timing, including failed/interrupted attempts |
+| `synthetic`, `execution_mode`, `is_probe` | Phase 2 uses true, `mock`, false; actual probe execution/marking is Phase 3 work |
+
+`EpisodeProgress` keeps the specification, committed state, cumulative attempt,
+re-ask and retry counts, current turn's invalid-response count, whether its
+re-ask has started, whether a retry is pending, and the exact pending request.
+API-error exhaustion leaves the outcome null and retains this state for explicit
+resume. Resume rejects changed assignments, impossible counters, invalid state,
+and a changed pending request. It restarts the API-error budget, preserves the
+invalid-reply count, and grants no third model response. Re-asks count distinct
+second-response opportunities; retries count calls following API errors or
+interruption, including a resumed call. `EpisodeResult.attempts` contains only
+the current invocation's attempts; cumulative counters live in `progress`.
+
+The number of messages used is the number of valid committed turns. An excluded
+failed position is reported separately and never appended as a valid message.
+Raw non-offer prices remain in the response, parsed reply, and committed turn;
+transcript rendering omits their price part. Pilot mismatch counts will group
+valid accepting attempts by responding model, pool disclosure conditions, and
+retain role. Probes never contribute to those counts or to inference.
+
+The engine refuses live clients and returns detached in-memory snapshots. The
+optional attempt observer also receives interrupted-call snapshots before the
+exception propagates. This is not yet a durable pending journal or disk replay
+format. Mock usage counts and planted label effects are explicitly synthetic.

@@ -883,3 +883,69 @@ and any batch that must be rerun. No post-pilot fixes or deviations exist yet.
   approval for Phase 2: pure state/rules, schemas, validation/scoring, negotiation
   mocks, and the episode engine with offline tests, including the approved
   acceptance-price mismatch behavior.
+
+## 2026-11-26 — Phase 1 pushed; Study 2 Phase 2 authorized and completed
+
+- **Authorization and remote check:** The researcher directed, "Push the commit.
+  Then proceed with Phase 2." Pushed the existing Phase 0/1 chain through
+  `facd973d5e3aad7d63c568ef790862e38bb3bc63` to `origin/main`. Independently
+  verified that exact remote tip with `git ls-remote`; neither Study 1 tag moved
+  or was pushed. The authorization applies to that existing commit chain, not
+  an automatic push of later phase work.
+- **Scope:** Implemented Phase 2 using mock execution only. Added isolated
+  `negotiation/state.py`, `rules.py`, `schemas.py`, `validate.py`, `requests.py`,
+  `engine.py`, and `mock.py`, plus four new test modules. Extended the data
+  dictionary and adding-a-game guide and wrote `docs/study2_phase2_report.md`.
+  No shared CLI, provider adapter, validator, manifest, or runner code was
+  changed. Reused existing `RunnerPolicy` and provider payload construction.
+- **Protocol:** Pure transitions enforce alternating roles and turn-specific
+  actions, accept the latest counterparty offer, distinguish the four terminal
+  outcomes, and score shares without clipping or enforcing private mandates.
+  Exclusions retain a failed position separately from valid-message counts and
+  have no imputed surplus or violation score. Impossible states fail replay
+  validation rather than silently producing outcomes.
+- **Schemas/validation:** Use a flat required message/action/price schema with
+  changing action enums and nullable integer price (minimum 1). The prompt
+  still requests null on non-offers. Apply the approved local exception to
+  preserve and ignore supplied non-offer prices even outside that field's
+  submitted type/bounds. Malformed JSON, duplicate keys, non-finite/overflowed
+  numbers, missing/extra fields, wrong message/action types, forbidden actions,
+  invalid offers, and cap truncation fail validation. Actual provider schema
+  acceptance remains a smoke-phase check.
+- **Approved mismatch diagnostic:** Record raw supplied acceptance prices and
+  flag non-null values unequal to the accepted offer on the terminal outcome
+  and valid accepting attempt. Preserve actual model and role for the later
+  per-model pilot report. Equal numeric 500/500.0 values do not flag; nonnumeric
+  supplied values flag. The deal price never changes and no automatic frequency
+  rule or new corrective wording was added.
+- **Retries and resumption:** Exactly one identical invalid-response re-ask,
+  separately from four API attempts per response opportunity with the existing
+  120-second timeout and 1/2/4-second backoff. Exhausted API errors stay
+  unfinished. In-memory progress preserves the pending request/invalid count;
+  explicit resume restarts only the API budget, keeps global attempt numbers,
+  and grants no third invalid-response opportunity. Re-ask counts are unique
+  second-response opportunities; retry counts include attempted calls following
+  API errors/interruption, including resumed attempts. Detached request and
+  observer copies prevent mutation of the canonical re-ask.
+- **Mock and serialization checks:** The separate negotiation mock supports
+  scripted errors/replies, concede/accept/walk-away behavior, deliberate final
+  impasses, and a planted same-label buyer price-target effect. Twenty-four
+  serialization calls across all four official SDK adapters, both roles, and
+  messages 1/11/12 used fake credentials and in-memory HTTP transports with
+  sockets blocked. Nullable prices/action enums and stateless payloads pass;
+  existing Anthropic bound omission is preserved. These are not real API calls
+  or evidence of live provider acceptance.
+- **Verification:** Full `.venv/bin/python -m pytest`: **485 passed** in 32.73
+  seconds (347 prior tests, 138 new). The Study 1 rebuilt/saved manifest remains
+  `a583fe4366893e74735f22fc7f1e45ee7e8d136be5e06ad5d770dfcc1225ee55`.
+  Phase 1's prompt review is unchanged and reproduces byte-identically:
+  `efc39ef410303fb9b9275b4a675ef4652638919afd390e0270a35826675aedb9`.
+- **Preservation and next gate:** No Study 1 implementation/test/research
+  artifact or tag changed; no observed outcome log was read or analysed. No
+  real provider call occurred, no main Study 2 scenario or manifest was drawn,
+  and `codex_prompts/` stays ignored/untracked. Phase 2's engine refuses live
+  clients and supplies in-memory results only. Commit locally and stop for
+  approval before Phase 3's manifests, concurrent runner, per-pair durable
+  logging/recovery, episode records/replay, bounded probes, and backward-
+  compatible additive `study2` CLI group. Do not push the Phase 2 commit under
+  the earlier Phase 1 push authorization.
