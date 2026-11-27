@@ -59,6 +59,14 @@ def main():
         approved=approved.replace(change['before'],change['after'],1)
     assert approved==(PAPER/'draft.md').read_text()
     assert hashlib.sha256(approved.encode()).hexdigest()==edits['draft_after_sha256']
+    benchmark=json.loads((PAPER/'sources/intelligence-index-scores.json').read_text())
+    assert hashlib.sha256((PAPER/benchmark['chart_file']).read_bytes()).hexdigest()==benchmark['chart_sha256']
+    model_rows=re.findall(r'^\| (?:Anthropic|Google|OpenAI|Moonshot AI) \| (.*?) \| (\d+) \|$',approved,re.M)
+    assert {model:int(score) for model,score in model_rows}=={
+        row['model']:row['score'] for row in benchmark['selected_models']}
+    assert 'Intelligence Index (v5.0.2)' in approved
+    assert benchmark['source_url'] in bibliography
+    assert r'\citep{artificialanalysis2026}' in source
     audit=json.loads((PAPER/'numeric-audit.json').read_text())
     for path,sha in audit['source_sha256'].items():
         assert hashlib.sha256((ROOT/path).read_bytes()).hexdigest()==sha
@@ -78,6 +86,11 @@ def main():
     assert 'Notes for typesetting' not in text
     assert not re.search(r'\bLiu\b',text)
     assert 'Jin et al.' not in text and 'Choi et al.' in text
+    # Reading-order extraction keeps wrapped URLs contiguous in two columns;
+    # layout extraction can interleave lines from the other column.
+    compact_text=re.sub(r'\s+','',run('pdftotext',PAPER/'main.pdf','-'))
+    assert benchmark['source_url'] in compact_text
+    assert 'Version5.0.2.ScoresasofNovember27,2026' in compact_text
     assert not any(line.strip() in ['{','}'] for line in text.splitlines())
     page_text=[p for p in text.split('\f') if p.strip()]
     refs=[i+1 for i,p in enumerate(page_text) if re.search(r'\bReferences\b',p)]
@@ -94,7 +107,9 @@ def main():
                 'official_style_and_bibliography_unmodified':True,'manuscript_proposals_applied':True,
                 'only_recorded_author_approved_draft_changes':True,
                 'reference_count':16,'liu_reference_removed':True,'choi_citation_corrected':True,
-                'intelligence_index_scores_retained_unverified_by_author_instruction':True,
+                'intelligence_index_version':benchmark['index_version'],
+                'intelligence_index_scores_match_author_supplied_chart':True,
+                'intelligence_index_source_url_in_pdf':True,
                 'numeric_source_files_unchanged':True,'permitted_packages':packages,
                 'supplement_bytes':supplement.stat().st_size,'supplement_below_50_mb':True,
                 'pdf_sha256':hashlib.sha256((PAPER/'main.pdf').read_bytes()).hexdigest(),

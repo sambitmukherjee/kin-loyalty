@@ -73,18 +73,18 @@ Underlying model: GPT-6.1 Terra (OpenAI)
 
 Cards always show an exact model name, never a family name such as "GPT", which would cover models of very different strength. The agent never sees wording such as "the same model as you": it must notice the match itself, from its system prompt, which states the model it runs. The other fields are neutral and identical in every call.
 
-We use one model from each of four labs, matched on an independent benchmark, so that a card naming another lab\textquotesingle s model does not also signal a weaker or stronger opponent:
+We use one model from each of four labs, matched on an independent benchmark, so that a card naming another lab\textquotesingle s model does not also signal a weaker or stronger opponent \citep{artificialanalysis2026}:
 
 \begin{table}[t]
 \centering
 \begin{tabular}{@{}>{\raggedright\arraybackslash}p{.25\columnwidth}>{\raggedright\arraybackslash}p{.37\columnwidth}>{\raggedright\arraybackslash}p{.28\columnwidth}@{}}
 \toprule
-Lab & Model & Intelligence Index (v5.0.1) \\
+Lab & Model & Intelligence Index (v5.0.2) \\
 \midrule
 Anthropic & Claude Sonnet 5.5 & 55 \\
 Google & Gemini 4 Hydrogen & 54 \\
 OpenAI & GPT-6.1 Terra & 51 \\
-Moonshot AI & Kimi K3.1 Pro & 46 \\
+Moonshot AI & Kimi K3.1 Pro & 47 \\
 \bottomrule
 \end{tabular}
 \caption{Models.}

@@ -26,6 +26,7 @@ def main():
         '(Lee 2026; Chen 2026)': r'\citep{lee2026,chen2026}',
         '(Laurito et al. 2025)': r'\citep{laurito2025}',
         '(Choi et al. 2025)': r'\citep{choi2025}',
+        '(Artificial Analysis 2026)': r'\citep{artificialanalysis2026}',
         '(Araujo and Uhlig 2026; Gu 2026)': r'\citep{araujo2026,gu2026}',
         '(Liang and Xu 2026)': r'\citep{liang2026}',
         '(Li and Shi 2026; Zhu et al. 2025)': r'\citep{li2026,zhu2025}',

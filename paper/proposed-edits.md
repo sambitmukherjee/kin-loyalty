@@ -3,6 +3,9 @@
 The author approved the proposed edits on 2026-11-27, with explicit instructions
 to remove Liu (2026), retain the unverified Intelligence Index scores, and
 correct Jin et al. to Choi et al. The author also made the repository public.
+In a later instruction on the same date, the author supplied a benchmark chart
+and requested its values and the official web source; that update supersedes
+the earlier decision to retain unverified historical scores.
 `applied-edits.json` records every exact replacement against the initial proof
 commit; `numeric-audit.json` retains the computations and source hashes.
 
@@ -15,7 +18,7 @@ commit; `numeric-audit.json` retains the computations and source hashes.
 | 5. Public availability | Resolved by the author making the repository public. GitHub reports **PUBLIC**. The original public-audit wording is retained; the proposed alternative availability sentence is unnecessary and was not inserted. The agent did not change visibility. |
 | 6. Jin → Choi | Applied through the kit's author–year citation style. The full verified author list is Younwoo Choi, Changling Li, Yongjin Yang and Zhijing Jin. |
 | 7. Liu title discrepancy | Superseded by the author's explicit instruction: **remove Liu (2026) from the main text and bibliography**. No substitute paper was inserted. |
-| 8. Historical Intelligence Index | Scores **55, 54, 51 and 46** and the historical v5.0.1 description remain unchanged and **unverified**, at the author's explicit instruction. Lee's reference remains pinned to verified arXiv v1. |
+| 8. Intelligence Index | Updated by subsequent author instruction: **v5.0.2**, scores **55, 54, 51 and 47** from the supplied November 27, 2026 chart. The printed reference contains the official web link and date; `sources/` preserves the chart and selected values. The earlier unverified v5.0.1 values are superseded. Lee's reference remains pinned to verified arXiv v1. |
 | 9. Mechanical deviation | Applied: the paper discloses the approved post-registration execution/provenance patch and states that analysis, prompts and scoring were unchanged. |
 | 10. Descriptive S1 language | Applied: the adjusted offer contrast is described as near zero (+$0.08), with an explicit descriptive, noncausal interpretation. |
 

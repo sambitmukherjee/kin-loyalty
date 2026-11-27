@@ -29,11 +29,13 @@ bash paper/build.sh
 
 ## Approved corrections applied
 
-The author approved the proposed edits on **2026-11-27**, with explicit
-instructions to remove Liu (2026), retain the historical Intelligence Index
-scores unverified, and correct Jin et al. to Choi et al. The author made the
-repository public; GitHub visibility was verified **PUBLIC**. Its public-audit
-wording is retained. The agent did not change repository visibility.
+The author approved the proposed edits on **2026-11-27**, including removal
+of Liu (2026) and correction of Jin et al. to Choi et al. The initial instruction
+to retain unverified historical Intelligence Index scores was superseded by a
+later explicit request to use the supplied November 27 chart and official web
+source. The author made the repository public; GitHub visibility was verified
+**PUBLIC**. Its public-audit wording is retained. The agent did not change
+repository visibility.
 
 `applied-edits.json` records every exact replacement against initial proof
 commit `495f4909d8a841eb1bff28969c9ff1abd0e8721e`. Validation reconstructs the
@@ -74,9 +76,13 @@ are recorded in `reference-verification.md`. The three dagger-marked references
   Younwoo Choi, Changling Li, Yongjin Yang and Zhijing Jin.
 - **Liu removed:** no Liu citation or reference remains in the main paper.
   The earlier source discrepancy is retained only in the audit history.
-- **Historical Intelligence Index:** the v5.0.1 mid-November scores
-  **55/54/51/46 remain unchanged and unverified**, as explicitly instructed
-  by the author. No replacement scores or additional paper prose were inserted.
+- **Intelligence Index updated:** Table 1 is labelled **v5.0.2**, with
+  **Claude 55, Gemini 54, GPT 51 and Kimi 47**, read from the author-supplied
+  November 27, 2026 chart. Only Kimi's number changes (46 → 47). A citation now
+  accompanies the benchmark description; the printed reference includes the
+  official source URL and observation date. The unmodified chart, its hash and
+  selected labels are preserved in `sources/`. This does not retrospectively
+  verify the superseded v5.0.1 values or alter the study's model settings.
 - Lee's title is verified for **arXiv v1**; the bibliography remains pinned to
   that version.
 

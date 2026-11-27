@@ -18,7 +18,9 @@
   "reference_count": 16,
   "liu_reference_removed": true,
   "choi_citation_corrected": true,
-  "intelligence_index_scores_retained_unverified_by_author_instruction": true,
+  "intelligence_index_version": "5.0.2",
+  "intelligence_index_scores_match_author_supplied_chart": true,
+  "intelligence_index_source_url_in_pdf": true,
   "numeric_source_files_unchanged": true,
   "permitted_packages": [
     "aaai2027",
@@ -31,11 +33,12 @@
   ],
   "supplement_bytes": 834572,
   "supplement_below_50_mb": true,
-  "pdf_sha256": "0a601c64456a78a5396702d21ea2221fb3c88d5004cb51e3fb7372924851e04b",
-  "tex_sha256": "c2bf18cb121023ba0530339925cf3232e1d7a5b7e0338b76ae607b21707076d5",
+  "pdf_sha256": "4982ceccbbacaec4c14e9bc924eebff7a00d6b83b2a23a723f9b557fa7f23602",
+  "tex_sha256": "133cd612285a0c077c22f70cc234d50fc39dbf1c76db5f8fadfcc2252dcf96d7",
   "visual_inspection": {
     "all_five_latest_rendered_pages_inspected": true,
     "figure_greyscale_inspected": true,
+    "updated_table_and_bibliography_url_inspected": true,
     "overlap_or_clipping_found": false,
     "missing_glyphs_found": false,
     "body_fits_four_pages_plus_references": true

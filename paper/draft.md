@@ -41,14 +41,14 @@ Underlying model: GPT-6.1 Terra (OpenAI)
 
 Cards always show an exact model name, never a family name such as "GPT", which would cover models of very different strength. The agent never sees wording such as "the same model as you": it must notice the match itself, from its system prompt, which states the model it runs. The other fields are neutral and identical in every call.
 
-**Models.** We use one model from each of four labs, matched on an independent benchmark, so that a card naming another lab's model does not also signal a weaker or stronger opponent:
+**Models.** We use one model from each of four labs, matched on an independent benchmark, so that a card naming another lab's model does not also signal a weaker or stronger opponent (Artificial Analysis 2026):
 
-| Lab | Model | Intelligence Index (v5.0.1) |
+| Lab | Model | Intelligence Index (v5.0.2) |
 | --- | --- | --- |
 | Anthropic | Claude Sonnet 5.5 | 55 |
 | Google | Gemini 4 Hydrogen | 54 |
 | OpenAI | GPT-6.1 Terra | 51 |
-| Moonshot AI | Kimi K3.1 Pro | 46 |
+| Moonshot AI | Kimi K3.1 Pro | 47 |
 
 Each call was a single request to the provider's chat-style API, with low reasoning effort, default sampling, structured JSON output and prompt caching off where possible.
 
@@ -147,7 +147,7 @@ References marked † were cited from memory and must be checked before submissi
 
 - A2A Project. 2026. Agent2Agent (A2A) Protocol Specification, version 1.0, Section 4.4 (Agent Discovery Objects). [a2a-protocol.org/latest/specification](https://a2a-protocol.org/latest/specification/).
 - Araujo, D. K. G.; and Uhlig, H. 2026. How Does AI Distribute the Pie? Large Language Models and the Ultimatum Game. NBER Working Paper 34919. [nber.org/papers/w34919](https://www.nber.org/papers/w34919).
-- Artificial Analysis. 2026. Artificial Analysis Intelligence Index, version 5.0.1. Scores as reported in mid-November 2026.
+- Artificial Analysis. 2026. Artificial Analysis Intelligence Index, version 5.0.2. Scores as of November 27, 2026. [Source](https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index).
 - Chen, Y. 2026. Why LLM Agents Favor Their Group: Stakes, Observed Norms, and Reputation. [arXiv:2610.11008](https://arxiv.org/pdf/2610.11008).
 - Del Giudice, X.; Palma, A.; Migliarini, M.; Galasso, F.; and Spinelli, I. 2026. Prompted Identity Degrades Cooperation in Multi-Agent LLM Systems. [arXiv:2609.35928](https://arxiv.org/pdf/2609.35928).
 - Gu, G. C. 2026. Is AI Becoming More Human? Evidence from LLMs and the Ultimatum Game. MPRA Paper 129505. [econpapers.repec.org](https://econpapers.repec.org/RePEc:pra:mprapa:129505).
@@ -184,4 +184,4 @@ Code, prompts, pre-registrations and logs: https://github.com/sambitmukherjee/ki
 - "p < 0.001" is used where the permutation p-value was 0.0001 or 0.0004.
 - Bonferroni check verified: 29 pooled secondary tests; threshold 0.05/29 ≈ 0.00172414; both main ultimatum p-values clear it. This check remains explicitly non-preregistered.
 
-**References.** Dagger-marked references have been checked. Choi et al. (2025) has its full verified author list. Liu (2026) was removed at the author’s request. Intelligence Index scores are retained unverified at the author’s instruction.
+**References.** Dagger-marked references have been checked. Choi et al. (2025) has its full verified author list. Liu (2026) was removed at the author’s request. Intelligence Index v5.0.2 scores are transcribed from the author-supplied November 27, 2026 chart: Claude 55, Gemini 54, GPT 51 and Kimi 47; the official source link is in the reference.

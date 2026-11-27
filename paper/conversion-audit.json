@@ -1,6 +1,6 @@
 {
-  "draft_sha256": "2de41fc635b7a72c9a5aa402638d9ae0a1298d2d6b698461fffbfb32607e1087",
-  "main_tex_sha256": "c2bf18cb121023ba0530339925cf3232e1d7a5b7e0338b76ae607b21707076d5",
+  "draft_sha256": "6de6037ed91e79e9c671cac14ace012786133d1d63b5a46a53c25855d377f1b9",
+  "main_tex_sha256": "133cd612285a0c077c22f70cc234d50fc39dbf1c76db5f8fadfcc2252dcf96d7",
   "body_prose_reworded_by_converter": false,
   "author_approved_edits_applied_to_input": true,
   "numeric_proposals_applied": true,
@@ -33,6 +33,7 @@
     "(Lee 2026; Chen 2026)": "\\citep{lee2026,chen2026}",
     "(Laurito et al. 2025)": "\\citep{laurito2025}",
     "(Choi et al. 2025)": "\\citep{choi2025}",
+    "(Artificial Analysis 2026)": "\\citep{artificialanalysis2026}",
     "(Araujo and Uhlig 2026; Gu 2026)": "\\citep{araujo2026,gu2026}",
     "(Liang and Xu 2026)": "\\citep{liang2026}",
     "(Li and Shi 2026; Zhu et al. 2025)": "\\citep{li2026,zhu2025}",

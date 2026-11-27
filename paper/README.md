@@ -44,6 +44,10 @@ tables and figures; it excludes raw API logs and credentials.
 
 The manuscript now cites Choi et al. with the full verified author list in
 the bibliography. Liu (2026) is removed from both text and references. The
-Intelligence Index scores remain unchanged and historically unverified at the
-author’s explicit instruction. GitHub visibility was verified PUBLIC; the
-agent did not change repository visibility. No study files were modified.
+Intelligence Index table now uses v5.0.2 values from the author-supplied chart
+of 2026-11-27: Claude 55, Gemini 54, GPT 51 and Kimi 47. The table cites Artificial
+Analysis, and the bibliography prints the official source URL and observation
+date. `sources/` preserves the supplied chart, its hash and the selected labels
+and values. This supersedes the earlier instruction to retain unverified
+historical scores. GitHub visibility was verified PUBLIC; the agent did not
+change repository visibility. No study files were modified.

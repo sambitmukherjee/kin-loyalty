@@ -1,0 +1,34 @@
+{
+  "source_url": "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index",
+  "index_version": "5.0.2",
+  "chart_date": "2026-11-27",
+  "chart_file": "sources/artificial-analysis-intelligence-index-2026-11-27.png",
+  "chart_sha256": "a9c4184dfa68d47fdf1c8795dfdcc71936fdd6e2a83f5ae93645894fc1c4a9aa",
+  "source_kind": "Author-supplied chart; selected printed values read visually",
+  "selected_models": [
+    {
+      "model": "Claude Sonnet 5.5",
+      "chart_label": "Claude Sonnet 5.5 (max)",
+      "score": 55
+    },
+    {
+      "model": "Gemini 4 Hydrogen",
+      "chart_label": "Gemini 4 Hydrogen (Xhigh)",
+      "score": 54
+    },
+    {
+      "model": "GPT-6.1 Terra",
+      "chart_label": "GPT-6.1 Terra (max)",
+      "score": 51
+    },
+    {
+      "model": "Kimi K3.1 Pro",
+      "chart_label": "Kimi K3.1 Pro",
+      "score": 47
+    }
+  ],
+  "web_page_version_checked": true,
+  "historical_v5_0_1_scores_verified": false,
+  "study_settings_changed": false,
+  "note": "Chart configuration labels are preserved here. The study continues to use its registered low-reasoning settings; benchmark values are contextual source data, not new study analysis."
+}
