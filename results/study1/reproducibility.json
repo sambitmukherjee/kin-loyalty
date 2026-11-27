@@ -1,0 +1,164 @@
+{
+  "date": "2026-11-27",
+  "frozen_tag": "study1-data",
+  "frozen_commit": "f7dd0a690a5089b245fff365acf002fcfd7b056a",
+  "registration_tag": "prereg-study1",
+  "registration_commit": "d4d6ff9c1f7b84bc2b4f90578873f18dbc9fb98a",
+  "main_reproduction_commit": "3b3b85d77c619fcc6fb093a93915e5ef769cbf53",
+  "frozen_command": "uv run --offline --locked kinloyalty reproduce --config configs/study1.yaml --data data/study1/main --comprehension data/study1/repilot_20261126/comprehension --output results/study1/generated",
+  "main_comparison_command": "uv run --offline --locked kinloyalty reproduce --config configs/study1.yaml --data data/study1/main --comprehension data/study1/repilot_20261126/comprehension --output scratch/study1-reproduce",
+  "csv_tables": {
+    "attempt_diagnostics.csv": {
+      "byte_identical": true,
+      "frozen_sha256": "e3425e319de43fb1d3bfcc6ed4e2b7e1540e1f663c2f7149723cf6aca3b82c9a"
+    },
+    "comprehension.csv": {
+      "byte_identical": true,
+      "frozen_sha256": "cef762c19326b149a4a4a2b7fb0ec72965b4540416f4fd15455075a3f359e7f5"
+    },
+    "contrasts.csv": {
+      "byte_identical": true,
+      "frozen_sha256": "b4e0f2a09e18b932ff3c952c84f9fee2ee8934125816f49bf50ea9c1a89503a0"
+    },
+    "coverage.csv": {
+      "byte_identical": true,
+      "frozen_sha256": "8756570a843369b5a48f4b7ac762a62274fade39c29857e428073f01fac382c9"
+    },
+    "decisions.csv": {
+      "byte_identical": true,
+      "frozen_sha256": "7e7377f3b1340117805f512e7cd7014bb77b278d57ef5d2bce916fa9ee355d8b"
+    },
+    "descriptives.csv": {
+      "byte_identical": true,
+      "frozen_sha256": "5e957110b56c20d1a060573e7f9d41eb9f470fb9444209b420b671810f5f566e"
+    },
+    "equivalence.csv": {
+      "byte_identical": true,
+      "frozen_sha256": "cdccfac654a8eb1e15a5605e34528fd20197669d530ef75cadce56c8dfc956d5"
+    },
+    "s1_belief_cell_counts.csv": {
+      "byte_identical": true,
+      "frozen_sha256": "b0987650fad986eb2943fb4101f949b008c7c62bbdacc0d4a29871815cd7948d"
+    },
+    "s1_belief_diagnostics.csv": {
+      "byte_identical": true,
+      "frozen_sha256": "b3bbfeef46c2d0419e587dd50e29c8f3a122977404a7426a3308dd0d04e4a3ee"
+    },
+    "s1_coefficient_changes.csv": {
+      "byte_identical": true,
+      "frozen_sha256": "c08ffb396cf06148522e50bf627590d6eab0ea4ba6ad2a4b8120b48aef39343b"
+    },
+    "usage_calls.csv": {
+      "byte_identical": true,
+      "frozen_sha256": "682e84443a4f1edc0a5f00524647fe987baee51129871dccca207ccf8a0f4fd7"
+    },
+    "usage_summary.csv": {
+      "byte_identical": true,
+      "frozen_sha256": "4e6d7fc3f3bc0b0d0d46e16f645c16cedd1dd74626898248aa213cc83d5384ab"
+    }
+  },
+  "figures": {
+    "comprehension.pdf": {
+      "byte_identical": true,
+      "metadata_only_difference": false,
+      "date_metadata_frozen": [],
+      "date_metadata_main": []
+    },
+    "comprehension.png": {
+      "byte_identical": true,
+      "metadata_only_difference": false
+    },
+    "main_distributions.pdf": {
+      "byte_identical": true,
+      "metadata_only_difference": false,
+      "date_metadata_frozen": [],
+      "date_metadata_main": []
+    },
+    "main_distributions.png": {
+      "byte_identical": true,
+      "metadata_only_difference": false
+    },
+    "responder_distributions.pdf": {
+      "byte_identical": true,
+      "metadata_only_difference": false,
+      "date_metadata_frozen": [],
+      "date_metadata_main": []
+    },
+    "responder_distributions.png": {
+      "byte_identical": true,
+      "metadata_only_difference": false
+    },
+    "s1_coefficients.pdf": {
+      "byte_identical": true,
+      "metadata_only_difference": false,
+      "date_metadata_frozen": [],
+      "date_metadata_main": []
+    },
+    "s1_coefficients.png": {
+      "byte_identical": true,
+      "metadata_only_difference": false
+    }
+  },
+  "unexpected_differences": [],
+  "resampling_arrays": {
+    "count": 330,
+    "all_exactly_equal_including_nan": true,
+    "unequal_names": [],
+    "archive_byte_identical": true
+  },
+  "provenance_different_keys": [
+    "git_commit",
+    "inputs_sha256",
+    "package_source_sha256"
+  ],
+  "inputs_identical": {
+    "data/study1/main/attempts.jsonl": "2cb8b042908437b2e382dd6021a3df43218e1f276f04e1eed6a1e037abd3d9ac",
+    "data/study1/repilot_20261126/comprehension/attempts.jsonl": "fcecdfc1518db4b157713d9a727179911c6e57ad655342993210f8ac6ab77460"
+  },
+  "metadata_explanation": "Only provenance.json and its entry in artifacts.sha256.json differ. Provenance records checkout-specific absolute input paths, the frozen versus current main Git commit, and the current package source inventory (Study 2 additions and additive CLI dispatch). All CSV tables, resampling arrays/archive, and all PDF/PNG figures are byte-identical; there are no figure metadata differences.",
+  "artifact_hash_inventory_byte_identical": false,
+  "frozen_output_sha256": {
+    "artifacts.sha256.json": "a8152721b3f3da73a4e64a2c7d2ef236ca11951354dfdaabcb16fb0657100b3c",
+    "attempt_diagnostics.csv": "e3425e319de43fb1d3bfcc6ed4e2b7e1540e1f663c2f7149723cf6aca3b82c9a",
+    "comprehension.csv": "cef762c19326b149a4a4a2b7fb0ec72965b4540416f4fd15455075a3f359e7f5",
+    "comprehension.pdf": "6fa75bf4727f49ba22f97a90e564d0afbb69a21ae794134040176b3673f32c78",
+    "comprehension.png": "d3d215b8f7dcf212daa834fb0aa926cc50cc119cc8052d38edb8930d172bd409",
+    "contrasts.csv": "b4e0f2a09e18b932ff3c952c84f9fee2ee8934125816f49bf50ea9c1a89503a0",
+    "coverage.csv": "8756570a843369b5a48f4b7ac762a62274fade39c29857e428073f01fac382c9",
+    "decisions.csv": "7e7377f3b1340117805f512e7cd7014bb77b278d57ef5d2bce916fa9ee355d8b",
+    "descriptives.csv": "5e957110b56c20d1a060573e7f9d41eb9f470fb9444209b420b671810f5f566e",
+    "equivalence.csv": "cdccfac654a8eb1e15a5605e34528fd20197669d530ef75cadce56c8dfc956d5",
+    "main_distributions.pdf": "3f8b1d9061fa8cd90512c0071a2bde53688c47899b12140f23b5cd29b815fc77",
+    "main_distributions.png": "9a6a52364ad1c175deb7a7c9340d89352100650abfbd0146ed639841e4f25c1f",
+    "provenance.json": "0b3e2869e1694d59f2435499399754c5a4dc9bfd40914561bad6b8dab396d345",
+    "resampling_distributions.npz": "cbf7c01b39a58a995ac4e11e5a544dd65c728b6c5023fb2b49fc6a7bf44754b0",
+    "responder_distributions.pdf": "29123e15abf891493af334599f0ca17029210447fe5e360e7a26a6edaba7f129",
+    "responder_distributions.png": "70968194a31f8e57da088a34bcf058787e0c6064d7bc2be3cbb16295fd18666f",
+    "s1_belief_cell_counts.csv": "b0987650fad986eb2943fb4101f949b008c7c62bbdacc0d4a29871815cd7948d",
+    "s1_belief_diagnostics.csv": "b3bbfeef46c2d0419e587dd50e29c8f3a122977404a7426a3308dd0d04e4a3ee",
+    "s1_coefficient_changes.csv": "c08ffb396cf06148522e50bf627590d6eab0ea4ba6ad2a4b8120b48aef39343b",
+    "s1_coefficients.pdf": "2f4f9a5ed17c906c4d07b1f67b92c13bc48e3ae9678e9c9a47198afbdaa21ed4",
+    "s1_coefficients.png": "0a8801d504838f3b119f0189ffafa0bc92907a0dd723b38d4515cd643cc77ea8",
+    "usage_calls.csv": "682e84443a4f1edc0a5f00524647fe987baee51129871dccca207ccf8a0f4fd7",
+    "usage_summary.csv": "4e6d7fc3f3bc0b0d0d46e16f645c16cedd1dd74626898248aa213cc83d5384ab"
+  },
+  "frozen_vs_registration_changed_paths": [
+    "README.md",
+    "data/study1/README.md",
+    "data/study1/main/attempts.jsonl",
+    "data/study1/main/collection_audit.json",
+    "data/study1/main/collection_counts.csv",
+    "data/study1/main/invocation_summary.json",
+    "data/study1/main/preflight.json",
+    "data/study1/main/resume_01_preflight.json",
+    "data/study1/main/resume_01_summary.json",
+    "data/study1/main/run_summary.json",
+    "docs/decisions.md",
+    "docs/study1_main_collection_report.md",
+    "results/study1/README.md"
+  ],
+  "frozen_analysis_config_prompts_identical_to_registration": true,
+  "code_parameters_and_seeds_changed": false,
+  "study2_data_or_analysis_modified": false,
+  "worktree_commits_created": 0
+}

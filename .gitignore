@@ -23,3 +23,7 @@ dist/
 
 # Local operating-system files.
 .DS_Store
+
+# Local frozen-data worktrees and disposable reproduction outputs.
+worktrees/
+scratch/

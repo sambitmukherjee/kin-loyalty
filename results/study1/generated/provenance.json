@@ -1,0 +1,114 @@
+{
+  "analysis_config_sha256": "443d1e2baa176fee8ddb6de04b92c47b635b9521770ab9326d4e4e370eb69974",
+  "analysis_settings": {
+    "accepted_decision_phase": "main",
+    "adjusted_permutation_rule": "freedman_lane_tested_pair_within_model_paraphrase",
+    "alpha": 0.05,
+    "alternative": "two_sided",
+    "bootstrap_interval": "percentile_count_matched",
+    "bootstrap_resamples": 10000,
+    "bootstrap_strata": [
+      "model",
+      "label",
+      "paraphrase"
+    ],
+    "confidence_level": 0.95,
+    "contrast_permutation_rule": "tested_pair_within_model_paraphrase",
+    "equivalence_bound_dollars": 5,
+    "figure_formats": [
+      "pdf",
+      "png"
+    ],
+    "fixed_effects": "model_by_paraphrase",
+    "model_weighting": "equal",
+    "multiple_comparison_correction": "none",
+    "permutation_resamples": 10000,
+    "permutation_strata": [
+      "model",
+      "paraphrase"
+    ],
+    "primary_contrast": [
+      "own_model",
+      "other_lab"
+    ],
+    "primary_decision": "dictator",
+    "s1_belief_estimability": {
+      "denominator": "retained_valid_proposer_draws",
+      "frozen_before_pilot": true,
+      "minimum_nonmodal_percent": 10,
+      "modal_cell": [
+        "label",
+        "paraphrase"
+      ],
+      "mode_tie_break": "lowest"
+    },
+    "s1_belief_slopes": "model_specific",
+    "tost_method": "percentile_bootstrap_tail_probabilities"
+  },
+  "code_dirty": true,
+  "git_commit": "f7dd0a690a5089b245fff365acf002fcfd7b056a",
+  "inference_tie_tolerance": 1e-12,
+  "inputs_sha256": {
+    "/Users/xelpmoc/Software_Projects/kin-loyalty/worktrees/study1-data/data/study1/main/attempts.jsonl": "2cb8b042908437b2e382dd6021a3df43218e1f276f04e1eed6a1e037abd3d9ac",
+    "/Users/xelpmoc/Software_Projects/kin-loyalty/worktrees/study1-data/data/study1/repilot_20261126/comprehension/attempts.jsonl": "fcecdfc1518db4b157713d9a727179911c6e57ad655342993210f8ac6ab77460"
+  },
+  "interpretation": "Observed saved study data",
+  "model_config_sha256": "5baaff356d22b3b7430989a9694cdde0ef83eb8acb48d5ade545d9ffa514d591",
+  "package_source_sha256": {
+    "__init__.py": "3c7a110941e18cca276c4a63314ab977c352c4e028d5fbb7a370675d03effc91",
+    "analysis/__init__.py": "6478c3b10b3dec3837d8e3ff8c9b145b65d8ba332ad56fdc7512073dcf4077f5",
+    "analysis/figures.py": "59d0efa410a0de1b64d2c392f09d5a43e6ca4982357f08f4614d38ee7d70290a",
+    "analysis/inference.py": "70f646f3f250104673b526f660f7d2ea181d946b96fbbcab76cee9dfb7dbe7ce",
+    "analysis/loading.py": "2ada258fe416d3e01235662fcb4ef37786beef2af81f30702035593a22101b93",
+    "analysis/pipeline.py": "03847599b398163c3427113df8d2436c64fc4f4aa57af8da202a9ea3ffbdc0d8",
+    "analysis/reports.py": "06ad0d2c5eaac8509630461062a4efdba7f23cb552750f574f65b36abd1e2598",
+    "analysis/simulate.py": "47d24615596136c5ca198243c844e7fe8e9fc376d1bbb4874705aa63fcc58b69",
+    "cards.py": "a232c0be92412422f94239be8ef717bf68aa791d3cd2d12d0ed5bfdec022d641",
+    "cli.py": "6e4c55fedd363ab1f6f075fda7f136e29df7469e73e8e540e87f0e3118a2c138",
+    "clients/__init__.py": "7d479ad68d0321e685729ed8d8c9f0815d17b8e4ed0298a88f3864b0b1d3aa54",
+    "clients/anthropic.py": "03fe5c23daba575e6ae867f6af786f4244bb85b5dd8066df79087a869d34544a",
+    "clients/base.py": "39ef16b5c61e0f10119e1f2c0c20f6510ec014068502003c768534ea5fbce5ea",
+    "clients/factory.py": "f4781d9d26a3dbe0e5649279d32aec9640c3e6868106efc4fd149bab385c8096",
+    "clients/google.py": "8ed047c063de5dced139bef478b1a0d157912d4d83736307b497d1613aeee8d2",
+    "clients/mock.py": "7fc83bd44df54f9d7981e7e36d35894d93fd3ca5c2ee430a9f6f167b13902368",
+    "clients/moonshot.py": "c82c4a75ebbb0476e9ab1969a62b1e6fa430431061be78df098123fda5db313b",
+    "clients/openai.py": "206d49a3aabd4d7b3e9147842de08c5ed3feabd6fcb9154c0b12118bf41a70d5",
+    "clients/payloads.py": "c68a7034d44887fe94ade78b59c91cea0e19421de0e18046b68b075e8504185b",
+    "clients/response_data.py": "b96b652da96d1ef54dff9858579a5d8605ed0909592091fb747690c6662c38ec",
+    "cohort.py": "4d371bdbe4e9fe1433e96532aa61b08c78fcee40aa995c3791adbc1e6570acb2",
+    "logs.py": "bf77f7c5070e3a790404bf67a7ed55d5e9251d67389e9c3f287b903be6ac5038",
+    "manifest.py": "f7337c4074bade63ec4824af9e8bf46a03702f4ad1720d1f769b6ee690ea7c8b",
+    "prompts.py": "c0a4bcf9c18dd3eed3d8964fb1ea251bf82b0525cd01cdea58f74ffd55316e89",
+    "provenance.py": "c39144337f0b575164a57738ba5924bcb5c981fb3df5e4a94bf20d83423c5118",
+    "review.py": "1bb499950959abaf9bbdf4bd3da66c0747829db1da7b22a7a521d2bfda748b3d",
+    "runner.py": "8060247250cba1f6f71ae6b2e9a2cf3776d7108ecea7cc78cd16c80204c23ff0",
+    "schemas.py": "a3135438c3be9468d3595ee252e4a6b7974639ee6432426c4995600097e1d61e",
+    "state.py": "c6bccaaea71de8295d012c12cad8d625a31b5f721956b5524cffea7bcdb0291a",
+    "validate.py": "e62c681f0b316e0b5235da5e590e38b7bc5021ddef26a6d2fccb77be54510b78"
+  },
+  "package_version": "0.1.0",
+  "packages": {
+    "PyYAML": "6.0.4",
+    "matplotlib": "3.11.2",
+    "numpy": "2.4.6",
+    "pandas": "3.1.1",
+    "scipy": "1.17.1",
+    "statsmodels": "0.15.0"
+  },
+  "sdk_versions": {
+    "anthropic": "2.14.0",
+    "google-genai": "3.6.1",
+    "openai": "3.59.0"
+  },
+  "seeds": {
+    "bootstrap": 2026112505,
+    "comprehension_order": 2026112503,
+    "main_order": 2026112504,
+    "mock": 2026112507,
+    "permutation": 2026112506,
+    "pilot_order": 2026112502,
+    "smoke_order": 2026112501
+  },
+  "study": "study1",
+  "synthetic": false
+}

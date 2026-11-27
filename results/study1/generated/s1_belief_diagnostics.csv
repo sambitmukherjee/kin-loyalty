@@ -1,0 +1,5 @@
+model,n,unique_beliefs,nonmodal_draws,nonmodal_share,minimum_nonmodal_percent,required_nonmodal_draws,mode_tie_break,rank_deficient,estimable,not_estimable_reason,bootstrap_fits_attempted,bootstrap_numerical_failures
+claude_sonnet_5_5,300,4,38,0.126666666667,10,30,lowest,False,True,,10000,0
+gpt_6_1_terra,300,6,96,0.32,10,30,lowest,False,True,,10000,0
+gemini_4_hydrogen,300,5,134,0.446666666667,10,30,lowest,False,True,,10000,0
+kimi_k3_1_pro,300,6,123,0.41,10,30,lowest,False,True,,10000,0
