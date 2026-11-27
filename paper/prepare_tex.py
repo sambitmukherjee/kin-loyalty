@@ -98,6 +98,14 @@ def main():
 \frenchspacing
 \usepackage{booktabs}
 \usepackage{array}
+\usepackage{listings}
+\DeclareCaptionStyle{ruled}{labelfont=normalfont,labelsep=colon,strut=off}
+\DeclareCaptionFormat{promptlisting}{\hrule\nobreak\strut #1#2#3\strut\par\nobreak\hrule}
+\captionsetup[lstlisting]{style=ruled,format=promptlisting,
+  justification=raggedright,singlelinecheck=false}
+\lstset{basicstyle={\footnotesize\ttfamily},numbers=none,
+  showstringspaces=false,tabsize=2,breaklines=true,breakatwhitespace=false,
+  keepspaces=true,columns=fullflexible,frame=b,captionpos=t}
 \pdfinfo{/TemplateVersion (2027.2)}
 \setcounter{secnumdepth}{1}
 % Empty compatibility hook: retain native list spacing; do not compact lists.
@@ -110,7 +118,8 @@ def main():
     content = '\n'.join([preamble, front, r'\begin{document}', r'\maketitle',
                          r'\begin{abstract}', latex(abstract), r'\end{abstract}',
                          r'\begin{links}', r'\link{Code, prompts, pre-registrations and logs}{https://github.com/sambitmukherjee/kin-loyalty}',
-                         r'\end{links}', body_tex, r'\nocite{*}', r'\bibliography{references}', r'\end{document}', ''])
+                         r'\end{links}', body_tex, r'\nocite{*}', r'\bibliography{references}',
+                         r'\input{appendix/appendices.tex}', r'\end{document}', ''])
     assert 'Notes for typesetting' not in content
     assert r'\$222.47' in content and r'\$1.70 per deal' in content
     assert 'Jin et al. 2025' not in content and 'liu2026' not in content

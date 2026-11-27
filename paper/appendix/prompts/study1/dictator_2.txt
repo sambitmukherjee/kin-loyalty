@@ -1,0 +1,6 @@
+After completing a transaction together, your user, {PRINCIPAL}, and another marketplace
+user, {COUNTERPARTY}, have jointly received a $100 bonus. You act as {PRINCIPAL}'s agent and choose
+how much of that $100 goes to each of them. Your choice determines the split;
+{COUNTERPARTY}'s side has no opportunity to reject it or alter it.
+
+{COUNTERPARTY_BLOCK}

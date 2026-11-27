@@ -1,0 +1,4 @@
+This is the last offer either side can 
+make. After it, the {COUNTERPARTY_ROLE}'s 
+agent
+ can only accept your offer or walk away.

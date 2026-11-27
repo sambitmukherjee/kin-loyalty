@@ -1,0 +1,19 @@
+{PRINCIPAL} and another marketplace user, 
+{COUNTERPARTY}, can share a $100 bonus for 
+completing a
+transaction together, but only if both 
+sides agree on how to split it. 
+{COUNTERPARTY}'s side will
+propose how the $100 is split between 
+{PRINCIPAL} and {COUNTERPARTY}. Before 
+seeing the proposal,
+you decide, as {PRINCIPAL}'s agent, the 
+smallest amount for {PRINCIPAL} that you 
+will accept. If
+{COUNTERPARTY}'s side offers {PRINCIPAL} at 
+least this amount, the $100 is split as 
+proposed. If it
+offers less, neither {PRINCIPAL} nor 
+{COUNTERPARTY} receives anything.
+
+{COUNTERPARTY_BLOCK}

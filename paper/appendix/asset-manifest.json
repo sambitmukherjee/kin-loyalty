@@ -1,0 +1,353 @@
+{
+  "prompts": [
+    {
+      "source": "prompts/study1/counterparty_agent.txt",
+      "copy": "appendix/prompts/study1/counterparty_agent.txt",
+      "sha256": "2c5227ea546508941c93e64d8738f44daf0abdbb447a3e3c4c158c145728df30",
+      "maximum_source_line_characters": 69,
+      "display_wrapping": "automatic visual wrapping by listings; source bytes, words and punctuation unchanged"
+    },
+    {
+      "source": "prompts/study1/counterparty_human.txt",
+      "copy": "appendix/prompts/study1/counterparty_human.txt",
+      "sha256": "55d41970aa7c1370f5c52d15c719bbfc0380af7600d2da891175248b9c79d54e",
+      "maximum_source_line_characters": 97,
+      "display_wrapping": "automatic visual wrapping by listings; source bytes, words and punctuation unchanged"
+    },
+    {
+      "source": "prompts/study1/dictator_1.txt",
+      "copy": "appendix/prompts/study1/dictator_1.txt",
+      "sha256": "978e58cc745b477b341754af04a550580811c490bec64ba4b103a676095aa24d",
+      "maximum_source_line_characters": 106,
+      "display_wrapping": "automatic visual wrapping by listings; source bytes, words and punctuation unchanged"
+    },
+    {
+      "source": "prompts/study1/dictator_2.txt",
+      "copy": "appendix/prompts/study1/dictator_2.txt",
+      "sha256": "64eb00cf1622af77882615cc0db4922da7e9ba92fb24eca69075649e24d50f34",
+      "maximum_source_line_characters": 99,
+      "display_wrapping": "automatic visual wrapping by listings; source bytes, words and punctuation unchanged"
+    },
+    {
+      "source": "prompts/study1/dictator_3.txt",
+      "copy": "appendix/prompts/study1/dictator_3.txt",
+      "sha256": "9a419170aef929717d86fd40de2c63e50ac9e765c747388662e2d7a7fde62917",
+      "maximum_source_line_characters": 92,
+      "display_wrapping": "automatic visual wrapping by listings; source bytes, words and punctuation unchanged"
+    },
+    {
+      "source": "prompts/study1/reply_comprehension.txt",
+      "copy": "appendix/prompts/study1/reply_comprehension.txt",
+      "sha256": "99132bddacd914f64c959fd8cd5e41db93173c63c7f9fb18d1afeb0bcfb284c4",
+      "maximum_source_line_characters": 83,
+      "display_wrapping": "automatic visual wrapping by listings; source bytes, words and punctuation unchanged"
+    },
+    {
+      "source": "prompts/study1/reply_dictator.txt",
+      "copy": "appendix/prompts/study1/reply_dictator.txt",
+      "sha256": "f1f2597fe96192222ca03e5352e0b45ee2de55ed1e065263e22e8b468d5b3a3c",
+      "maximum_source_line_characters": 56,
+      "display_wrapping": "automatic visual wrapping by listings; source bytes, words and punctuation unchanged"
+    },
+    {
+      "source": "prompts/study1/reply_ultimatum_proposer.txt",
+      "copy": "appendix/prompts/study1/reply_ultimatum_proposer.txt",
+      "sha256": "3579bf465fa8853b7678092f41a60311abe56b75956ff8199e43a6657a094d4a",
+      "maximum_source_line_characters": 82,
+      "display_wrapping": "automatic visual wrapping by listings; source bytes, words and punctuation unchanged"
+    },
+    {
+      "source": "prompts/study1/reply_ultimatum_responder.txt",
+      "copy": "appendix/prompts/study1/reply_ultimatum_responder.txt",
+      "sha256": "7d9758d064a0e26271e680a48ab68e5b275a45202e25d9408a0320c8831677ea",
+      "maximum_source_line_characters": 79,
+      "display_wrapping": "automatic visual wrapping by listings; source bytes, words and punctuation unchanged"
+    },
+    {
+      "source": "prompts/study1/system_1.txt",
+      "copy": "appendix/prompts/study1/system_1.txt",
+      "sha256": "f375bf4baaa9c23a2d0eaf93e4db5e6f8227a0e0f8241a4bb93e2a3411ce41cf",
+      "maximum_source_line_characters": 94,
+      "display_wrapping": "automatic visual wrapping by listings; source bytes, words and punctuation unchanged"
+    },
+    {
+      "source": "prompts/study1/system_2.txt",
+      "copy": "appendix/prompts/study1/system_2.txt",
+      "sha256": "6d1dda5e47e33e54c2eacdc86075aff1ed40532aafe350ab0da2cd257a946efd",
+      "maximum_source_line_characters": 91,
+      "display_wrapping": "automatic visual wrapping by listings; source bytes, words and punctuation unchanged"
+    },
+    {
+      "source": "prompts/study1/system_3.txt",
+      "copy": "appendix/prompts/study1/system_3.txt",
+      "sha256": "ceeae6982d1faa77374016203bd45e0531d13429f60c8acf48fb7879f060e6a1",
+      "maximum_source_line_characters": 86,
+      "display_wrapping": "automatic visual wrapping by listings; source bytes, words and punctuation unchanged"
+    },
+    {
+      "source": "prompts/study1/ultimatum_proposer_1.txt",
+      "copy": "appendix/prompts/study1/ultimatum_proposer_1.txt",
+      "sha256": "cdbf12cfd33f93c1adc1bb0efcda00b22cfafdcff34a76750654cb049fbb19f3",
+      "maximum_source_line_characters": 100,
+      "display_wrapping": "automatic visual wrapping by listings; source bytes, words and punctuation unchanged"
+    },
+    {
+      "source": "prompts/study1/ultimatum_proposer_2.txt",
+      "copy": "appendix/prompts/study1/ultimatum_proposer_2.txt",
+      "sha256": "65c587c8630c1c87cb6871be90a37e11933ebe2fa43f711f967d979dec5bca34",
+      "maximum_source_line_characters": 94,
+      "display_wrapping": "automatic visual wrapping by listings; source bytes, words and punctuation unchanged"
+    },
+    {
+      "source": "prompts/study1/ultimatum_proposer_3.txt",
+      "copy": "appendix/prompts/study1/ultimatum_proposer_3.txt",
+      "sha256": "40dd4e3b842b56997fe44643912a7236813b7246e4d849e4bd957c1f84f94fa8",
+      "maximum_source_line_characters": 92,
+      "display_wrapping": "automatic visual wrapping by listings; source bytes, words and punctuation unchanged"
+    },
+    {
+      "source": "prompts/study1/ultimatum_responder_1.txt",
+      "copy": "appendix/prompts/study1/ultimatum_responder_1.txt",
+      "sha256": "9077c611e129593bd3f0f8c1048953b69c52c276049908e44b460047080a05a4",
+      "maximum_source_line_characters": 99,
+      "display_wrapping": "automatic visual wrapping by listings; source bytes, words and punctuation unchanged"
+    },
+    {
+      "source": "prompts/study1/ultimatum_responder_2.txt",
+      "copy": "appendix/prompts/study1/ultimatum_responder_2.txt",
+      "sha256": "c453244ae30f71d977b3525a715f3aff7e44434d208f093993cd79af35cc8b7e",
+      "maximum_source_line_characters": 94,
+      "display_wrapping": "automatic visual wrapping by listings; source bytes, words and punctuation unchanged"
+    },
+    {
+      "source": "prompts/study1/ultimatum_responder_3.txt",
+      "copy": "appendix/prompts/study1/ultimatum_responder_3.txt",
+      "sha256": "cbef0c19a81987b4efa089c798a80867d36e22845f0cd8847260f199ecf0ebff",
+      "maximum_source_line_characters": 97,
+      "display_wrapping": "automatic visual wrapping by listings; source bytes, words and punctuation unchanged"
+    },
+    {
+      "source": "prompts/study2/agent_card.txt",
+      "copy": "appendix/prompts/study2/agent_card.txt",
+      "sha256": "c4e052b4da463ad8af8ede5088bc9f78a2409c0885f6a84d54004655dec2f0a8",
+      "maximum_source_line_characters": 45,
+      "display_wrapping": "automatic visual wrapping by listings; source bytes, words and punctuation unchanged"
+    },
+    {
+      "source": "prompts/study2/buyer_system.txt",
+      "copy": "appendix/prompts/study2/buyer_system.txt",
+      "sha256": "56bf429962005b3f859f0d9d4b69af2a25c124d62ef225800019120d78b23e9b",
+      "maximum_source_line_characters": 86,
+      "display_wrapping": "automatic visual wrapping by listings; source bytes, words and punctuation unchanged"
+    },
+    {
+      "source": "prompts/study2/counterparty_with_card.txt",
+      "copy": "appendix/prompts/study2/counterparty_with_card.txt",
+      "sha256": "5c2687f8c6aff6915eb89e65630f5316c3d5d56dbc86ad27da94a589be78f67b",
+      "maximum_source_line_characters": 78,
+      "display_wrapping": "automatic visual wrapping by listings; source bytes, words and punctuation unchanged"
+    },
+    {
+      "source": "prompts/study2/counterparty_without_card.txt",
+      "copy": "appendix/prompts/study2/counterparty_without_card.txt",
+      "sha256": "0e858cb48d5695e0892a29f7745d7b721b672e583003c3260df58d0dec321836",
+      "maximum_source_line_characters": 51,
+      "display_wrapping": "automatic visual wrapping by listings; source bytes, words and punctuation unchanged"
+    },
+    {
+      "source": "prompts/study2/final_message.txt",
+      "copy": "appendix/prompts/study2/final_message.txt",
+      "sha256": "6bfcc38b56d4ad3e4a14ba890069826b644a34f26f659e35329be5e2680f5c1f",
+      "maximum_source_line_characters": 85,
+      "display_wrapping": "automatic visual wrapping by listings; source bytes, words and punctuation unchanged"
+    },
+    {
+      "source": "prompts/study2/last_offer.txt",
+      "copy": "appendix/prompts/study2/last_offer.txt",
+      "sha256": "df646ec1fbf012dafa8b236c6008efedd5aac92cdeb6ab59e00ade1f6840e993",
+      "maximum_source_line_characters": 86,
+      "display_wrapping": "automatic visual wrapping by listings; source bytes, words and punctuation unchanged"
+    },
+    {
+      "source": "prompts/study2/opening.txt",
+      "copy": "appendix/prompts/study2/opening.txt",
+      "sha256": "c6337ba80b30b84211ec22811e6cec7ebce043782f28cee34c72845e8c4d5083",
+      "maximum_source_line_characters": 50,
+      "display_wrapping": "automatic visual wrapping by listings; source bytes, words and punctuation unchanged"
+    },
+    {
+      "source": "prompts/study2/seller_system.txt",
+      "copy": "appendix/prompts/study2/seller_system.txt",
+      "sha256": "c40c23d038736f7cbe2079e13c0295d24a2df3fac0c220bb09fa2a1b51e422fb",
+      "maximum_source_line_characters": 89,
+      "display_wrapping": "automatic visual wrapping by listings; source bytes, words and punctuation unchanged"
+    },
+    {
+      "source": "prompts/study2/transcript_heading.txt",
+      "copy": "appendix/prompts/study2/transcript_heading.txt",
+      "sha256": "4b4fd168789c49bd9a87539b4c837c6915dcea44c271890b5c9ae0dff1e08d81",
+      "maximum_source_line_characters": 32,
+      "display_wrapping": "automatic visual wrapping by listings; source bytes, words and punctuation unchanged"
+    },
+    {
+      "source": "prompts/study2/turn.txt",
+      "copy": "appendix/prompts/study2/turn.txt",
+      "sha256": "ecd3a9c68a7955ccbf87fa6791609a45d343c5cbe3b6d147be805541005b0c5e",
+      "maximum_source_line_characters": 56,
+      "display_wrapping": "automatic visual wrapping by listings; source bytes, words and punctuation unchanged"
+    }
+  ],
+  "figures": [
+    {
+      "source": "results/study1/generated/comprehension.pdf",
+      "source_sha256": "6fa75bf4727f49ba22f97a90e564d0afbb69a21ae794134040176b3673f32c78",
+      "copy": "appendix/figures/study1-comprehension.pdf",
+      "copy_sha256": "e9e77b9430ca18cb23acc14dbd720adae9578758fb7fb9a06b6c0bd29c154c38",
+      "vector": true,
+      "source_plot_geometry_unchanged": true,
+      "lettering_outline_scale": 1.35,
+      "text_runs_enlarged": 104,
+      "six_point_legend_scale": null,
+      "legend_paths_repositioned": 0,
+      "duplicate_legend_elements_removed": 0,
+      "reason": "AAAI prohibits CID/Identity-H fonts and requires legible labels. Saved 7/8-point lettering is outlined and enlarged; plot paths and data are unchanged."
+    },
+    {
+      "source": "results/study1/generated/main_distributions.pdf",
+      "source_sha256": "3f8b1d9061fa8cd90512c0071a2bde53688c47899b12140f23b5cd29b815fc77",
+      "copy": "appendix/figures/study1-main_distributions.pdf",
+      "copy_sha256": "adc41329ba245b652884f34b3c01e8ce0e6d0fdd1b0cd81957bcb74e4d1b3bfe",
+      "vector": true,
+      "source_plot_geometry_unchanged": true,
+      "lettering_outline_scale": 1.35,
+      "text_runs_enlarged": 54,
+      "six_point_legend_scale": null,
+      "legend_paths_repositioned": 0,
+      "duplicate_legend_elements_removed": 0,
+      "reason": "AAAI prohibits CID/Identity-H fonts and requires legible labels. Saved 7/8-point lettering is outlined and enlarged; plot paths and data are unchanged."
+    },
+    {
+      "source": "results/study1/generated/responder_distributions.pdf",
+      "source_sha256": "29123e15abf891493af334599f0ca17029210447fe5e360e7a26a6edaba7f129",
+      "copy": "appendix/figures/study1-responder_distributions.pdf",
+      "copy_sha256": "7b743fc8d285364c74cf56518cdd3ac6c5857d4fbbdc878fe79a55f46c45a850",
+      "vector": true,
+      "source_plot_geometry_unchanged": true,
+      "lettering_outline_scale": 1.35,
+      "text_runs_enlarged": 53,
+      "six_point_legend_scale": null,
+      "legend_paths_repositioned": 0,
+      "duplicate_legend_elements_removed": 0,
+      "reason": "AAAI prohibits CID/Identity-H fonts and requires legible labels. Saved 7/8-point lettering is outlined and enlarged; plot paths and data are unchanged."
+    },
+    {
+      "source": "results/study1/generated/s1_coefficients.pdf",
+      "source_sha256": "2f4f9a5ed17c906c4d07b1f67b92c13bc48e3ae9678e9c9a47198afbdaa21ed4",
+      "copy": "appendix/figures/study1-s1_coefficients.pdf",
+      "copy_sha256": "9403a0220ca9eb3c0fb9cd8975033d51fc230f7557c4c3547183d75a2a5bb487",
+      "vector": true,
+      "source_plot_geometry_unchanged": true,
+      "lettering_outline_scale": 1.35,
+      "text_runs_enlarged": 18,
+      "six_point_legend_scale": 1.6,
+      "legend_paths_repositioned": 3,
+      "duplicate_legend_elements_removed": 0,
+      "reason": "AAAI prohibits CID/Identity-H fonts and requires legible labels. Saved 7/8-point lettering is outlined and enlarged; plot paths and data are unchanged."
+    },
+    {
+      "source": "results/study2/main/figures/appendix_buyer_p2.pdf",
+      "source_sha256": "3a1f658a2641ab05fd15f708f74b5f654e0265371f8b171e0f9912cbbfe1bec7",
+      "copy": "appendix/figures/study2-appendix_buyer_p2.pdf",
+      "copy_sha256": "db2a3957fe7c09a4e08e66be8b43a273e9143efaf5895f7520cc081257be1a3b",
+      "vector": true,
+      "source_plot_geometry_unchanged": true,
+      "lettering_outline_scale": 1.35,
+      "text_runs_enlarged": 15,
+      "six_point_legend_scale": null,
+      "legend_paths_repositioned": 0,
+      "duplicate_legend_elements_removed": 0,
+      "reason": "AAAI prohibits CID/Identity-H fonts and requires legible labels. Saved 7/8-point lettering is outlined and enlarged; plot paths and data are unchanged."
+    },
+    {
+      "source": "results/study2/main/figures/appendix_share_distributions.pdf",
+      "source_sha256": "c8e12877d1e46fcd7a30bc3720c387c7b01f150d5ff8ea69948c8bef95771cc9",
+      "copy": "appendix/figures/study2-appendix_share_distributions.pdf",
+      "copy_sha256": "92da8f71ff670e860e933bc917f28b992deb1a5571085f1dfe758e4dc3349327",
+      "vector": true,
+      "source_plot_geometry_unchanged": true,
+      "lettering_outline_scale": 1.35,
+      "text_runs_enlarged": 25,
+      "six_point_legend_scale": null,
+      "legend_paths_repositioned": 0,
+      "duplicate_legend_elements_removed": 0,
+      "reason": "AAAI prohibits CID/Identity-H fonts and requires legible labels. Saved 7/8-point lettering is outlined and enlarged; plot paths and data are unchanged."
+    },
+    {
+      "source": "results/study2/main/figures/deal_rate_and_within_deal_share.pdf",
+      "source_sha256": "33b38a24fe843f2747ed06a9a52268ee7d5162f29e2a1b720e44a90426f749fd",
+      "copy": "appendix/figures/study2-deal_rate_and_within_deal_share.pdf",
+      "copy_sha256": "69359910451443a30fa8afe06bc1031e9df42f4ae0292f84f755e2442412df05",
+      "vector": true,
+      "source_plot_geometry_unchanged": true,
+      "lettering_outline_scale": 1.35,
+      "text_runs_enlarged": 19,
+      "six_point_legend_scale": null,
+      "legend_paths_repositioned": 0,
+      "duplicate_legend_elements_removed": 0,
+      "reason": "AAAI prohibits CID/Identity-H fonts and requires legible labels. Saved 7/8-point lettering is outlined and enlarged; plot paths and data are unchanged."
+    },
+    {
+      "source": "results/study2/main/figures/main_label_by_actual_kinship.pdf",
+      "source_sha256": "e0288514895aa723cc5313308a0dc97a64a0a0a86387b70e414c561882e00982",
+      "copy": "appendix/figures/study2-main_label_by_actual_kinship.pdf",
+      "copy_sha256": "d9f343d28f1d100ee14aa6a51eeb5353b928d4c9ac09d0f78f5463a5a3119c95",
+      "vector": true,
+      "source_plot_geometry_unchanged": true,
+      "lettering_outline_scale": 1.35,
+      "text_runs_enlarged": 24,
+      "six_point_legend_scale": 1.6,
+      "legend_paths_repositioned": 2,
+      "duplicate_legend_elements_removed": 40,
+      "reason": "AAAI prohibits CID/Identity-H fonts and requires legible labels. Saved 7/8-point lettering is outlined and enlarged; plot paths and data are unchanged."
+    }
+  ],
+  "source_files": {
+    "prompts/study1/counterparty_agent.txt": "2c5227ea546508941c93e64d8738f44daf0abdbb447a3e3c4c158c145728df30",
+    "prompts/study1/counterparty_human.txt": "55d41970aa7c1370f5c52d15c719bbfc0380af7600d2da891175248b9c79d54e",
+    "prompts/study1/dictator_1.txt": "978e58cc745b477b341754af04a550580811c490bec64ba4b103a676095aa24d",
+    "prompts/study1/dictator_2.txt": "64eb00cf1622af77882615cc0db4922da7e9ba92fb24eca69075649e24d50f34",
+    "prompts/study1/dictator_3.txt": "9a419170aef929717d86fd40de2c63e50ac9e765c747388662e2d7a7fde62917",
+    "prompts/study1/reply_comprehension.txt": "99132bddacd914f64c959fd8cd5e41db93173c63c7f9fb18d1afeb0bcfb284c4",
+    "prompts/study1/reply_dictator.txt": "f1f2597fe96192222ca03e5352e0b45ee2de55ed1e065263e22e8b468d5b3a3c",
+    "prompts/study1/reply_ultimatum_proposer.txt": "3579bf465fa8853b7678092f41a60311abe56b75956ff8199e43a6657a094d4a",
+    "prompts/study1/reply_ultimatum_responder.txt": "7d9758d064a0e26271e680a48ab68e5b275a45202e25d9408a0320c8831677ea",
+    "prompts/study1/system_1.txt": "f375bf4baaa9c23a2d0eaf93e4db5e6f8227a0e0f8241a4bb93e2a3411ce41cf",
+    "prompts/study1/system_2.txt": "6d1dda5e47e33e54c2eacdc86075aff1ed40532aafe350ab0da2cd257a946efd",
+    "prompts/study1/system_3.txt": "ceeae6982d1faa77374016203bd45e0531d13429f60c8acf48fb7879f060e6a1",
+    "prompts/study1/ultimatum_proposer_1.txt": "cdbf12cfd33f93c1adc1bb0efcda00b22cfafdcff34a76750654cb049fbb19f3",
+    "prompts/study1/ultimatum_proposer_2.txt": "65c587c8630c1c87cb6871be90a37e11933ebe2fa43f711f967d979dec5bca34",
+    "prompts/study1/ultimatum_proposer_3.txt": "40dd4e3b842b56997fe44643912a7236813b7246e4d849e4bd957c1f84f94fa8",
+    "prompts/study1/ultimatum_responder_1.txt": "9077c611e129593bd3f0f8c1048953b69c52c276049908e44b460047080a05a4",
+    "prompts/study1/ultimatum_responder_2.txt": "c453244ae30f71d977b3525a715f3aff7e44434d208f093993cd79af35cc8b7e",
+    "prompts/study1/ultimatum_responder_3.txt": "cbef0c19a81987b4efa089c798a80867d36e22845f0cd8847260f199ecf0ebff",
+    "prompts/study2/agent_card.txt": "c4e052b4da463ad8af8ede5088bc9f78a2409c0885f6a84d54004655dec2f0a8",
+    "prompts/study2/buyer_system.txt": "56bf429962005b3f859f0d9d4b69af2a25c124d62ef225800019120d78b23e9b",
+    "prompts/study2/counterparty_with_card.txt": "5c2687f8c6aff6915eb89e65630f5316c3d5d56dbc86ad27da94a589be78f67b",
+    "prompts/study2/counterparty_without_card.txt": "0e858cb48d5695e0892a29f7745d7b721b672e583003c3260df58d0dec321836",
+    "prompts/study2/final_message.txt": "6bfcc38b56d4ad3e4a14ba890069826b644a34f26f659e35329be5e2680f5c1f",
+    "prompts/study2/last_offer.txt": "df646ec1fbf012dafa8b236c6008efedd5aac92cdeb6ab59e00ade1f6840e993",
+    "prompts/study2/opening.txt": "c6337ba80b30b84211ec22811e6cec7ebce043782f28cee34c72845e8c4d5083",
+    "prompts/study2/seller_system.txt": "c40c23d038736f7cbe2079e13c0295d24a2df3fac0c220bb09fa2a1b51e422fb",
+    "prompts/study2/transcript_heading.txt": "4b4fd168789c49bd9a87539b4c837c6915dcea44c271890b5c9ae0dff1e08d81",
+    "prompts/study2/turn.txt": "ecd3a9c68a7955ccbf87fa6791609a45d343c5cbe3b6d147be805541005b0c5e",
+    "results/study1/generated/comprehension.pdf": "6fa75bf4727f49ba22f97a90e564d0afbb69a21ae794134040176b3673f32c78",
+    "results/study1/generated/main_distributions.pdf": "3f8b1d9061fa8cd90512c0071a2bde53688c47899b12140f23b5cd29b815fc77",
+    "results/study1/generated/responder_distributions.pdf": "29123e15abf891493af334599f0ca17029210447fe5e360e7a26a6edaba7f129",
+    "results/study1/generated/s1_coefficients.pdf": "2f4f9a5ed17c906c4d07b1f67b92c13bc48e3ae9678e9c9a47198afbdaa21ed4",
+    "results/study2/main/figures/appendix_buyer_p2.pdf": "3a1f658a2641ab05fd15f708f74b5f654e0265371f8b171e0f9912cbbfe1bec7",
+    "results/study2/main/figures/appendix_share_distributions.pdf": "c8e12877d1e46fcd7a30bc3720c387c7b01f150d5ff8ea69948c8bef95771cc9",
+    "results/study2/main/figures/deal_rate_and_within_deal_share.pdf": "33b38a24fe843f2747ed06a9a52268ee7d5162f29e2a1b720e44a90426f749fd",
+    "results/study2/main/figures/main_label_by_actual_kinship.pdf": "e0288514895aa723cc5313308a0dc97a64a0a0a86387b70e414c561882e00982"
+  },
+  "cairosvg_version": "2.8.2"
+}

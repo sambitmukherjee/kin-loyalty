@@ -1,0 +1,4 @@
+Reply with JSON only, in this order:
+{"amount_to_counterparty": <whole number 
+from 0 to 100>,
+ "reason": "<one sentence>"}

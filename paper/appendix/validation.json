@@ -1,0 +1,143 @@
+{
+  "baseline_main_commit": "15429f61d532905722aff7979876107843479c02",
+  "main_draft_bibliography_and_figure_unchanged": true,
+  "main_document_body_unchanged": true,
+  "main_character_positions": [
+    {
+      "page": 1,
+      "main_text_and_reference_characters": 3900,
+      "identical_text_font_sizes_and_horizontal_positions": true,
+      "maximum_vertical_shift_points": 0,
+      "note": "All character positions unchanged."
+    },
+    {
+      "page": 2,
+      "main_text_and_reference_characters": 4407,
+      "identical_text_font_sizes_and_horizontal_positions": true,
+      "maximum_vertical_shift_points": 0,
+      "note": "All character positions unchanged."
+    },
+    {
+      "page": 3,
+      "main_text_and_reference_characters": 4734,
+      "identical_text_font_sizes_and_horizontal_positions": true,
+      "maximum_vertical_shift_points": 0,
+      "note": "All character positions unchanged."
+    },
+    {
+      "page": 4,
+      "main_text_and_reference_characters": 3232,
+      "identical_text_font_sizes_and_horizontal_positions": true,
+      "maximum_vertical_shift_points": 0,
+      "note": "All character positions unchanged."
+    },
+    {
+      "page": 5,
+      "main_text_and_reference_characters": 1606,
+      "identical_text_font_sizes_and_horizontal_positions": true,
+      "maximum_vertical_shift_points": 4.0150000000001,
+      "note": "Native vertical glue can settle differently on the final reference page when text follows; no spacing override is used."
+    }
+  ],
+  "main_first_four_pages_pixel_identical": true,
+  "no_manual_page_breaks": true,
+  "exact_prompt_source_files": 28,
+  "prompt_blocks_including_registered_card": 29,
+  "reversible_prompt_wrapping": true,
+  "generated_tables": 135,
+  "traced_numeric_cells": 2471,
+  "all_numeric_cells_match_saved_source": true,
+  "source_files_unchanged": true,
+  "registered_figures": 8,
+  "figure_checks": [
+    {
+      "source": "results/study1/generated/comprehension.pdf",
+      "minimum_display_label_points_conservative": 9.020728723404256,
+      "font_free_vector_pdf": true
+    },
+    {
+      "source": "results/study1/generated/main_distributions.pdf",
+      "minimum_display_label_points_conservative": 9.020728723404256,
+      "font_free_vector_pdf": true
+    },
+    {
+      "source": "results/study1/generated/responder_distributions.pdf",
+      "minimum_display_label_points_conservative": 9.020728723404256,
+      "font_free_vector_pdf": true
+    },
+    {
+      "source": "results/study1/generated/s1_coefficients.pdf",
+      "minimum_display_label_points_conservative": 9.020728723404256,
+      "font_free_vector_pdf": true
+    },
+    {
+      "source": "results/study2/main/figures/appendix_buyer_p2.pdf",
+      "minimum_display_label_points_conservative": 9.020728723404256,
+      "font_free_vector_pdf": true
+    },
+    {
+      "source": "results/study2/main/figures/appendix_share_distributions.pdf",
+      "minimum_display_label_points_conservative": 9.020728723404256,
+      "font_free_vector_pdf": true
+    },
+    {
+      "source": "results/study2/main/figures/deal_rate_and_within_deal_share.pdf",
+      "minimum_display_label_points_conservative": 9.020728723404256,
+      "font_free_vector_pdf": true
+    },
+    {
+      "source": "results/study2/main/figures/main_label_by_actual_kinship.pdf",
+      "minimum_display_label_points_conservative": 9.020728723404256,
+      "font_free_vector_pdf": true
+    }
+  ],
+  "pdf_pages": 37,
+  "pdf_bytes": 1067368,
+  "pdf_sha256": "d88f3717dd5ef22cf4c884548eac8774afa89baaa7a222587e1c2d4f7c2c317a",
+  "new_analysis_performed": false,
+  "visual_review": {
+    "pdf_sha256": "d88f3717dd5ef22cf4c884548eac8774afa89baaa7a222587e1c2d4f7c2c317a",
+    "render_dpi": 120,
+    "pages_inspected": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37
+    ],
+    "clipping_overlap_or_missing_glyphs": false,
+    "review_date": "2026-11-27"
+  }
+}

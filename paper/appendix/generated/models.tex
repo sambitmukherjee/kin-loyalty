@@ -1,0 +1,80 @@
+\paragraph{Claude Sonnet 5.5.}
+Requested model ID: \path{claude-sonnet-5-5}. Returned in both studies: \path{claude-sonnet-5-5}.
+\par\noindent\begin{minipage}{\columnwidth}
+\centering
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.25\linewidth}>{\raggedright\arraybackslash}p{0.63\linewidth}@{}}
+\toprule
+Setting & Registered request \\
+\midrule
+Endpoint & Messages API\newline\url{https://api.anthropic.com} \\
+Reasoning & low via \path{output_config.effort} \\
+Structured output & JSON schema via \path{output_config.format} \\
+Caching & Omit cache control; no explicit cache request. \\
+Output cap & 8192 tokens via \path{max_tokens} \\
+\bottomrule
+\end{tabular}
+\captionof{table}{Claude Sonnet 5.5: provider settings.}
+\label{tab:settings-claude_sonnet_5_5}
+\raggedright Source: \path{configs/models.yaml}.\par
+\end{minipage}\par
+
+\paragraph{GPT-6.1 Terra.}
+Requested model ID: \path{gpt-6.1-terra}. Returned in both studies: \path{gpt-6.1-terra}.
+\par\noindent\begin{minipage}{\columnwidth}
+\centering
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.25\linewidth}>{\raggedright\arraybackslash}p{0.63\linewidth}@{}}
+\toprule
+Setting & Registered request \\
+\midrule
+Endpoint & Chat Completions\newline\url{https://api.openai.com/v1} \\
+Reasoning & low via \path{reasoning_effort} \\
+Structured output & Strict JSON schema via \path{response_format} \\
+Caching & Explicit mode without breakpoints; storage disabled. \\
+Output cap & 8192 tokens via \path{max_completion_tokens} \\
+\bottomrule
+\end{tabular}
+\captionof{table}{GPT-6.1 Terra: provider settings.}
+\label{tab:settings-gpt_6_1_terra}
+\raggedright Source: \path{configs/models.yaml}.\par
+\end{minipage}\par
+
+\paragraph{Gemini 4 Hydrogen.}
+Requested model ID: \path{gemini-4-hydrogen}. Returned in both studies: \path{gemini-4-hydrogen}.
+\par\noindent\begin{minipage}{\columnwidth}
+\centering
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.25\linewidth}>{\raggedright\arraybackslash}p{0.63\linewidth}@{}}
+\toprule
+Setting & Registered request \\
+\midrule
+Endpoint & generateContent (v1beta)\newline\url{https://generativelanguage.googleapis.com} \\
+Reasoning & low via \path{thinking_config.thinking_level} \\
+Structured output & JSON schema via \path{response_json_schema}; JSON MIME type. \\
+Caching & No cache override; implicit caching only. Inputs below 4,096 tokens. \\
+Output cap & 8192 tokens via \path{max_output_tokens} \\
+\bottomrule
+\end{tabular}
+\captionof{table}{Gemini 4 Hydrogen: provider settings.}
+\label{tab:settings-gemini_4_hydrogen}
+\raggedright Source: \path{configs/models.yaml}.\par
+\end{minipage}\par
+
+\paragraph{Kimi K3.1 Pro.}
+Requested model ID: \path{kimi-k3.1-pro}. Returned in both studies: \path{kimi-k3.1-pro}.
+\par\noindent\begin{minipage}{\columnwidth}
+\centering
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.25\linewidth}>{\raggedright\arraybackslash}p{0.63\linewidth}@{}}
+\toprule
+Setting & Registered request \\
+\midrule
+Endpoint & Chat Completions (OpenAI-compatible)\newline\url{https://api.moonshot.ai/v1} \\
+Reasoning & low via \path{reasoning_effort} \\
+Structured output & Strict JSON schema via \path{response_format} \\
+Caching & Automatic caching; preserve reported reads, writes and missing fields. \\
+Output cap & 8192 tokens via \path{max_completion_tokens} \\
+\bottomrule
+\end{tabular}
+\captionof{table}{Kimi K3.1 Pro: provider settings.}
+\label{tab:settings-kimi_k3_1_pro}
+\raggedright Source: \path{configs/models.yaml}.\par
+\end{minipage}\par
+

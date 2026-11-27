@@ -40,7 +40,7 @@ def main():
     assert str(PAPER/'figures/figure1.pdf') in log
     source=(PAPER/'main.tex').read_text()
     packages=re.findall(r'\\usepackage(?:\[[^]]*\])?\{([^}]+)\}',source)
-    assert set(packages)=={'aaai2027','url','graphicx','natbib','caption','booktabs','array'}
+    assert set(packages)=={'aaai2027','url','graphicx','natbib','caption','booktabs','array','listings'}
     for forbidden in ['\\addtolength','\\baselinestretch','\\clearpage','\\newpage','\\pagebreak','\\pagestyle','\\geometry','\\vspace','\\vskip','\\resizebox','\\scalebox']:
         assert forbidden not in source
     assert 'Notes for typesetting' not in source
@@ -100,7 +100,12 @@ def main():
     supplement=PAPER/'supplementary-material.zip'
     assert supplement.stat().st_size<50_000_000
     with zipfile.ZipFile(supplement) as archive:assert archive.testzip() is None
+    appendix_match=re.search(r'\\newlabel\{app:reproducibility\}\{\{A\}\{(\d+)\}',(PAPER/'build/main.aux').read_text())
+    assert appendix_match
+    appendix_start=int(appendix_match[1])
     validation={'page_count':pages,'references_start_page':refs[0],'body_ends_on_page':refs[0],
+                'main_and_references_page_count':5,'appendices_start_page':appendix_start,
+                'appendix_pages_including_shared_page':pages-appendix_start+1,
                 'overfull_boxes':0,'undefined_citations':0,'latex_errors':0,'font_count':len(font_rows),
                 'all_fonts_embedded':True,'type3_fonts':False,'cid_or_identity_h_fonts':False,
                 'figure_lettering_vector_outlines':True,'paper_size':'US letter','pdf_version':'1.7',

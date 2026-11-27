@@ -1,0 +1,32 @@
+{
+  "study1_registered_card": "preregistration/study1.md, Section 3; verbatim fenced block",
+  "items_source": "results/study2/main/tables/episodes.csv",
+  "item_price_pairs": [
+    {
+      "item": "guitar",
+      "reference_price": "300",
+      "source_episode_id": "study2:main:claude_sonnet_5_5__claude_sonnet_5_5:s001:not_disclosed"
+    },
+    {
+      "item": "bicycle",
+      "reference_price": "400",
+      "source_episode_id": "study2:main:claude_sonnet_5_5__claude_sonnet_5_5:s005:not_disclosed"
+    },
+    {
+      "item": "camera",
+      "reference_price": "500",
+      "source_episode_id": "study2:main:claude_sonnet_5_5__claude_sonnet_5_5:s009:not_disclosed"
+    },
+    {
+      "item": "laptop",
+      "reference_price": "700",
+      "source_episode_id": "study2:main:claude_sonnet_5_5__claude_sonnet_5_5:s013:not_disclosed"
+    },
+    {
+      "item": "sofa",
+      "reference_price": "900",
+      "source_episode_id": "study2:main:claude_sonnet_5_5__claude_sonnet_5_5:s017:not_disclosed"
+    }
+  ],
+  "prompt_sources": "prompts/study1/*.txt and prompts/study2/*.txt; exact copies; visual wrapping only"
+}

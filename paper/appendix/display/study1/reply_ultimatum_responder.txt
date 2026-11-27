@@ -1,0 +1,4 @@
+Reply with JSON only:
+{"smallest_amount_for_your_user_you_will_
+accept": <whole number from 0 to 100>,
+ "reason": "<one sentence>"}

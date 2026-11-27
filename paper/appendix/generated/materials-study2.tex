@@ -1,0 +1,29 @@
+The buyer prompt supplies only the buyer's private maximum and its assigned counterparty description.
+\lstinputlisting[caption={Buyer system prompt.}]{appendix/display/study2/buyer_system.txt}
+
+The seller prompt supplies only the seller's private minimum. It does not include a buyer card.
+\lstinputlisting[caption={Seller system prompt.}]{appendix/display/study2/seller_system.txt}
+
+The buyer receives this introduction followed by the seller card.
+\lstinputlisting[caption={Counterparty introduction with a card.}]{appendix/display/study2/counterparty_with_card.txt}
+
+The model line is filled according to the assigned disclosure condition; other fields remain neutral.
+\lstinputlisting[caption={Study 2 card template.}]{appendix/display/study2/agent_card.txt}
+
+The seller receives this introduction without a model disclosure.
+\lstinputlisting[caption={Counterparty introduction without a card.}]{appendix/display/study2/counterparty_without_card.txt}
+
+Every user message includes the current transcript block, message number and any turn-specific notice.
+\lstinputlisting[caption={Per-turn user-message template.}]{appendix/display/study2/turn.txt}
+
+At the start, this text takes the place of an earlier public transcript.
+\lstinputlisting[caption={Empty-transcript opening instruction.}]{appendix/display/study2/opening.txt}
+
+When earlier messages exist, this heading precedes their role-relative lines.
+\lstinputlisting[caption={Transcript heading.}]{appendix/display/study2/transcript_heading.txt}
+
+This notice tells the mover that the next reply cannot contain a counteroffer.
+\lstinputlisting[caption={Notice at message 11.}]{appendix/display/study2/last_offer.txt}
+
+This notice restricts the last mover to accepting the latest offer or walking away.
+\lstinputlisting[caption={Notice at message 12.}]{appendix/display/study2/final_message.txt}

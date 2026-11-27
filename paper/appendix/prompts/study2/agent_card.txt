@@ -1,0 +1,5 @@
+  Represents: {REPRESENTS}
+  Type: {AGENT_TYPE}
+  Agent ID: {AGENT_ID}
+  Protocol: {PROTOCOL}
+  Underlying model: {COUNTERPARTY_MODEL_TEXT}

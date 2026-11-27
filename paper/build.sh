@@ -14,6 +14,9 @@ export MPLCONFIGDIR="$paper_dir/build/matplotlib"
 mkdir -p build
 paper_python="${PAPER_PYTHON:-$paper_dir/../.venv/bin/python}"
 "$paper_python" figures/make_figure1.py
+"$paper_python" appendix/build_materials.py
+"$paper_python" appendix/wrap_prompts.py
+"$paper_python" appendix/build_tables.py
 "$paper_python" prepare_tex.py
 pdflatex -no-shell-escape -interaction=nonstopmode -halt-on-error -file-line-error -output-directory=build main.tex >build/pdflatex-first.stdout 2>&1
 bibtex build/main >build/bibtex.stdout 2>&1

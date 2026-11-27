@@ -1,4 +1,4 @@
-# AAAI-27 workshop paper — author-approved revision
+# AAAI-27 workshop paper with technical appendices
 
 `main.pdf` typesets `draft.md` with the official AAAI-27 Author Kit, downloaded
 from <https://aaai.org/authorkit27/>. `main.tex` is generated from the draft;
@@ -7,6 +7,13 @@ recorded corrections on 2026-11-27. Author: Sambit Mukherjee; affiliation:
 Independent Researcher. `applied-edits.json` records every approved draft
 replacement; `proposed-edits.md` records its disposition.
 
+The approved technical appendices A–H follow the references in the same PDF.
+The main text, bibliography and Figure 1 are unchanged from commit `15429f6`.
+The main paper and references still occupy five pages. The complete PDF has
+37 pages; the appendices occupy pages 5–37, sharing page 5 with the final
+references. They explain the registered methods in plain language and include
+the complete saved result tables, exact prompt templates and registered figures.
+
 Build from the repository root:
 
 ```sh
@@ -14,7 +21,8 @@ bash paper/build.sh
 ```
 
 Requirements: PDFLaTeX and BibTeX (TeX Live 2026 used here), Pandoc, and the
-repository's existing Python/Matplotlib environment. `PAPER_PYTHON` may select
+repository's existing Python/Matplotlib environment. The appendix vector assets
+are committed, so a normal build need not regenerate them. `PAPER_PYTHON` may select
 an equivalent Python environment. A portable TinyTeX installation, if present
 under `.toolchain/TinyTeX`, is used locally; no study dependency was changed.
 That optional toolchain and build intermediates are ignored by Git.
@@ -41,6 +49,14 @@ Re-run requested arithmetic checks with:
 `validation.json` and `typesetting-report.md` document checks and author
 decisions. The supplement ZIP contains the requested unchanged source artifacts,
 tables and figures; it excludes raw API logs and credentials.
+
+`appendix/build_tables.py` generates 135 appendix tables from saved results and
+metadata, without fitting models or resampling. The appendices preserve 28 exact
+prompt-template files and the registered Study 1 card block. Display wrapping
+adds line breaks only, with a reversible source map. Eight registered vector
+figures have presentation copies with enlarged, outlined lettering; the source
+results are unchanged. See `appendix/README.md`, `appendix/source-map.md` and
+`appendix/report.md` for the workflow, provenance and final checks.
 
 The manuscript now cites Choi et al. with the full verified author list in
 the bibliography. Liu (2026) is removed from both text and references. The

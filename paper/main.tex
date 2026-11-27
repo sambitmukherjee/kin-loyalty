@@ -9,6 +9,14 @@
 \frenchspacing
 \usepackage{booktabs}
 \usepackage{array}
+\usepackage{listings}
+\DeclareCaptionStyle{ruled}{labelfont=normalfont,labelsep=colon,strut=off}
+\DeclareCaptionFormat{promptlisting}{\hrule\nobreak\strut #1#2#3\strut\par\nobreak\hrule}
+\captionsetup[lstlisting]{style=ruled,format=promptlisting,
+  justification=raggedright,singlelinecheck=false}
+\lstset{basicstyle={\footnotesize\ttfamily},numbers=none,
+  showstringspaces=false,tabsize=2,breaklines=true,breakatwhitespace=false,
+  keepspaces=true,columns=fullflexible,frame=b,captionpos=t}
 \pdfinfo{/TemplateVersion (2027.2)}
 \setcounter{secnumdepth}{1}
 % Empty compatibility hook: retain native list spacing; do not compact lists.
@@ -214,4 +222,5 @@ In contrast, average shares range from 0.50 when Gemini 4 Hydrogen buys from GPT
 \textbf{In short,} telling an agent that its counterparty runs its own model did not cost its principal money in mandated negotiation, but it pulled splits toward 50/50 in the ultimatum game.
 \nocite{*}
 \bibliography{references}
+\input{appendix/appendices.tex}
 \end{document}

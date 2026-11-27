@@ -1,0 +1,6 @@
+Reply with JSON only, in this order:
+{"amount_offered_to_counterparty": <whole 
+number from 0 to 100>,
+ "smallest_offer_you_expect_counterparty_
+to_accept": <whole number from 0 to 100>,
+ "reason": "<one sentence>"}

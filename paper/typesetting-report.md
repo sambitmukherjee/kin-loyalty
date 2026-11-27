@@ -1,10 +1,13 @@
-# AAAI-27 typesetting report — author-approved revision
+# AAAI-27 typesetting report — paper and approved appendices
 
 ## PDF and build
 
-- **Five pages total.** Main text ends on page 4; References begin on page 4
-  and continue onto page 5. This fits approximately four content pages plus
-  references. **No cuts were needed or made.**
+- **37 pages total, including the approved technical appendices.** Main text
+  ends on page 4; References begin on page 4 and continue onto page 5. The main
+  paper and references still occupy five pages. Appendices A–H start directly
+  after the references on page 5 and occupy 33 pages including that shared page.
+  They add 32 pages to the original PDF. **The main text is unchanged and no
+  cuts were made.**
 - Compiled with **pdflatex**, TeX Live 2026, and BibTeX using the official
   AAAI-27 Author Kit from <https://aaai.org/authorkit27/>. All 17 extracted kit
   files, including `aaai2027.sty` and `aaai2027.bst`, match the downloaded ZIP
@@ -14,12 +17,23 @@
   monospace size. Table columns use ordinary paragraph alignment without
   shrinking the font or intercolumn spacing.
 - **Zero LaTeX errors, zero overfull boxes, zero undefined citations.**
-- `pdffonts` confirms all **eight** fonts are embedded. No Type 3, CID or
+- `pdffonts` confirms all **13** fonts are embedded. No Type 3, CID or
   Identity-H font remains. Figure lettering is vector outlines, preserving
   glyph shapes and point sizes. `font-audit.txt` retains the command output.
-- All five latest rendered pages and a greyscale rendering of Figure 1 were
+- All 37 latest rendered pages and the earlier greyscale rendering of Figure 1 were
   visually inspected. No overlaps, clipped text, unreadable labels or missing
   glyphs were found.
+- The PDF is **1,067,368 bytes** (about 1.07 MB). The appendices include all
+  requested material, 135 generated tables and eight registered vector figures.
+  `appendix/report.md` records the final appendix audit. The build has ordinary
+  underfull-box messages; it has no overfull boxes or compilation errors.
+
+The main document body through the bibliography is byte-identical to commit
+`15429f61d532905722aff7979876107843479c02`. The draft, bibliography and Figure 1
+are also byte-identical. Pages 1–4 are pixel-identical. On page 5 all existing
+reference text, font sizes and horizontal positions are preserved; native TeX
+vertical glue settles by at most 4.015 points because the appendices now follow.
+No manual page break or spacing adjustment was added.
 
 Build command, from the repository root:
 
@@ -123,5 +137,5 @@ contains no raw API logs or credentials. It is unchanged from the initial proof.
 
 No study code, data, result file or pre-registration was modified, and no study
 analysis was rerun. All revisions and generated audits are confined to
-`paper/`. The approved revision is prepared for a paper-only local commit.
+`paper/`. The approved revision and appendices are prepared for a paper-only local commit.
 Nothing is pushed.

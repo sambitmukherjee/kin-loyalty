@@ -1,0 +1,15 @@
+Your user, {PRINCIPAL}, and another 
+marketplace user, {COUNTERPARTY}, can 
+receive a $100 bonus
+for completing a transaction together. To 
+receive it, both sides must agree on its
+division. Acting as {PRINCIPAL}'s agent, 
+you offer a split of the $100. 
+{COUNTERPARTY}'s side
+chooses whether to accept or reject that 
+offer. Acceptance gives each user the 
+amount
+you proposed; rejection means that both 
+{PRINCIPAL} and {COUNTERPARTY} get nothing.
+
+{COUNTERPARTY_BLOCK}

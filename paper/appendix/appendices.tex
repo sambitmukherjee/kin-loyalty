@@ -1,0 +1,294 @@
+\appendix
+\section{Reproducibility}
+\label{app:reproducibility}
+These appendices document the materials, registered methods and complete saved results of both studies. They are technical supplementary material permitted by the workshop. The main paper and its references are unchanged. The repository contains the source files and raw logs:
+\begin{quote}
+\url{https://github.com/sambitmukherjee/kin-loyalty}
+\end{quote}
+
+\subsection{Frozen versions}
+Registration tags identify the code and protocol fixed before collection. Data tags identify the completed, frozen collections. The records below give the full commit hashes and the dates stored by Git, including their time-zone offsets. A commit or tag date is not, by itself, evidence of the time at which it became public; the decision log separately records the registration pushes.
+\input{appendix/generated/tags.tex}
+
+Study 2 also has an approved execution commit, \lstinline!4e088670c0cc8386eccf8fff01d93d353a230bda!. This enabled the main run and recorded both registration and execution hashes. It did not change the scientific analysis, prompts, configuration or scoring. Appendix F explains this deviation.
+
+\subsection{Environment and commands}
+The verified study environment used Python 3.11.5. The repository's \path{.python-version} specifies Python 3.11; \path{uv.lock} fixes the dependency versions. The exact registered commands below read saved logs. They do not call model APIs or require API keys. Run each from the corresponding frozen data checkout, after installing the locked environment. The output directory must be fresh. Use another fresh path when repeating a command rather than overwriting saved results.
+
+\begin{lstlisting}[caption={Install the locked study environment.}]
+uv sync --locked
+\end{lstlisting}
+
+Study 1 also reads the separate final-prompt comprehension check. Its original and revised pilot decisions are not part of the main analysis.
+\begin{lstlisting}[caption={Registered Study 1 reproduction command.}]
+uv run --offline --locked kinloyalty reproduce --config configs/study1.yaml \
+  --data data/study1/main \
+  --comprehension data/study1/repilot_20261126/comprehension \
+  --output results/study1/generated
+\end{lstlisting}
+
+Study 2 reconstructs each episode from its turn records before producing its tables and figures. A disagreement with the episode record stops the pipeline.
+\begin{lstlisting}[caption={Registered Study 2 reproduction command.}]
+.venv/bin/kinloyalty study2 reproduce \
+  --manifest data/study2/main/manifest.jsonl \
+  --directory data/study2/main \
+  --output results/study2/main
+\end{lstlisting}
+
+The saved independent reproduction audits found byte-identical numeric tables, figures and saved resampling arrays for both studies. This statement concerns the scientific outputs, not every provenance file. Reproduction from a different checkout records that checkout's commit and, for Study 1, its input paths and package inventory. Those provenance fields and the associated checksum-inventory entries therefore differ. The audits report no unexpected result differences. Sources are \path{results/study1/reproducibility.json} and \path{results/study2/reproduction-check.json}.
+
+\subsection{How the appendix tables were made}
+\path{paper/appendix/build_tables.py} reads the existing result tables and formats their saved cells. It does not fit a regression, draw a bootstrap sample or run a permutation test. Decimal rounding and conversion of shares to percentages are presentation steps only. \path{paper/appendix/number-trace.json} identifies the source file, CSV row and field for every numeric cell, together with checksums of the inputs. The complete CSV files remain in the repository when more decimal places are needed.
+
+\section{Models and API Settings}
+\label{app:models}
+Each model acts for its human user rather than for its provider. The exact model name and lab appear in the system prompt. The tables below distinguish requested settings from usage actually reported by the provider. Returned model strings matched the requested IDs in both main studies; they are aliases returned by the APIs, not immutable identifiers for model weights.
+
+For readability, subsequent tables use Sonnet for Claude Sonnet 5.5, Terra for GPT-6.1 Terra, Hydrogen for Gemini 4 Hydrogen, and Kimi for Kimi K3.1 Pro. Pooled always means the equally weighted average of the four model-specific contrasts in Study 1. It does not mean that the models are sampled from a larger population.
+\input{appendix/generated/models.tex}
+
+Sampling settings were left at provider defaults. No temperature, top-p, top-k or provider random seed was supplied. Requests were stateless: every call supplied its full system and user messages. Provider SDK retries were disabled so that the study runner alone controlled retries. The verified SDK versions were Anthropic 2.14.0, OpenAI 3.59.0 and Google Gen AI 3.6.1; Moonshot used the OpenAI SDK with its separate origin. These are the settings recorded in the registrations, not claims about the providers' current APIs.
+
+Anthropic's submitted schema omitted numerical bounds for compatibility, while the local validator retained them. Google requests used JSON response MIME type and the registered response schema, with automatic function calling and continuation disabled. OpenAI used explicit caching without breakpoints and \path{store = false}. Google inputs were required to stay below its registered implicit-cache threshold. These details are fixed in \path{preregistration/study1.md}, Section 2, and retained by the Study 2 addendum.
+
+\subsection{Reported reasoning and cache usage}
+The next tables show mean token counts where the field was reported. Observed and missing count responses, not tokens. A missing cache field is not evidence of zero caching, and it has not been replaced by zero. Study 1 combines its main decision tasks; Study 2 separates buyer and seller calls. Sources are the studies' saved \path{usage_summary.csv} files.
+\input{appendix/generated/usage.tex}
+
+\section{Study 1 Materials}
+\label{app:study1-materials}
+A request combines a system prompt, a decision body, a counterparty description and the task's reply instructions. The same wording number selects the system and decision-body variants. Wording 1 uses Alex and Jordan; wording 2 uses Riley and Taylor; wording 3 uses Casey and Morgan. In each pair the first name is the principal and the second is the counterparty.
+
+The listings below reproduce every final source template word for word. Uppercase placeholders are replaced by the registered model, lab, names and card text. Literal JSON braces are part of the prompt. Long source lines wrap visually to fit a column, without adding a hyphen or changing a word. A visual continuation is still part of the same source line. This applies throughout Appendices C and D. The file \path{paper/appendix/prompt-wrapping.json} identifies every inserted display line break and reconstructs the source exactly. The exact source files and their newline bytes are also preserved in \path{paper/appendix/prompts/}; \path{asset-manifest.json} records their checksums and original line lengths.
+
+\subsection{System prompts and decision bodies}
+The system templates identify the model and its duty to its principal. The three decision bodies preserve the economics of each task while varying the wording. Each body is followed by two newline characters and that task's reply instructions. Rendering removes one file-ending newline but preserves internal text and spacing.
+\input{appendix/generated/materials-study1-decisions.tex}
+
+\subsection{Counterparty blocks and replies}
+For an agent counterparty, only the underlying-model line changes across the four agent conditions. The human condition replaces the entire agent introduction and card. The next card-construction block is copied from Section 3 of the registration because its fields are held in configuration rather than in a separate Study 1 card template.
+\lstinputlisting[caption={Registered Study 1 agent introduction and card construction.}]{appendix/display/study1/registered-agent-card.txt}
+\input{appendix/generated/materials-study1-replies.tex}
+
+The model line names the focal agent's exact model and lab in the own-model condition. It names one of the other three registered models in the other-lab condition. The fictional line is \path{Orion-1 (Southwind AI)}; the undisclosed line is \path{not disclosed}. The prompt never states that the counterparty is the same model as the focal agent.
+
+\subsection{Comprehension check and design counts}
+The comprehension check reuses the dictator system and body, including the card, but substitutes the question below for the bonus-decision reply instructions. It has no human condition. These calls are separate from the main decisions.
+\lstinputlisting[caption={Study 1 comprehension question and reply instruction.}]{appendix/display/study1/reply_comprehension.txt}
+
+The main design crosses four models, three decisions, five counterparty conditions and three wordings, with 20 draws in every cell: 3,600 decisions. There are 60 draws per model, decision and card condition. Within each wording's other-lab condition, the three alternative names appear 7, 7 and 6 times. The name receiving six rotates across the three wordings, so each alternative is shown 20 times per focal model and decision.
+
+The separate comprehension check has 20 calls per model and card, for 320 calls. Wordings and alternative-model names each have 7/7/6 margins. Their joint allocation is fixed: rows of the wording-by-alternative-name table are (3,2,2), (2,3,2) and (2,2,2), in the configured order. Own-model answers should be yes; other-lab and fictional answers should be no. At least 18 of 20 correct answers are required separately in each scored condition. Undisclosed is unscored. A model that fails remains in the study and its failure is reported. Sources are \path{configs/study1.yaml} and \path{preregistration/study1.md}, Sections 3, 4 and 6.
+
+\section{Study 2 Materials}
+\label{app:study2-materials}
+The buyer represents Alex and the seller represents Jordan. Each sees the reference price and its own principal's private limit; it does not receive the other principal's limit. Only the buyer sees a card. Every turn is a new stateless request containing the relevant system prompt and the public transcript so far.
+
+\subsection{Role prompts, card and turn instructions}
+The buyer is instructed to seek a low price; the seller is instructed to seek a high one. Both are instructed to keep their private limits secret. The following listings are exact copies of the ten registered text templates. Their uppercase placeholders are filled once; substituted public messages are not reinterpreted as template instructions.
+\input{appendix/generated/materials-study2.tex}
+
+\subsection{Transcript and action rules}
+The transcript is ordered from oldest to newest. A mover's previous messages are labelled \path{[You]}. Opposing messages are labelled \path{[Seller's agent]} for a buyer mover and \path{[Buyer's agent]} for a seller mover. The registered line format is shown below. The quoted public message is JSON-escaped, so a newline or quote inside it cannot create a new transcript line. Non-offer lines omit the price.
+\begin{lstlisting}[caption={Transcript line format, as specified in the Study 2 registration.}]
+[You] message: "..." | action: offer | price: $X
+\end{lstlisting}
+
+Messages are counted across both participants. The opener can offer or walk away at message 1. Messages 2 through 11 allow offer, accept or walk away. Message 11 carries the last-offer notice, because the other side can only accept or walk away at message 12. An offer requires a positive whole-dollar price. Acceptance implements the other side's most recent valid offer; it cannot choose a new price. A walk-away before the last message is a walk-away impasse; walking away at message 12 is a final-message impasse.
+
+The prompt asks for null on non-offers. The approved local rule nevertheless retains and ignores a supplied finite numeric price on an acceptance or walk-away. An acceptance with a different supplied price is flagged, but the deal still uses the counterparty's latest offer. This exception is not a new bargaining action. Invalid replies are logged and do not advance the message count. One identical re-ask is allowed; a second invalid reply excludes the episode. API errors are separate from invalid responses: each response opportunity permits four attempts under the registered timeout and backoff rules, and exhausted work remains unfinished for resumption. These rules come from \path{preregistration/study2.md}, Sections 4 and 5.
+
+\subsection{Items, limits and matched scenarios}
+The five items and their reference prices appear below. These are scenario inputs recorded in the saved episode table, not estimated market prices.
+\input{appendix/generated/items.tex}
+
+Each price-limit multiplier is drawn uniformly from its interval, so every value in that interval is equally likely. For reference price $P$, independently draw the seller's minimum $s=P U[0.75,0.85]$ and the buyer's maximum $b=P U[1.15,1.25]$. Round each to the nearest five dollars with decimal half-up rounding. Thus an exact positive half-step rounds up. The draws always leave a positive room for agreement, $b-s$. These limits are instructions to agents, not filters that discard offers or deals outside them. A completed deal outside a principal's limit remains in the data and is scored as a mandate violation.
+
+Every ordered buyer--seller pair has 20 scenarios: five items, two possible openers and two replicates of each item--opener combination. Each scenario is reused unchanged under undisclosed, true and swapped cards. There are 16 ordered pairs, including four self-pairs, giving 320 scenarios and 960 negotiations. Every pair and condition has ten buyer-open and ten seller-open episodes. The manifest fixes all facts and the execution order before collection; resuming an episode does not draw another scenario.
+
+The undisclosed card always says not disclosed. A true card names the actual seller. In a cross-pair, a swapped card names the buyer's own model; in a self-pair it names one of the other three models. Each scenario therefore has one card saying same, one saying other and one saying none. For swapped self-pairs, alternative names appear 7/7/6 times. The next model in cyclic roster order receives six, and the other two receive seven. The order is Sonnet, Terra, Hydrogen, Kimi, then back to Sonnet, so the shortfall rotates across self-pairs. Assignments are shuffled with the separately registered seed. Sources are \path{configs/study2.yaml} and Section 3 of the Study 2 registration.
+
+\section{Statistical Methods}
+\label{app:methods}
+A contrast is a difference between two card conditions. Its sign depends on the outcome: a positive Study 1 transfer gives more money to the counterparty, whereas a positive Study 2 buyer share keeps more of the available surplus for the buyer. Intervals describe uncertainty in the registered contrast. A nonsignificant difference test is not, on its own, evidence that an effect is small; the primary equivalence tests address that separate question.
+
+All procedures below were fixed before the main data were collected. Main inference excludes pilots and smoke probes. This appendix explains the saved analyses; it adds no test. Detailed sources are Section 7 of \path{preregistration/study1.md} and Section 7 of \path{preregistration/study2.md}.
+
+\subsection{Study 1: estimating a card contrast}
+In plain language, comparisons are made within a model while allowing each wording to have its own baseline. The four model estimates are then averaged equally. A model with more retained replies does not receive more weight in this pooled target.
+
+Precisely, each model's ordinary least-squares regression includes all five card indicators and wording fixed effects. A contrast subtracts the two fitted card coefficients. An intercept with one reference card gives the same specification. The regression uses every retained valid reply; exclusions are not filled with zero. The pooled contrast is the arithmetic mean of the four model-specific contrasts, with weight one quarter each. The target is these four models, rather than a random-effects population of models.
+
+\subsection{Study 1: two-label permutations}
+The permutation test asks how unusual the observed difference is when the two compared labels are exchanged within otherwise comparable groups. A group, or stratum, consists of replies from the same model and wording. Only the two labels in the particular comparison are exchanged; the other conditions stay where they are.
+
+Precisely, make 10,000 random permutations within model-by-wording strata, preserving the two label counts. Refit the card and wording regression and recompute the contrast. For a pooled replicate, average the four model contrasts from that same replicate index. Do not average the model-specific p-values. The frozen permutation seed is 2026112506, with the registered named streams. If $T$ is the observed contrast and $T_j$ is permutation replicate $j$, the two-sided p-value is
+\[
+ p=\frac{1+\#\{j:|T_j|\geq |T|-\epsilon\}}{10001}.
+\]
+The added one prevents a reported p-value of zero. The tolerance $\epsilon$ is defined below. This procedure is used for unadjusted outcome and stated-belief contrasts.
+
+\subsection{Study 1: bootstrap intervals}
+The bootstrap asks how the estimate varies when replies like those observed are sampled again. Sampling stays within each model, card and wording cell. This preserves the design's cell structure and keeps the paired offer and stated belief from a reply together.
+
+Precisely, draw with replacement at the observed retained sample size within each model-by-card-by-wording cell. Refit the model regressions for each of 10,000 bootstrap samples, using seed 2026112505 and the registered model streams. Average the four model contrasts at the same replicate index for a pooled result.
+
+Intervals select actual sorted bootstrap estimates rather than interpolating between them. The 95\% interval uses one-based ranks 250 and 9,751; the 90\% interval uses ranks 500 and 9,501. These count-matched ranks were chosen so that the primary equivalence decision agrees with strict containment of its 90\% interval under the same tail-count rule. The same interval convention applies to all registered bootstrap intervals.
+
+\subsection{Primary equivalence tests in both studies}
+Equivalence asks whether the contrast is small enough to lie within a practical bound fixed before collection. It does not require the effect to be exactly zero. There are two checks: evidence against an effect at or below the lower bound, and evidence against an effect at or above the upper bound. Both must pass.
+
+Precisely, use the same primary bootstrap estimates already drawn for the confidence interval. Do not run another bootstrap or change the seed. Let $d_j$ denote those estimates and $\Delta$ the positive bound. The saved two one-sided tests, or TOST, use
+\[
+\begin{array}{l}
+p_L=(1+\#\{j:d_j\leq-\Delta+\epsilon\})/10001,\\
+p_U=(1+\#\{j:d_j\geq \Delta-\epsilon\})/10001.
+\end{array}
+\]
+The reported TOST p-value is the larger of the two. Equivalence requires both to be strictly below .05 and the 90\% interval to lie strictly inside the bounds, with the conservative tolerance. Study 1 uses $\Delta=\$5$ for pooled P1. Study 2 uses $\Delta=0.05$ buyer-share units for P2, or five percentage points of the room for agreement. These tests are always reported, regardless of the primary difference-test result. They use the raw bootstrap estimates, not null-centred or reflected bootstrap errors. Bootstrap inference remains approximate.
+
+\subsection{S1: offers adjusted for stated expectations}
+The S1 adjustment asks whether a card contrast in offers remains after allowing for the proposer's own expectation of what would be accepted. That expectation is stated after seeing the card. The adjustment therefore describes how offers and expectations move together; it cannot establish that a change in expectations causes a change in offers.
+
+Precisely, each model has its own proposer regression on card indicators, wording fixed effects and stated belief, with a model-specific belief slope. The comparison regression uses the same retained replies and omits only belief. Their card contrasts are averaged equally across models. Both fits use the same bootstrap indexes. For every replicate, subtract the adjusted contrast from the unadjusted contrast. The resulting paired differences supply the interval for the coefficient change. No permutation test or explained-share ratio is registered for that change.
+
+\paragraph{Adjusted permutation test.}
+A direct exchange of labels would not implement the registered adjustment for expectations. The Freedman--Lane procedure instead rearranges the part of an offer that the equality-null model has not predicted, while retaining its fitted component.
+
+Precisely, merge the two compared card coefficients in a reduced regression, imposing equality while retaining other card, wording and belief terms. Fit that model and obtain its residuals. Within each model-by-wording stratum, permute residuals only among replies belonging to the two tested cards. Leave all other residuals fixed. Add the permuted residuals to the reduced fitted values, refit the full regression and recompute the contrast. Apply the same-index pooled average and two-sided p-value rule as above. Using fitted residuals makes this an approximate permutation procedure.
+
+\paragraph{Beliefs that barely vary.}
+A belief adjustment needs enough within-cell belief variation to be meaningful. A model is not silently dropped if that variation is absent.
+
+Precisely, find the modal belief in each card-by-wording cell, breaking modal ties by choosing the lowest value. Count retained valid proposer replies whose beliefs differ from their own cell's mode. Fewer than 10\% nonmodal replies makes that model's adjusted contrast not estimable. With $N$ retained replies, the minimum passing count is $\lceil N/10\rceil$. This rule was fixed before the pilot. Unadjusted offer and belief contrasts are retained. If any model fails, the equally weighted four-model adjusted contrast and coefficient change are also unavailable, rather than replaced by a three-model average. Numerical failures in an otherwise eligible bootstrap are retained as unavailable; failed samples are not discarded or redrawn, and an affected interval is reported unavailable.
+
+\subsection{Study 2: outcome and regression}
+The main outcome measures how much of the available bargaining room the buyer keeps. A failed negotiation gives the buyer no surplus. The regression compares cards while allowing each actual buyer--seller pair to have its own negotiating baseline and allowing opening the negotiation to matter.
+
+Precisely, a deal at price $p$ gives buyer share $(b-p)/(b-s)$, and either kind of impasse gives zero. Shares are not clipped to the range zero to one. Excluded episodes have no outcome. Ordinary least squares includes pair fixed effects, an indicator that the buyer opens, and indicators for cards saying same and other. None is the card baseline. P2 is the same coefficient minus the other coefficient. No scenario fixed effects are added. All eligible episodes enter the fit. Aliased nuisance coefficients are allowed if the requested contrast remains identifiable; non-identifiable contrasts are reported unavailable.
+
+\subsection{Study 2: matched permutations}
+Each scenario was run under all three cards. The permutation test uses that match: it exchanges only the two compared labels within the same actual pair and scenario, then calculates the contrast again. The real buyer, seller, item, limits and opener remain matched.
+
+Precisely, independently swap or keep the two tested labels with probability one half in each pair-by-scenario stratum. Use 10,000 permutations, frozen seed 2026112608 and the registered named streams. Refit the pair/opener/card specification and use the same absolute-statistic p-value formula above. Because the matched rows have identical pair and opener controls, exchanging their outcomes in the fixed design is algebraically equivalent to exchanging their labels. Only strata with both tested outcomes available can swap; the missing-outcome rule below gives the full treatment of incomplete pairs.
+
+\subsection{Study 2: scenario bootstrap}
+The three episodes of one scenario share the same bargaining facts. The bootstrap therefore carries them together rather than sampling negotiations independently. It also keeps each actual buyer--seller pair represented in the resampling design.
+
+Precisely, within each pair sample its 20 planned scenario IDs with replacement, carrying all three condition slots together. Use 10,000 shared draws with seed 2026112607 and the frozen pair-specific streams. Refit the regression on eligible rows. Reuse these scenario indexes for primary and secondary intervals, buyer-specific results, equivalence tests and descriptive figure intervals. Use the same count-matched ranks stated above. Unavailable bootstrap estimates remain missing with their failure counts; they are never dropped or replaced. If any requested replicate is unavailable, that contrast's interval, and primary TOST when affected, is unavailable.
+
+\subsection{Study 2: cluster-robust check}
+The robustness check allows errors within the same actual buyer--seller pair to be related. It provides another uncertainty calculation for P2, but it does not replace the matched permutation test or scenario-bootstrap interval.
+
+Precisely, fit the registered ordinary-least-squares specification with statsmodels pair-cluster covariance and test the same-minus-other coefficient contrast. Report its standard error, statistic, p-value, interval, reference distribution and cluster count. The 16 pairs are the clusters. Nonfinite inference is marked unavailable rather than substituted for the primary result.
+
+\subsection{Study 2: missing outcomes and secondary definitions}
+An outcome may be unavailable because an episode was excluded or because that particular outcome is undefined. These are different reasons for missingness. Neither is converted to zero merely to complete a matched set.
+
+Precisely, retain every eligible episode in the point estimate and scenario bootstrap. In a permutation test, swap a tested pair only when both of its outcomes are available. Keep an incomplete tested pair fixed; any eligible singleton remains in the regression. A missing third-condition episode does not prevent a complete tested pair from swapping. Report complete and incomplete strata for every test, separating incomplete strata with one available tested outcome from those with neither. This applies to primary, buyer-specific, secondary-outcome and disclosure-baseline tests.
+
+Share among deals and messages to agreement are defined only for agreements. These outcomes condition on a result that the card could itself affect and are labelled accordingly. First buyer-offer position is $(b-x)/(b-s)$ for the buyer's first offer $x$; it is undefined without a buyer offer. Average buyer concession uses only successive offers made by the buyer itself: calculate $(x_{j+1}-x_j)/(b-s)$ for each consecutive own-offer pair, then average within the episode. Acceptance is not a buyer offer. Raising an offer is positive; lowering it is negative; nothing is clipped. Fewer than two buyer offers makes this outcome undefined.
+
+The self-pair interaction adds both card indicators interacted with actual self-pair status. Pair fixed effects already absorb self-pair status itself. The contrast is (same minus other in self-pairs) minus (same minus other in cross-pairs). A positive sign means the card contrast is more positive in actual self-pairs. Report its scenario-bootstrap interval only, with no permutation test. Actual-kinship cell means are descriptive.
+
+\subsection{Numerical tolerance and reporting}
+Tiny floating-point discrepancies should not turn an exact tie into evidence for significance or equivalence. Both studies therefore use the shared absolute tolerance $\epsilon=10^{-12}$ in the statistic's units. It is applied conservatively to permutation cutoffs, both TOST tails and the strict-inside interval check. The decision rule is still strict $p<.05$; interval ranks do not change. Study 2 also uses the registered relative pseudoinverse cutoff when checking regression estimability. These are numerical safeguards, not data-dependent tuning choices.
+
+Only pooled P1 and P2 are primary. Model-specific tests, disclosure baselines and other registered contrasts are secondary. Their p-values are reported without multiplicity correction. The main paper's Bonferroni calculation is explicitly a non-preregistered check; the appendices do not add further corrections or analyses.
+
+\section{Pre-registration and Deviations}
+\label{app:deviations}
+The registrations fixed the hypotheses, outcomes, materials, model roster, settings, allocation, validation and retry rules, seeds, estimators, resampling procedures, figures and reporting conventions before the corresponding main runs. Appendix A identifies the immutable registration commits and dates. This section separates design decisions made before a lock from execution changes after it. The source of the dated history is \path{docs/decisions.md}, together with the registrations and the saved blind pilot reports.
+
+\subsection{Study 1 pilots and the one design amendment}
+The original pilot contained 240 decisions and a separate 320-call comprehension check. Decision summaries pooled all card labels within model and task, so the review could not compare label effects. The next tables show those pooled summaries and the corresponding revised-prompt pilot. They are descriptions of pilot data, not main-study tests.
+\input{appendix/generated/pilots-study1.tex}
+
+GPT-6.1 Terra and Gemini 4 Hydrogen each gave zero in every original-pilot dictator draw. On November 26, before registration, the researcher approved removing the final principal-interest sentence from all system wordings. This was explicitly a design amendment, not a parsing fix. The removed sentences were ``Act in \{PRINCIPAL\}'s interest.'', ``Make these decisions in \{PRINCIPAL\}'s interest.'' and ``In those decisions, act in \{PRINCIPAL\}'s interest.'' No other stimulus text, allocation, schema, provider setting or analysis method changed.
+
+The stopping rule was fixed before the fresh pilot: this would be the only prompt change in response to that floor, regardless of the new findings. Gemini's original proposer offers were also constant, but no proposer-specific change was made. The fresh 240-decision pilot and 320-call comprehension check used the final prompts in separate namespaces. They completed without API errors, invalid replies, re-asks or exclusions. No model retained an all-zero dictator floor; Sonnet and Hydrogen instead had constant equal-split dictator replies. The fixed stopping rule was followed, with no further prompt change. Only the fresh comprehension check supplies the main reported check; neither pilot's decisions enter main inference.
+
+Before this pilot, the researcher had also fixed the model-specific S1 belief slopes, the nonmodal-count rule, count-matched percentile intervals and TOST tails, the tested-pair-only Freedman--Lane procedure and conservative numerical tolerance. These choices are preserved in the final registration. They are not post-lock amendments.
+
+\subsection{Study 1 after its lock}
+The decision log records the registration push before the separately authorized main run. Scientific requests, code, prompts, settings, allocation and seeds were unchanged during collection. One draw remained unfinished after the permitted API retries were exhausted; it was resumed from the same registration tag and frozen request. This was the registered recovery procedure, not another design draw or a new exclusion rule.
+
+Subsequent Study 2 development added its own modules and additive command dispatch while preserving the locked Study 1 scientific implementation. This explains why reproducing Study 1 from a later checkout has a different package/provenance inventory. Saved reproduction checks found its scientific outputs identical. The dated log records no further Study 1 design or analysis amendment after the lock.
+
+\subsection{Study 2 smoke checks and blind pilot}
+Study 2 included natural smoke negotiations and separately flagged forced-position schema probes. For each model and role, the probes tested messages 11 and 12 with fixed hand-written transcripts. They checked request acceptance and allowed actions; they never enter pilot or main outcome analysis. This distinction matters because natural negotiations need not reach the final message.
+
+The blind pilot contained 80 episodes, five per ordered pair. Its outcome summaries pooled all disclosures within each pair. The following tables reproduce those summaries without comparing card conditions.
+\input{appendix/generated/pilot-study2.tex}
+
+The pilot needed one retry after a Kimi HTTP 429 and otherwise had no invalid reply, re-ask, exclusion, truncation, drift or unfinished episode. Gemini never supplied a natural message-12 reply in that pilot. Its natural final-message validity rate therefore remained undefined, rather than being treated as a success or failure. Earlier forced-position probes supplied separate schema-acceptance evidence in both roles; they were not added to natural pilot denominators. The researcher retained this coverage limitation and approved no post-pilot mechanical fix or extra calls. Missing provider cache fields were retained as missing.
+
+Three analysis clarifications were approved before the pilot and lock: concessions use signed consecutive own buyer offers; permutation swaps depend only on availability of the two tested outcomes; and the adjusted self-pair interaction uses the sign stated in Appendix E, with a bootstrap interval and no permutation test. The second figure is grouped by what the card says. These definitions appear in the locked addendum and were not chosen from main results.
+
+\subsection{Study 2 after its lock}
+The locked runner did not yet authorize a main collection. Before any main call, the researcher explicitly approved two mechanical changes: enable main-run execution under the frozen manifest and record both registration and execution commit hashes in every turn and episode record. Commit \lstinline!4e088670c0cc8386eccf8fff01d93d353a230bda! made that extension while preserving \path{prereg-study2} and its scientific code, prompts, settings, protocol, scoring, analysis and seeds.
+
+The extension added launch and collection-only reporting tools, enforced the existing retry/resumption rules and drift stop, and adapted registration tests to verify the original preserved tag. It did not change an inferential method or inferential test. The approved main execution contract records the researcher's completion requirement without a new cumulative main-attempt cap; the registered per-opportunity retry limit remains unchanged. All resumes had to use the same clean execution revision.
+
+This is a post-registration execution/provenance deviation and is disclosed as such. It is why the registration-to-data tag diff is not data-only. The full reason and scope are in \path{docs/study2_main_execution_patch.md} and the final post-lock entry in \path{docs/decisions.md}. Later data freezing, merging and result reproduction did not amend analysis parameters or seeds. Checkout-specific metadata differences are documented in Appendix A; they are not concealed as byte-identical provenance.
+
+\section{Full Study 1 Results}
+\label{app:study1-results}
+These tables reproduce all saved registered contrast rows, including model-specific and pooled results. They retain secondary results regardless of their p-values. Each comparison is labelled in words, and the direction is always the first named condition minus the second. All displayed monetary estimates and intervals are rounded from the saved CSV values.
+
+\subsection{Primary equivalence result}
+The next table supplements the primary contrast with both one-sided p-values, their maximum and the 90\% interval used for equivalence. It uses the already registered bootstrap distribution.
+\input{appendix/generated/study1-equivalence.tex}
+\subsection{Registered Study 1 figures}
+The figures below are presentation copies of the registered vector PDFs in \path{results/study1/generated/}. Plot geometry and data are unchanged. To meet the kit's font and readability requirements, the copies use outlined lettering enlarged from the saved figure, with a small outer margin to prevent clipping. No outcome was recomputed. Appendix source manifests record the original and presentation-copy checksums.
+\input{appendix/generated/figures-study1.tex}
+
+
+\input{appendix/generated/study1-contrasts.tex}
+
+\subsection{S1 coefficient changes and diagnostics}
+The next tables compare the unadjusted and belief-adjusted offer contrasts on the same replies and resampling indexes. They are descriptive coefficient changes. The following diagnostic tables show whether each model met the pre-specified belief-variation rule and provide the underlying cell modes and nonmodal counts.
+\input{appendix/generated/study1-changes.tex}
+\input{appendix/generated/study1-diagnostics.tex}
+
+\subsection{Descriptive statistics}
+Each table below describes one model and decision across all five conditions. The sample count is the number of valid replies. Equal-split and zero shares describe the answer distribution; they are not additional tests.
+\input{appendix/generated/study1-descriptives.tex}
+
+\subsection{Final-prompt comprehension check}
+These answer counts concern the separate check with the final prompts. Own-model, other-lab and fictional cards are scored; undisclosed answers remain unscored. They are not bonus decisions or negotiation episodes.
+\input{appendix/generated/study1-comprehension.tex}
+
+\section{Full Study 2 Results}
+\label{app:study2-results}
+These tables use the replay-verified main episodes only. A share of 0.01 is one percentage point of the room for agreement. Share and offer-position contrasts below are in raw share units, so their sign can be read consistently with Appendix E. Messages-to-agreement contrasts are in messages, and indicator contrasts are differences in rates. The primary comparison is same minus other; disclosure baselines and the interaction state their own directions.
+
+\subsection{Primary, buyer-specific and secondary contrasts}
+The saved P2 result appears first, followed by disclosure baselines, buyer-specific results, secondary outcomes and the self-pair interaction in the saved table's order. A dash denotes an unavailable or unregistered quantity, not zero. In particular, the interaction has no permutation p-value.
+\input{appendix/generated/study2-contrasts.tex}
+
+The next two tables give the always-reported equivalence test and the separate pair-cluster robustness check. The latter is a sensitivity check and does not replace the primary inference.
+\input{appendix/generated/study2-primary-details.tex}
+\subsection{Registered Study 2 figures}
+The figures below reproduce the four registered saved plots as vector presentation copies, using the same lettering treatment described for Study 1. The deal-only share plot conditions on agreement; it does not estimate an unconditional effect on a fixed set of deals. The distribution plot groups original disclosure conditions, whereas the card-label figures group what the buyer was told.
+\input{appendix/generated/figures-study2.tex}
+
+
+\subsection{Eligibility and permutation strata}
+The eligibility tables distinguish excluded episodes from non-excluded episodes for which a particular outcome is undefined. This distinction is especially relevant to concessions, which require at least two buyer offers. Counts are reported both by original disclosure condition and by what the buyer's card says.
+\input{appendix/generated/study2-eligibility.tex}
+
+The stratum tables then show how many matched pairs could exchange labels in every permutation test. One and Neither describe availability among the two tested episodes only. Incomplete pairs stay fixed, while all their eligible observations remain in estimation.
+\input{appendix/generated/study2-strata.tex}
+
+\subsection{Mandate compliance}
+A buyer violation is a completed deal above the buyer's maximum; a seller violation is a deal below the seller's minimum. Either can occur when the principal's own offer is accepted. An unaccepted offer is not itself a completed-deal violation. Counts and rates below retain impasses in the non-excluded denominator.
+\input{appendix/generated/study2-mandates.tex}
+
+\subsection{Pair and condition descriptives}
+The next tables keep actual buyers and sellers separate. Within each buyer's tables, seller identities and original disclosure conditions appear in the same order. Splitting outcomes, completion and impasses into separate tables keeps the columns readable. These are descriptive levels, not extra hypothesis tests.
+\input{appendix/generated/study2-descriptives.tex}
+
+The actual-kinship table below groups episodes by whether the participants really use the same model and by what the card says. Its cell means are descriptive; the adjusted interaction is reported separately above.
+\input{appendix/generated/study2-kinship.tex}
+

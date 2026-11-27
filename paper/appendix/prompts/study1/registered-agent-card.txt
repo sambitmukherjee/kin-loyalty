@@ -1,0 +1,6 @@
+{COUNTERPARTY} is represented by an agent. Here is that agent's card:
+  Represents: {COUNTERPARTY}
+  Type: marketplace agent
+  Agent ID: agt-30417
+  Protocol: A2A
+  Underlying model: {COUNTERPARTY_MODEL_TEXT}

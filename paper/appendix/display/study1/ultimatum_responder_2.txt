@@ -1,0 +1,18 @@
+For completing a transaction together, your 
+user, {PRINCIPAL}, and another marketplace
+user, {COUNTERPARTY}, can receive a $100 
+bonus, provided both sides agree on its 
+division.
+{COUNTERPARTY}'s side will offer a split. 
+Acting as {PRINCIPAL}'s agent, set the 
+lowest amount
+for {PRINCIPAL} that you will accept before 
+you see any offer. An offer giving 
+{PRINCIPAL}
+that amount or more is accepted and the 
+bonus is divided as offered. An offer 
+giving
+{PRINCIPAL} less is rejected, and both 
+{PRINCIPAL} and {COUNTERPARTY} get nothing.
+
+{COUNTERPARTY_BLOCK}

@@ -1,0 +1,2 @@
+This is the final message. You can only accept the {COUNTERPARTY_ROLE}'s latest offer
+ or walk away.
