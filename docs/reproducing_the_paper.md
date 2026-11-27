@@ -263,14 +263,15 @@ therefore differ from the earlier analysis report's number formatting. The
 [appendix correction report](../paper/appendix/fix-pass-report.md) records these
 display rules. The numerical source files are preserved unchanged.
 
-The existing PDF is [paper/main.pdf](../paper/main.pdf). Its build command is
-`bash paper/build.sh`, and the existing dependencies and asset workflow are
-described in [paper/README.md](../paper/README.md). The frozen data checkouts
-predate the manuscript, so a PDF build belongs in a separate current checkout.
-The analysis steps above do not require PDF build tools. The current paper
-build still uses Codex-specific Poppler paths, so its PDF build is not yet
-portable to an ordinary installation. This limitation does not affect the
-analysis commands or the saved plots.
+The existing PDF is [paper/main.pdf](../paper/main.pdf). To rebuild it, follow
+the dependency setup, build command and optional validation steps in the
+[paper build guide](../paper/README.md). The frozen data checkouts predate the
+manuscript, so a PDF build belongs in a separate current checkout. It uses
+ordinary installed TeX, Pandoc and Poppler tools, together with the repository's
+locked Python environment. The analysis steps above do not require PDF build
+tools. A [separate portability check](../paper/portability-validation.json)
+rebuilt all 34 pages with identical text and rendering while retaining the
+published PDF and study artifacts unchanged.
 
 ## Common problems
 

@@ -1,78 +1,125 @@
-# Technical appendices
+# Technical appendix materials and figures
 
-The author approved the A–H outline and confirmed that the workshop permits
-technical appendices after the references in the same PDF on 2026-11-27.
-The appendices use the unchanged AAAI-27 style. They contain no manual page or
-column breaks. The existing main text, bibliography and Figure 1 are preserved
-from commit `15429f6`, apart from the later author-requested Table 1 heading
-“Artificial Analysis Intelligence Index v5.0.2”.
+Appendices A–H follow the references in the same [paper PDF](../main.pdf).
+They explain the registered methods and include the saved result tables, exact
+prompt templates and registered figures. The full PDF has 34 pages; the
+appendices occupy pages 5–34 and share page 5 with the final references.
 
-`appendices.tex` contains the explanatory prose. Each method starts with its
-purpose and an intuitive description, then specifies the registered procedure.
-Result tables are split into manageable groups with units, directions and
-missing-value conventions stated in words. No results were selected by p-value.
+For dependencies and the complete PDF build, start with the
+[paper build guide](../README.md). From the repository root,
+`bash paper/build.sh` regenerates the appendix materials and tables before
+compiling the paper. A normal build reuses the committed figure assets.
 
-The subsequent author-requested prose revision describes the registered analysis
-and study procedures rather than instructing the reader. It changes no main
-text, copied prompt, command, formula, seed, result cell or statistical method.
-The revision is checked against the original appendix commit `8e9f829` in
-`validation.json`.
+## How the appendix is assembled
 
-From the repository root, `bash paper/build.sh` regenerates the appendix
-materials and tables, then compiles the complete paper with PDFLaTeX and BibTeX.
-All work and temporary files remain inside `paper/`.
+[appendices.tex](appendices.tex) contains the explanatory prose. Each method
+starts with its purpose and an intuitive description, followed by the registered
+procedure. The prose describes what was done; copied prompts and commands keep
+their original wording. The author approved technical appendices in the same
+PDF, and the official AAAI-27 style remains unchanged.
 
-- `build_tables.py` reads saved result CSVs and the saved Study 2 metadata for
-  TOST and cluster-robust inference. It also reads the registered provider
-  configuration and Git tag metadata. It formats values; it fits no model and
-  performs no resampling. `number-trace.json` records the original cell behind
-  every displayed numerical result and the input hashes.
-- `build_materials.py` prepares source listings and figure inclusions.
-- `prompts/` contains exact copies of all 28 registered text-template files,
-  plus the Study 1 card-construction block copied from the registration.
-- `wrap_prompts.py` prepares byte-identical source copies in `display/`.
-  `prompt-wrapping.json` retains original spaces, hard breaks and final newlines.
-  The listings package wraps long lines automatically; grey arrows mark only
-  visual continuations and are not prompt text. All 37 listings are unbreakable
-  native floats; the two long JSON instructions and transcript format span both
-  columns.
-- `figures/` contains presentation copies of the eight registered vector PDFs.
-  The saved originals use kit-forbidden CID/Identity-H fonts and 6–8 point
-  labels. `prepare_assets.py` converts glyphs to vector outlines and enlarges
-  lettering; it never re-estimates a plotted value or changes data geometry.
-  The small S1 legend is enlarged as a unit. The duplicate Study 2 kinship
-  legends become one shared enlarged legend below the panels. Its caption
-  discloses that relocation. Source and presentation hashes are recorded in
-  `asset-manifest.json`. The copies contain no fonts or raster images.
-- `validate_appendix.py` checks exact source copies, reversible wrapping,
-  numerical cell provenance, main-text preservation, figure fonts and source
-  hashes. Run it with a Python environment providing `pypdf`, `pdfplumber`
-  and Pillow, after `paper/validate.py` has rendered the pages.
+The material is prepared in several steps:
 
-The committed vector copies allow normal builds without regenerating assets.
-To regenerate those presentation copies, use `prepare_assets.py` with
-CairoSVG 2.8.2, the dependencies in `asset-requirements.txt`, Cairo and Poppler's
-`pdftocairo` and `pdffonts`. The verified local build used the bundled Python
-3.12 runtime and installed only these paper-build dependencies under the ignored
-`paper/.toolchain/appendix-python/`. The study Python environment and `uv.lock`
-were not modified. See `source-map.md` for prose sources and `validation.json`
-for the final checks.
+- [build_materials.py](build_materials.py) prepares source-listing inclusions,
+  item descriptions and saved-figure inclusions. It also copies the registered
+  Study 1 card-construction block into the prompt materials.
+- [prompts/](prompts/) contains exact copies of all 28 registered text-template
+  files, plus that card-construction block. These are source templates; variable
+  placeholders remain visible.
+- [wrap_prompts.py](wrap_prompts.py) prepares byte-identical display copies in
+  `display/`. [prompt-wrapping.json](prompt-wrapping.json) records original
+  spaces, hard breaks and final newlines. LaTeX wraps long lines visually, with
+  grey arrows marking continuations. The arrows are not prompt text. The 37
+  listings use native LaTeX floats; the longest listings span both columns.
+- [build_tables.py](build_tables.py) formats the saved result CSVs and Study 2
+  inference metadata, together with registered configuration and Git tag
+  metadata. It does not fit models, resample or call an API.
+  [number-trace.json](number-trace.json) identifies the original source cell for
+  every displayed numerical result and records input hashes. The current
+  appendix has 107 generated tables containing 1,959 traced result cells.
 
-The correction pass against commit `76823a6` is documented in
-`fix-pass-report.md`, with old/new locations in `fix-locations.json`. The PDF
-has 34 pages: five main/reference pages and 30 appendix pages including shared
-page 5. The 107 generated appendix tables contain 1,959 traced result cells.
-`verify_fix_facts.py` checks the requested saved-file facts on every table build.
-`validate_fixes.py` checks exact main PDF text, pages 1–4 rendering, all inline
-literals, table hashes, leftover phrases and display changes. It uses the
-committed baseline-location map and Git baseline, so it does not require an old
-build directory. `build_fix_report.py` writes the itemized report after validation.
+The tables state units, contrast directions and missing-value conventions. They
+use Decimal round-half-to-even. Unadjusted pooled Study 1 values are recovered
+as exact multiples of 1/240 before display rounding, and per-pair Study 2 message
+means as multiples of 1/20. Belief-adjusted coefficients use their exported
+values. One borderline p-value has six decimals, and all 48 per-pair message
+means have two. [verify_fix_facts.py](verify_fix_facts.py) checks the saved-file
+facts on every table build. No result was selected by its p-value.
 
-Values use Decimal round-half-to-even; unadjusted pooled Study 1 cells are
-recovered on their exact 1/240 lattice, and per-pair Length means on their 1/20
-lattice. Belief-adjusted coefficients use their exported decimal values. One
-borderline p-value has six decimals; all 48 Length means have two. Identical
-eligibility, strata, mandate and completion tables were condensed with build
-assertions. The duplicate comprehension tables were checked against the registered
-figure before removal. Some native float/column whitespace remains; the report
-records this limitation without claiming that G6 is fully satisfied.
+The [source map](source-map.md) identifies the registrations, protocol files and
+saved outputs behind each appendix. The full CSVs in `results/` retain more
+precision than the printed tables.
+
+## Optional regeneration of the figure assets
+
+The eight PDFs in [figures/](figures/) are presentation copies of registered
+plots in `results/study1/generated/` and `results/study2/main/figures/`. Their
+sources use CID/Identity-H fonts and small lettering. The presentation copies
+have outlined, enlarged lettering, with no embedded fonts or raster images.
+[asset-manifest.json](asset-manifest.json) records both source and copy hashes.
+
+[prepare_assets.py](prepare_assets.py) regenerates these copies. It leaves plot
+paths and data geometry unchanged, enlarges the small Study 1 S1 legend as a
+unit, and replaces duplicate Study 2 kinship legends with one enlarged legend
+below the panels. The paper caption states the latter change. The script also
+refreshes the exact copies of the 28 prompt-template files.
+
+This conversion is separate from the ordinary PDF build. To run it, install
+[Cairo](https://www.cairographics.org/) and Poppler, including `pdftocairo` and
+`pdffonts`, through your system package manager. Then install the pinned
+[CairoSVG dependencies](https://cairosvg.org/documentation/) in the optional
+paper-tool environment. From the repository root:
+
+```sh
+uv venv paper/.toolchain/tools-venv --python 3.11.5
+uv pip install --python paper/.toolchain/tools-venv/bin/python \
+  -r paper/validation-requirements.txt \
+  -r paper/appendix/asset-requirements.txt
+paper/.toolchain/tools-venv/bin/python paper/appendix/prepare_assets.py
+bash paper/build.sh
+```
+
+If the tool environment already exists, reuse it and run the install command
+onward. These packages are kept out of the study environment and `uv.lock`.
+The script imports CairoSVG normally and uses the common
+[Poppler lookup](../README.md#build-the-pdf); it does not need an app-provided
+Python runtime or library directory. If Cairo is installed in a nonstandard
+location, configure the system library loader for that installation. On macOS,
+for example:
+
+```sh
+DYLD_FALLBACK_LIBRARY_PATH=/absolute/path/to/cairo/lib \
+  paper/.toolchain/tools-venv/bin/python paper/appendix/prepare_assets.py
+```
+
+Regeneration overwrites the eight copies and their manifest. Use a disposable
+checkout to check this step while preserving the published assets. The
+[portability check](../portability-validation.json) used CairoSVG 2.8.2, Cairo
+1.18.6 and Poppler 26.05.0. All eight regenerated figures matched the committed
+figures pixel for pixel at 160 dpi. Their PDF bytes differed, so compare their
+rendering and source hashes as well as their file hashes. All published assets
+were retained unchanged after that check.
+
+## Validation and earlier correction reports
+
+Follow the validation commands in the [paper build guide](../README.md#validate-a-rebuilt-paper),
+after compiling the PDF. `validate_appendix.py` checks source copies, reversible
+prompt wrapping, numerical provenance, figure fonts and preservation of the main
+text. It needs the rendered pages produced by `paper/validate.py`, plus the
+optional `pypdf`, `pdfplumber` and Pillow packages. Both validators write audit
+files; they do not run the study analysis.
+
+[validate_fixes.py](validate_fixes.py) additionally checks the appendix correction
+pass against commit `76823a6`. It verifies exact main/reference PDF text,
+rendering of pages 1–4, inline literals, generated table hashes and the requested
+display changes. It uses the committed location map and Git history rather than
+an old build directory. [build_fix_report.py](build_fix_report.py) can rebuild the
+itemized historical report after those checks.
+
+[report.md](report.md) and [validation.json](validation.json) record the original
+appendix work. The subsequent prose revision is checked against commit
+`8e9f829`; it changed no main text, copied prompt, command, formula, seed or
+statistical method. The later correction pass is documented in
+[fix-pass-report.md](fix-pass-report.md), with old and new locations in
+[fix-locations.json](fix-locations.json). Some native float and column whitespace
+remains, as that report explains.

@@ -11,11 +11,14 @@ import hashlib
 import json
 import re
 import subprocess
+import sys
 import yaml
 
 HERE=Path(__file__).resolve().parent
 PAPER=HERE.parent
 ROOT=PAPER.parent
+sys.path.insert(0, str(PAPER))
+from tool_paths import poppler_tool
 OUT=HERE/'generated'
 MODELS=['claude_sonnet_5_5','gpt_6_1_terra','gemini_4_hydrogen','kimi_k3_1_pro']
 SHORT=dict(zip(MODELS,['Sonnet','Terra','Hydrogen','Kimi']))
@@ -176,8 +179,7 @@ def study1_results():
         parts.append(table('s1-belief-cells-'+model,['Card','Wording','n','Mode','Other'],[[LABEL[r['label']],cell(r,'paraphrase_id'),cell(r,'n'),cell(r,'mode',0),cell(r,'nonmodal_draws')] for r in rows],[.25,.16,.08,.13,.14],FULL[model]+': belief counts within each card and wording.','Mode is the most frequent dollar belief in the cell; ties use the lowest value. Other counts beliefs different from that cell mode.',data[0]['_source']))
     write('study1-diagnostics.tex',parts)
     data=read('results/study1/generated/comprehension.csv')
-    tool=Path.home()/'.cache/codex-runtimes/codex-primary-runtime/dependencies/native/poppler/poppler/bin/pdftotext'
-    figure=subprocess.check_output([str(tool),'-layout',str(ROOT/'results/study1/generated/comprehension.pdf'),'-'],text=True)
+    figure=subprocess.check_output([poppler_tool('pdftotext'),'-layout',str(ROOT/'results/study1/generated/comprehension.pdf'),'-'],text=True)
     for r in data:
         pattern=re.escape(FULL[r['model']])+r'\s+'+re.escape(LABEL[r['label']])+r'\s+'+r'\s+'.join(re.escape(r[k]) for k in ['n_yes','n_no','n_unsure'])+r'\s+'
         assert re.search(pattern,figure),(r,figure)

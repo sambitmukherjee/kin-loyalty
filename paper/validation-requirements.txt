@@ -1,0 +1,4 @@
+# Optional PDF inspection tools; install in a separate paper-tool environment.
+pypdf==6.21.4
+pdfplumber==0.11.9
+Pillow==13.0.0

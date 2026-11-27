@@ -1,11 +1,13 @@
 """Audit the requested appendix-only correction pass against the previous PDF."""
 from pathlib import Path
 from collections import defaultdict
-import csv,hashlib,json,re,subprocess
+import csv,hashlib,json,re,subprocess,sys
 import pdfplumber
 from PIL import Image,ImageChops
 HERE=Path(__file__).resolve().parent;PAPER=HERE.parent;ROOT=PAPER.parent
-BASE='76823a6';POP=Path.home()/'.cache/codex-runtimes/codex-primary-runtime/dependencies/native/poppler/poppler/bin'
+sys.path.insert(0, str(PAPER))
+from tool_paths import poppler_tool
+BASE='76823a6'
 def original(file):return subprocess.check_output(['git','show',BASE+':'+str(file)],cwd=ROOT)
 def labels(text):return {k:{'number':n,'page':int(p)} for k,n,p in re.findall(r'\\newlabel\{([^}]+)\}\{\{([^}]+)\}\{(\d+)\}',text)}
 def main():
@@ -22,7 +24,7 @@ def main():
     identical=[]
     for n in range(1,5):
         target=PAPER/'build/fixes'/f'before-{n}'
-        subprocess.run([str(POP/'pdftoppm'),'-f',str(n),'-l',str(n),'-singlefile','-r','120','-png',str(before),str(target)],check=True,capture_output=True)
+        subprocess.run([poppler_tool('pdftoppm'),'-f',str(n),'-l',str(n),'-singlefile','-r','120','-png',str(before),str(target)],check=True,capture_output=True)
         assert ImageChops.difference(Image.open(str(target)+'.png').convert('RGB'),Image.open(PAPER/f'build/render/page-{n:02d}.png').convert('RGB')).getbbox() is None
         identical.append(n)
     literals=[]

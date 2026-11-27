@@ -2,17 +2,29 @@
 set -euo pipefail
 paper_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$paper_dir"
-if [[ -d .toolchain/TinyTeX/bin/universal-darwin ]]; then
-  export PATH="$paper_dir/.toolchain/TinyTeX/bin/universal-darwin:$PATH"
+if [[ -n "${PAPER_TEX_BIN:-}" ]]; then
+  export PATH="$PAPER_TEX_BIN:$PATH"
 fi
 export TEXINPUTS="$paper_dir/:$paper_dir/author-kit/AuthorKit27//:${TEXINPUTS:-}"
 export BSTINPUTS="$paper_dir/:$paper_dir/author-kit/AuthorKit27//:${BSTINPUTS:-}"
-export TEXMFVAR="$paper_dir/.toolchain/texmf-var"
-export TEXMFCONFIG="$paper_dir/.toolchain/texmf-config"
-export TEXMFHOME="$paper_dir/.toolchain/texmf-home"
+export TEXMFVAR="${TEXMFVAR:-$paper_dir/.toolchain/texmf-var}"
+export TEXMFCONFIG="${TEXMFCONFIG:-$paper_dir/.toolchain/texmf-config}"
+export TEXMFHOME="${TEXMFHOME:-$paper_dir/.toolchain/texmf-home}"
 export MPLCONFIGDIR="$paper_dir/build/matplotlib"
 mkdir -p build
 paper_python="${PAPER_PYTHON:-$paper_dir/../.venv/bin/python}"
+if ! command -v "$paper_python" >/dev/null 2>&1; then
+  printf 'Cannot find the paper Python interpreter: %s\nRun uv sync --locked or set PAPER_PYTHON. See paper/README.md.\n' "$paper_python" >&2
+  exit 1
+fi
+for paper_command in pdflatex bibtex pandoc; do
+  if ! command -v "$paper_command" >/dev/null 2>&1; then
+    printf 'Cannot find %s on PATH. See paper/README.md for installation and PAPER_TEX_BIN.\n' "$paper_command" >&2
+    exit 1
+  fi
+done
+"$paper_python" tool_paths.py pdftotext
+"$paper_python" -c 'import matplotlib, yaml'
 "$paper_python" figures/make_figure1.py
 "$paper_python" appendix/build_materials.py
 "$paper_python" appendix/wrap_prompts.py

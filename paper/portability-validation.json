@@ -1,0 +1,216 @@
+{
+  "purpose": "Verify the portable paper tooling without changing the published manuscript or study artifacts.",
+  "baseline_commit": "d573a9da1595d45fc8d15f883897edc70a774846",
+  "checkout": "Disposable full local clone of the baseline commit with the paper tooling patch applied.",
+  "platform": "macOS, Apple Silicon; no claim of a Linux or Windows test.",
+  "tools": {
+    "python": "CPython 3.11.5; separate environment installed from the unchanged uv.lock",
+    "pandoc": {
+      "version": "3.7.0.1",
+      "installation": "Homebrew"
+    },
+    "tex": {
+      "distribution": "Official TinyTeX / TeX Live 2026",
+      "pdftex_version": "1.40.29",
+      "selection": "Explicit PAPER_TEX_BIN"
+    },
+    "poppler": {
+      "version": "26.05.0",
+      "installation": "conda-forge, local prefix",
+      "selection": "PATH"
+    },
+    "optional_validation_python": {
+      "pypdf": "6.21.4",
+      "pdfplumber": "0.11.9",
+      "Pillow": "13.0.0"
+    },
+    "optional_conversion": {
+      "CairoSVG": "2.8.2",
+      "Cairo": "1.18.6",
+      "installation": "Pinned asset requirements and ordinary conda-forge Cairo; standard macOS library-loader setting"
+    }
+  },
+  "codex_runtime_executables_or_libraries_used": false,
+  "build": {
+    "command": "bash paper/build.sh",
+    "environment": "PATH contains the ordinary Poppler and Pandoc installations plus system commands; PAPER_TEX_BIN selects TeX.",
+    "exit_code": 0,
+    "page_count": 34,
+    "overfull_boxes": 0,
+    "undefined_citations": 0,
+    "latex_errors": 0,
+    "embedded_fonts": 15,
+    "all_fonts_embedded": true,
+    "type3_fonts": false,
+    "cid_or_identity_h_fonts": false,
+    "published_pdf_sha256": "ddb20d79aeb44cb6f9672d92e7d395ca250d72063042114ee66741ddb1a78c46",
+    "rebuilt_pdf_sha256": "958a6e05715d7fee5e6b2b6d247145ea4e7e29dd0b97d13a02103d7d3b1b28ad",
+    "pdf_text_identical": true,
+    "page_content_streams_identical": true,
+    "render_dpi": 120,
+    "pixel_identical_pages": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34
+    ],
+    "pixel_different_pages": [],
+    "visual_spot_checks": [
+      1,
+      6,
+      30
+    ],
+    "existing_native_float_whitespace_preserved": true,
+    "main_tex_byte_identical": true,
+    "main_figure_byte_identical": true,
+    "generated_table_tex_byte_identical": true,
+    "generated_tables": 107,
+    "traced_numeric_cells": 1959,
+    "numeric_cell_and_table_records_identical": true,
+    "exact_prompt_blocks_including_registered_card": 29,
+    "number_trace_source_hash_differences": [
+      "docs/analysis.md",
+      "docs/study2_analysis.md"
+    ],
+    "number_trace_difference_explanation": "Only hashes for analysis guides edited in documentation Phase 2 changed. Numerical cells, table records and generated statements are identical. This rebuilt trace was left in the disposable checkout."
+  },
+  "validators": [
+    {
+      "script": "paper/validate.py",
+      "exit_code": 0
+    },
+    {
+      "script": "paper/appendix/validate_appendix.py",
+      "exit_code": 0
+    },
+    {
+      "script": "paper/appendix/validate_fixes.py",
+      "exit_code": 0
+    }
+  ],
+  "tool_lookup_tests": {
+    "command": ".venv/bin/python -m unittest discover -s paper -p test_tool_paths.py",
+    "tests": 9,
+    "failures": 0
+  },
+  "missing_dependency_checks": [
+    {
+      "case": "missing-python",
+      "exit_code": 1,
+      "generated_files_unchanged": true
+    },
+    {
+      "case": "missing-pandoc",
+      "exit_code": 1,
+      "generated_files_unchanged": true
+    },
+    {
+      "case": "missing-poppler",
+      "exit_code": 1,
+      "generated_files_unchanged": true
+    }
+  ],
+  "optional_asset_regeneration": {
+    "command": "paper/.toolchain/tools-venv/bin/python paper/appendix/prepare_assets.py",
+    "exit_code": 0,
+    "render_dpi": 160,
+    "figures": [
+      {
+        "figure": "appendix/figures/study1-comprehension.pdf",
+        "pixel_identical_at_160_dpi": true,
+        "byte_identical": false
+      },
+      {
+        "figure": "appendix/figures/study1-main_distributions.pdf",
+        "pixel_identical_at_160_dpi": true,
+        "byte_identical": false
+      },
+      {
+        "figure": "appendix/figures/study1-responder_distributions.pdf",
+        "pixel_identical_at_160_dpi": true,
+        "byte_identical": false
+      },
+      {
+        "figure": "appendix/figures/study1-s1_coefficients.pdf",
+        "pixel_identical_at_160_dpi": true,
+        "byte_identical": false
+      },
+      {
+        "figure": "appendix/figures/study2-appendix_buyer_p2.pdf",
+        "pixel_identical_at_160_dpi": true,
+        "byte_identical": false
+      },
+      {
+        "figure": "appendix/figures/study2-appendix_share_distributions.pdf",
+        "pixel_identical_at_160_dpi": true,
+        "byte_identical": false
+      },
+      {
+        "figure": "appendix/figures/study2-deal_rate_and_within_deal_share.pdf",
+        "pixel_identical_at_160_dpi": true,
+        "byte_identical": false
+      },
+      {
+        "figure": "appendix/figures/study2-main_label_by_actual_kinship.pdf",
+        "pixel_identical_at_160_dpi": true,
+        "byte_identical": false
+      }
+    ],
+    "source_hashes_match": true,
+    "all_assets_font_free_vector_pdfs_without_raster_images": true,
+    "exact_template_copies": 28,
+    "published_assets_retained_unchanged": true
+  },
+  "preservation": {
+    "official_author_kit_files_identical": 17,
+    "official_archive_sha256": "9406a545d5d213757245eb37118fe652b2fccf64f555aff28b49ebe2a780c960",
+    "published_pdf_and_generated_artifacts_retained_unchanged": true,
+    "draft_main_tex_bibliography_appendix_prose_and_prepare_tex_unchanged": true,
+    "study_code_config_prompts_data_results_registrations_and_lockfile_unchanged": true,
+    "statistical_methods_parameters_and_seeds_unchanged": true,
+    "analysis_run": false,
+    "model_api_calls": 0,
+    "codex_prompts_tracked": false
+  },
+  "tooling_sha256": {
+    "paper/build.sh": "4a6552f9df44d1ef7fd290897430316673cb22c8992a7217058c5de090d6f0eb",
+    "paper/tool_paths.py": "06d44d28ef625c5354df156f8d9003acea88f8ebb3ada54dbb19a066944257fd",
+    "paper/test_tool_paths.py": "dc83206b53b4f62daa103cec056a1b409de0c6fb7b3c544dfec186a7ad1889b7",
+    "paper/validation-requirements.txt": "9e7f5f328fb6504e14a8fa773dcbda9dc970c89cfb836f7c5f426276466292fe",
+    "paper/validate.py": "19a9afa8e9777a4d63921ae181c2341082eaedac6d3d88d1e1e80c54324123eb",
+    "paper/appendix/build_tables.py": "4aa4d3fa3854bc504cbf252b074067d2a60cee06e5dfd317d745e08a6b28846b",
+    "paper/appendix/prepare_assets.py": "000a44e00fef155338cd7c95da0e42156370e35305e33056e47f1d88d9fb6b27",
+    "paper/appendix/validate_appendix.py": "77e05a3d957f55e4bbc011443832d2487c0f0a347abc4113cb950dba9b99a457",
+    "paper/appendix/validate_fixes.py": "5445cb1b0c66b0c62fdd3cc7866645370a6f17cc1a34ecab5ebe8c8599695513"
+  }
+}

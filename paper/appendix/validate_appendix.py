@@ -14,8 +14,8 @@ from pypdf import PdfReader
 HERE=Path(__file__).resolve().parent
 PAPER=HERE.parent
 ROOT=PAPER.parent
-BUNDLE=Path.home()/'.cache/codex-runtimes/codex-primary-runtime/dependencies'
-POPPLER=BUNDLE/'native/poppler/poppler/bin'
+sys.path.insert(0, str(PAPER))
+from tool_paths import poppler_tool
 BASELINE='15429f6'
 OLD_HEADING='Intelligence Index (v5.0.2)'
 APPROVED_HEADING='Artificial Analysis Intelligence Index v5.0.2'
@@ -64,7 +64,7 @@ def main():
     for r in assets['figures']:
         p=PAPER/r['copy'];assert sha(p)==r['copy_sha256']
         assert len(PdfReader(p).pages)==1
-        fonts=subprocess.check_output([str(POPPLER/'pdffonts'),str(p)],text=True)
+        fonts=subprocess.check_output([poppler_tool('pdffonts'),str(p)],text=True)
         assert not fonts.splitlines()[2:],p
         sizes=[]
         PdfReader(ROOT/r['source']).pages[0].extract_text(visitor_text=lambda text,cm,tm,font,size:sizes.append(size) if text.strip() else None)
@@ -99,7 +99,7 @@ def main():
     render=PAPER/'build/render';render.mkdir(exist_ok=True)
     for i in [1]:
         target=render/('baseline-'+str(i))
-        subprocess.run([str(POPPLER/'pdftoppm'),'-f',str(i),'-l',str(i),'-singlefile','-r','120','-png',str(before),str(target)],check=True,capture_output=True)
+        subprocess.run([poppler_tool('pdftoppm'),'-f',str(i),'-l',str(i),'-singlefile','-r','120','-png',str(before),str(target)],check=True,capture_output=True)
         diff=ImageChops.difference(Image.open(str(target)+'.png').convert('RGB'),Image.open(render/f'page-{i:02d}.png').convert('RGB'))
         assert diff.getbbox() is None,('main render changed',i)
     pages=len(PdfReader(PAPER/'main.pdf').pages)

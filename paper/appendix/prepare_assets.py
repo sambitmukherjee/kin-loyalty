@@ -1,9 +1,7 @@
 """Copy exact prompts and make vector, font-free presentation copies of figures."""
 from pathlib import Path
-import ctypes.util
 import hashlib
 import json
-import os
 import re
 import shutil
 import subprocess
@@ -13,16 +11,8 @@ import xml.etree.ElementTree as ET
 HERE=Path(__file__).resolve().parent
 PAPER=HERE.parent
 ROOT=PAPER.parent
-BUNDLE=Path.home()/'.cache/codex-runtimes/codex-primary-runtime/dependencies'
-POPPLER=BUNDLE/'native/poppler/poppler'
-POPPLER_BIN=Path(os.environ.get('PAPER_POPPLER_BIN',str(POPPLER/'bin')))
-if not (POPPLER_BIN/'pdftocairo').exists():
-    found=shutil.which('pdftocairo')
-    if not found:raise RuntimeError('Install Poppler or set PAPER_POPPLER_BIN.')
-    POPPLER_BIN=Path(found).parent
-sys.path.insert(0,str(PAPER/'.toolchain/appendix-python'))
-original_find=ctypes.util.find_library
-ctypes.util.find_library=lambda name: str(POPPLER/'lib/libcairo.2.dylib') if name=='cairo' and (POPPLER/'lib/libcairo.2.dylib').exists() else original_find(name)
+sys.path.insert(0, str(PAPER))
+from tool_paths import poppler_tool
 import cairosvg
 
 
@@ -32,7 +22,7 @@ def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 def main():
     (HERE/'prompts').mkdir(exist_ok=True)
     (HERE/'figures').mkdir(exist_ok=True)
-    temp=PAPER/'build/appendix';temp.mkdir(exist_ok=True)
+    temp=PAPER/'build/appendix';temp.mkdir(parents=True,exist_ok=True)
     manifest={'prompts':[], 'figures':[], 'source_files':{}}
     for study in ['study1','study2']:
         target=HERE/'prompts'/study;target.mkdir(exist_ok=True)
@@ -47,7 +37,7 @@ def main():
         study='study1' if 'study1' in source.parts else 'study2'
         stem=study+'-'+source.stem
         svg=temp/(stem+'.svg')
-        subprocess.run([str(POPPLER_BIN/'pdftocairo'),'-svg',str(source),str(svg)],check=True)
+        subprocess.run([poppler_tool('pdftocairo'),'-svg',str(source),str(svg)],check=True)
         tree=ET.parse(svg);root=tree.getroot()
         assert not root.findall('.//s:image',ns), 'The source figure must remain vector.'
         changed=0
@@ -109,7 +99,7 @@ def main():
         prepared=temp/(stem+'-outlined.svg');tree.write(prepared,encoding='utf-8',xml_declaration=True)
         dest=HERE/'figures'/(stem+'.pdf')
         cairosvg.svg2pdf(url=str(prepared),write_to=str(dest))
-        fonts=subprocess.check_output([str(POPPLER_BIN/'pdffonts'),str(dest)],text=True)
+        fonts=subprocess.check_output([poppler_tool('pdffonts'),str(dest)],text=True)
         assert not fonts.splitlines()[2:],fonts
         manifest['figures'].append({'source':str(source.relative_to(ROOT)),'source_sha256':sha(source),'copy':str(dest.relative_to(PAPER)),'copy_sha256':sha(dest),'vector':True,'source_plot_geometry_unchanged':True,'lettering_outline_scale':1.35,'text_runs_enlarged':changed,'six_point_legend_scale':1.6 if legend_paths_changed else None,'legend_paths_repositioned':legend_paths_changed,'duplicate_legend_elements_removed':duplicate_legend_elements_removed,'reason':'AAAI prohibits CID/Identity-H fonts and requires legible labels. Saved 7/8-point lettering is outlined and enlarged; plot paths and data are unchanged.'})
     for record in manifest['prompts']+manifest['figures']:

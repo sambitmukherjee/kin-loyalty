@@ -2,24 +2,18 @@
 from pathlib import Path
 import hashlib
 import json
-import os
 import re
-import shutil
 import subprocess
 import zipfile
+
+from tool_paths import poppler_tool
 
 PAPER = Path(__file__).resolve().parent
 ROOT = PAPER.parent
 
 
 def main():
-    bundled=Path.home()/'.cache/codex-runtimes/codex-primary-runtime/dependencies/native/poppler/poppler/bin'
-    def tool(name):
-        found=os.environ.get(name.upper()) or shutil.which(name)
-        if found:return found
-        candidate=bundled/name
-        if candidate.exists():return str(candidate)
-        raise RuntimeError(f'{name} is required for PDF validation.')
+    tool = poppler_tool
     def run(name,*args):
         return subprocess.check_output([tool(name),*map(str,args)],text=True)
     fonts=run('pdffonts',PAPER/'main.pdf')
