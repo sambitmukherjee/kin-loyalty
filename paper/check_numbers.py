@@ -43,7 +43,7 @@ def main():
         record(model+' dictator equal splits', {'equal':count,'total':len(subset)})
     for model in ['gpt_6_1_terra','kimi_k3_1_pro']:
         record(model+' dictator contrast and interval', contrast('dictator',scope=model))
-    record('Proposer +3.02, 95% interval 1.85 to 4.17, p<.001', contrast('ultimatum_proposer'), 'upper endpoint is 4.175; proposed conventional decimal rounding is 4.18')
+    record('Proposer +3.02, 95% interval 1.85 to 4.18, p<.001', contrast('ultimatum_proposer'), 'matches; upper endpoint 4.175 rounds to the approved 4.18')
     record('Responder +5.68, interval 2.75 to 8.54, p<.001', contrast('ultimatum_responder'))
     for decision, expected in [('ultimatum_proposer',3),('ultimatum_responder',4)]:
         c=[r for r in s1 if r['decision']==decision and r['family']=='own_vs_other' and r['method']=='unadjusted' and r['outcome']=='outcome' and r['scope']!='pooled']
@@ -75,7 +75,7 @@ def main():
     scored=[r for r in comp if r['scored']=='True'];unscored=[r for r in comp if r['scored']=='False']
     assert len(scored)==12 and all(r['correct']==r['planned']=='20' for r in scored)
     assert len(unscored)==4 and all(r['n_unsure']=='20' for r in unscored)
-    record('320 comprehension calls; every model correct for every card', {'scored_calls':240,'scored_conditions_per_model':3,'unscored_undisclosed_calls':80,'unscored_answers':'unsure'}, 'scope mismatch: not-disclosed cards were unscored, not correct answers')
+    record('320 comprehension calls; each model correct for three scored cards; undisclosed unscored', {'scored_calls':240,'scored_conditions_per_model':3,'unscored_undisclosed_calls':80,'unscored_answers':'unsure'})
     record('Study 2: 960 deals, no mandate violations or re-asks; mean share .61', pooled)
     assert len(episodes)==960 and pooled['deals']=='960' and pooled['reasks']=='0'
     assert pooled['buyer_mandate_violations']==pooled['seller_mandate_violations']=='0'
@@ -98,7 +98,7 @@ def main():
     secondary=[r for r in s1 if r['scope']=='pooled' and r['designation']=='secondary' and r['permutation_p']]
     threshold=Decimal('.05')/len(secondary)
     computed={'mean_agreement_room_dollars':str(zone),'episodes_in_mean':960,'larger_absolute_90_interval_bound_share':str(bound),'mean_room_times_90_bound_dollars':str(zone*bound),'pooled_secondary_test_count':len(secondary),'test_count_filter':'scope=pooled; designation=secondary; permutation_p available; excludes the primary and bootstrap-only coefficient changes','bonferroni_threshold':str(threshold),'proposer_p':contrast('ultimatum_proposer')['permutation_p'],'responder_p':contrast('ultimatum_responder')['permutation_p'],'both_below_threshold':all(Decimal(contrast(d)['permutation_p'])<threshold for d in ['ultimatum_proposer','ultimatum_responder'])}
-    audit={'draft_sha256':hashlib.sha256((PAPER/'draft.md').read_bytes()).hexdigest(),'source_sha256':{p:hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in files},'checks':checks,'computed_for_requested_proposals_only':computed,'no_study_analysis_rerun':True,'manuscript_edits_applied':False}
+    audit={'draft_sha256':hashlib.sha256((PAPER/'draft.md').read_bytes()).hexdigest(),'source_sha256':{p:hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in files},'checks':checks,'computed_for_requested_author_edits':computed,'no_study_analysis_rerun':True,'manuscript_edits_applied':True,'approval_record':'applied-edits.json'}
     (PAPER/'numeric-audit.json').write_text(json.dumps(audit,indent=2)+'\n')
     with (PAPER/'bonferroni-pooled-secondary.csv').open('w') as h:
         writer=csv.DictWriter(h,fieldnames=list(secondary[0]),lineterminator='\n');writer.writeheader();writer.writerows(secondary)

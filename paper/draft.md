@@ -21,11 +21,11 @@ Identity labels are known to change how language-model agents cooperate, but whe
 
 ## 2 Related work
 
-**Identity labels.** Visible model-family labels make agents cluster with same-label peers (Del Giudice et al. 2026), and telling a model that its co-player reasons like itself increases cooperation in social dilemmas (Kundu et al. 2026). When agents are sorted into groups, they favor members of their own group even if the groups are defined by meaningless labels, much as people do (Lee 2026; Chen 2026). Models also prefer text written by other models (Laurito et al. 2025), and they can recognize their own model family from a conversation (Jin et al. 2025). All of this concerns agents acting for themselves, not a principal's money.
+**Identity labels.** Visible model-family labels make agents cluster with same-label peers (Del Giudice et al. 2026), and telling a model that its co-player reasons like itself increases cooperation in social dilemmas (Kundu et al. 2026). When agents are sorted into groups, they favor members of their own group even if the groups are defined by meaningless labels, much as people do (Lee 2026; Chen 2026). Models also prefer text written by other models (Laurito et al. 2025), and they can recognize their own model family from a conversation (Choi et al. 2025). All of this concerns agents acting for themselves, not a principal's money.
 
 **Ultimatum and bargaining games.** Model proposers in the ultimatum game give away more than necessary, and behave differently when the responder is described as human (Araujo and Uhlig 2026; Gu 2026). In bargaining between models, which model sits on each side shifts the division of surplus (Liang and Xu 2026). None of this work varies what agents are *told* about the counterparty's model while holding the real counterparty fixed.
 
-**Loyalty benchmarks** test leakage of private information, giving in under pressure and injected instructions (Li and Shi 2026; Liu 2026; Zhu et al. 2025), but not the counterparty's disclosed identity.
+**Loyalty benchmarks** test leakage of private information, giving in under pressure and injected instructions (Li and Shi 2026; Zhu et al. 2025), but not the counterparty's disclosed identity.
 
 ## 3 Design shared by both studies
 
@@ -52,7 +52,7 @@ Cards always show an exact model name, never a family name such as "GPT", which 
 
 Each call was a single request to the provider's chat-style API, with low reasoning effort, default sampling, structured JSON output and prompt caching off where possible.
 
-**Pre-registration.** Each study was piloted and then pre-registered, including the analysis code, in a dated commit pushed to GitHub before its main run. Pilots were analyzed blind, pooled over all card conditions. The logs of every API call were frozen before analysis, and rerunning the analysis from them reproduces every table and figure exactly.
+**Pre-registration.** Each study was piloted and then pre-registered, including the analysis code, in a dated commit pushed to GitHub before its main run. Pilots were analyzed blind, pooled over all card conditions. The logs of every API call were frozen before analysis, and rerunning the analysis from them reproduces every table and figure exactly. After registration, an approved mechanical patch enabled the Study 2 main run and recorded both registration and execution commits; the analysis, prompts and scoring were unchanged.
 
 ## 4 Study 1: single decisions
 
@@ -64,7 +64,7 @@ Each call was a single request to the provider's chat-style API, with low reason
 
 **Conditions and hypotheses.** The card names the agent's own model, another lab's model (rotating over the other three), a fictional model ("Orion-1, Southwind AI"), or "not disclosed"; in a fifth condition Jordan decides personally, with no agent. P1 predicts larger dictator transfers under the own-model card than under the another-lab card. Secondary hypothesis S1 asks whether extra generosity in the ultimatum game goes with changed expectations, and S2 asks whether a human counterparty is treated differently from an undisclosed AI agent.
 
-**Sample.** Each prompt was written in three wordings, and each wording gave the two human users a different pair of names (Alex and Jordan in the first). Each combination of model, decision, card and wording was sampled 20 times: 3,600 answers in all. A separate check of 320 calls asked agents only whether the card's model was the same as theirs; every model answered correctly in all 20 calls for every card.
+**Sample.** Each prompt was written in three wordings, and each wording gave the two human users a different pair of names (Alex and Jordan in the first). Each combination of model, decision, card and wording was sampled 20 times: 3,600 answers in all. A separate check of 320 calls asked agents only whether the card's model was the same as theirs; every model answered correctly in all 20 calls for each of the three scored cards; “not disclosed” answers were unsure and unscored.
 
 **A change after the pilot.** The first pilot's system prompt ended with "Act in Alex's interest", and under it two models gave $0 in every dictator draw, leaving no room to detect any shift. We removed that sentence before pre-registering, with a rule fixed in advance that no further change would follow. The pilot was analyzed blind, so the change could not be steered by any model label effect.
 
@@ -104,19 +104,19 @@ All 3,600 answers were valid. Figure 1 compares the own-model card with the anot
 
 **P1 is not supported.** Averaged over the four models, the own-model card raised dictator transfers by $1.04 (95% CI −$1.46 to $3.54; p = 0.53), and the 90% interval lies inside ±$5, so the effect is equivalent to zero within our bound. One caveat: Claude Sonnet 5.5 gave exactly $50 in all 300 dictator answers and Gemini 4 Hydrogen in 296, so for them the test had little room. The two models whose choices varied pointed in opposite directions: GPT-6.1 Terra gave $4.17 less to its own model, and Kimi K3.1 Pro gave $7.50 more, but neither difference is significant. For each of these two models alone, effects of $10 or more cannot be ruled out.
 
-**In the ultimatum game, the own-model card pulls agents toward an equal split.** Proposers offered $3.02 more to their own model than to another lab's (95% CI $1.85 to $4.17; p < 0.001), and responders demanded $5.68 more (95% CI $2.75 to $8.54; p < 0.001). Three of the four models offered more, and all four demanded more. Both shifts point toward $50. As a proposer, Claude Sonnet 5.5 offered exactly $50 in 67% of its answers when the card named its own model, but never offered $50 when the card showed anything else. Gemini 4 Hydrogen offered exactly $50 in 68% of its answers when the card named its own model, against 15% when it named another lab's model. As a responder, Kimi K3.1 Pro set its minimum at exactly $50 in 82% of its answers when the card named its own model, against 63% when it named another lab's model.
+**In the ultimatum game, the own-model card pulls agents toward an equal split.** Proposers offered $3.02 more to their own model than to another lab's (95% CI $1.85 to $4.18; p < 0.001), and responders demanded $5.68 more (95% CI $2.75 to $8.54; p < 0.001). Three of the four models offered more, and all four demanded more. Both shifts point toward $50. As a proposer, Claude Sonnet 5.5 offered exactly $50 in 67% of its answers when the card named its own model, but never offered $50 when the card showed anything else. Gemini 4 Hydrogen offered exactly $50 in 68% of its answers when the card named its own model, against 15% when it named another lab's model. As a responder, Kimi K3.1 Pro set its minimum at exactly $50 in 82% of its answers when the card named its own model, against 63% when it named another lab's model.
 
 **There is no reputation effect: the effect is specific to the agent's own name.** A real model from another lab and the fictional Orion-1 were treated almost identically in every decision (differences of −$0.62, −$0.44 and +$0.98, none significant). So agents do not treat a real, well-known model differently from an unknown one; only seeing their own model's name makes a difference.
 
 **Expectations do not explain the extra offers (S1).** Alongside each offer, the proposer stated the smallest offer it expected the responder to accept; we call this its expectation. Controlling for it leaves the effect unchanged (+$3.13 against +$3.02), and the own-model card barely moved the expectations themselves. Claude Sonnet 5.5, for example, offered $6.67 more to its own model while expecting its own model to accept $2.38 less. Kimi K3.1 Pro is the exception: when the card named its own model, it both offered more and expected the responder to demand more.
 
-**Humans are treated differently (S2).** Compared with an undisclosed AI agent, a human received offers $2.46 lower and faced responders who accepted $8.31 less (both p < 0.001). The lower offers are fully explained by lower expectations: agents act as if a human will accept less.
+**Humans are treated differently (S2).** Compared with an undisclosed AI agent, a human received offers $2.46 lower and faced responders who accepted $8.31 less (both p < 0.001). After controlling for stated expectations, the offer contrast is near zero (+$0.08); this is a descriptive association, not a causal explanation.
 
 ## 7 Study 2 results
 
 All 960 negotiations ended in a deal, no agent agreed to a price beyond its principal's limit, and no reply had to be re-asked. Buyers kept 61% of the room for agreement on average.
 
-**P2 is not supported, and the null result is precise.** A "same model" card changed the buyer's share by −0.26 percentage points compared with a "different model" card (95% CI −0.86 to +0.34; p = 0.40). The 90% interval, −0.77 to +0.25, lies far inside the ±5-point bound: with about $220 of room in a typical negotiation, any effect is below about $2 per deal. Standard errors clustered by pair give the same answer (p = 0.38). No buyer model shows a significant effect on its own. Cards that named a model, whether the buyer's own or another, led to the same outcomes as cards that kept the model undisclosed. And a "same model" card did not matter more when it was true.
+**P2 is not supported, and the null result is precise.** A "same model" card changed the buyer's share by −0.26 percentage points compared with a "different model" card (95% CI −0.86 to +0.34; p = 0.40). The 90% interval, −0.77 to +0.25, lies far inside the ±5-point bound: with a mean of $222.47 of room for agreement, the larger absolute 90% interval bound corresponds to about $1.70 per deal. Standard errors clustered by pair give the same answer (p = 0.38). No buyer model shows a significant effect on its own. Cards that named a model, whether the buyer's own or another, led to the same outcomes as cards that kept the model undisclosed. And a "same model" card did not matter more when it was true.
 
 **Who the buyer faces matters far more than what it is told.** The cells of the two-by-two differ by at most 1.5 points:
 
@@ -135,7 +135,7 @@ In contrast, average shares range from 0.50 when Gemini 4 Hydrogen buys from GPT
 
 **Why the studies differ** is an open question, because they differ in three ways at once: explicit price instructions in Study 2 but none in Study 1's final prompts; a jointly earned bonus that invites fairness against a market price that anchors haggling; and a single decision against a conversation. Study 1's first pilot, where an explicit instruction drove two models to give nothing under every card, suggests that instructions may override identity cues, but we did not test this.
 
-**Limitations.** We study four models at low reasoning effort, and Claude Sonnet 5.5 reported no reasoning tokens at all. Study 2 uses one wording, and both settings are stylized. In the dictator game, Claude Sonnet 5.5 and Gemini 4 Hydrogen split the money evenly almost every time, whatever the card said, which left little room for the card to change their answers. Finally, the ultimatum results are secondary, and because we ran many secondary tests, a few could be significant by chance alone. A standard safeguard against this, the Bonferroni correction, divides the 5% significance threshold by the number of tests run. The two main ultimatum results would remain significant even under this stricter threshold, although this check was not part of our pre-registration.
+**Limitations.** We study four models at low reasoning effort, and Claude Sonnet 5.5 reported no reasoning tokens at all. Study 2 uses one wording, and both settings are stylized. In the dictator game, Claude Sonnet 5.5 and Gemini 4 Hydrogen split the money evenly almost every time, whatever the card said, which left little room for the card to change their answers. Finally, the ultimatum results are secondary, and because we ran many secondary tests, a few could be significant by chance alone. A standard safeguard against this, the Bonferroni correction, divides the 5% significance threshold by the number of tests run. Both main ultimatum results remain significant at the corrected threshold of 0.05/29 ≈ 0.00172 (p ≈ 0.00010 and 0.00040), although this check was not part of our pre-registration.
 
 **Next steps** are threefold. First, vary the strength of the principal's instructions in both settings. Second, test whether, in the ultimatum game, a counterparty could exploit the pull toward equal splits by falsely claiming the agent's own model on its card. Third, show cards to both sides, or replace the model on the card with the company that builds and runs the agent (for example, a shopping app), which A2A cards list as the agent's provider.
 
@@ -152,18 +152,17 @@ References marked † were cited from memory and must be checked before submissi
 - Del Giudice, X.; Palma, A.; Migliarini, M.; Galasso, F.; and Spinelli, I. 2026. Prompted Identity Degrades Cooperation in Multi-Agent LLM Systems. [arXiv:2609.35928](https://arxiv.org/pdf/2609.35928).
 - Gu, G. C. 2026. Is AI Becoming More Human? Evidence from LLMs and the Ultimatum Game. MPRA Paper 129505. [econpapers.repec.org](https://econpapers.repec.org/RePEc:pra:mprapa:129505).
 - † Hofstadter, D. R. 1985. *Metamagical Themas: Questing for the Essence of Mind and Pattern*. Basic Books.
-- Jin, et al. 2025. Agent-to-Agent Theory of Mind: Testing Interlocutor Awareness among Large Language Models. In *Proceedings of EMNLP 2025*. [arXiv:2506.22957](https://arxiv.org/pdf/2506.22957).
+- Choi, Younwoo; Li, Changling; Yang, Yongjin; and Jin, Zhijing. 2025. Agent-to-Agent Theory of Mind: Testing Interlocutor Awareness among Large Language Models. In *Proceedings of EMNLP 2025*. [arXiv:2506.22957](https://arxiv.org/pdf/2506.22957).
 - Kundu, A.; Tewolde, E.; Berker, R. E.; Brown, S. F.; and Conitzer, V. 2026. Do LLMs Take Care of Their Own? Similarity Signals Can Induce Cooperation. [arXiv:2608.12125](https://arxiv.org/pdf/2608.12125).
 - † Lakens, D. 2017. Equivalence Tests: A Practical Primer for t Tests, Correlations, and Meta-Analyses. *Social Psychological and Personality Science* 8(4): 355–362.
 - Laurito, W.; Davis, B.; Grietzer, P.; Gavenčiak, T.; Böhm, A.; and Kulveit, J. 2025. AI–AI Bias: Large Language Models Favor Communications Generated by Large Language Models. *PNAS*. [arXiv:2407.12856](https://arxiv.org/abs/2407.12856).
 - Lee, M. H. J. 2026. Human-like In-group Bias in Instruction-tuned Language Model Agents. [arXiv:2605.28114](https://arxiv.org/html/2605.28114).
 - Li, B.; and Shi, N. 2026. Whose Side Is Your Agent On? Multi-Party Principal Loyalty in LLM Agents. [arXiv:2606.30383](https://arxiv.org/html/2606.30383).
 - Liang, C.; and Xu, F. 2026. When LLM Agents Negotiate: Private Information and Dynamic Bargaining in Supply Chains. [arXiv:2608.07538](https://arxiv.org/pdf/2608.07538).
-- Liu, D. Z. 2026. Faithful Delegates? Benchmarking the Fiduciary Duties of LLM Negotiating Agents. [arXiv:2607.02814](https://arxiv.org/html/2607.02814).
 - † Schelling, T. C. 1960. *The Strategy of Conflict*. Harvard University Press.
 - Zhu, S.; et al. 2025. The Automated but Risky Game: Modeling and Benchmarking Agent-to-Agent Negotiations and Transactions in Consumer Markets. [arXiv:2506.00073](https://arxiv.org/html/2506.00073v4).
 
-Code, prompts, pre-registrations and logs: GitHub repository URL to be added.
+Code, prompts, pre-registrations and logs: https://github.com/sambitmukherjee/kin-loyalty.
 
 ## Notes for typesetting (remove before submission)
 
@@ -179,10 +178,10 @@ Code, prompts, pre-registrations and logs: GitHub repository URL to be added.
 **Numbers to check against the results files.**
 
 - Abstract: $1.04; −0.26 points; the 90% interval within ±0.8 points.
-- Study 1: P1 $1.04 (−1.46 to 3.54), p = 0.53, and the 90% interval (−1.04 to 3.12) inside ±$5; Claude 300 of 300 and Gemini 296 of 300 dictator answers at $50; GPT and Kimi intervals reaching −$10.00 and +$15.83; proposer +3.02 (1.85 to 4.17); responder +5.68 (2.75 to 8.54); three models offering more and all four demanding more; equal splits under the own-model card against the another-lab card (Claude's offers 67% against 0%, Gemini's offers 68% against 15%, Kimi's responder minimums 82% against 63%); another lab against fictional "almost identical" (−0.62, −0.44, +0.98); S1 +3.13 against +3.02, Claude +6.67 and −2.38, Kimi's beliefs rising; S2 −2.46 and −8.31, both p < 0.001, and the belief-adjusted offer contrast near zero (+0.08).
+- Study 1: P1 $1.04 (−1.46 to 3.54), p = 0.53, and the 90% interval (−1.04 to 3.12) inside ±$5; Claude 300 of 300 and Gemini 296 of 300 dictator answers at $50; GPT and Kimi intervals reaching −$10.00 and +$15.83; proposer +3.02 (1.85 to 4.18); responder +5.68 (2.75 to 8.54); three models offering more and all four demanding more; equal splits under the own-model card against the another-lab card (Claude's offers 67% against 0%, Gemini's offers 68% against 15%, Kimi's responder minimums 82% against 63%); another lab against fictional "almost identical" (−0.62, −0.44, +0.98); S1 +3.13 against +3.02, Claude +6.67 and −2.38, Kimi's beliefs rising; S2 −2.46 and −8.31, both p < 0.001, and the belief-adjusted offer contrast near zero (+0.08).
 - Study 2: all 960 deals, no violations, no re-asks; mean share 0.61; P2 −0.26 points (−0.86 to +0.34), p = 0.40; 90% interval −0.77 to +0.25; cluster-robust p = 0.38; no buyer model significant; both disclosure contrasts non-significant; the interaction interval including zero; the two-by-two cells within 1.5 points; pair averages 0.50 to 0.77.
-- "About $220 of room" and "less than about $2" are estimates from the average reference price ($560 × 0.4 ≈ $224). Replace them with the actual mean of (b − s) in the Study 2 logs.
+- Author-approved room-for-agreement calibration: the actual mean of (b − s) over all 960 main Study 2 episodes is $222.46875; multiplying by the larger absolute 90% bound, 0.007658102208929781, gives $1.7036884257928472. The paper reports $222.47 and about $1.70.
 - "p < 0.001" is used where the permutation p-value was 0.0001 or 0.0004.
-- The Bonferroni remark in Limitations: confirm the number of pooled secondary tests in Study 1 and that both p-values clear the corrected threshold.
+- Bonferroni check verified: 29 pooled secondary tests; threshold 0.05/29 ≈ 0.00172414; both main ultimatum p-values clear it. This check remains explicitly non-preregistered.
 
-**References.** Check every † reference, and give Jin et al. (2025) its full author list.
+**References.** Dagger-marked references have been checked. Choi et al. (2025) has its full verified author list. Liu (2026) was removed at the author’s request. Intelligence Index scores are retained unverified at the author’s instruction.

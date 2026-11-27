@@ -13,7 +13,12 @@
   "paper_size": "US letter",
   "pdf_version": "1.7",
   "official_style_and_bibliography_unmodified": true,
-  "manuscript_proposals_applied": false,
+  "manuscript_proposals_applied": true,
+  "only_recorded_author_approved_draft_changes": true,
+  "reference_count": 16,
+  "liu_reference_removed": true,
+  "choi_citation_corrected": true,
+  "intelligence_index_scores_retained_unverified_by_author_instruction": true,
   "numeric_source_files_unchanged": true,
   "permitted_packages": [
     "aaai2027",
@@ -26,11 +31,13 @@
   ],
   "supplement_bytes": 834572,
   "supplement_below_50_mb": true,
-  "pdf_sha256": "5d9e0610c68848fbb78134768d8d2bd7509cf5dd4a588bffce43b845a6cbbf68",
-  "tex_sha256": "0871d2eb9066bf05472042a7d76821d0db0573f4d8b87d21d380def9099cc713",
+  "pdf_sha256": "0a601c64456a78a5396702d21ea2221fb3c88d5004cb51e3fb7372924851e04b",
+  "tex_sha256": "c2bf18cb121023ba0530339925cf3232e1d7a5b7e0338b76ae607b21707076d5",
   "visual_inspection": {
-    "all_five_pages_reviewed": true,
-    "greyscale_figure_reviewed": true,
-    "overlaps_or_clipping_observed": false
+    "all_five_latest_rendered_pages_inspected": true,
+    "figure_greyscale_inspected": true,
+    "overlap_or_clipping_found": false,
+    "missing_glyphs_found": false,
+    "body_fits_four_pages_plus_references": true
   }
 }

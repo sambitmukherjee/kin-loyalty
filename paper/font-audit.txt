@@ -1,10 +1,10 @@
 name                                 type              encoding         emb sub uni object ID
 ------------------------------------ ----------------- ---------------- --- --- --- ---------
 TLCYZC+TeXGyreTermesX-Bold           Type 1            Custom           yes yes yes      4  0
-WUQXUK+TeXGyreTermesX-Regular        Type 1            Custom           yes yes yes      5  0
+ZEFKCP+TeXGyreTermesX-Regular        Type 1            Custom           yes yes yes      5  0
 JRSCPC+TeXGyreTermes-Regular         Type 1            Custom           yes yes yes      6  0
 LLGCZY+TeXGyreTermesX-Italic         Type 1            Custom           yes yes yes      7  0
 PLFQTP+TeXGyreTermes-Bold            Type 1            Custom           yes yes yes      8  0
 FLWYDU+NimbusMonL-Regu               Type 1            Custom           yes yes yes     14  0
 RVWRVF+TeXGyreTermes-Italic          Type 1            Custom           yes yes yes     19  0
-FXXUVH+CMSY10                        Type 1            Builtin          yes yes yes     20  0
+NLQBJE+CMSY10                        Type 1            Builtin          yes yes yes     20  0

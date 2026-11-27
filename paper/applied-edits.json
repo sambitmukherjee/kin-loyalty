@@ -1,0 +1,101 @@
+{
+  "approval_date": "2026-11-27",
+  "approval": "Apply the proposed edits. Repository made public by author. Drop Liu 2026; keep Intelligence Index scores unverified; change Jin et al. to Choi et al.",
+  "initial_proof_commit": "495f4909d8a841eb1bff28969c9ff1abd0e8721e",
+  "draft_before_sha256": "fcedf26c8399ea85a816f6844602098726ff960c77f8d78a3a831ba3fa7753a4",
+  "draft_after_sha256": "2de41fc635b7a72c9a5aa402638d9ae0a1298d2d6b698461fffbfb32607e1087",
+  "changes": [
+    {
+      "edit": "Correct lead-author citation",
+      "before": "(Jin et al. 2025)",
+      "after": "(Choi et al. 2025)"
+    },
+    {
+      "edit": "Remove Liu body citation",
+      "before": "(Li and Shi 2026; Liu 2026; Zhu et al. 2025)",
+      "after": "(Li and Shi 2026; Zhu et al. 2025)"
+    },
+    {
+      "edit": "Apply agreement-room and dollar-calibration wording",
+      "before": "with about $220 of room in a typical negotiation, any effect is below about $2 per deal.",
+      "after": "with a mean of $222.47 of room for agreement, the larger absolute 90% interval bound corresponds to about $1.70 per deal."
+    },
+    {
+      "edit": "Apply Bonferroni count/threshold and p-values",
+      "before": "The two main ultimatum results would remain significant even under this stricter threshold, although this check was not part of our pre-registration.",
+      "after": "Both main ultimatum results remain significant at the corrected threshold of 0.05/29 ≈ 0.00172 (p ≈ 0.00010 and 0.00040), although this check was not part of our pre-registration."
+    },
+    {
+      "edit": "Correct proposer interval rounding",
+      "before": "(95% CI $1.85 to $4.17; p < 0.001)",
+      "after": "(95% CI $1.85 to $4.18; p < 0.001)"
+    },
+    {
+      "edit": "Clarify scored comprehension conditions",
+      "before": "every model answered correctly in all 20 calls for every card.",
+      "after": "every model answered correctly in all 20 calls for each of the three scored cards; “not disclosed” answers were unsure and unscored."
+    },
+    {
+      "edit": "Use approved descriptive S1 language",
+      "before": "The lower offers are fully explained by lower expectations: agents act as if a human will accept less.",
+      "after": "After controlling for stated expectations, the offer contrast is near zero (+$0.08); this is a descriptive association, not a causal explanation."
+    },
+    {
+      "edit": "Disclose approved post-registration mechanical patch",
+      "before": "The logs of every API call were frozen before analysis, and rerunning the analysis from them reproduces every table and figure exactly.",
+      "after": "The logs of every API call were frozen before analysis, and rerunning the analysis from them reproduces every table and figure exactly. After registration, an approved mechanical patch enabled the Study 2 main run and recorded both registration and execution commits; the analysis, prompts and scoring were unchanged."
+    },
+    {
+      "edit": "Give correct full author list in draft references",
+      "before": "- Jin, et al. 2025. Agent-to-Agent Theory of Mind: Testing Interlocutor Awareness among Large Language Models. In *Proceedings of EMNLP 2025*. [arXiv:2506.22957](https://arxiv.org/pdf/2506.22957).",
+      "after": "- Choi, Younwoo; Li, Changling; Yang, Yongjin; and Jin, Zhijing. 2025. Agent-to-Agent Theory of Mind: Testing Interlocutor Awareness among Large Language Models. In *Proceedings of EMNLP 2025*. [arXiv:2506.22957](https://arxiv.org/pdf/2506.22957)."
+    },
+    {
+      "edit": "Remove Liu reference entry",
+      "before": "- Liu, D. Z. 2026. Faithful Delegates? Benchmarking the Fiduciary Duties of LLM Negotiating Agents. [arXiv:2607.02814](https://arxiv.org/html/2607.02814).\n",
+      "after": ""
+    },
+    {
+      "edit": "Fill the previously authorized repository-link placeholder",
+      "before": "Code, prompts, pre-registrations and logs: GitHub repository URL to be added.",
+      "after": "Code, prompts, pre-registrations and logs: https://github.com/sambitmukherjee/kin-loyalty."
+    },
+    {
+      "edit": "Update excluded notes: approved rounding",
+      "before": "proposer +3.02 (1.85 to 4.17)",
+      "after": "proposer +3.02 (1.85 to 4.18)"
+    },
+    {
+      "edit": "Update excluded notes: approved monetary calibration",
+      "before": "- \"About $220 of room\" and \"less than about $2\" are estimates from the average reference price ($560 × 0.4 ≈ $224). Replace them with the actual mean of (b − s) in the Study 2 logs.",
+      "after": "- Author-approved room-for-agreement calibration: the actual mean of (b − s) over all 960 main Study 2 episodes is $222.46875; multiplying by the larger absolute 90% bound, 0.007658102208929781, gives $1.7036884257928472. The paper reports $222.47 and about $1.70."
+    },
+    {
+      "edit": "Update excluded notes: verified Bonferroni check",
+      "before": "- The Bonferroni remark in Limitations: confirm the number of pooled secondary tests in Study 1 and that both p-values clear the corrected threshold.",
+      "after": "- Bonferroni check verified: 29 pooled secondary tests; threshold 0.05/29 ≈ 0.00172414; both main ultimatum p-values clear it. This check remains explicitly non-preregistered."
+    },
+    {
+      "edit": "Update excluded notes: author reference decisions",
+      "before": "**References.** Check every † reference, and give Jin et al. (2025) its full author list.",
+      "after": "**References.** Dagger-marked references have been checked. Choi et al. (2025) has its full verified author list. Liu (2026) was removed at the author’s request. Intelligence Index scores are retained unverified at the author’s instruction."
+    }
+  ],
+  "repository": {
+    "url": "https://github.com/sambitmukherjee/kin-loyalty",
+    "verified_visibility": "PUBLIC",
+    "visibility_changed_by_agent": false
+  },
+  "intelligence_index_scores": {
+    "values": [
+      55,
+      54,
+      51,
+      46
+    ],
+    "changed": false,
+    "historical_source_verified": false,
+    "retained_by_explicit_author_instruction": true
+  },
+  "study_files_changed": false
+}

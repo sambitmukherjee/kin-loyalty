@@ -1,4 +1,4 @@
-"""Validate the compiled proof; write only paper/ audit files."""
+"""Validate the author-approved revision; write only paper/ audit files."""
 from pathlib import Path
 import hashlib
 import json
@@ -44,6 +44,21 @@ def main():
     for forbidden in ['\\addtolength','\\baselinestretch','\\clearpage','\\newpage','\\pagebreak','\\pagestyle','\\geometry','\\vspace','\\vskip','\\resizebox','\\scalebox']:
         assert forbidden not in source
     assert 'Notes for typesetting' not in source
+    assert 'liu2026' not in source and 'Jin et al.' not in source
+    assert r'\citep{choi2025}' in source
+    bibliography=(PAPER/'references.bib').read_text()
+    assert 'liu2026' not in bibliography
+    assert len(re.findall(r'^@',bibliography,re.M))==16
+    edits=json.loads((PAPER/'applied-edits.json').read_text())
+    initial=subprocess.check_output(
+        ['git','show',edits['initial_proof_commit']+':paper/draft.md'],cwd=ROOT)
+    assert hashlib.sha256(initial).hexdigest()==edits['draft_before_sha256']
+    approved=initial.decode()
+    for change in edits['changes']:
+        assert approved.count(change['before'])==1
+        approved=approved.replace(change['before'],change['after'],1)
+    assert approved==(PAPER/'draft.md').read_text()
+    assert hashlib.sha256(approved.encode()).hexdigest()==edits['draft_after_sha256']
     audit=json.loads((PAPER/'numeric-audit.json').read_text())
     for path,sha in audit['source_sha256'].items():
         assert hashlib.sha256((ROOT/path).read_bytes()).hexdigest()==sha
@@ -61,6 +76,8 @@ def main():
     subprocess.run([tool('pdftotext'),'-layout',str(PAPER/'main.pdf'),str(PAPER/'build/main.txt')],check=True)
     text=(PAPER/'build/main.txt').read_text()
     assert 'Notes for typesetting' not in text
+    assert not re.search(r'\bLiu\b',text)
+    assert 'Jin et al.' not in text and 'Choi et al.' in text
     assert not any(line.strip() in ['{','}'] for line in text.splitlines())
     page_text=[p for p in text.split('\f') if p.strip()]
     refs=[i+1 for i,p in enumerate(page_text) if re.search(r'\bReferences\b',p)]
@@ -74,7 +91,10 @@ def main():
                 'overfull_boxes':0,'undefined_citations':0,'latex_errors':0,'font_count':len(font_rows),
                 'all_fonts_embedded':True,'type3_fonts':False,'cid_or_identity_h_fonts':False,
                 'figure_lettering_vector_outlines':True,'paper_size':'US letter','pdf_version':'1.7',
-                'official_style_and_bibliography_unmodified':True,'manuscript_proposals_applied':False,
+                'official_style_and_bibliography_unmodified':True,'manuscript_proposals_applied':True,
+                'only_recorded_author_approved_draft_changes':True,
+                'reference_count':16,'liu_reference_removed':True,'choi_citation_corrected':True,
+                'intelligence_index_scores_retained_unverified_by_author_instruction':True,
                 'numeric_source_files_unchanged':True,'permitted_packages':packages,
                 'supplement_bytes':supplement.stat().st_size,'supplement_below_50_mb':True,
                 'pdf_sha256':hashlib.sha256((PAPER/'main.pdf').read_bytes()).hexdigest(),

@@ -1,10 +1,11 @@
-# AAAI-27 workshop paper — proof awaiting author approval
+# AAAI-27 workshop paper — author-approved revision
 
 `main.pdf` typesets `draft.md` with the official AAAI-27 Author Kit, downloaded
 from <https://aaai.org/authorkit27/>. `main.tex` is generated from the draft;
-the final “Notes for typesetting” section is omitted. The prose and numeric
-claims have not been corrected or cut. Author: Sambit Mukherjee; affiliation:
-Independent Researcher. Proposed corrections are in `proposed-edits.md`.
+the final “Notes for typesetting” section is omitted. The author approved the
+recorded corrections on 2026-11-27. Author: Sambit Mukherjee; affiliation:
+Independent Researcher. `applied-edits.json` records every approved draft
+replacement; `proposed-edits.md` records its disposition.
 
 Build from the repository root:
 
@@ -37,11 +38,12 @@ Re-run requested arithmetic checks with:
 ```
 
 `numeric-audit.json`, `reference-verification.md`, `conversion-audit.json`,
-`validation.json` and `typesetting-report.md` document checks and unresolved
-items. The supplement ZIP contains the requested unchanged source artifacts,
+`validation.json` and `typesetting-report.md` document checks and author
+decisions. The supplement ZIP contains the requested unchanged source artifacts,
 tables and figures; it excludes raw API logs and credentials.
 
-The proof keeps the draft's literal “Jin et al.” citation pending approval,
-although its full verified Choi/Li/Yang/Jin author list is in the bibliography.
-Liu's supplied title and the unverified historical benchmark scores also remain
-provisional. Do not treat this proof as the author-approved final version.
+The manuscript now cites Choi et al. with the full verified author list in
+the bibliography. Liu (2026) is removed from both text and references. The
+Intelligence Index scores remain unchanged and historically unverified at the
+author’s explicit instruction. GitHub visibility was verified PUBLIC; the
+agent did not change repository visibility. No study files were modified.

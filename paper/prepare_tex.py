@@ -25,9 +25,10 @@ def main():
         '(Kundu et al. 2026)': r'\citep{kundu2026}',
         '(Lee 2026; Chen 2026)': r'\citep{lee2026,chen2026}',
         '(Laurito et al. 2025)': r'\citep{laurito2025}',
+        '(Choi et al. 2025)': r'\citep{choi2025}',
         '(Araujo and Uhlig 2026; Gu 2026)': r'\citep{araujo2026,gu2026}',
         '(Liang and Xu 2026)': r'\citep{liang2026}',
-        '(Li and Shi 2026; Liu 2026; Zhu et al. 2025)': r'\citep{li2026,liu2026,zhu2025}',
+        '(Li and Shi 2026; Zhu et al. 2025)': r'\citep{li2026,zhu2025}',
         '(Lakens 2017)': r'\citep{lakens2017}',
         '(Schelling 1960)': r'\citep{schelling1960}',
         '(Hofstadter 1985)': r'\citep{hofstadter1985}',
@@ -35,9 +36,7 @@ def main():
     for text, command in citations.items():
         assert body.count(text) == 1, text
         body = body.replace(text, command)
-    # The incorrect author attribution cannot be silently changed. Its verified
-    # four-author reference is included, and this literal citation awaits approval.
-    assert '(Jin et al. 2025)' in body
+    assert '(Jin et al. 2025)' not in body and 'liu2026' not in body
     tables = re.findall(r'(?m)^\|.*\n(?:\|.*\n)+', body)
     assert len(tables) == 3
     replacements = []
@@ -104,6 +103,7 @@ def main():
 \providecommand{\tightlist}{}
 \newenvironment{agentcard}{\footnotesize}{}
 \DeclareUnicodeCharacter{2212}{\ensuremath{-}}
+\DeclareUnicodeCharacter{2248}{\ensuremath{\approx}}
 '''
     front = '\\title{' + latex(title) + '}\n\\author{Sambit Mukherjee}\n\\affiliations{Independent Researcher}\n'
     content = '\n'.join([preamble, front, r'\begin{document}', r'\maketitle',
@@ -111,18 +111,19 @@ def main():
                          r'\begin{links}', r'\link{Code, prompts, pre-registrations and logs}{https://github.com/sambitmukherjee/kin-loyalty}',
                          r'\end{links}', body_tex, r'\nocite{*}', r'\bibliography{references}', r'\end{document}', ''])
     assert 'Notes for typesetting' not in content
-    assert r'\$220' in content and r'\$2 per deal' in content
-    assert 'Jin et al. 2025' in content
+    assert r'\$222.47' in content and r'\$1.70 per deal' in content
+    assert 'Jin et al. 2025' not in content and 'liu2026' not in content
     (PAPER/'main.tex').write_text(content)
     (PAPER/'conversion-audit.json').write_text(json.dumps({
         'draft_sha256': hashlib.sha256(original.encode()).hexdigest(),
         'main_tex_sha256': hashlib.sha256(content.encode()).hexdigest(),
-        'body_prose_reworded': False, 'numeric_proposals_applied': False,
+        'body_prose_reworded_by_converter': False, 'author_approved_edits_applied_to_input': True,
+        'numeric_proposals_applied': True,
         'notes_section_omitted': True, 'export_timestamp_replaced_by_requested_author_affiliation': True,
         'references_editorial_warning_and_daggers_omitted': True,
         'repository_placeholder_replaced_per_typesetting_notes': True,
         'table_handling': replacements, 'figure_caption_from_export': caption,
-        'pending_literal_citation': 'Jin et al. 2025; verified first author is Choi',
+        'pending_literal_citation': None,
         'citation_markup_replacements': citations
     }, indent=2) + '\n')
 

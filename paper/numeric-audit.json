@@ -1,5 +1,5 @@
 {
-  "draft_sha256": "fcedf26c8399ea85a816f6844602098726ff960c77f8d78a3a831ba3fa7753a4",
+  "draft_sha256": "2de41fc635b7a72c9a5aa402638d9ae0a1298d2d6b698461fffbfb32607e1087",
   "source_sha256": {
     "results/study1/generated/contrasts.csv": "b4e0f2a09e18b932ff3c952c84f9fee2ee8934125816f49bf50ea9c1a89503a0",
     "results/study1/generated/equivalence.csv": "cdccfac654a8eb1e15a5605e34528fd20197669d530ef75cadce56c8dfc956d5",
@@ -79,14 +79,14 @@
       "assessment": "matches at stated precision"
     },
     {
-      "claim": "Proposer +3.02, 95% interval 1.85 to 4.17, p<.001",
+      "claim": "Proposer +3.02, 95% interval 1.85 to 4.18, p<.001",
       "actual": {
         "estimate": "3.02083333333",
         "ci_low": "1.85416666667",
         "ci_high": "4.175",
         "permutation_p": "9.99900009999e-05"
       },
-      "assessment": "upper endpoint is 4.175; proposed conventional decimal rounding is 4.18"
+      "assessment": "matches; upper endpoint 4.175 rounds to the approved 4.18"
     },
     {
       "claim": "Responder +5.68, interval 2.75 to 8.54, p<.001",
@@ -273,14 +273,14 @@
       "assessment": "matches at stated precision"
     },
     {
-      "claim": "320 comprehension calls; every model correct for every card",
+      "claim": "320 comprehension calls; each model correct for three scored cards; undisclosed unscored",
       "actual": {
         "scored_calls": 240,
         "scored_conditions_per_model": 3,
         "unscored_undisclosed_calls": 80,
         "unscored_answers": "unsure"
       },
-      "assessment": "scope mismatch: not-disclosed cards were unscored, not correct answers"
+      "assessment": "matches at stated precision"
     },
     {
       "claim": "Study 2: 960 deals, no mandate violations or re-asks; mean share .61",
@@ -459,7 +459,7 @@
       "assessment": "matches at stated precision"
     }
   ],
-  "computed_for_requested_proposals_only": {
+  "computed_for_requested_author_edits": {
     "mean_agreement_room_dollars": "222.46875",
     "episodes_in_mean": 960,
     "larger_absolute_90_interval_bound_share": "0.007658102208929781",
@@ -472,5 +472,6 @@
     "both_below_threshold": true
   },
   "no_study_analysis_rerun": true,
-  "manuscript_edits_applied": false
+  "manuscript_edits_applied": true,
+  "approval_record": "applied-edits.json"
 }

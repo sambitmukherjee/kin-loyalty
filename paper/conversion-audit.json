@@ -1,8 +1,9 @@
 {
-  "draft_sha256": "fcedf26c8399ea85a816f6844602098726ff960c77f8d78a3a831ba3fa7753a4",
-  "main_tex_sha256": "0871d2eb9066bf05472042a7d76821d0db0573f4d8b87d21d380def9099cc713",
-  "body_prose_reworded": false,
-  "numeric_proposals_applied": false,
+  "draft_sha256": "2de41fc635b7a72c9a5aa402638d9ae0a1298d2d6b698461fffbfb32607e1087",
+  "main_tex_sha256": "c2bf18cb121023ba0530339925cf3232e1d7a5b7e0338b76ae607b21707076d5",
+  "body_prose_reworded_by_converter": false,
+  "author_approved_edits_applied_to_input": true,
+  "numeric_proposals_applied": true,
   "notes_section_omitted": true,
   "export_timestamp_replaced_by_requested_author_affiliation": true,
   "references_editorial_warning_and_daggers_omitted": true,
@@ -25,15 +26,16 @@
     }
   ],
   "figure_caption_from_export": "Study 1 analysis report (contrasts.csv) \u00b7 60 answers per model, decision and card; 3,600 in all",
-  "pending_literal_citation": "Jin et al. 2025; verified first author is Choi",
+  "pending_literal_citation": null,
   "citation_markup_replacements": {
     "(Del Giudice et al. 2026)": "\\citep{delgiudice2026}",
     "(Kundu et al. 2026)": "\\citep{kundu2026}",
     "(Lee 2026; Chen 2026)": "\\citep{lee2026,chen2026}",
     "(Laurito et al. 2025)": "\\citep{laurito2025}",
+    "(Choi et al. 2025)": "\\citep{choi2025}",
     "(Araujo and Uhlig 2026; Gu 2026)": "\\citep{araujo2026,gu2026}",
     "(Liang and Xu 2026)": "\\citep{liang2026}",
-    "(Li and Shi 2026; Liu 2026; Zhu et al. 2025)": "\\citep{li2026,liu2026,zhu2025}",
+    "(Li and Shi 2026; Zhu et al. 2025)": "\\citep{li2026,zhu2025}",
     "(Lakens 2017)": "\\citep{lakens2017}",
     "(Schelling 1960)": "\\citep{schelling1960}",
     "(Hofstadter 1985)": "\\citep{hofstadter1985}"
