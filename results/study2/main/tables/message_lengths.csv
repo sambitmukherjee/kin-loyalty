@@ -1,0 +1,9 @@
+model,role,messages,mean_characters,median_characters,max_characters
+claude_sonnet_5_5,buyer,1075,188.81581395348837,186,390
+claude_sonnet_5_5,seller,1046,200.95889101338432,196,502
+gemini_4_hydrogen,buyer,897,124.18394648829431,124,243
+gemini_4_hydrogen,seller,967,147.9358841778697,154,302
+gpt_6_1_terra,buyer,1225,77.21632653061225,75,199
+gpt_6_1_terra,seller,1153,89.694709453599302,87,205
+kimi_k3_1_pro,buyer,1025,157.48195121951218,158,292
+kimi_k3_1_pro,seller,1027,164.78481012658227,169,360

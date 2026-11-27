@@ -1,0 +1,7 @@
+card_says,outcome,n,estimate,ci_low,ci_high,interval_available,bootstrap_resamples,bootstrap_unavailable,ci_method,ci_level,ci_ranks
+none,deal,320,1,1,1,True,10000,0,percentile_count_matched,0.94999999999999996,"[250, 9751]"
+other,deal,320,1,1,1,True,10000,0,percentile_count_matched,0.94999999999999996,"[250, 9751]"
+same,deal,320,1,1,1,True,10000,0,percentile_count_matched,0.94999999999999996,"[250, 9751]"
+none,within_deal_share,320,0.61425226612459749,0.60493514612547816,0.62341123736501203,True,10000,0,percentile_count_matched,0.94999999999999996,"[250, 9751]"
+other,within_deal_share,320,0.61405909575073314,0.60500611432850726,0.62275124015312744,True,10000,0,percentile_count_matched,0.94999999999999996,"[250, 9751]"
+same,within_deal_share,320,0.61141539561317448,0.60175837023706458,0.62058882527537018,True,10000,0,percentile_count_matched,0.94999999999999996,"[250, 9751]"

@@ -1,0 +1,5 @@
+provider,responses,cache_read_tokens_present,cache_read_tokens_missing,cache_read_tokens_sum,cache_write_tokens_present,cache_write_tokens_missing,cache_write_tokens_sum
+anthropic,2121,2121,0,0,2121,0,0
+google,1864,0,1864,,0,1864,
+moonshot,2052,1599,453,536640,2031,21,534992
+openai,2378,2378,0,0,2378,0,0

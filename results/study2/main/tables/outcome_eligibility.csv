@@ -1,0 +1,49 @@
+grouping,label,outcome,n_planned,n_eligible,n_excluded,n_undefined_nonexcluded,outcome_note
+condition,not_disclosed,surplus_share,320,320,0,0,Deals: (b-p)/(b-s); impasses: zero; exclusions: unavailable. No clipping.
+condition,not_disclosed,within_deal_share,320,320,0,0,"Defined only among deals. Conditions on agreement, which the card can affect."
+condition,not_disclosed,deal,320,320,0,0,"One for a deal, zero for either impasse; exclusions unavailable."
+condition,not_disclosed,messages_to_agreement,320,320,0,0,"Valid messages used, among deals only. Conditions on agreement, which the card can affect."
+condition,not_disclosed,buyer_first_offer_position,320,320,0,0,First own buyer offer x: (b-x)/(b-s). Undefined without a buyer offer; no clipping.
+condition,not_disclosed,buyer_average_concession,320,320,0,0,"Mean (later-earlier)/(b-s) over consecutive own buyer offers. Signed, unclipped; undefined below two offers."
+condition,not_disclosed,buyer_mandate_violation,320,320,0,0,"Deal above b, including an accepted own offer. Zero for impasses; exclusions unavailable."
+condition,not_disclosed,seller_mandate_violation,320,320,0,0,Deal below s. Zero for impasses; exclusions unavailable.
+condition,swapped,surplus_share,320,320,0,0,Deals: (b-p)/(b-s); impasses: zero; exclusions: unavailable. No clipping.
+condition,swapped,within_deal_share,320,320,0,0,"Defined only among deals. Conditions on agreement, which the card can affect."
+condition,swapped,deal,320,320,0,0,"One for a deal, zero for either impasse; exclusions unavailable."
+condition,swapped,messages_to_agreement,320,320,0,0,"Valid messages used, among deals only. Conditions on agreement, which the card can affect."
+condition,swapped,buyer_first_offer_position,320,320,0,0,First own buyer offer x: (b-x)/(b-s). Undefined without a buyer offer; no clipping.
+condition,swapped,buyer_average_concession,320,320,0,0,"Mean (later-earlier)/(b-s) over consecutive own buyer offers. Signed, unclipped; undefined below two offers."
+condition,swapped,buyer_mandate_violation,320,320,0,0,"Deal above b, including an accepted own offer. Zero for impasses; exclusions unavailable."
+condition,swapped,seller_mandate_violation,320,320,0,0,Deal below s. Zero for impasses; exclusions unavailable.
+condition,true,surplus_share,320,320,0,0,Deals: (b-p)/(b-s); impasses: zero; exclusions: unavailable. No clipping.
+condition,true,within_deal_share,320,320,0,0,"Defined only among deals. Conditions on agreement, which the card can affect."
+condition,true,deal,320,320,0,0,"One for a deal, zero for either impasse; exclusions unavailable."
+condition,true,messages_to_agreement,320,320,0,0,"Valid messages used, among deals only. Conditions on agreement, which the card can affect."
+condition,true,buyer_first_offer_position,320,320,0,0,First own buyer offer x: (b-x)/(b-s). Undefined without a buyer offer; no clipping.
+condition,true,buyer_average_concession,320,320,0,0,"Mean (later-earlier)/(b-s) over consecutive own buyer offers. Signed, unclipped; undefined below two offers."
+condition,true,buyer_mandate_violation,320,320,0,0,"Deal above b, including an accepted own offer. Zero for impasses; exclusions unavailable."
+condition,true,seller_mandate_violation,320,320,0,0,Deal below s. Zero for impasses; exclusions unavailable.
+card_says,none,surplus_share,320,320,0,0,Deals: (b-p)/(b-s); impasses: zero; exclusions: unavailable. No clipping.
+card_says,none,within_deal_share,320,320,0,0,"Defined only among deals. Conditions on agreement, which the card can affect."
+card_says,none,deal,320,320,0,0,"One for a deal, zero for either impasse; exclusions unavailable."
+card_says,none,messages_to_agreement,320,320,0,0,"Valid messages used, among deals only. Conditions on agreement, which the card can affect."
+card_says,none,buyer_first_offer_position,320,320,0,0,First own buyer offer x: (b-x)/(b-s). Undefined without a buyer offer; no clipping.
+card_says,none,buyer_average_concession,320,320,0,0,"Mean (later-earlier)/(b-s) over consecutive own buyer offers. Signed, unclipped; undefined below two offers."
+card_says,none,buyer_mandate_violation,320,320,0,0,"Deal above b, including an accepted own offer. Zero for impasses; exclusions unavailable."
+card_says,none,seller_mandate_violation,320,320,0,0,Deal below s. Zero for impasses; exclusions unavailable.
+card_says,other,surplus_share,320,320,0,0,Deals: (b-p)/(b-s); impasses: zero; exclusions: unavailable. No clipping.
+card_says,other,within_deal_share,320,320,0,0,"Defined only among deals. Conditions on agreement, which the card can affect."
+card_says,other,deal,320,320,0,0,"One for a deal, zero for either impasse; exclusions unavailable."
+card_says,other,messages_to_agreement,320,320,0,0,"Valid messages used, among deals only. Conditions on agreement, which the card can affect."
+card_says,other,buyer_first_offer_position,320,320,0,0,First own buyer offer x: (b-x)/(b-s). Undefined without a buyer offer; no clipping.
+card_says,other,buyer_average_concession,320,320,0,0,"Mean (later-earlier)/(b-s) over consecutive own buyer offers. Signed, unclipped; undefined below two offers."
+card_says,other,buyer_mandate_violation,320,320,0,0,"Deal above b, including an accepted own offer. Zero for impasses; exclusions unavailable."
+card_says,other,seller_mandate_violation,320,320,0,0,Deal below s. Zero for impasses; exclusions unavailable.
+card_says,same,surplus_share,320,320,0,0,Deals: (b-p)/(b-s); impasses: zero; exclusions: unavailable. No clipping.
+card_says,same,within_deal_share,320,320,0,0,"Defined only among deals. Conditions on agreement, which the card can affect."
+card_says,same,deal,320,320,0,0,"One for a deal, zero for either impasse; exclusions unavailable."
+card_says,same,messages_to_agreement,320,320,0,0,"Valid messages used, among deals only. Conditions on agreement, which the card can affect."
+card_says,same,buyer_first_offer_position,320,320,0,0,First own buyer offer x: (b-x)/(b-s). Undefined without a buyer offer; no clipping.
+card_says,same,buyer_average_concession,320,320,0,0,"Mean (later-earlier)/(b-s) over consecutive own buyer offers. Signed, unclipped; undefined below two offers."
+card_says,same,buyer_mandate_violation,320,320,0,0,"Deal above b, including an accepted own offer. Zero for impasses; exclusions unavailable."
+card_says,same,seller_mandate_violation,320,320,0,0,Deal below s. Zero for impasses; exclusions unavailable.

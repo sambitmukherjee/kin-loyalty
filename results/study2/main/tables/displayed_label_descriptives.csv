@@ -1,0 +1,4 @@
+card_says,n_planned,n_retained,deals,walk_away_impasses,final_message_impasses,exclusions,reasks,retries,mean_surplus_share,median_surplus_share,deal_rate,within_deal_share,messages_used_mean_all,messages_used_mean_retained,buyer_mandate_violations,seller_mandate_violations,buyer_mandate_violation_rate,seller_mandate_violation_rate
+none,320,320,320,0,0,0,0,1,0.61425226612459749,0.60903532608695654,1,0.61425226612459749,8.7093749999999996,8.7093749999999996,0,0,0,0
+other,320,320,320,0,0,0,0,1,0.61405909575073314,0.6071428571428571,1,0.61405909575073314,8.7593750000000004,8.7593750000000004,0,0,0,0
+same,320,320,320,0,0,0,0,0,0.61141539561317448,0.59999999999999998,1,0.61141539561317448,8.828125,8.828125,0,0,0,0

@@ -1,0 +1,102 @@
+{
+  "frozen_tag": "study2-data",
+  "frozen_commit": "3b3b85d77c619fcc6fb093a93915e5ef769cbf53",
+  "main_commit": "78aac6a5125c293b2a9f66f50b3f061624c7da80",
+  "numeric_tables": {
+    "count": 16,
+    "all_byte_identical": true
+  },
+  "figures": {
+    "count": 8,
+    "all_byte_identical": true
+  },
+  "resamples_npz_byte_identical": true,
+  "identical_files": [
+    "figures/appendix_buyer_p2.pdf",
+    "figures/appendix_buyer_p2.png",
+    "figures/appendix_share_distributions.pdf",
+    "figures/appendix_share_distributions.png",
+    "figures/deal_rate_and_within_deal_share.pdf",
+    "figures/deal_rate_and_within_deal_share.png",
+    "figures/main_label_by_actual_kinship.pdf",
+    "figures/main_label_by_actual_kinship.png",
+    "report.md",
+    "resamples.npz",
+    "tables/actual_kinship_means.csv",
+    "tables/contrasts.csv",
+    "tables/displayed_label_descriptives.csv",
+    "tables/episodes.csv",
+    "tables/mandates_by_buyer.csv",
+    "tables/mandates_by_condition.csv",
+    "tables/message_lengths.csv",
+    "tables/outcome_eligibility.csv",
+    "tables/pair_condition_descriptives.csv",
+    "tables/pooled_descriptives.csv",
+    "tables/price_and_deal_means.csv",
+    "tables/provider_cache_summary.csv",
+    "tables/public_message_lengths.csv",
+    "tables/scenario_index.csv",
+    "tables/usage_calls.csv",
+    "tables/usage_summary.csv"
+  ],
+  "different_files": [
+    "artifacts.sha256.json",
+    "metadata.json"
+  ],
+  "metadata_differences": [
+    {
+      "field": "provenance.git_commit",
+      "frozen": "3b3b85d77c619fcc6fb093a93915e5ef769cbf53",
+      "main": "78aac6a5125c293b2a9f66f50b3f061624c7da80"
+    }
+  ],
+  "difference_explanation": "metadata.json records each execution commit; the artifact inventory changes only for the metadata.json digest.",
+  "tag_diff_is_data_only": false,
+  "approved_execution_patch_commit": "4e088670c0cc8386eccf8fff01d93d353a230bda",
+  "preregistration_commit": "c277054e182eb3a81a475108fa3439e96e869bb0",
+  "preregistration_to_data_tag_changed_paths": [
+    "A\tdata/study2/main/collection.json",
+    "A\tdata/study2/main/episodes.jsonl",
+    "A\tdata/study2/main/preflight.json",
+    "A\tdata/study2/main/run_summary.json",
+    "A\tdata/study2/main/runner-console.log",
+    "A\tdata/study2/main/turns/claude_sonnet_5_5__claude_sonnet_5_5.jsonl",
+    "A\tdata/study2/main/turns/claude_sonnet_5_5__gemini_4_hydrogen.jsonl",
+    "A\tdata/study2/main/turns/claude_sonnet_5_5__gpt_6_1_terra.jsonl",
+    "A\tdata/study2/main/turns/claude_sonnet_5_5__kimi_k3_1_pro.jsonl",
+    "A\tdata/study2/main/turns/gemini_4_hydrogen__claude_sonnet_5_5.jsonl",
+    "A\tdata/study2/main/turns/gemini_4_hydrogen__gemini_4_hydrogen.jsonl",
+    "A\tdata/study2/main/turns/gemini_4_hydrogen__gpt_6_1_terra.jsonl",
+    "A\tdata/study2/main/turns/gemini_4_hydrogen__kimi_k3_1_pro.jsonl",
+    "A\tdata/study2/main/turns/gpt_6_1_terra__claude_sonnet_5_5.jsonl",
+    "A\tdata/study2/main/turns/gpt_6_1_terra__gemini_4_hydrogen.jsonl",
+    "A\tdata/study2/main/turns/gpt_6_1_terra__gpt_6_1_terra.jsonl",
+    "A\tdata/study2/main/turns/gpt_6_1_terra__kimi_k3_1_pro.jsonl",
+    "A\tdata/study2/main/turns/kimi_k3_1_pro__claude_sonnet_5_5.jsonl",
+    "A\tdata/study2/main/turns/kimi_k3_1_pro__gemini_4_hydrogen.jsonl",
+    "A\tdata/study2/main/turns/kimi_k3_1_pro__gpt_6_1_terra.jsonl",
+    "A\tdata/study2/main/turns/kimi_k3_1_pro__kimi_k3_1_pro.jsonl",
+    "M\tdocs/decisions.md",
+    "A\tdocs/study2_main_execution_patch.md",
+    "A\tresults/study2/main-collection-report/collection-report.json",
+    "A\tresults/study2/main-collection-report/collection-report.md",
+    "A\tresults/study2/main-collection-report/data-freeze.json",
+    "M\tsrc/kinloyalty/negotiation/authorization.py",
+    "M\tsrc/kinloyalty/negotiation/collection.py",
+    "M\tsrc/kinloyalty/negotiation/history.py",
+    "A\tsrc/kinloyalty/negotiation/main_report.py",
+    "A\tsrc/kinloyalty/negotiation/main_run.py",
+    "M\tsrc/kinloyalty/negotiation/runner.py",
+    "M\ttests/test_study2_analysis.py",
+    "A\ttests/test_study2_main_run.py",
+    "M\ttests/test_study2_registration.py"
+  ],
+  "unchanged_from_preregistration": [
+    "all analysis source including shared inference",
+    "configuration",
+    "prompts",
+    "dependency lock",
+    "pure protocol and scoring"
+  ],
+  "environment": "Existing locked dependencies reused through an ignored .venv/bin link; PYTHONPATH pointed at the respective checkout src. Module paths verified before frozen replay."
+}

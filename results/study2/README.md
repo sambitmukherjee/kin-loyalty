@@ -1,19 +1,34 @@
-# Study 2 results
+# Study 2 preregistered analysis
 
-`smoke-report/` contains mechanical diagnostics only:
+`main/` contains unchanged outputs produced on 2026-11-27 from annotated tag
+`study2-data`, commit `3b3b85d77c619fcc6fb093a93915e5ef769cbf53`.
+The replay verified all 960 episodes and 8,417 attempts before inference.
 
-- `smoke_audit.json`: counts, model-version/schema checks, usage/stop/cache
-  availability, clean-code provenance, and replay status.
-- `usage_calls.csv`: provider-reported usage for each of the 51 smoke calls.
-  Blank counts represent unavailable/null fields, never imputed zeros.
-- `probe-report.json`: the sixteen unscored forced-position probes, including
-  complete system/user requests and original transcript prefixes.
-- `smoke-report.md`: the exact generated mechanical report and four shared
-  transcript prefixes.
-- `artifacts.sha256.json`: digests of preserved raw/report artifacts and phase
-  documentation, excluding the inventory itself.
+Run inside that frozen checkout, with its source first on `PYTHONPATH` and the
+existing locked dependency environment:
 
-Raw calls and terminal summaries are under `data/study2/smoke/`. The enriched
-phase report is `docs/study2_phase4_report.md`. No smoke/probe data are eligible
-for hypothesis analysis. No analysis has been run on real Study 2 or Study 1
-main data; Phase 5 writes/tests the analysis using synthetic logs only.
+```sh
+.venv/bin/kinloyalty study2 reproduce \
+  --manifest data/study2/main/manifest.jsonl \
+  --directory data/study2/main \
+  --output results/study2/main
+```
+
+The scientific analysis, configuration, prompts, dependencies, protocol and
+scoring match `prereg-study2` (`c277054e182eb3a81a475108fa3439e96e869bb0`).
+The full tag diff is **not data-only**: it includes the already approved main
+execution/dual-provenance patch `4e088670c0cc8386eccf8fff01d93d353a230bda`,
+documented in `docs/decisions.md`. Retain that mechanical deviation in the paper.
+No analysis code, parameters or seeds changed for this analysis.
+
+Independent reproduction from main commit
+`78aac6a5125c293b2a9f66f50b3f061624c7da80`, writing to
+`scratch/study2-reproduce/`, matched all 16 numeric CSV tables, all eight figure
+files, `resamples.npz` and `report.md` byte-for-byte. Only the execution commit
+in `metadata.json` and its artifact-inventory digest differed.
+See [reproduction-check.json](reproduction-check.json).
+
+The complete ordered results are in [analysis-summary.md](analysis-summary.md).
+Exact numeric tables and the unmodified generated report are under `main/`.
+Earlier smoke, pilot and main-collection reports remain separate; smoke/pilot
+and probes are ineligible for inference. Study 1 artifacts were not changed.
