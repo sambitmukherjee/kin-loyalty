@@ -20,10 +20,11 @@
 - `pdffonts` confirms all **13** fonts are embedded. No Type 3, CID or
   Identity-H font remains. Figure lettering is vector outlines, preserving
   glyph shapes and point sizes. `font-audit.txt` retains the command output.
-- All 37 latest rendered pages and the earlier greyscale rendering of Figure 1 were
-  visually inspected. No overlaps, clipped text, unreadable labels or missing
-  glyphs were found.
-- The PDF is **1,067,368 bytes** (about 1.07 MB). The appendices include all
+- The 17 pages whose rendering changed in the prose revision were visually
+  inspected; the other 20 pages are pixel-identical to the previously inspected
+  PDF. The earlier greyscale check of unchanged Figure 1 still applies. No
+  overlaps, clipped text, unreadable labels or missing glyphs were found.
+- The PDF is **1,068,119 bytes** (about 1.07 MB). The appendices include all
   requested material, 135 generated tables and eight registered vector figures.
   `appendix/report.md` records the final appendix audit. The build has ordinary
   underfull-box messages; it has no overfull boxes or compilation errors.
@@ -34,6 +35,13 @@ are also byte-identical. Pages 1–4 are pixel-identical. On page 5 all existing
 reference text, font sizes and horizontal positions are preserved; native TeX
 vertical glue settles by at most 4.015 points because the appendices now follow.
 No manual page break or spacing adjustment was added.
+
+At the author's request, appendix instructions to the reader were revised into
+descriptions of what was done or what the registered procedure specifies.
+Checks against appendix commit `8e9f829` preserve every command body, copied
+prompt and display file, formula, number token, figure and numeric result cell.
+The statistical methods and main text are unchanged. The appendix validation
+records the preservation and rendered-page comparison.
 
 Build command, from the repository root:
 

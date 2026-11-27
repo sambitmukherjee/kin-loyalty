@@ -11,6 +11,12 @@ purpose and an intuitive description, then specifies the registered procedure.
 Result tables are split into manageable groups with units, directions and
 missing-value conventions stated in words. No results were selected by p-value.
 
+The subsequent author-requested prose revision describes the registered analysis
+and study procedures rather than instructing the reader. It changes no main
+text, copied prompt, command, formula, seed, result cell or statistical method.
+The revision is checked against the original appendix commit `8e9f829` in
+`validation.json`.
+
 From the repository root, `bash paper/build.sh` regenerates the appendix
 materials and tables, then compiles the complete paper with PDFLaTeX and BibTeX.
 All work and temporary files remain inside `paper/`.

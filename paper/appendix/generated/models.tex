@@ -9,7 +9,7 @@ Setting & Registered request \\
 Endpoint & Messages API\newline\url{https://api.anthropic.com} \\
 Reasoning & low via \path{output_config.effort} \\
 Structured output & JSON schema via \path{output_config.format} \\
-Caching & Omit cache control; no explicit cache request. \\
+Caching & Cache control omitted; no explicit cache request. \\
 Output cap & 8192 tokens via \path{max_tokens} \\
 \bottomrule
 \end{tabular}
@@ -69,7 +69,7 @@ Setting & Registered request \\
 Endpoint & Chat Completions (OpenAI-compatible)\newline\url{https://api.moonshot.ai/v1} \\
 Reasoning & low via \path{reasoning_effort} \\
 Structured output & Strict JSON schema via \path{response_format} \\
-Caching & Automatic caching; preserve reported reads, writes and missing fields. \\
+Caching & Automatic caching; reported reads, writes and missing fields retained. \\
 Output cap & 8192 tokens via \path{max_completion_tokens} \\
 \bottomrule
 \end{tabular}
