@@ -64,7 +64,7 @@ def main():
     model_rows=re.findall(r'^\| (?:Anthropic|Google|OpenAI|Moonshot AI) \| (.*?) \| (\d+) \|$',approved,re.M)
     assert {model:int(score) for model,score in model_rows}=={
         row['model']:row['score'] for row in benchmark['selected_models']}
-    assert 'Intelligence Index (v5.0.2)' in approved
+    assert 'Artificial Analysis Intelligence Index v5.0.2' in approved
     assert benchmark['source_url'] in bibliography
     assert r'\citep{artificialanalysis2026}' in source
     audit=json.loads((PAPER/'numeric-audit.json').read_text())

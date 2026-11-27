@@ -3,7 +3,7 @@
   "approval": "Apply the proposed edits. Repository made public by author. Drop Liu 2026; keep Intelligence Index scores unverified; change Jin et al. to Choi et al.",
   "initial_proof_commit": "495f4909d8a841eb1bff28969c9ff1abd0e8721e",
   "draft_before_sha256": "fcedf26c8399ea85a816f6844602098726ff960c77f8d78a3a831ba3fa7753a4",
-  "draft_after_sha256": "6de6037ed91e79e9c671cac14ace012786133d1d63b5a46a53c25855d377f1b9",
+  "draft_after_sha256": "8434b0b3d94b5afd041feba71ef0c71372de3a7975d966be674ef762405c1088",
   "changes": [
     {
       "edit": "Correct lead-author citation",
@@ -104,6 +104,11 @@
       "edit": "Update excluded typesetting notes to the latest author instruction",
       "before": "Intelligence Index scores are retained unverified at the author\u2019s instruction.",
       "after": "Intelligence Index v5.0.2 scores are transcribed from the author-supplied November 27, 2026 chart: Claude 55, Gemini 54, GPT 51 and Kimi 47; the official source link is in the reference."
+    },
+    {
+      "edit": "Use the full benchmark name in Table 1, as requested",
+      "before": "| Lab | Model | Intelligence Index (v5.0.2) |",
+      "after": "| Lab | Model | Artificial Analysis Intelligence Index v5.0.2 |"
     }
   ],
   "repository": {
@@ -136,6 +141,14 @@
       "supersedes": "Earlier instruction to retain unverified historical benchmark scores",
       "source_record": "sources/intelligence-index-scores.json",
       "change_count": 5
+    },
+    {
+      "date": "2026-11-27",
+      "instruction": "In Table 1, replace \"Intelligence Index (v5.0.2)\" with \"Artificial Analysis Intelligence Index v5.0.2\".",
+      "previous_revision_commit": "75ee5688f07e89da7dfb3f79bec6e2c070d526dc",
+      "draft_before_sha256": "6de6037ed91e79e9c671cac14ace012786133d1d63b5a46a53c25855d377f1b9",
+      "draft_after_sha256": "8434b0b3d94b5afd041feba71ef0c71372de3a7975d966be674ef762405c1088",
+      "change_count": 1
     }
   ],
   "previous_intelligence_index_decision": {

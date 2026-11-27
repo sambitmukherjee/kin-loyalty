@@ -4,7 +4,8 @@ The author approved the A–H outline and confirmed that the workshop permits
 technical appendices after the references in the same PDF on 2026-11-27.
 The appendices use the unchanged AAAI-27 style. They contain no manual page or
 column breaks. The existing main text, bibliography and Figure 1 are preserved
-from commit `15429f6`.
+from commit `15429f6`, apart from the later author-requested Table 1 heading
+“Artificial Analysis Intelligence Index v5.0.2”.
 
 `appendices.tex` contains the explanatory prose. Each method starts with its
 purpose and an intuitive description, then specifies the registered procedure.

@@ -6,8 +6,8 @@
   ends on page 4; References begin on page 4 and continue onto page 5. The main
   paper and references still occupy five pages. Appendices A–H start directly
   after the references on page 5 and occupy 33 pages including that shared page.
-  They add 32 pages to the original PDF. **The main text is unchanged and no
-  cuts were made.**
+  They add 32 pages to the original PDF. **Only the later author-requested
+  Table 1 heading has changed in the main paper; no cuts were made.**
 - Compiled with **pdflatex**, TeX Live 2026, and BibTeX using the official
   AAAI-27 Author Kit from <https://aaai.org/authorkit27/>. All 17 extracted kit
   files, including `aaai2027.sty` and `aaai2027.bst`, match the downloaded ZIP
@@ -20,28 +20,31 @@
 - `pdffonts` confirms all **13** fonts are embedded. No Type 3, CID or
   Identity-H font remains. Figure lettering is vector outlines, preserving
   glyph shapes and point sizes. `font-audit.txt` retains the command output.
-- The 17 pages whose rendering changed in the prose revision were visually
-  inspected; the other 20 pages are pixel-identical to the previously inspected
+- The five pages whose rendering changed in the Table 1 heading revision were
+  visually inspected; the other 32 pages are pixel-identical to the previously inspected
   PDF. The earlier greyscale check of unchanged Figure 1 still applies. No
   overlaps, clipped text, unreadable labels or missing glyphs were found.
-- The PDF is **1,068,119 bytes** (about 1.07 MB). The appendices include all
+- The PDF is **1,068,084 bytes** (about 1.07 MB). The appendices include all
   requested material, 135 generated tables and eight registered vector figures.
   `appendix/report.md` records the final appendix audit. The build has ordinary
   underfull-box messages; it has no overfull boxes or compilation errors.
 
-The main document body through the bibliography is byte-identical to commit
-`15429f61d532905722aff7979876107843479c02`. The draft, bibliography and Figure 1
-are also byte-identical. Pages 1–4 are pixel-identical. On page 5 all existing
-reference text, font sizes and horizontal positions are preserved; native TeX
-vertical glue settles by at most 4.015 points because the appendices now follow.
-No manual page break or spacing adjustment was added.
+The main document body through the bibliography matches commit
+`15429f61d532905722aff7979876107843479c02` except for the exact author-approved
+Table 1 heading replacement: “Intelligence Index (v5.0.2)” became “Artificial
+Analysis Intelligence Index v5.0.2”. The draft has the same single replacement;
+the bibliography and Figure 1 remain byte-identical. The longer heading wraps
+at the existing font size and causes native text reflow on pages 2–6. Page 1
+and pages 7–37 render pixel-identically to the preceding revision. No manual
+page break or spacing adjustment was added.
 
 At the author's request, appendix instructions to the reader were revised into
 descriptions of what was done or what the registered procedure specifies.
 Checks against appendix commit `8e9f829` preserve every command body, copied
 prompt and display file, formula, number token, figure and numeric result cell.
-The statistical methods and main text are unchanged. The appendix validation
-records the preservation and rendered-page comparison.
+That prose revision preserved the statistical methods and main text; the later
+Table 1 heading change is recorded above. The appendix validation records the
+preservation and rendered-page comparison.
 
 Build command, from the repository root:
 

@@ -43,7 +43,7 @@ Cards always show an exact model name, never a family name such as "GPT", which 
 
 **Models.** We use one model from each of four labs, matched on an independent benchmark, so that a card naming another lab's model does not also signal a weaker or stronger opponent (Artificial Analysis 2026):
 
-| Lab | Model | Intelligence Index (v5.0.2) |
+| Lab | Model | Artificial Analysis Intelligence Index v5.0.2 |
 | --- | --- | --- |
 | Anthropic | Claude Sonnet 5.5 | 55 |
 | Google | Gemini 4 Hydrogen | 54 |

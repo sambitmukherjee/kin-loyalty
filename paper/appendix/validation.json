@@ -1,45 +1,21 @@
 {
   "baseline_main_commit": "15429f61d532905722aff7979876107843479c02",
-  "main_draft_bibliography_and_figure_unchanged": true,
-  "main_document_body_unchanged": true,
+  "main_draft_unchanged_except_author_approved_table1_heading": true,
+  "bibliography_and_main_figure_unchanged": true,
+  "main_document_body_unchanged_except_author_approved_table1_heading": true,
+  "approved_table1_heading": {
+    "before": "Intelligence Index (v5.0.2)",
+    "after": "Artificial Analysis Intelligence Index v5.0.2"
+  },
+  "main_reference_rendered_character_inventory_matches": true,
   "main_character_positions": [
     {
       "page": 1,
-      "main_text_and_reference_characters": 3900,
-      "identical_text_font_sizes_and_horizontal_positions": true,
-      "maximum_vertical_shift_points": 0,
-      "note": "All character positions unchanged."
-    },
-    {
-      "page": 2,
-      "main_text_and_reference_characters": 4407,
-      "identical_text_font_sizes_and_horizontal_positions": true,
-      "maximum_vertical_shift_points": 0,
-      "note": "All character positions unchanged."
-    },
-    {
-      "page": 3,
-      "main_text_and_reference_characters": 4734,
-      "identical_text_font_sizes_and_horizontal_positions": true,
-      "maximum_vertical_shift_points": 0,
-      "note": "All character positions unchanged."
-    },
-    {
-      "page": 4,
-      "main_text_and_reference_characters": 3232,
-      "identical_text_font_sizes_and_horizontal_positions": true,
-      "maximum_vertical_shift_points": 0,
-      "note": "All character positions unchanged."
-    },
-    {
-      "page": 5,
-      "main_text_and_reference_characters": 1606,
-      "identical_text_font_sizes_and_horizontal_positions": true,
-      "maximum_vertical_shift_points": 4.0150000000001,
-      "note": "Native vertical glue can settle differently on the final reference page when text follows; no spacing override is used."
+      "all_character_positions_unchanged": true
     }
   ],
-  "main_first_four_pages_pixel_identical": true,
+  "main_first_page_pixel_identical": true,
+  "main_pages_2_to_5_reflow_after_heading_change": true,
   "no_manual_page_breaks": true,
   "exact_prompt_source_files": 28,
   "prompt_blocks_including_registered_card": 29,
@@ -92,16 +68,25 @@
     }
   ],
   "pdf_pages": 37,
-  "pdf_bytes": 1068119,
-  "pdf_sha256": "da3a3a87c76a3e83aa4ca6d6100a5509ed932743381d976fd2d623b2e3ad6d5c",
+  "pdf_bytes": 1068084,
+  "pdf_sha256": "f0d4d3d8ccdc02301051e39411403b6f13ce20537e75c1473182e51b054ca2b1",
   "new_analysis_performed": false,
   "visual_review": {
-    "pdf_sha256": "da3a3a87c76a3e83aa4ca6d6100a5509ed932743381d976fd2d623b2e3ad6d5c",
+    "pdf_sha256": "f0d4d3d8ccdc02301051e39411403b6f13ce20537e75c1473182e51b054ca2b1",
     "render_dpi": 120,
     "pages_visually_inspected_this_revision": [
+      2,
+      3,
+      4,
       5,
-      6,
+      6
+    ],
+    "pages_pixel_identical_to_previously_inspected_pdf": [
+      1,
       7,
+      8,
+      9,
+      10,
       11,
       12,
       13,
@@ -115,22 +100,13 @@
       21,
       22,
       23,
-      30
-    ],
-    "pages_pixel_identical_to_previously_inspected_pdf": [
-      1,
-      2,
-      3,
-      4,
-      8,
-      9,
-      10,
       24,
       25,
       26,
       27,
       28,
       29,
+      30,
       31,
       32,
       33,
@@ -142,17 +118,11 @@
     "clipping_overlap_or_missing_glyphs": false,
     "review_date": "2026-11-27"
   },
-  "appendix_prose_revision": {
-    "baseline_commit": "8e9f8291b041879484dcf68c0854f32865fb14f0",
-    "changes": "Appendix explanatory prose only; generated provider-setting descriptions and one figure introduction revised consistently.",
-    "main_document_source_unchanged": true,
-    "copied_prompt_source_and_display_files_unchanged": true,
-    "command_bodies_unchanged": true,
-    "all_math_expressions_unchanged": true,
-    "all_number_tokens_unchanged": true,
-    "all_numeric_cells_and_input_hashes_unchanged": true,
-    "all_figures_unchanged": true,
-    "table_generation_logic_unchanged": true,
-    "statistical_procedures_unchanged_after_prose_review": true
+  "table1_heading_revision": {
+    "baseline_commit": "75ee5688f07e89da7dfb3f79bec6e2c070d526dc",
+    "before": "Intelligence Index (v5.0.2)",
+    "after": "Artificial Analysis Intelligence Index v5.0.2",
+    "all_other_manuscript_wording_unchanged": true,
+    "appendix_sources_and_result_cells_unchanged": true
   }
 }

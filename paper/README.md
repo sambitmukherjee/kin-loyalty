@@ -8,7 +8,9 @@ Independent Researcher. `applied-edits.json` records every approved draft
 replacement; `proposed-edits.md` records its disposition.
 
 The approved technical appendices A–H follow the references in the same PDF.
-The main text, bibliography and Figure 1 are unchanged from commit `15429f6`.
+The main text is unchanged from commit `15429f6` except for the later requested
+Table 1 heading, “Artificial Analysis Intelligence Index v5.0.2”. The bibliography
+and Figure 1 are unchanged.
 The main paper and references still occupy five pages. The complete PDF has
 37 pages; the appendices occupy pages 5–37, sharing page 5 with the final
 references. They explain the registered methods in plain language and include

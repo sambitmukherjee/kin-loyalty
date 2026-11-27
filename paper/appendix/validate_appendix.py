@@ -1,5 +1,6 @@
 """Verify appendix sources, unchanged main text and final PDF; no study analysis."""
 from pathlib import Path
+from collections import Counter
 import csv
 import hashlib
 import json
@@ -16,6 +17,8 @@ ROOT=PAPER.parent
 BUNDLE=Path.home()/'.cache/codex-runtimes/codex-primary-runtime/dependencies'
 POPPLER=BUNDLE/'native/poppler/poppler/bin'
 BASELINE='15429f6'
+OLD_HEADING='Intelligence Index (v5.0.2)'
+APPROVED_HEADING='Artificial Analysis Intelligence Index v5.0.2'
 
 def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 
@@ -23,10 +26,15 @@ def main():
     baseline=subprocess.check_output(['git','rev-parse',BASELINE],cwd=ROOT,text=True).strip()
     for name in ['draft.md','references.bib','figures/figure1.pdf']:
         original=subprocess.check_output(['git','show',baseline+':paper/'+name],cwd=ROOT)
+        if name=='draft.md':
+            assert original.count(OLD_HEADING.encode())==1
+            original=original.replace(OLD_HEADING.encode(),APPROVED_HEADING.encode(),1)
         assert original==(PAPER/name).read_bytes(),name
     oldtex=subprocess.check_output(['git','show',baseline+':paper/main.tex'],cwd=ROOT,text=True)
     newtex=(PAPER/'main.tex').read_text()
     oldbody=oldtex.split(r'\begin{document}',1)[1].split(r'\end{document}',1)[0]
+    assert oldbody.count(OLD_HEADING)==1
+    oldbody=oldbody.replace(OLD_HEADING,APPROVED_HEADING,1)
     newbody=newtex.split(r'\begin{document}',1)[1].split(r'\input{appendix/appendices.tex}',1)[0]
     assert oldbody==newbody
     own=[PAPER/'main.tex',HERE/'appendices.tex',*sorted((HERE/'generated').glob('*.tex'))]
@@ -72,20 +80,24 @@ def main():
     positions=[]
     with pdfplumber.open(before) as a,pdfplumber.open(PAPER/'main.pdf') as b:
         assert len(a.pages)==5
-        for i,page in enumerate(a.pages):
-            previous=page.chars;current=b.pages[i].chars[:len(previous)]
-            assert ''.join(c['text'] for c in previous)==''.join(c['text'] for c in current),('main text differs',i+1)
-            largest_shift=0
-            for c,d in zip(previous,current):
-                for key in ['x0','x1','size']:
-                    assert abs(float(c[key])-float(d[key]))<.001,(i+1,key,c,d)
-                for key in ['top','bottom']:
-                    shift=abs(float(c[key])-float(d[key]));largest_shift=max(largest_shift,shift)
-                    if i<4:assert shift<.001,(i+1,key,c,d)
-            positions.append({'page':i+1,'main_text_and_reference_characters':len(previous),'identical_text_font_sizes_and_horizontal_positions':True,'maximum_vertical_shift_points':largest_shift,'note':'Native vertical glue can settle differently on the final reference page when text follows; no spacing override is used.' if i==4 else 'All character positions unchanged.'})
-    # The first four pages contain no appendix text and must render identically.
+        normalize=lambda s:re.sub(r'[\s-]','',s)
+        previous=normalize(''.join(c['text'] for page in a.pages for c in page.chars))
+        previous=previous.replace(normalize(OLD_HEADING),normalize(APPROVED_HEADING),1)
+        current=normalize(''.join(c['text'] for page in b.pages[:5] for c in page.chars))
+        assert current.count('AReproducibility')==1
+        current=current.split('AReproducibility',1)[0]
+        assert normalize(APPROVED_HEADING) in current
+        # The longer heading moves a paragraph past a float in PDF drawing order.
+        # Exact source equality above protects wording and order; this additional
+        # character inventory check protects the rendered main/reference content.
+        assert Counter(previous)==Counter(current),'main/reference rendered content differs'
+        for c,d in zip(a.pages[0].chars,b.pages[0].chars):
+            for key in ['x0','x1','size','top','bottom']:
+                assert abs(float(c[key])-float(d[key]))<.001,(1,key,c,d)
+        positions.append({'page':1,'all_character_positions_unchanged':True})
+    # Page 1 remains unchanged; later main pages may reflow after the approved heading.
     render=PAPER/'build/render';render.mkdir(exist_ok=True)
-    for i in range(1,5):
+    for i in [1]:
         target=render/('baseline-'+str(i))
         subprocess.run([str(POPPLER/'pdftoppm'),'-f',str(i),'-l',str(i),'-singlefile','-r','120','-png',str(before),str(target)],check=True,capture_output=True)
         diff=ImageChops.difference(Image.open(str(target)+'.png').convert('RGB'),Image.open(render/f'page-{i:02d}.png').convert('RGB'))
@@ -96,7 +108,7 @@ def main():
         sheet=Image.new('RGB',(images[0].width*2,images[0].height+30),'#dddddd');draw=ImageDraw.Draw(sheet)
         for j,im in enumerate(images):sheet.paste(im,(j*im.width,30));draw.text((j*im.width+10,8),f'PDF page {start+j}',fill='black')
         sheet.save(render/f'spread-{start:02d}.png')
-    audit={'baseline_main_commit':baseline,'main_draft_bibliography_and_figure_unchanged':True,'main_document_body_unchanged':True,'main_character_positions':positions,'main_first_four_pages_pixel_identical':True,'no_manual_page_breaks':True,'exact_prompt_source_files':len(assets['prompts']),'prompt_blocks_including_registered_card':len(wrapping['files']),'reversible_prompt_wrapping':True,'generated_tables':len(trace['tables']),'traced_numeric_cells':len(trace['numeric_cells']),'all_numeric_cells_match_saved_source':True,'source_files_unchanged':True,'registered_figures':len(assets['figures']),'figure_checks':figure_checks,'pdf_pages':pages,'pdf_bytes':(PAPER/'main.pdf').stat().st_size,'pdf_sha256':sha(PAPER/'main.pdf'),'new_analysis_performed':False}
+    audit={'baseline_main_commit':baseline,'main_draft_unchanged_except_author_approved_table1_heading':True,'bibliography_and_main_figure_unchanged':True,'main_document_body_unchanged_except_author_approved_table1_heading':True,'approved_table1_heading':{'before':OLD_HEADING,'after':APPROVED_HEADING},'main_reference_rendered_character_inventory_matches':True,'main_character_positions':positions,'main_first_page_pixel_identical':True,'main_pages_2_to_5_reflow_after_heading_change':True,'no_manual_page_breaks':True,'exact_prompt_source_files':len(assets['prompts']),'prompt_blocks_including_registered_card':len(wrapping['files']),'reversible_prompt_wrapping':True,'generated_tables':len(trace['tables']),'traced_numeric_cells':len(trace['numeric_cells']),'all_numeric_cells_match_saved_source':True,'source_files_unchanged':True,'registered_figures':len(assets['figures']),'figure_checks':figure_checks,'pdf_pages':pages,'pdf_bytes':(PAPER/'main.pdf').stat().st_size,'pdf_sha256':sha(PAPER/'main.pdf'),'new_analysis_performed':False}
     (HERE/'validation.json').write_text(json.dumps(audit,indent=2)+'\n')
     print(json.dumps({k:v for k,v in audit.items() if k not in ['figure_checks','main_character_positions']},indent=2))
 
