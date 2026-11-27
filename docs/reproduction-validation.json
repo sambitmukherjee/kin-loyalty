@@ -1,0 +1,142 @@
+{
+  "purpose": "Verification of the paper reproduction guide, documentation Phase 2",
+  "date": "2026-11-27",
+  "source_main_commit": "c362a0d4fc5f31b3c1e7d2639f710e385612d507",
+  "setup": "Fresh local clone with both frozen data-tag worktrees; separate uv-installed environments; Study 1 installed from an empty task cache and Study 2 reused downloaded packages.",
+  "uv_version": "uv 0.13.10 (e3e7c1eac 2026-11-24 aarch64-apple-darwin)",
+  "environment": {
+    "python": "3.11.5",
+    "implementation": "CPython",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "packages": {
+      "numpy": "2.4.6",
+      "pandas": "3.1.1",
+      "scipy": "1.17.1",
+      "statsmodels": "0.15.0",
+      "matplotlib": "3.11.2",
+      "PyYAML": "6.0.4",
+      "anthropic": "2.14.0",
+      "openai": "3.59.0",
+      "google-genai": "3.6.1"
+    }
+  },
+  "frozen_checkouts": {
+    "study1": {
+      "commit": "f7dd0a690a5089b245fff365acf002fcfd7b056a",
+      "source_import_verified_in_own_worktree": true,
+      "tracked_files_clean": true
+    },
+    "study2": {
+      "commit": "3b3b85d77c619fcc6fb093a93915e5ef769cbf53",
+      "source_import_verified_in_own_worktree": true,
+      "tracked_files_clean": true
+    }
+  },
+  "study2_replay": {
+    "planned_units": 960,
+    "episodes_verified": 960,
+    "attempts_verified": 8417,
+    "probes_verified": 0,
+    "unfinished_unit_ids": []
+  },
+  "comparison": {
+    "matched": true,
+    "studies": {
+      "study1": {
+        "matched": true,
+        "csv_tables": {
+          "count": 12,
+          "all_byte_identical": true
+        },
+        "figures": {
+          "count": 8,
+          "all_byte_identical": true
+        },
+        "resampling_arrays": {
+          "count": 330,
+          "all_exactly_equal_including_nan": true,
+          "different_arrays": [],
+          "archive_byte_identical": true
+        },
+        "metadata": {
+          "informational_differences": [
+            {
+              "field": "code_dirty",
+              "reference": true,
+              "reproduced": false
+            },
+            {
+              "field": "inputs_sha256",
+              "reason": "Input paths changed; file digests match."
+            }
+          ],
+          "unexpected_fields": []
+        },
+        "checksum_inventory_errors": {
+          "reference": [],
+          "reproduced": []
+        },
+        "unexpected_differences": []
+      },
+      "study2": {
+        "matched": true,
+        "csv_tables": {
+          "count": 16,
+          "all_byte_identical": true
+        },
+        "figures": {
+          "count": 8,
+          "all_byte_identical": true
+        },
+        "resampling_arrays": {
+          "count": 42,
+          "all_exactly_equal_including_nan": true,
+          "different_arrays": [],
+          "archive_byte_identical": true
+        },
+        "metadata": {
+          "informational_differences": [],
+          "unexpected_fields": []
+        },
+        "checksum_inventory_errors": {
+          "reference": [],
+          "reproduced": []
+        },
+        "unexpected_differences": []
+      }
+    }
+  },
+  "comparison_tool_sha256": "8f85b92585d73924c48fb5428fc91dc798941a73106cdf60ff8e329d2ac3094f",
+  "comparison_self_checks": [
+    "Unchanged outputs pass.",
+    "A changed CSV value fails even with an updated checksum inventory.",
+    "A changed resampling array fails even with an updated inventory.",
+    "A changed scientific metadata seed fails.",
+    "A changed figure is reported and is not silently dismissed as metadata.",
+    "An invalid checksum inventory fails.",
+    "Existing report paths and report paths inside an output directory are rejected without writes.",
+    "The CLI exits with status 1 when required output files are missing."
+  ],
+  "registered_bootstrap_resamples": 10000,
+  "registered_permutation_resamples": 10000,
+  "analysis_parameters_or_seeds_changed": false,
+  "model_api_calls_made": 0,
+  "platform_scope": "This test verifies the recorded macOS ARM64 environment. Other operating systems and interpreter versions were not tested in this documentation pass.",
+  "paper_figure1": {
+    "command": "worktrees/study1-data/.venv/bin/python paper/figures/make_figure1.py",
+    "run_in": "Disposable current checkout, after reproducing the registered contrast table.",
+    "source_csv_matches_reproduced_table": true,
+    "vector_pdf_byte_identical": true,
+    "source_manifest_byte_identical": true,
+    "pdf_sha256": "ea70160b55420491b1e78bc6be9f3f0505d0c820c25898fca68c4d7c0f598aca"
+  },
+  "protected_study_artifacts_changed": false,
+  "changes_confined_to_documentation_and_comparison_utility": true,
+  "paper_table2_source_rows_and_displayed_precision_verified": true,
+  "cleanup": {
+    "both_test_worktrees_removed_with_git": true,
+    "fresh_clone_tracked_working_tree_clean": true,
+    "reproduction_outputs_retained_under_ignored_scratch": true
+  },
+  "guide_sha256": "cc8b8451c769a71bd8cc4ebd289d7a65f6daa0b66ff4fe4c847d5ea089f822c3"
+}

@@ -1,5 +1,9 @@
 # Study 1 analysis and reproduction
 
+For setup, frozen-checkout commands and output comparison, follow
+[Reproduce the paper](reproducing_the_paper.md). This guide explains the methods
+and eligibility rules used by the Study 1 analysis.
+
 All commands below run locally without model API calls, SDK imports, or API-key
 reads. Outcomes come from saved logs, never from re-rendered prompts. The
 analysis was implemented before the pilot and pre-registration lock. The main

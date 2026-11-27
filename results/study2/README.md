@@ -1,5 +1,8 @@
 # Study 2 preregistered analysis
 
+For complete setup, frozen-checkout commands and comparison with these outputs,
+see [Reproduce the paper](../../docs/reproducing_the_paper.md).
+
 `main/` contains unchanged outputs produced on 2026-11-27 from annotated tag
 `study2-data`, commit `3b3b85d77c619fcc6fb093a93915e5ef769cbf53`.
 The replay verified all 960 episodes and 8,417 attempts before inference.

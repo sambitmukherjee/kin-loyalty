@@ -179,6 +179,10 @@ preserving its bytes for recovery.
 
 ## Quickstart A: reproduce the paper
 
+For the complete frozen-checkout procedure and output comparison, follow
+[Reproduce the paper](docs/reproducing_the_paper.md). It covers both studies,
+checks which source code Python imports and maps results to the paper artifacts.
+
 The reproduction command reads saved main logs and a separate comprehension
 batch, then regenerates CSV tables, PDF/PNG figures, resampling distributions,
 provenance, and artifact hashes without API keys:

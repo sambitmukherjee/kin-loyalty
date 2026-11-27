@@ -1,5 +1,9 @@
 # Study 2 analysis and reproduction
 
+For setup, frozen-checkout commands and output comparison, follow
+[Reproduce the paper](reproducing_the_paper.md). This guide explains the methods
+and eligibility rules used by the Study 2 analysis.
+
 The pipeline lives in `src/kinloyalty/analysis/study2/`. It does not invoke Study
 1 analysis, read credentials, or make model calls. The main analysis is complete
 and was independently reproduced. All 960 main episodes were reconstructed

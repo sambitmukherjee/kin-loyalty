@@ -1,5 +1,8 @@
 # Study 1 pre-registered analysis
 
+For complete setup, frozen-checkout commands and comparison with these outputs,
+see [Reproduce the paper](../../docs/reproducing_the_paper.md).
+
 Generated on 2026-11-27 from tag **`study1-data`**, commit
 `f7dd0a690a5089b245fff365acf002fcfd7b056a`. Its registered analysis/configuration/prompts
 match `prereg-study1` (`d4d6ff9c1f7b84bc2b4f90578873f18dbc9fb98a`) exactly.
