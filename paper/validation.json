@@ -1,0 +1,36 @@
+{
+  "page_count": 5,
+  "references_start_page": 4,
+  "body_ends_on_page": 4,
+  "overfull_boxes": 0,
+  "undefined_citations": 0,
+  "latex_errors": 0,
+  "font_count": 8,
+  "all_fonts_embedded": true,
+  "type3_fonts": false,
+  "cid_or_identity_h_fonts": false,
+  "figure_lettering_vector_outlines": true,
+  "paper_size": "US letter",
+  "pdf_version": "1.7",
+  "official_style_and_bibliography_unmodified": true,
+  "manuscript_proposals_applied": false,
+  "numeric_source_files_unchanged": true,
+  "permitted_packages": [
+    "aaai2027",
+    "url",
+    "graphicx",
+    "natbib",
+    "caption",
+    "booktabs",
+    "array"
+  ],
+  "supplement_bytes": 834572,
+  "supplement_below_50_mb": true,
+  "pdf_sha256": "5d9e0610c68848fbb78134768d8d2bd7509cf5dd4a588bffce43b845a6cbbf68",
+  "tex_sha256": "0871d2eb9066bf05472042a7d76821d0db0573f4d8b87d21d380def9099cc713",
+  "visual_inspection": {
+    "all_five_pages_reviewed": true,
+    "greyscale_figure_reviewed": true,
+    "overlaps_or_clipping_observed": false
+  }
+}

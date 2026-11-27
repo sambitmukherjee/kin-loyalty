@@ -1,0 +1,24 @@
+{
+  "official_url": "https://aaai.org/authorkit27/",
+  "archive_sha256": "9406a545d5d213757245eb37118fe652b2fccf64f555aff28b49ebe2a780c960",
+  "extracted_files_sha256": {
+    "AuthorKit27/CameraReady2027.tex": "e0b55f09da66a69af9866ec07ce7a05d200880a57a8fa0a8f60db92ffb4d86a1",
+    "AuthorKit27/aaai2027.bib": "ff8a860f20602b2645723856b80f0a0ad28ee7ec270158254400fdb80b429e45",
+    "AuthorKit27/aaai2027.bst": "5db7765ba99de5c1e4686f9b3940a0add9c5e702f2164514462bec130ccb6e3c",
+    "AuthorKit27/Word/CameraReady2027.docx": "9c7e05fd22998b0fc02a9d4df4846c061d0204c89ef551100873038ca88211e3",
+    "AuthorKit27/Word/ReproducibilityChecklist.pdf": "dc9228c4c3c892be8e9eb813f0fe2c9e2cafd91a0d0efcf972306eda51e3e87b",
+    "AuthorKit27/Word/AnonymousSubmission2027.pdf": "44907864ea8ad847a566eab48a488ca7b5c2ca8388cb130eba7aefb476db7e83",
+    "AuthorKit27/Word/AnonymousSubmission2027.docx": "1caac0d7bb5fdd7e18d05d0b18256ffff2f0be611c2bf99232bb51e21657f341",
+    "AuthorKit27/Word/CameraReady2027.pdf": "ad2973ba70448627a17d145a183c78737f4b999a543b3bcb18c8b17acaabc944",
+    "AuthorKit27/Word/ReproducibilityChecklist.docx": "cf04a01ca595b6b4b469d1be53a9e6f4484233fe8ac0fefa4dbfd23e0b3de180",
+    "AuthorKit27/ReproducibilityChecklist.tex": "06a3459158089bf1c64b738986118f1d1566e816da4b710c6397561e33c3d5e6",
+    "AuthorKit27/AnonymousSubmission2027.tex": "95a9e0ee566c6f76276c9dcad09a83637542dac168383213252671daec3408ab",
+    "AuthorKit27/Figures/figure2.pdf": "8899687a74776c5ba3179f630f14a946c36278560a997fbac0cde58cdca1750f",
+    "AuthorKit27/Figures/figure1.pdf": "29e16580aae21c9c7785b6851d244a9948c6ccf96e308ee366fa651db22c922b",
+    "AuthorKit27/ReproducibilityChecklist.pdf": "5118f14146d36d76205b4ffb94ab9cff0916b6bd243eb2dcbebe897c831dcb39",
+    "AuthorKit27/AnonymousSubmission2027.pdf": "101906ebaa386de03d6aca8cde1e18000467e74365dc024d0372d6e9c7926c43",
+    "AuthorKit27/CameraReady2027.pdf": "db17f6c4ff7e803d835be3ccf695f07b8eb32693b28d20d5490405e3d2e409a6",
+    "AuthorKit27/aaai2027.sty": "01990f8d3716f8e39c5b28a7478f3ac6e28630d1161de6105a7217f5e7f60e43"
+  },
+  "all_files_unmodified": true
+}

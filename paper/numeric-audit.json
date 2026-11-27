@@ -1,0 +1,476 @@
+{
+  "draft_sha256": "fcedf26c8399ea85a816f6844602098726ff960c77f8d78a3a831ba3fa7753a4",
+  "source_sha256": {
+    "results/study1/generated/contrasts.csv": "b4e0f2a09e18b932ff3c952c84f9fee2ee8934125816f49bf50ea9c1a89503a0",
+    "results/study1/generated/equivalence.csv": "cdccfac654a8eb1e15a5605e34528fd20197669d530ef75cadce56c8dfc956d5",
+    "results/study1/generated/decisions.csv": "7e7377f3b1340117805f512e7cd7014bb77b278d57ef5d2bce916fa9ee355d8b",
+    "results/study1/generated/comprehension.csv": "cef762c19326b149a4a4a2b7fb0ec72965b4540416f4fd15455075a3f359e7f5",
+    "results/study1/generated/coverage.csv": "8756570a843369b5a48f4b7ac762a62274fade39c29857e428073f01fac382c9",
+    "results/study2/main/tables/episodes.csv": "74a351f7cd7f8ca3cbef58a0d7b5e9b9a82a434f9cc0803c620a8a9669cccf78",
+    "results/study2/main/tables/contrasts.csv": "fb39fb67a9839396e0625041b2f67728726069ea613af105f988b85d76894732",
+    "results/study2/main/tables/pooled_descriptives.csv": "10bf27b23073449c56f59bf448765bb75e45e3110cdb03fbe8cfc3f202b84871",
+    "results/study2/main/metadata.json": "65e8c5343e66533b255908600e75f1af06fbfb72e0c8f3fd6c92aa2d7227fc1a"
+  },
+  "checks": [
+    {
+      "claim": "Study 1: 3,600 valid answers; 20 per wording/cell; 60 per model/decision/card",
+      "actual": {
+        "answers": 3600,
+        "coverage_cells": 180,
+        "per_wording": 20,
+        "per_card": 60
+      },
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "P1: 1.04, 95% interval -1.46 to 3.54, p=.53",
+      "actual": {
+        "estimate": "1.04166666667",
+        "ci_low": "-1.45833333333",
+        "ci_high": "3.54166666667",
+        "permutation_p": "0.532346765323"
+      },
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "P1 90% interval -1.04 to 3.12 within +/-5",
+      "actual": {
+        "equivalence_ci_low": "-1.04166666667",
+        "equivalence_ci_high": "3.125",
+        "bound": "5",
+        "equivalent": "True"
+      },
+      "assessment": "matches with ties-to-even rounding; exact upper endpoint is 3.125"
+    },
+    {
+      "claim": "claude_sonnet_5_5 dictator equal splits",
+      "actual": {
+        "equal": 300,
+        "total": 300
+      },
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "gemini_4_hydrogen dictator equal splits",
+      "actual": {
+        "equal": 296,
+        "total": 300
+      },
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "gpt_6_1_terra dictator contrast and interval",
+      "actual": {
+        "estimate": "-4.16666666667",
+        "ci_low": "-10",
+        "ci_high": "1.66666666667",
+        "permutation_p": "0.285371462854"
+      },
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "kimi_k3_1_pro dictator contrast and interval",
+      "actual": {
+        "estimate": "7.5",
+        "ci_low": "2.48689957516e-14",
+        "ci_high": "15.8333333333",
+        "permutation_p": "0.115788421158"
+      },
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "Proposer +3.02, 95% interval 1.85 to 4.17, p<.001",
+      "actual": {
+        "estimate": "3.02083333333",
+        "ci_low": "1.85416666667",
+        "ci_high": "4.175",
+        "permutation_p": "9.99900009999e-05"
+      },
+      "assessment": "upper endpoint is 4.175; proposed conventional decimal rounding is 4.18"
+    },
+    {
+      "claim": "Responder +5.68, interval 2.75 to 8.54, p<.001",
+      "actual": {
+        "estimate": "5.68333333333",
+        "ci_low": "2.75416666667",
+        "ci_high": "8.5375",
+        "permutation_p": "0.000399960004"
+      },
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "ultimatum_proposer models with positive own-model effect",
+      "actual": 3,
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "ultimatum_responder models with positive own-model effect",
+      "actual": 4,
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "claude_sonnet_5_5: ultimatum_proposer, own_model, equal splits",
+      "actual": {
+        "equal": 40,
+        "denominator": 60,
+        "percent": "66.66666666666666666666666667"
+      },
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "claude_sonnet_5_5: ultimatum_proposer, all_other_cards, equal splits",
+      "actual": {
+        "equal": 0,
+        "denominator": 240,
+        "percent": "0"
+      },
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "gemini_4_hydrogen: ultimatum_proposer, own_model, equal splits",
+      "actual": {
+        "equal": 41,
+        "denominator": 60,
+        "percent": "68.33333333333333333333333333"
+      },
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "gemini_4_hydrogen: ultimatum_proposer, other_lab, equal splits",
+      "actual": {
+        "equal": 9,
+        "denominator": 60,
+        "percent": "15"
+      },
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "kimi_k3_1_pro: ultimatum_responder, own_model, equal splits",
+      "actual": {
+        "equal": 49,
+        "denominator": 60,
+        "percent": "81.66666666666666666666666667"
+      },
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "kimi_k3_1_pro: ultimatum_responder, other_lab, equal splits",
+      "actual": {
+        "equal": 38,
+        "denominator": 60,
+        "percent": "63.33333333333333333333333333"
+      },
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "dictator other-lab minus fictional",
+      "actual": {
+        "estimate": "-0.625",
+        "ci_low": "-3.125",
+        "ci_high": "1.875",
+        "permutation_p": "0.757224277572"
+      },
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "ultimatum_proposer other-lab minus fictional",
+      "actual": {
+        "estimate": "-0.4375",
+        "ci_low": "-1.3875",
+        "ci_high": "0.529166666667",
+        "permutation_p": "0.38896110389"
+      },
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "ultimatum_responder other-lab minus fictional",
+      "actual": {
+        "estimate": "0.979166666667",
+        "ci_low": "-1.80416666667",
+        "ci_high": "3.79166666667",
+        "permutation_p": "0.498650134987"
+      },
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "S1 adjusted +3.13 against unadjusted +3.02",
+      "actual": {
+        "estimate": "3.1283964149",
+        "ci_low": "2.25610278853",
+        "ci_high": "4.01346711489",
+        "permutation_p": "9.99900009999e-05"
+      },
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "S1 Claude offer +6.67",
+      "actual": {
+        "estimate": "6.66666666667",
+        "ci_low": "6.66666666667",
+        "ci_high": "6.66666666667",
+        "permutation_p": "9.99900009999e-05"
+      },
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "S1 Claude expectation -2.38",
+      "actual": {
+        "estimate": "-2.38333333333",
+        "ci_low": "-4.4",
+        "ci_high": "-0.2",
+        "permutation_p": "0.0949905009499"
+      },
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "S1 Kimi expectations rise",
+      "actual": {
+        "estimate": "6.5",
+        "ci_low": "1.13333333333",
+        "ci_high": "11.75",
+        "permutation_p": "0.018198180182"
+      },
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "Pooled expectation shift",
+      "actual": {
+        "estimate": "0.466666666667",
+        "ci_low": "-1.225",
+        "ci_high": "2.17083333333",
+        "permutation_p": "0.62103789621"
+      },
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "S2 ultimatum_proposer human minus undisclosed",
+      "actual": {
+        "estimate": "-2.4625",
+        "ci_low": "-3.16666666667",
+        "ci_high": "-1.7375",
+        "permutation_p": "9.99900009999e-05"
+      },
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "S2 ultimatum_responder human minus undisclosed",
+      "actual": {
+        "estimate": "-8.30833333333",
+        "ci_low": "-10.9291666667",
+        "ci_high": "-5.62083333333",
+        "permutation_p": "9.99900009999e-05"
+      },
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "S2 adjusted offer contrast near +0.08",
+      "actual": {
+        "estimate": "0.0830003834245",
+        "ci_low": "-0.699264440521",
+        "ci_high": "0.85216941139",
+        "permutation_p": "0.802919708029"
+      },
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "320 comprehension calls; every model correct for every card",
+      "actual": {
+        "scored_calls": 240,
+        "scored_conditions_per_model": 3,
+        "unscored_undisclosed_calls": 80,
+        "unscored_answers": "unsure"
+      },
+      "assessment": "scope mismatch: not-disclosed cards were unscored, not correct answers"
+    },
+    {
+      "claim": "Study 2: 960 deals, no mandate violations or re-asks; mean share .61",
+      "actual": {
+        "n_planned": "960",
+        "n_retained": "960",
+        "deals": "960",
+        "walk_away_impasses": "0",
+        "final_message_impasses": "0",
+        "exclusions": "0",
+        "reasks": "0",
+        "retries": "2",
+        "mean_surplus_share": "0.61324225249616826",
+        "median_surplus_share": "0.60640040962621611",
+        "deal_rate": "1",
+        "within_deal_share": "0.61324225249616826",
+        "messages_used_mean_all": "8.765625",
+        "messages_used_mean_retained": "8.765625",
+        "buyer_mandate_violations": "0",
+        "seller_mandate_violations": "0",
+        "buyer_mandate_violation_rate": "0",
+        "seller_mandate_violation_rate": "0"
+      },
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "Study 2 p2",
+      "actual": {
+        "estimate": "-0.0026437001375587106",
+        "ci_low": "-0.0085841893953873989",
+        "ci_high": "0.0034245250194484518",
+        "permutation_p_value": "0.39856014398560147"
+      },
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "Study 2 same_vs_none",
+      "actual": {
+        "estimate": "-0.0028368705114228112",
+        "ci_low": "-0.0090984653410217907",
+        "ci_high": "0.0033505071277671931",
+        "permutation_p_value": "0.36036396360363965"
+      },
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "Study 2 other_vs_none",
+      "actual": {
+        "estimate": "-0.00019317037386410081",
+        "ci_low": "-0.0066896796765814805",
+        "ci_high": "0.0061745675702278759",
+        "permutation_p_value": "0.95340465953404663"
+      },
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "Study 2 label_x_actual_self_pair",
+      "actual": {
+        "estimate": "0.0073444909163914007",
+        "ci_low": "-0.0064127603397840967",
+        "ci_high": "0.020869868587115099",
+        "permutation_p_value": ""
+      },
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "Study 2 buyer_claude_sonnet_5_5",
+      "actual": {
+        "estimate": "-0.0023494816474745181",
+        "ci_low": "-0.011938125048769122",
+        "ci_high": "0.0071320117422391405",
+        "permutation_p_value": "0.62633736626337366"
+      },
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "Study 2 buyer_gpt_6_1_terra",
+      "actual": {
+        "estimate": "-0.0057965883123211603",
+        "ci_low": "-0.01893400438242767",
+        "ci_high": "0.0078161393657126821",
+        "permutation_p_value": "0.39586041395860416"
+      },
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "Study 2 buyer_gemini_4_hydrogen",
+      "actual": {
+        "estimate": "0.0028835524093535963",
+        "ci_low": "-0.0081820771582764781",
+        "ci_high": "0.013479763823999999",
+        "permutation_p_value": "0.61143885611438853"
+      },
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "Study 2 buyer_kimi_k3_1_pro",
+      "actual": {
+        "estimate": "-0.005312282999792751",
+        "ci_low": "-0.018000676575446815",
+        "ci_high": "0.0083458614314818377",
+        "permutation_p_value": "0.44935506449355067"
+      },
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "Study 2 90% interval -0.77 to +0.25 points; within +/-0.8 points",
+      "actual": {
+        "equivalence_ci_low": -0.007658102208929781,
+        "equivalence_ci_high": 0.002469699604268686,
+        "equivalent": true
+      },
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "Pair-cluster p=.38",
+      "actual": {
+        "available": true,
+        "ci_high": 0.0032376668762638745,
+        "ci_low": -0.00852506715138128,
+        "clusters": 16,
+        "estimate": -0.0026437001375587024,
+        "method": "pair_cluster_robustness_only",
+        "p_value": 0.37831112807674416,
+        "reason": "",
+        "reference_distribution": "norm",
+        "standard_error": 0.003000752595565046,
+        "statistic": -0.8810123638536385
+      },
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "Two-by-two mean cells .606, .603, .613, .618",
+      "actual": [
+        {
+          "self_pair": "False",
+          "card_says": "other",
+          "n": "240",
+          "estimate": "0.61759847822059466"
+        },
+        {
+          "self_pair": "False",
+          "card_says": "same",
+          "n": "240",
+          "estimate": "0.61311865535393795"
+        },
+        {
+          "self_pair": "True",
+          "card_says": "other",
+          "n": "80",
+          "estimate": "0.60344094834114903"
+        },
+        {
+          "self_pair": "True",
+          "card_says": "same",
+          "n": "80",
+          "estimate": "0.60630561639088398"
+        }
+      ],
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "Two-by-two range at most 1.5 percentage points",
+      "actual": "1.41575298794456300",
+      "assessment": "matches at stated precision"
+    },
+    {
+      "claim": "Pair means .50 Gemini buying from GPT to .77 reverse; about 100 times P2",
+      "actual": {
+        "min_pair": "gemini_4_hydrogen__gpt_6_1_terra",
+        "min_mean": "0.4997793429506172483333333333",
+        "max_pair": "gpt_6_1_terra__gemini_4_hydrogen",
+        "max_mean": "0.7745972713538889515",
+        "range_divided_by_abs_p2": "103.9520044270408934059952326"
+      },
+      "assessment": "matches at stated precision"
+    }
+  ],
+  "computed_for_requested_proposals_only": {
+    "mean_agreement_room_dollars": "222.46875",
+    "episodes_in_mean": 960,
+    "larger_absolute_90_interval_bound_share": "0.007658102208929781",
+    "mean_room_times_90_bound_dollars": "1.70368842579284721684375",
+    "pooled_secondary_test_count": 29,
+    "test_count_filter": "scope=pooled; designation=secondary; permutation_p available; excludes the primary and bootstrap-only coefficient changes",
+    "bonferroni_threshold": "0.001724137931034482758620689655",
+    "proposer_p": "9.99900009999e-05",
+    "responder_p": "0.000399960004",
+    "both_below_threshold": true
+  },
+  "no_study_analysis_rerun": true,
+  "manuscript_edits_applied": false
+}
