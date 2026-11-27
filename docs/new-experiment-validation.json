@@ -1,0 +1,241 @@
+{
+  "purpose": "Verification of the documented new-experiment examples with synthetic responses only.",
+  "baseline_commit": "e584efaf573f372f75a2cb33baaf84c718fbcb27",
+  "environment": {
+    "platform": "macOS, Apple Silicon",
+    "python": "CPython 3.11.5",
+    "dependencies": "Unchanged repository uv.lock",
+    "uv": "0.13.10"
+  },
+  "guide_sha256": "ac113754739e25712a94ae805bb9d0fac9d78dd78fc9f75baa419dd8ca87441f",
+  "offline_shell_blocks": [
+    {
+      "block": 1,
+      "exit_code": 0,
+      "sha256": "27fc028102800d2274f8bef7b6ce055810eedb1150cb3c9c792b24d90bcdbfe7"
+    },
+    {
+      "block": 2,
+      "exit_code": 0,
+      "sha256": "141c747e690c2d635280a0f17cd9180dbf78d5fecb29879508c09a59b57f7087"
+    },
+    {
+      "block": 3,
+      "exit_code": 0,
+      "sha256": "345e81f382a361428686c44699b4f73ebe9d18eee7e134c413dbd16e75ab4d4a"
+    },
+    {
+      "block": 4,
+      "exit_code": 0,
+      "sha256": "9bf4d0b37d96b98a90fb6e2663d3273c01ad38ba9c8c33505714a07d2cb84d59"
+    },
+    {
+      "block": 5,
+      "exit_code": 0,
+      "sha256": "c4525212c4688e4236dbaf7ef8d0fa812a3d38e4c8495695fd8a43429936eda7"
+    },
+    {
+      "block": 6,
+      "exit_code": 0,
+      "sha256": "d4d5e2603df84cdedc88b2db75d398776059c820977d27b00d13967a207993ac"
+    },
+    {
+      "block": 7,
+      "exit_code": 0,
+      "sha256": "091cfecd0f57a2ee778a95ce704bba445d4247865cf6951273df6d365099ec62"
+    },
+    {
+      "block": 8,
+      "exit_code": 0,
+      "sha256": "1c3f61737f69a5ce4bd04be56732f1071243e8418437dc8882463d17b9cff66c"
+    },
+    {
+      "block": 9,
+      "exit_code": 0,
+      "sha256": "db1b5cedbdfae945eff40c791106ec339833b335a6de51e310186cb836e2040e"
+    },
+    {
+      "block": 10,
+      "exit_code": 0,
+      "sha256": "bd46201dc92c834cfb97569111b5f3e03dfeb04fadf310dc11c397ea58987dcc"
+    }
+  ],
+  "network_controls": {
+    "uv_offline": true,
+    "socket_guard_active": true,
+    "api_keys_loaded": false,
+    "model_provider_calls": 0
+  },
+  "study1": {
+    "smoke": {
+      "planned": 4,
+      "valid": 4,
+      "first_calls": 4,
+      "second_already_final": 4,
+      "second_calls": 0
+    },
+    "unfinished_recovery": {
+      "injected_synthetic_connection_errors": 1,
+      "first_valid": 3,
+      "first_unfinished": 1,
+      "resume_already_final": 3,
+      "resume_calls": 1,
+      "final_valid": 4,
+      "final_unfinished": 0
+    },
+    "simulation": {
+      "main": {
+        "planned": 3600,
+        "valid": 3600,
+        "excluded": 0,
+        "unfinished": 0
+      },
+      "pilot": {
+        "planned": 240,
+        "valid": 240,
+        "excluded": 0,
+        "unfinished": 0
+      },
+      "comprehension": {
+        "planned": 320,
+        "valid": 320,
+        "excluded": 0,
+        "unfinished": 0
+      }
+    },
+    "analysis": {
+      "synthetic": true,
+      "bootstrap_resamples": 200,
+      "permutation_resamples": 200,
+      "csv_files": 12,
+      "figure_files": 8,
+      "artifact_inventory_matches": true,
+      "resampling_archive": "resampling_distributions.npz",
+      "resampling_archive_present": true
+    }
+  },
+  "study2": {
+    "phase": "synthetic",
+    "planned_episodes": 960,
+    "ordered_pairs": 16,
+    "probes": 0,
+    "attempts": 6240,
+    "episodes_completed": 960,
+    "second_already_final": 960,
+    "second_calls": 0,
+    "unfinished": 0,
+    "replay": {
+      "episodes_verified": 960,
+      "attempts_verified": 6240,
+      "unfinished": 0
+    },
+    "analysis": {
+      "synthetic": true,
+      "bootstrap_resamples": 200,
+      "permutation_resamples": 200,
+      "csv_files": 16,
+      "figure_files": 8,
+      "artifact_inventory_matches": true,
+      "resampling_archive": "resamples.npz",
+      "resampling_archive_present": true
+    }
+  },
+  "negative_cases": [
+    {
+      "case": "existing-manifest",
+      "exit_code": 2,
+      "expected_rejection": true
+    },
+    {
+      "case": "study1-live-cli-unavailable",
+      "exit_code": 2,
+      "expected_rejection": true
+    },
+    {
+      "case": "study2-live-cli-unavailable",
+      "exit_code": 2,
+      "expected_rejection": true
+    },
+    {
+      "case": "study1-synthetic-opt-in",
+      "exit_code": 2,
+      "expected_rejection": true
+    },
+    {
+      "case": "study2-synthetic-opt-in",
+      "exit_code": 2,
+      "expected_rejection": true
+    },
+    {
+      "case": "existing-study2-output",
+      "exit_code": 2,
+      "expected_rejection": true
+    }
+  ],
+  "documented_interfaces_checked": {
+    "kinloyalty.clients.factory.create_provider_clients": [
+      "requests",
+      "env_path"
+    ],
+    "kinloyalty.runner.run_manifest": [
+      "manifest_path",
+      "log_path",
+      "client"
+    ],
+    "kinloyalty.cohort.run_cohort": [
+      "batches",
+      "client"
+    ],
+    "kinloyalty.negotiation.runner.run_manifest": [
+      "manifest_path",
+      "directory",
+      "clients",
+      "authorization"
+    ],
+    "kinloyalty.negotiation.engine.run_episode": [
+      "config",
+      "spec",
+      "clients",
+      "allow_live"
+    ]
+  },
+  "illustrative_live_wiring": {
+    "client": "MockClient substituted for provider factory; no credentials loaded",
+    "valid": 4,
+    "calls": 4,
+    "client_closed": true
+  },
+  "targeted_existing_tests": {
+    "command": ".venv/bin/python -m pytest tests/test_provider_clients.py tests/test_cohort.py -q",
+    "passed": 57,
+    "failed": 0,
+    "network": "Blocked by the test suite; provider fixtures use in-memory transports."
+  },
+  "preservation": {
+    "study_source_config_prompts_data_results_registrations_and_lockfile_unchanged": true,
+    "paper_unchanged": true,
+    "frozen_tags_unchanged": true,
+    "actual_study_analysis_run": false,
+    "all_example_outputs_under_ignored_scratch": true,
+    "codex_prompts_untracked_and_ignored": true,
+    "frozen_tag_commits": {
+      "prereg-study1": "d4d6ff9c1f7b84bc2b4f90578873f18dbc9fb98a",
+      "study1-data": "f7dd0a690a5089b245fff365acf002fcfd7b056a",
+      "prereg-study2": "c277054e182eb3a81a475108fa3439e96e869bb0",
+      "study2-data": "3b3b85d77c619fcc6fb093a93915e5ef769cbf53"
+    }
+  },
+  "limits": [
+    "Synthetic outputs are mechanics checks, not scientific results.",
+    "No new live provider or model acceptance was tested.",
+    "The live-wiring illustration was executed with a mock factory only.",
+    "The small demonstration resampling counts do not change the original study settings.",
+    "Native Windows was not tested and the collection engines require fcntl."
+  ],
+  "local_links_and_anchors_verified": 36,
+  "documentation_sha256": {
+    "docs/running_a_new_experiment.md": "ac113754739e25712a94ae805bb9d0fac9d78dd78fc9f75baa419dd8ca87441f",
+    "docs/adding_a_model.md": "6902ad91b5d5b7f49e989a4c52ee2fc7e73063b2ed1a6c0c4454630622a08f4f",
+    "docs/adding_a_game.md": "7ab6486db3c7d3637b3ac11d4fed7de962f7fe0aba5e3791acb0e44322825cb4"
+  }
+}
