@@ -5,7 +5,8 @@ Generated on 2026-11-27 from tag **`study1-data`**, commit
 match `prereg-study1` (`d4d6ff9c1f7b84bc2b4f90578873f18dbc9fb98a`) exactly.
 The frozen outputs are copied unchanged under `generated/`.
 
-Command run inside `worktrees/study1-data/`:
+The original command was run inside the frozen `study1-data` checkout. It is
+recorded here as analysis provenance; its output directory was new at that time:
 
 ```sh
 uv run --offline --locked kinloyalty reproduce --config configs/study1.yaml \
@@ -15,9 +16,17 @@ uv run --offline --locked kinloyalty reproduce --config configs/study1.yaml \
 ```
 
 See [the ordered results report](analysis_report.md) and
-[the reproducibility audit](reproducibility.json). The current-main reproduction
+[the reproducibility audit](reproducibility.json). The independent reproduction
+from the then-current main branch
 (commit `3b3b85d77c619fcc6fb093a93915e5ef769cbf53`) wrote to
 `scratch/study1-reproduce/`: every numeric table, saved resampling array/archive,
 and figure is byte-identical. Only provenance and its hash entry differ.
 Code, parameters, and seeds are unchanged; Study 2 data/analysis are untouched.
 The other subdirectories retain historical blind pilot/check reports.
+
+For another reproduction from the repository root, use the same arguments with
+`--output scratch/study1-reproduce` and a path that does not already exist.
+The committed `generated/` directory is the saved reference output. The
+[main README](../../README.md#quickstart-a-reproduce-the-paper) gives the current
+starting commands; the [methods guide](../../docs/analysis.md) explains eligibility
+and inference.

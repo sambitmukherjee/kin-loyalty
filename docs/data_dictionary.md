@@ -1,9 +1,11 @@
 # Data dictionary — manifest and attempt schema version 1
 
-Manifest, request, response, attempt records, and analysis tables are implemented.
-Four live smoke requests were accepted; observed metadata and
-limitations appear in `docs/phase4b_report.md`. See `docs/provider_verification.md`
-for primary sources.
+This dictionary describes the manifests, requests, responses, attempt records
+and derived tables used by the completed studies. Study 1 has 3,600 valid main
+decisions, and Study 2 has 960 completed main episodes. Their frozen data tags
+and registration tags are listed in the
+[registration index](../preregistration/README.md). Provider request checks and
+metadata limitations are documented in [provider verification](provider_verification.md).
 Missing provider metadata stays distinguishable from zero. Current mock records
 have `synthetic: true`; their usage counts are synthetic, not provider measurements.
 
@@ -11,8 +13,8 @@ have `synthetic: true`; their usage counts are synthetic, not provider measureme
 
 `kinloyalty.prompts.RenderedPrompt` contains `system_prompt`, `user_message`,
 `json_schema`, and `counterparty_model_text`. Messages preserve internal template
-whitespace and contain no trailing newline. These fields will be copied into
-the request logs; analysis will use saved logs rather than render prompts again.
+whitespace and contain no trailing newline. These fields are copied into the
+request logs. Analysis uses saved logs rather than rendering prompts again.
 
 `kinloyalty.schemas.response_schema` creates a new schema for each request. Every
 listed field is required and extra fields are disallowed. Amounts have integer
@@ -53,7 +55,8 @@ and a fixed seed. Every batch, including smoke, gets a manifest before calls.
 
 The manifest must preserve the 7/7/6 other-lab rotation and exact main counts.
 The comprehension manifest has 320 draws, four card labels, and its own rotations.
-Manifest file hashes and generation seeds will be recorded at pre-registration.
+Manifest file hashes and generation seeds are recorded in the final
+registrations and their lock inventories.
 
 ### Request object (`ModelRequest`)
 
@@ -293,12 +296,13 @@ hashes, safe API-error categories/statuses, per-model returned versions/stops,
 token/metadata presence, measured concurrency maxima, and local execution times.
 These are audit/completion artifacts, not outcome-effect estimates.
 
-## Study 2 Phase 2 objects (in memory)
+## Study 2 engine objects (in memory)
 
 The objects below belong to `kinloyalty.negotiation` and do not change Study 1's
-manifest/attempt schema. They are the current mock engine contract. Durable
-Study 2 JSONL envelopes, manifest bindings, provenance, and replay commands are
-described in the Phase 3 section below. Real collection remains separately gated.
+manifest/attempt schema. They describe the protocol engine. Durable Study 2
+JSONL records, manifest bindings, provenance and replay are described below.
+The public `run` command uses mocks; dedicated live collection modules were
+used for the original smoke, pilot and main batches.
 
 | Object / field | Meaning |
 | --- | --- |
@@ -337,7 +341,7 @@ available, an invalid reason, and the valid public turn when present.
 | `excluded` | This second invalid reply terminated the episode as excluded |
 | `accept_price_mismatch` | Same acceptance mismatch flag as the terminal outcome, attached only to the valid accepting attempt |
 | `timestamp_utc`, `completed_at_utc`, `latency_seconds` | Call timing, including failed/interrupted attempts |
-| `synthetic`, `execution_mode`, `is_probe` | Phase 2 uses true, `mock`, false; actual probe execution/marking is Phase 3 work |
+| `synthetic`, `execution_mode`, `is_probe` | Mock records use true/`mock`; provider records use false/`live`. Forced-position probes are marked true in `is_probe`. |
 
 `EpisodeProgress` keeps the specification, committed state, cumulative attempt,
 re-ask and retry counts, current turn's invalid-response count, whether its
@@ -353,24 +357,26 @@ the current invocation's attempts; cumulative counters live in `progress`.
 The number of messages used is the number of valid committed turns. An excluded
 failed position is reported separately and never appended as a valid message.
 Raw non-offer prices remain in the response, parsed reply, and committed turn;
-transcript rendering omits their price part. Pilot mismatch counts will group
-valid accepting attempts by responding model, pool disclosure conditions, and
-retain role. Probes never contribute to those counts or to inference.
+transcript rendering omits their price part. Pilot mismatch counts group valid
+accepting attempts by responding model, pool disclosure conditions and retain
+role. Probes never contribute to those counts or to inference.
 
 The engine refuses live clients and returns detached in-memory snapshots. The
 optional attempt observer also receives interrupted-call snapshots before the
-exception propagates. This is not yet a durable pending journal or disk replay
-format. Mock usage counts and planted label effects are explicitly synthetic.
+exception propagates. This low-level interface keeps progress in memory; the
+batch runner described below supplies durable journaling and replay. Mock usage
+counts and planted label effects are explicitly synthetic.
 
-## Study 2 Phase 3 persisted contract (version 1)
+## Study 2 persisted records (version 1)
 
 These fields extend the Study 2 objects above; they do not modify Study 1's
-manifest or attempt contracts. Current execution is mock-only, with
-`synthetic: true`, and writes outside real-study artifact directories.
+manifest or attempt contracts. Mock execution writes `synthetic: true` outside
+real-study artifact directories. The completed live collections use
+`synthetic: false` and `execution_mode: live`.
 
 | Manifest row field | Meaning |
 | --- | --- |
-| `schema_version`, `study`, `phase` | 1, `study2`, and `synthetic`/`smoke`/`pilot`/later `main` |
+| `schema_version`, `study`, `phase` | 1, `study2`, and `synthetic`/`smoke`/`pilot`/`main` |
 | `spec` | Complete `EpisodeSpec`, including private/public scenario facts and the actual buyer/seller identities |
 | `pair_id`, `execution_position` | Safe pair-file identity and one-based seeded plan position |
 | `scenario_seed`, `order_seed`, `swapped_seed`, `mock_seed` | Explicit design/order/simulation controls; main scenario seeds are not used by synthetic generation |
@@ -395,6 +401,7 @@ Per-pair turn logs copy every `TurnAttempt` field above and add:
 | `run_id`, `dispatch_sequence` | Invocation UUID and globally unique one-based actual reservation order |
 | `runner_policy` | Frozen timeout/retry/concurrency policy, including one invalid-response re-ask |
 | `git_commit`, `code_dirty`, `package_version`, `sdk_versions` | Actual execution provenance, collected without reading credentials |
+| `registration_git_commit`, `execution_git_commit` | Main-only fields identifying the original registration and actual main execution commits; described below |
 | `record_sha256` | Digest of all record content except this digest field |
 
 Each pair log has an atomic fsynced `.pending.json` sidecar and an advisory
@@ -476,13 +483,14 @@ inventory. `docs/study2_phase4_report.md` adds phase authorization/provenance,
 usage caveats, replay instructions, and the next gate. These reports contain no
 hypothesis comparisons; real smoke/probe data never enter main inference.
 
-## Study 2 analysis outputs (Phase 5)
+## Study 2 analysis outputs
 
 The isolated pipeline accepts replay-verified main collections or explicitly
-opted-in synthetic collections. It refuses smoke/pilot/probes. The live runner
-is still smoke-only; read-only replay also validates future pilot/main contracts
-against their phase, approval metadata, expected versions, and explicit budgets.
-It does not authorize collection. See `docs/study2_analysis.md` for all methods.
+opted-in synthetic collections. It refuses smoke, pilot and probe inputs.
+Replay validates the saved collection scope, expected model versions and attempt
+limits before analysis. The completed main analysis and its independent
+reproduction are indexed in [the results README](../results/study2/README.md).
+See [the analysis guide](study2_analysis.md) for all methods.
 
 `tables/episodes.csv` is a replay-verified derived table, not a replacement for
 append-only source logs. It adds `excluded`, `deal`, `buyer_opens`, both card
@@ -534,7 +542,8 @@ ground-truth negotiation outcomes.
 7,680 cumulative natural attempts, zero probes, researcher/date approval,
 manifest binding, and prior returned model versions. The owned live entry point
 requires clean committed code and ignored .env-only credentials. Smoke and pilot
-authorizations are not interchangeable; live main remains disabled. Counters,
+authorizations are not interchangeable with each other or with the separate
+main authorization. Counters,
 unknown interrupted attempts, version-drift halts, and resume contracts follow
 the same durable rules as smoke. Scientific config/prompts/clients are unchanged.
 
@@ -576,8 +585,9 @@ are pooled over disclosure conditions; no pilot inference is performed.
 ## Study 2 Phase 8 registration snapshot
 
 `data/study2/main/manifest.jsonl` freezes 960 natural main episode assignments,
-320 scenarios and sixteen ordered pairs. It is an unexecuted plan, not outcome
-data. Its SHA-256 is
+320 scenarios and sixteen ordered pairs. The manifest was generated before
+collection and contains planned requests rather than responses. It now
+accompanies the completed collection in `data/study2/main/`. Its SHA-256 is
 `293fecc0f30249e46a794d3d4e1d7d2eacb51e3ad2e13b2113da7067e0a7b814`.
 Rows use main scenario/order/swapped seeds 2026112605/2026112606/2026112610;
 all frozen source facts, hashes and per-turn schemas follow the existing
@@ -599,4 +609,40 @@ regenerates the main manifest in memory, validates all 11,520 possible request
 positions with disposable offer prefixes, and optionally verifies the annotated
 tag. It does not load credentials, make API calls, generate outcomes, or run
 inference. `--require-unrun` additionally requires only the manifest in the main
-directory. No placeholder negotiation output is written there.
+directory. That check applies to the original `prereg-study2` checkout. It is
+not a completion check for the collected data. Source verification must also
+use that registration checkout because it predates the execution patch. No
+placeholder negotiation output is written there.
+
+
+## Study 2 completed main collection and provenance
+
+The main collection completed all 960 episodes in 8,417 attempts, with two
+recovered API errors and no invalid-reply re-asks, exclusions or episode
+resumptions. Every terminal summary was reconstructed from the turn records and
+matched exactly. The [collection report](../results/study2/main-collection-report/collection-report.md)
+records per-pair and per-condition mechanics; the
+[data README](../data/study2/README.md) indexes the raw files.
+
+The main collection added two fields to every attempt and terminal episode:
+
+| Field | Value and meaning |
+| --- | --- |
+| `registration_git_commit` | `c277054e182eb3a81a475108fa3439e96e869bb0` identifies the unchanged `prereg-study2` snapshot. |
+| `execution_git_commit` | `4e088670c0cc8386eccf8fff01d93d353a230bda` identifies the mechanical execution patch used for every main call. |
+| `git_commit` | This also records the actual execution commit, rather than the original registration commit. |
+
+These fields are bound to the collection's saved scope and checked during
+resume and replay. They are part of the approved post-registration execution
+change described in [the patch report](study2_main_execution_patch.md).
+Smoke and pilot formats remain as originally collected; these extra main fields
+are not retroactively required of them.
+
+The `study2-data` tag points to commit
+`3b3b85d77c619fcc6fb093a93915e5ef769cbf53`, which froze the completed collection.
+That snapshot commit is distinct from the execution commit in each record.
+`collection.json` preserves the original scope, expected versions, manifest
+binding and provenance requirements. The main scope has no aggregate attempt
+cap. Each response opportunity permits at most four API attempts. An invalid
+reply permits one identical re-ask, which is a separate response opportunity.
+These are the original collection rules, not instructions to start a new run.

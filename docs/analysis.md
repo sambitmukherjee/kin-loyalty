@@ -2,7 +2,9 @@
 
 All commands below run locally without model API calls, SDK imports, or API-key
 reads. Outcomes come from saved logs, never from re-rendered prompts. The
-analysis is implemented before the pilot and pre-registration lock.
+analysis was implemented before the pilot and pre-registration lock. The main
+analysis is complete and was independently reproduced. Its saved outputs and
+source commit are indexed in [the results README](../results/study1/README.md).
 
 ## Eligibility and histories
 
@@ -70,8 +72,8 @@ cell's modal belief, breaking modal ties by the lowest value; count retained
 valid proposer draws differing from their own cell's mode. If fewer than 10%
 are nonmodal, flag that model's adjusted contrast as not estimable. Exactly
 30/300 passes; fewer than 30/300 fails. For `N` retained valid draws, the minimum
-is `ceil(N/10)`. No SD cutoff is used, and this rule will not be tuned after the
-pilot. `s1_belief_diagnostics.csv` records every model's count/denominator and
+is `ceil(N/10)`. No SD cutoff is used. This rule was fixed before the pilot
+and retained unchanged. `s1_belief_diagnostics.csv` records every model's count/denominator and
 status; `s1_belief_cell_counts.csv` records the cell modes and counts.
 
 Unavailable adjusted point estimates, intervals, and p-values remain empty with
@@ -89,7 +91,9 @@ identifiable points and their valid permutation tests remain available. Plots
 mark a point with an unavailable interval using `*`.
 
 The same specification is recorded in `preregistration/study1.md`; the
-`prereg-study1` tag identifies the registration snapshot once created and pushed.
+`prereg-study1` tag identifies the completed registration snapshot. The
+`study1-data` tag identifies the completed collection used for analysis. See
+[the registration index](../preregistration/README.md) for their commit hashes.
 
 ## Bootstrap intervals and equivalence
 
@@ -196,17 +200,20 @@ draws are saved in `resampling_distributions.npz` for audit.
 
 ## Commands
 
-When real main and comprehension logs exist, one command regenerates the tables,
-figures, provenance, and artifact hashes:
+The completed main logs and final-prompt comprehension batch are included.
+From the repository root, the following command regenerates their tables,
+figures, provenance and artifact hashes into a new directory:
 
 ```sh
-kinloyalty reproduce --config configs/study1.yaml \
+uv run --offline --locked kinloyalty reproduce --config configs/study1.yaml \
   --data data/study1/main --comprehension data/study1/repilot_20261126/comprehension \
-  --output results/study1/generated
+  --output scratch/study1-reproduce
 ```
 
 `kinloyalty analyze study1` accepts the same arguments and runs the same pipeline.
-Output directories must be new; existing artifacts are never overwritten. If no
+The example assumes the locked dependencies have been installed. Output
+directories must be new; existing artifacts are never overwritten. The saved
+reference outputs remain in `results/study1/generated/`. If no
 comprehension input is supplied, that table/figure is omitted. Main logs and the
 comprehension batch are never merged into one outcome dataset.
 

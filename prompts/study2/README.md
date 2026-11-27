@@ -24,7 +24,7 @@ alternating-offer prefixes for both openers. These are illustrative fixtures,
 not observed data or seeded main scenarios. A message-11 probe uses the first
 ten messages of the requested role's opener transcript; a message-12 probe uses
 the first eleven messages of the other role's opener transcript. The same
-prefixes supply Phase 1's review positions. All models use the same fixtures.
+prefixes were used to render the prompt-review positions. All models use the same fixtures.
 
 Read the 48 complete system/user examples in `docs/study2_prompt_review.md`.
 To reproduce them in a new file from the repository root:
@@ -35,5 +35,7 @@ To reproduce them in a new file from the repository root:
 ```
 
 The output path must not exist. No credentials, SDKs, API calls, observed data,
-or main scenario draws are used. Reply schemas and the negotiation engine are
-implemented in the separately approved Phase 2.
+or main scenario draws are used. The reply schemas, negotiation engine and
+main analysis are implemented. Main collection and analysis are complete;
+these files preserve the prompts registered under `prereg-study2`. The
+[registration index](../../preregistration/README.md) explains the frozen versions.

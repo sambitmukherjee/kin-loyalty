@@ -1,15 +1,29 @@
-# Replace the contributor entity with publication authors when confirmed.
-# Add the public repository URL, paper citation, and DOI when available.
+# The accompanying manuscript has no confirmed publication venue or DOI.
 cff-version: 1.2.0
-message: "If you use this software or its study data, please cite this repository version."
+message: Please cite the accompanying manuscript when discussing the findings, and record
+  the repository commit or frozen data tag used.
 type: software
-title: "kin-loyalty: Counterparty model labels and AI agent loyalty"
+title: 'kin-loyalty: Counterparty model labels and AI agent loyalty'
 authors:
-  - name: kin-loyalty contributors
+- family-names: Mukherjee
+  given-names: Sambit
+  affiliation: Independent Researcher
 version: 0.1.0
 license: MIT
 keywords:
-  - AI agents
-  - loyalty
-  - experimental economics
-  - model labels
+- AI agents
+- loyalty
+- experimental economics
+- model labels
+repository-code: https://github.com/sambitmukherjee/kin-loyalty
+url: https://github.com/sambitmukherjee/kin-loyalty
+preferred-citation:
+  type: unpublished
+  authors:
+  - family-names: Mukherjee
+    given-names: Sambit
+    affiliation: Independent Researcher
+  title: Do AI Agents Favor Their Own Kind? Model Labels Shift One-Shot Splits but Not Mandated
+    Negotiation
+  year: 2026
+  url: https://github.com/sambitmukherjee/kin-loyalty/blob/main/paper/main.pdf

@@ -4,48 +4,50 @@ Does an AI agent give away more of its user's money when a counterparty's agent
 card names the agent's own exact model? Study 1 examines this label effect in a
 dictator game and in the proposer and responder roles of an ultimatum game.
 
-Study 1's unit of observation is a fresh, self-contained model call, with
-hypothetical counterparties. Study 2 adds up to 12-message buyer/seller
-negotiations with buyer-only model-label disclosure. Its offline engine,
-balanced plans, durable collection, recovery, and replay are implemented.
-The approved live smoke completed four natural episodes and sixteen probes in
-51 valid calls, with exact returned-version matches, no errors/re-asks/retries,
-and no truncation. See the [smoke report](docs/study2_phase4_report.md).
-The analysis/reproduce pipeline is implemented and verified on synthetic mock
-logs only. The approved pilot completed all 80 episodes in 707 attempts,
-including one recovered rate limit, with no invalid reply or version drift.
-See the [blind pilot report](docs/study2_phase6_report.md) for diagnostics,
-pair-pooled outcomes and Gemini's unobserved natural final-turn coverage.
-Phase 7's [mechanical review](docs/study2_phase7_report.md) retained the protocol
-with no fixes or additional calls, preserving that coverage limitation. The
-Phase 8 prepares the [final addendum](preregistration/study2.md), the frozen
-960-episode main manifest, and local annotated registration tag. The concrete
-commit/tag still require permission to push; the main run remains unstarted. The
-[execution plan](docs/study2_phase6_execution_plan.md) records the approved scope
-and clean-code/budget controls.
+Study 1 uses fresh, self-contained model calls with hypothetical counterparties.
+Study 2 uses buyer/seller negotiations of up to 12 messages, with model-label
+cards shown only to buyers. Both main collections and their pre-registered
+analyses are complete. The paper is
+[Do AI Agents Favor Their Own Kind? Model Labels Shift One-Shot Splits but Not Mandated Negotiation](paper/main.pdf),
+by Sambit Mukherjee, Independent Researcher.
 
-Study 2 commands are isolated under `kinloyalty study2`: `manifest`, `run`
-(mock only), `replay`, `probe-report`, `simulate`, `analyze`, and `reproduce`. See the
-[Phase 3 report](docs/study2_phase3_report.md) for safe temporary-directory
-examples, the exact artifact contract, and verification. The configured main
-scenario seed was first used in the approved Phase 8 lock. The main manifest is
-an unexecuted plan, and no real Study 2 hypothesis analysis has run. Existing Study 1
-commands and their defaults remain available unchanged.
+The frozen collections are identified by `study1-data` and `study2-data`.
+The [registration index](preregistration/README.md) explains these data tags and
+the earlier protocol tags, `prereg-study1` and `prereg-study2`.
+Saved results and reproduction audits are indexed in the
+[Study 1 results README](results/study1/README.md) and the
+[Study 2 results README](results/study2/README.md).
 
-The [Study 2 analysis guide](docs/study2_analysis.md) gives independent reproduce
-commands, outcome eligibility, signed concessions, tested-pair missingness,
-the interaction sign, and the complete table/figure contract. Synthetic inputs
-require `--allow-synthetic`; inference rejects smoke/pilot/probes. Each reproduce
-run verifies saved outcomes against turn attempts before calculating results.
+Study 2 commands are grouped under `kinloyalty study2`: `manifest`, `run`,
+`replay`, `probe-report`, `simulate`, `analyze` and `reproduce`.
+The `run` command uses mock responses. Dedicated Python modules handled live
+smoke, pilot and main collection. The main launcher is bound to the original
+registered manifest and execution commit; it is not a general launcher for new
+experiments. The [execution patch report](docs/study2_main_execution_patch.md)
+describes this documented post-registration change.
+
+The [Study 2 analysis guide](docs/study2_analysis.md) explains outcome eligibility,
+signed concessions, missing outcomes in tested pairs, the interaction's sign
+and the generated tables and figures. Reproduction checks saved outcomes against
+turn records before calculating results. Smoke tests, pilots and probes are
+excluded from main inference; synthetic inputs require `--allow-synthetic`.
 
 ## Current status
 
-**Study 1 main collection complete; analysis deferred until the Study 2 addendum is committed.** The researcher has approved the prompt
-text, response schemas, and Riley/Taylor and Casey/Morgan name pairs. The package
+**Both studies have completed main collection and pre-registered analysis.**
+Study 1 collected 3,600 valid decisions. Study 2 completed all 960 negotiations
+in 8,417 API attempts, with two recovered API errors, no re-asks or exclusions,
+and no unfinished episodes. Its [collection report](results/study2/main-collection-report/collection-report.md)
+records the mechanical checks, including exact replay of every terminal summary.
+The [Study 2 results report](results/study2/analysis-summary.md) contains the
+completed analysis.
+
+For Study 1, the researcher approved the prompt text, response schemas, and Riley/Taylor and Casey/Morgan name pairs. The package
 builds balanced, deterministic manifests and executes/resumes them with a mock
 client, durable attempt logs, validation, retries, and one identical re-ask.
-The CLI supports **mock execution only**. Four provider adapters use the official
-SDKs with documentation-verified mappings and in-memory HTTP tests. The approved
+The `kinloyalty run` command supports **mock execution only**; live Study 1
+collection used the provider factory and runner through Python. Four provider
+adapters use the official SDKs with documentation-verified mappings and in-memory HTTP tests. The approved
 smoke invocation made exactly four API attempts, with no retries or re-asks.
 Input sizes were 233–539 tokens; no response hit the output cap. Kimi omitted
 its cache-read count (retained as null) and reported 256 cache-write tokens.
@@ -61,8 +63,8 @@ The fresh 240-draw pilot and 320-draw comprehension check completed in exactly
 every scored comprehension condition at 20/20. No model had an all-zero dictator
 floor; Sonnet and Gemini transferred $50 in all 20 dictator draws each. Gemini
 proposer offers varied; no change was made in response to its original constant
-$40 offers. **This is the only prompt change for the dictator floor; no further
-change will be made for that reason.** See the
+$40 offers. **This was the only prompt change for the dictator floor; no further
+change was made for that reason.** See the
 [re-pilot report](docs/repilot_20261126_report.md) for pooled distributions,
 metadata, and offline verification commands. Original artifacts are preserved.
 No pilot label-effect comparison was computed. See
@@ -72,7 +74,7 @@ prompt/schema appendices, main manifest and exact hashes, final comprehension
 result, fixed S1 count rule and paired descriptive comparison, and the pooled
 P1 percentile-bootstrap TOST specification. The
 [hash inventory](preregistration/study1-lock.json) binds all frozen source and
-research artifacts. The `prereg-study1` tag identifies the local registration
+research artifacts. The `prereg-study1` tag identifies the registration
 commit, `d4d6ff9`. The researcher approved its push, and GitHub main and the
 annotated tag were verified at that commit before main collection. See the
 [Phase 8 preparation report](docs/phase8_report.md).
@@ -84,15 +86,17 @@ re-asks, exclusions, and unfinished draws are zero throughout. Every attempt
 records the tagged commit and clean-code provenance. See the
 [collection report](docs/study1_main_collection_report.md) and
 [complete 60-cell mechanical counts](data/study1/main/collection_counts.csv).
-No main outcome analysis or amount/belief summary has been produced. Analysis
-waits for the committed Study 2 addendum, as the researcher instructed.
+The main analysis was subsequently completed from the `study1-data` tag.
+The [Study 1 analysis report](results/study1/analysis_report.md) contains the
+results, and the [reproducibility audit](results/study1/reproducibility.json)
+records the independent comparison from another checkout.
 All bootstrap intervals use empirical ranks without interpolation: 500/9501
 for 90% and 250/9751 for 95%, out of the same 10,000 resamples.
 Label and adjusted-residual permutations exchange only the two tested labels
 within strata. One shared conservative numerical tie tolerance applies to
 permutation p-values and bootstrap TOST decisions.
 
-The planned main design has four models, three decisions, five labels, three
+The Study 1 main design used four models, three decisions, five labels, three
 paraphrases, and 20 draws per smallest cell: **3,600 planned draws**. Smoke tests,
 the 240-draw pilot, and the 320-draw comprehension check are separate batches.
 Re-asks and API retries add attempts beyond these counts. The separately
@@ -139,7 +143,8 @@ uv run --offline --locked kinloyalty review-prompts \
 directory paths are resolved relative to the study YAML file; CLI input/output
 paths are relative to the working directory unless supplied as absolute paths.
 Initial prompt approval was recorded on 2026-11-25; the system-sentence removal
-was explicitly approved on 2026-11-26. Neither locks the pre-registration.
+was approved on 2026-11-26, before registration. The `prereg-study1` tag preserves
+the final registered prompts and protocol.
 
 ## Try the offline engine
 
@@ -179,14 +184,32 @@ batch, then regenerates CSV tables, PDF/PNG figures, resampling distributions,
 provenance, and artifact hashes without API keys:
 
 ```sh
-kinloyalty reproduce --data data/study1/main \
-  --comprehension data/study1/repilot_20261126/comprehension --output results/study1/generated
+uv run --offline --locked kinloyalty reproduce --config configs/study1.yaml \
+  --data data/study1/main \
+  --comprehension data/study1/repilot_20261126/comprehension \
+  --output scratch/study1-reproduce
 ```
 
-Main logs are complete, but this command is deferred until the Study 2 addendum
-is committed. It rejects smoke/pilot/comprehension decisions as main outcomes,
-requires every main draw to be terminal, and refuses to overwrite outputs.
+Run from the repository root after installing the locked dependencies. The
+output directory must not already exist. This command rejects smoke, pilot and
+comprehension decisions as main outcomes, requires every main draw to be
+terminal, and keeps the separate comprehension batch out of outcome inference.
 `kinloyalty analyze study1` runs the same pipeline with the same arguments.
+
+Study 2 reproduction reads its frozen manifest and collection:
+
+```sh
+uv run --offline --locked kinloyalty study2 reproduce \
+  --manifest data/study2/main/manifest.jsonl \
+  --directory data/study2/main \
+  --output scratch/study2-reproduce
+```
+
+This output directory must also be new. The saved results remain in
+`results/study1/generated/` and `results/study2/main/`. Their READMEs record the
+original frozen-checkout commands and independent reproduction checks.
+These analysis commands do not rebuild the paper PDF; its existing build
+instructions are in [paper/README.md](paper/README.md).
 
 For an entirely offline demonstration, use new temporary paths:
 
@@ -208,8 +231,9 @@ eligibility rules, and inference conventions](docs/analysis.md).
 Planning, execution, and the four provider adapters are implemented. Every real
 batch still requires its own approval:
 
-1. Edit the readable model and study YAML files in `configs/` and the experiment
-   templates in `prompts/study1/`.
+1. Make separate copies of the model and study YAML files and prompt templates
+   for the new experiment. Preserve the configurations and prompts used by the
+   registered studies.
 2. Verify each model's endpoint and request parameters against its provider's
    current official documentation. Obtain approval for all prompt text.
 3. After real-call approval, create a local `.env` from `.env.example` and fill
@@ -221,10 +245,11 @@ batch still requires its own approval:
 
 Available commands are `review-prompts`, `manifest`, mock-only `run`,
 `simulate-study1`, `analyze study1`, `reproduce`, and `report pilot|comprehension`.
-Real batch execution is available programmatically through the provider factory
-and runner/cohort coordinator after approval; it is not exposed by the CLI yet. Pilot reports pool
-all labels; comprehension reports apply the separate pass rule. No CLI command
-makes paid calls.
+Live Study 1 batches use the provider factory and runner or cohort coordinator
+through Python. Study 2 has dedicated live smoke, pilot and main modules, each
+with its own collection checks. The main module accepts only the original
+registered study. The public `run` commands use mocks. Pilot reports pool all
+labels; comprehension reports apply the separate pass rule.
 
 ## Repository layout
 
@@ -235,8 +260,12 @@ makes paid calls.
 | `prompts/study1/` | Versioned system/game templates, protected blocks and shared JSON instructions |
 | `src/kinloyalty/` | Prompts/schemas, manifests, clients, validation, logging, runner, saved-log analysis, CLI |
 | `data/study1/` | Separate smoke/pilot/check batches, frozen main plan, and completed main collection with mechanical counts |
-| `results/study1/` | Saved pilot/check reports; main tables and figures generated after collection |
-| `preregistration/` | Final Study 1 protocol and machine-readable source/artifact hash inventory |
+| `results/study1/` | Completed main analysis, reproduction audit and separate historical pilot/check reports |
+| `configs/study2.yaml`, `prompts/study2/` | Registered negotiation design and exact prompt templates |
+| `data/study2/` | Separate smoke/probe, pilot and completed main collections |
+| `results/study2/` | Completed main analysis, reproduction audit and separate collection reports |
+| `paper/` | Manuscript, compiled PDF, figures, appendices and build instructions |
+| `preregistration/` | Both final registrations, their hash inventories and an index of frozen tags |
 | `docs/data_dictionary.md` | Attempt-log and implemented analysis-table contracts |
 | `docs/decisions.md` | Dated decisions, approvals, and later deviations |
 | `docs/study1_prompt_review.md` | Fully rendered final prompts and schemas across all paraphrases |
@@ -245,7 +274,7 @@ makes paid calls.
 | `docs/phase4b_report.md` | Observed smoke metadata, limitations, artifact hashes, and offline inspection commands |
 | `docs/analysis.md` | Eligibility, approved methods, resampling conventions, reports, and reproduction |
 | `docs/phase6_report.md` | Observed pilot/comprehension results, pooled distributions, mechanical checks, and review flags |
-| `docs/phase8_report.md` | Registration snapshot, verification, and remaining final-push gate |
+| `docs/phase8_report.md` | Historical Study 1 registration preparation and verification report |
 | `docs/study1_main_collection_report.md` | Main completion/validation counts and tagged provenance; no outcome summaries |
 | `tests/` | Offline protocol, manifest, validation, logging/resume, and CLI checks; socket connections blocked |
 | `codex_prompts/` | Local coding-agent instructions; always Git-ignored |
@@ -266,19 +295,19 @@ artifacts and are not ignored.
   are computed, and pilot decisions never enter the main analysis.
 - An invalid reply gets one identical fresh re-ask. Two invalid replies exclude
   the draw. Exhausted API errors remain unfinished and resumable.
-- Each phase ends with a report, local commit, and approval before the next.
-  Real API batches require explicit approval and a stated call count. No GitHub
-  pushes occur without permission.
+- The original collections used researcher approvals and recorded call budgets.
+  Their decisions and deviations are preserved in `docs/decisions.md`. New
+  experiments need their own collection plans and any applicable approvals.
 
-The refined phase order is repository skeleton → prompts/cards → mock engine →
-provider documentation/clients → approved smoke test → mock-tested analysis →
-approved pilot/comprehension → approved fixes → pre-registration lock. The final
-lock includes a main manifest and hashes, a local commit and tag, and a separately
-approved push. It does not execute the main study.
+The historical phase reports describe development and registration before main
+collection. Their statements about work still to come refer to the date of each
+report. Current collection and analysis status is recorded above and in the
+data and results READMEs.
 
 ## Licenses and citation
 
 Code uses the MIT license in `LICENSE`. Study data and logs use CC BY 4.0 as
-described in `DATA_LICENSE`, subject to third-party rights. `CITATION.cff`
-contains provisional repository metadata; named authors, the public repository,
-and publication details will be added when confirmed.
+described in `DATA_LICENSE`, subject to third-party rights.
+[CITATION.cff](CITATION.cff) names Sambit Mukherjee and records the public repository and accompanying manuscript. The manuscript is listed as unpublished;
+no DOI or publication venue is claimed. Record the repository commit or frozen
+data tag used when citing a particular version.

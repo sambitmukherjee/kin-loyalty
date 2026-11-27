@@ -1,11 +1,15 @@
-# Offline experiment engine
+# Study 1 experiment engine
 
-The CLI supports mock calls only. Provider adapters and a credential loader are
-implemented. Four approved live smoke requests have completed; subsequent real
-batches need separate approval. The offline engine
-does not import SDKs or read keys. Every mock record is explicitly synthetic.
-Frozen requests include documentation-verified SDK arguments; these are not
-evidence of a successful provider call.
+This guide describes the single-decision engine used for Study 1. Its main
+collection and analysis are complete. The `kinloyalty run` command uses mock
+responses; live Study 1 collection used provider adapters and the runner through
+Python. Offline commands do not import provider SDKs or read credentials, and
+all mock records are marked synthetic. Frozen requests retain the exact SDK
+arguments used for collection. Observed provider behavior is documented in
+[the original smoke report](phase4b_report.md) and
+[the main collection report](study1_main_collection_report.md).
+Study 2 has a separate negotiation engine, described in the
+[data dictionary](data_dictionary.md#study-2-engine-objects-in-memory).
 
 ## Allocation and frozen manifests
 
@@ -17,7 +21,8 @@ phase-specific fixed seed before execution positions are assigned.
 - **Main:** 3,600 draws, 900/model, 60/model × decision × label, and 20/smallest
   cell. Other-lab names have 7/7/6 counts within each paraphrase. Rotating that
   row across the three paraphrases gives 20 mentions of each name per focal
-  model × decision. This plan is tested in temporary files only at this stage.
+  model × decision. The frozen main manifest and completed collection are in
+  `data/study1/main/`, preserved by the `study1-data` tag.
 - **Pilot:** 240 draws. Each model × decision has four draws for each label.
   Start with one draw per paraphrase and add one at
   `(label_index + model_index + decision_index) % 3` (zero-based config order).

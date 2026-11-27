@@ -6,7 +6,9 @@ all paraphrases on 2026-11-26 as a Phase 7 pre-lock design change. The final
 system prompts contain two sentences. All other stimulus text is unchanged.
 The three paraphrases retain the same economics and protected text. Registration
 status and the immutable snapshot are recorded in `preregistration/study1.md`
-and the `prereg-study1` tag; main execution requires separate authorization.
+and the `prereg-study1` tag. Main collection and analysis are complete; these
+files preserve the registered stimuli. Another experiment should use separate
+copies rather than changing these study inputs.
 
 | Paraphrase | Names | System | Dictator | Proposer | Responder |
 | --- | --- | --- | --- | --- | --- |

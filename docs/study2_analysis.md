@@ -1,16 +1,38 @@
 # Study 2 analysis and reproduction
 
 The pipeline lives in `src/kinloyalty/analysis/study2/`. It does not invoke Study
-1 analysis, read credentials, or make model calls. During Phase 5, all execution
-and numerical verification use explicit synthetic mock logs. Real smoke, pilot,
-and probe data are ineligible for inference. The researcher approved the
-clarifications below on 2026-11-26; they are preserved in `docs/decisions.md` and
-the unlocked draft `preregistration/study2.md`.
+1 analysis, read credentials, or make model calls. The main analysis is complete
+and was independently reproduced. All 960 main episodes were reconstructed
+from turn records and checked against their saved summaries before inference.
+The [results README](../results/study2/README.md) records the source tag and
+reproduction audit. Smoke, pilot and probe data are ineligible for inference.
+The researcher approved the clarifications below on 2026-11-26, before the
+Study 2 lock. They are preserved in [the decision log](decisions.md) and the
+[final addendum](../preregistration/study2.md).
 
-## Reproduce independently
+## Reproduce the main analysis
 
-Create a fresh synthetic collection using independent fixture seeds, then replay
-and reproduce every table and figure with the production replication counts:
+After installing the locked dependencies, run from the repository root with a
+new output path:
+
+```sh
+uv run --offline --locked kinloyalty study2 reproduce \
+  --manifest data/study2/main/manifest.jsonl \
+  --directory data/study2/main \
+  --output scratch/study2-reproduce
+```
+
+The saved reference outputs are in `results/study2/main/`. The original analysis
+used the `study2-data` checkout; the results README records that command and the
+independent comparison from the then-current main branch. The
+[registration index](../preregistration/README.md) explains the frozen versions
+and the mechanical execution change after registration.
+
+## Try a synthetic example
+
+The example below creates a fresh mock collection with independent fixture
+seeds, then replays it and reproduces its tables and figures with the production
+replication counts. These are simulated results, not the paper's observations:
 
 ```sh
 .venv/bin/kinloyalty study2 simulate --output /private/tmp/study2-synthetic-example
@@ -27,13 +49,11 @@ label, producing a P2 surplus-share contrast of −0.20. These numbers are test
 inputs and expected synthetic results, not empirical findings. Mock token counts
 are explicitly synthetic fixture values, not measured provider usage.
 
-`analyze` and `reproduce` are aliases for the same replay-first pipeline. Main
-analysis later uses the same arguments without `--allow-synthetic`. No actual
-main manifest was generated in Phase 5. Read-only replay understands future
-explicitly approved pilot/main contracts so future main inference can use the
-same verification path. Phase 6 adds the separately approved 80-episode pilot
-entry point; live main collection remains disabled. Reader support alone never
-authorizes live execution.
+`analyze` and `reproduce` are aliases for the same pipeline, which verifies
+replay before inference. Real main analysis uses the manifest and collection
+arguments without `--allow-synthetic`. Reproduction reads saved data. Live
+collection used separate smoke, pilot and main modules; the main launcher is
+bound to the original registered manifest and execution commit.
 
 `--resamples N` is available only with explicitly opted-in synthetic input for
 shorter tests; it is rejected for real input. Default analysis uses the frozen

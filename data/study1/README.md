@@ -1,5 +1,12 @@
 # Study 1 data
 
+The main collection and pre-registered analysis are complete. The `study1-data`
+tag freezes all 3,600 valid main decisions at commit
+`f7dd0a690a5089b245fff365acf002fcfd7b056a`. The final comprehension batch is in
+[repilot_20261126/comprehension/](repilot_20261126/comprehension/). Main results
+and reproduction checks are indexed in [results/study1/README.md](../../results/study1/README.md).
+The earlier collections below remain separate historical batches.
+
 The approved smoke invocation completed on 2026-11-25: four live requests,
 four valid replies, and no retries or re-asks. See `smoke/attempts.jsonl`,
 `smoke/run_summary.json`, and `docs/phase4b_report.md`. Every batch has a
@@ -16,7 +23,7 @@ system sentence in each paraphrase. Its fresh pilot and comprehension check
 completed on 2026-11-26 in `repilot_20261126/`: 240 and 320 valid draws, exactly
 560 attempts, no errors or re-asks. The original data above remain unchanged.
 Use `repilot_20261126/comprehension/` as the final-prompt comprehension check for
-the eventual registration/paper. See `docs/repilot_20261126_report.md` and the
+the registered analysis and paper. See `docs/repilot_20261126_report.md` and the
 fixed no-further-floor-prompt-change rule in `docs/decisions.md`.
 
 | Directory | Intended contents | Outcome-analysis eligibility |
@@ -26,7 +33,7 @@ fixed no-further-floor-prompt-change rule in `docs/decisions.md`.
 | `comprehension/` | 320 completed card-recognition draws | Separate comprehension report only |
 | `repilot_20261126/pilot/` | 240 revised-prompt pilot draws | Never |
 | `repilot_20261126/comprehension/` | 320 fresh final-prompt card-recognition draws | Final comprehension report only |
-| `main/` | Frozen manifest, 3,600 valid collected draws, raw attempts, and mechanical counts/audit | Analysis deferred until Study 2 addendum is committed |
+| `main/` | Frozen manifest, 3,600 valid collected draws, raw attempts, and mechanical counts/audit | Used for the completed pre-registered main analysis |
 
 Phase 8 generated `main/manifest.jsonl`: 3,600 planned draws, order seed
 2026112504, SHA-256
@@ -45,9 +52,9 @@ and `main/collection_audit.json` verifies all 3,613 records carry commit
 `d4d6ff9c1f7b84bc2b4f90578873f18dbc9fb98a` and clean-code provenance.
 Both invocations/preflights are retained, with aggregate `main/run_summary.json`.
 The registration inventory remains an immutable snapshot of the pre-collection
-state. No outcome analysis or amount/belief summary was computed; analysis waits
-until the Study 2 addendum is committed. Simulated verification data remain
-outside these real study directories.
+state. Analysis was performed after the Study 2 addendum was committed, using
+the frozen `study1-data` checkout. Its outputs are in `results/study1/generated/`.
+Simulated verification data remain outside these real study directories.
 
 Retries and re-asks retain the trial ID and add attempt records. An API-error
 attempt is never an exclusion. Detailed fields follow the contract in

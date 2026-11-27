@@ -1,16 +1,23 @@
 # Adding a model — implementation outline
 
 The common asynchronous interface, mock engine, and four provider adapters are
-implemented. All four current models accepted their live smoke requests; see
-`phase4b_report.md` for observed metadata and the missing Kimi cache-read count.
+implemented. All four registered models completed both main studies. The
+[original smoke report](phase4b_report.md) records the initial request checks,
+including the missing Kimi cache-read count. The main collection reports and
+[results READMEs](../README.md#current-status) record the completed studies.
+Provider settings in this repository describe the registered experiments; a
+new experiment needs its own checks against current provider documentation.
 
-1. Add a stable key, lab, exact display name, API model ID, provider, and key
-   environment-variable name to `configs/models.yaml`.
+1. Create a separate model configuration for the new experiment. Add a stable
+   key, lab, exact display name, API model ID, provider and credential name there.
+   Preserve the original `configs/models.yaml` used by both registered studies.
 2. Verify the provider's current official documentation for the intended model,
    endpoint, stateless behavior, low reasoning effort, sampling defaults, output
    schema, output cap, and cache controls. Stop and ask about any mismatch.
-3. Implement a short adapter behind `clients/base.py`'s `ModelClient` interface.
-   Reuse official SDKs; Kimi uses the OpenAI SDK with a verified Moonshot base URL.
+3. Reuse an existing provider adapter when it supports the new request. A new
+   provider needs an adapter behind `clients/base.py`'s `ModelClient` interface
+   and registration in the provider factory. Reuse official SDKs; the registered
+   Kimi requests used the OpenAI SDK with Moonshot's base URL.
    Never forward `request.context` to a provider or include keys/headers in logs.
    Freeze exact arguments as `request.api_payload`; keep the canonical local
    schema intact if a submitted provider schema needs the permitted bound fallback.
@@ -22,6 +29,7 @@ implemented. All four current models accepted their live smoke requests; see
 6. Obtain approval before any real smoke calls, state the call count, and record
    results and any design change in `docs/decisions.md`.
 
-Changing the four-model roster for this study is a design change requiring the
-researcher's approval. The engine should also support separate fresh experiments
-with other rosters through configuration.
+The registered studies retain their original four-model roster. A new roster
+belongs to a separate experiment. Changing the model count can also require
+changes to allocation counts, comprehension balance and analysis assumptions;
+adding an entry to a YAML file alone does not guarantee a valid design.
