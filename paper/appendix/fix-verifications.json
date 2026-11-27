@@ -1,0 +1,286 @@
+{
+  "A4": {
+    "mismatched_acceptances_by_model_and_role": [
+      {
+        "model": "claude_sonnet_5_5",
+        "role": "buyer",
+        "count": 0
+      },
+      {
+        "model": "claude_sonnet_5_5",
+        "role": "seller",
+        "count": 0
+      },
+      {
+        "model": "gemini_4_hydrogen",
+        "role": "buyer",
+        "count": 0
+      },
+      {
+        "model": "gemini_4_hydrogen",
+        "role": "seller",
+        "count": 0
+      },
+      {
+        "model": "kimi_k3_1_pro",
+        "role": "buyer",
+        "count": 0
+      },
+      {
+        "model": "kimi_k3_1_pro",
+        "role": "seller",
+        "count": 0
+      },
+      {
+        "model": "gpt_6_1_terra",
+        "role": "buyer",
+        "count": 0
+      },
+      {
+        "model": "gpt_6_1_terra",
+        "role": "seller",
+        "count": 0
+      }
+    ]
+  },
+  "A5": {
+    "total": 29,
+    "outcome": 17,
+    "belief": 6,
+    "adjusted_offer": 6
+  },
+  "B1": {
+    "drift": "returned model string differs from expected string; expected pilot strings equal requested IDs",
+    "episodes_required": 960,
+    "attempts_per_response_opportunity": 4,
+    "aggregate_attempt_cap": null,
+    "sources": [
+      "src/kinloyalty/negotiation/runner.py",
+      "src/kinloyalty/negotiation/authorization.py",
+      "src/kinloyalty/negotiation/main_run.py",
+      "docs/study2_main_execution_patch.md"
+    ]
+  },
+  "B2": {
+    "gemini_pilot_episodes": 35,
+    "maximum_messages": 11,
+    "no_episode_involving_gemini_reached_message_12": true
+  },
+  "B4": {
+    "single_re_sub_pass": true
+  },
+  "B5": {
+    "labels": [
+      "own_model",
+      "other_lab",
+      "fictional",
+      "not_disclosed"
+    ],
+    "draws_per_model_label": 20,
+    "expected_total_draws": 320,
+    "paraphrase_counts": [
+      7,
+      7,
+      6
+    ],
+    "other_lab_name_counts": [
+      7,
+      7,
+      6
+    ],
+    "other_lab_joint_counts": [
+      [
+        3,
+        2,
+        2
+      ],
+      [
+        2,
+        3,
+        2
+      ],
+      [
+        2,
+        2,
+        2
+      ]
+    ],
+    "allowed_answers": [
+      "yes",
+      "no",
+      "unsure"
+    ],
+    "minimum_correct_per_scored_label": 18,
+    "expected_answers": {
+      "own_model": "yes",
+      "other_lab": "no",
+      "fictional": "no"
+    },
+    "unscored_labels": [
+      "not_disclosed"
+    ],
+    "failed_models_remain_in_study": true
+  },
+  "C1": [
+    {
+      "csv_row": 63,
+      "scope": "gpt_6_1_terra",
+      "decision": "ultimatum_proposer",
+      "outcome": "outcome",
+      "method": "unadjusted",
+      "left": "other_lab",
+      "right": "not_disclosed",
+      "permutation_p": "0.0499950005"
+    }
+  ],
+  "C3": {
+    "rule": "round half to even",
+    "exact_lattice_applies_to": "unadjusted pooled Study 1 contrasts and their bootstrap endpoints, not belief-adjusted regressions",
+    "verified_ties": [
+      {
+        "csv_row": 11,
+        "decision": "dictator",
+        "outcome": "outcome",
+        "left": "other_lab",
+        "right": "fictional",
+        "field": "estimate",
+        "csv_value": "-0.625",
+        "exact_numerator": "-150",
+        "exact_denominator": 240,
+        "exact_decimal": "-0.625"
+      },
+      {
+        "csv_row": 11,
+        "decision": "dictator",
+        "outcome": "outcome",
+        "left": "other_lab",
+        "right": "fictional",
+        "field": "ci_low",
+        "csv_value": "-3.125",
+        "exact_numerator": "-750",
+        "exact_denominator": 240,
+        "exact_decimal": "-3.125"
+      },
+      {
+        "csv_row": 11,
+        "decision": "dictator",
+        "outcome": "outcome",
+        "left": "other_lab",
+        "right": "fictional",
+        "field": "ci_high",
+        "csv_value": "1.875",
+        "exact_numerator": "450",
+        "exact_denominator": 240,
+        "exact_decimal": "1.875"
+      },
+      {
+        "csv_row": 16,
+        "decision": "dictator",
+        "outcome": "outcome",
+        "left": "own_model",
+        "right": "not_disclosed",
+        "field": "estimate",
+        "csv_value": "1.875",
+        "exact_numerator": "450",
+        "exact_denominator": 240,
+        "exact_decimal": "1.875"
+      },
+      {
+        "csv_row": 16,
+        "decision": "dictator",
+        "outcome": "outcome",
+        "left": "own_model",
+        "right": "not_disclosed",
+        "field": "ci_low",
+        "csv_value": "-0.625",
+        "exact_numerator": "-150",
+        "exact_denominator": 240,
+        "exact_decimal": "-0.625"
+      },
+      {
+        "csv_row": 16,
+        "decision": "dictator",
+        "outcome": "outcome",
+        "left": "own_model",
+        "right": "not_disclosed",
+        "field": "ci_high",
+        "csv_value": "4.375",
+        "exact_numerator": "1050",
+        "exact_denominator": 240,
+        "exact_decimal": "4.375"
+      },
+      {
+        "csv_row": 36,
+        "decision": "ultimatum_proposer",
+        "outcome": "outcome",
+        "left": "own_model",
+        "right": "other_lab",
+        "field": "ci_high",
+        "csv_value": "4.175",
+        "exact_numerator": "1002",
+        "exact_denominator": 240,
+        "exact_decimal": "4.175"
+      },
+      {
+        "csv_row": 76,
+        "decision": "ultimatum_proposer",
+        "outcome": "outcome",
+        "left": "fictional",
+        "right": "not_disclosed",
+        "field": "estimate",
+        "csv_value": "-0.475",
+        "exact_numerator": "-114",
+        "exact_denominator": 240,
+        "exact_decimal": "-0.475"
+      },
+      {
+        "csv_row": 76,
+        "decision": "ultimatum_proposer",
+        "outcome": "outcome",
+        "left": "fictional",
+        "right": "not_disclosed",
+        "field": "ci_low",
+        "csv_value": "-1.425",
+        "exact_numerator": "-342",
+        "exact_denominator": 240,
+        "exact_decimal": "-1.425"
+      },
+      {
+        "csv_row": 116,
+        "decision": "ultimatum_responder",
+        "outcome": "outcome",
+        "left": "fictional",
+        "right": "not_disclosed",
+        "field": "ci_low",
+        "csv_value": "-1.625",
+        "exact_numerator": "-390",
+        "exact_denominator": 240,
+        "exact_decimal": "-1.625"
+      },
+      {
+        "csv_row": 126,
+        "decision": "ultimatum_proposer",
+        "outcome": "belief",
+        "left": "own_model",
+        "right": "other_lab",
+        "field": "ci_low",
+        "csv_value": "-1.225",
+        "exact_numerator": "-294",
+        "exact_denominator": 240,
+        "exact_decimal": "-1.225"
+      },
+      {
+        "csv_row": 151,
+        "decision": "ultimatum_proposer",
+        "outcome": "belief",
+        "left": "human",
+        "right": "not_disclosed",
+        "field": "estimate",
+        "csv_value": "-4.825",
+        "exact_numerator": "-1158",
+        "exact_denominator": 240,
+        "exact_decimal": "-4.825"
+      }
+    ]
+  }
+}

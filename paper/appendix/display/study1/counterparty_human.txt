@@ -1,3 +1,1 @@
-{COUNTERPARTY} is making this decision 
-personally; no agent is involved on 
-{COUNTERPARTY}'s side.
+{COUNTERPARTY} is making this decision personally; no agent is involved on {COUNTERPARTY}'s side.

@@ -12,7 +12,7 @@ The main text is unchanged from commit `15429f6` except for the later requested
 Table 1 heading, “Artificial Analysis Intelligence Index v5.0.2”. The bibliography
 and Figure 1 are unchanged.
 The main paper and references still occupy five pages. The complete PDF has
-37 pages; the appendices occupy pages 5–37, sharing page 5 with the final
+34 pages; the appendices occupy pages 5–34, sharing page 5 with the final
 references. They explain the registered methods in plain language and include
 the complete saved result tables, exact prompt templates and registered figures.
 
@@ -52,13 +52,16 @@ Re-run requested arithmetic checks with:
 decisions. The supplement ZIP contains the requested unchanged source artifacts,
 tables and figures; it excludes raw API logs and credentials.
 
-`appendix/build_tables.py` generates 135 appendix tables from saved results and
+`appendix/build_tables.py` generates 107 appendix tables from saved results and
 metadata, without fitting models or resampling. The appendices preserve 28 exact
-prompt-template files and the registered Study 1 card block. Display wrapping
-adds line breaks only, with a reversible source map. Eight registered vector
+prompt-template files and the registered Study 1 card block. The listing inputs are byte-identical to the sources. Automatic display wrapping
+uses a grey continuation arrow and an exact source map. Eight registered vector
 figures have presentation copies with enlarged, outlined lettering; the source
 results are unchanged. See `appendix/README.md`, `appendix/source-map.md` and
 `appendix/report.md` for the workflow, provenance and final checks.
+The correction pass is documented item by item in `appendix/fix-pass-report.md`;
+it preserves all main-paper text against commit `76823a6`. Some native float
+whitespace remains, as that report explains.
 
 The manuscript now cites Choi et al. with the full verified author list in
 the bibliography. Liu (2026) is removed from both text and references. The

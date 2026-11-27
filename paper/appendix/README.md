@@ -30,10 +30,12 @@ All work and temporary files remain inside `paper/`.
 - `build_materials.py` prepares source listings and figure inclusions.
 - `prompts/` contains exact copies of all 28 registered text-template files,
   plus the Study 1 card-construction block copied from the registration.
-- `wrap_prompts.py` prepares `display/` with only inserted display line breaks.
-  `prompt-wrapping.json` maps those lines back to the exact source, including
-  original spaces and final newlines. Listings state that wrapping is for
-  display only. The source copies are never edited to fit a column.
+- `wrap_prompts.py` prepares byte-identical source copies in `display/`.
+  `prompt-wrapping.json` retains original spaces, hard breaks and final newlines.
+  The listings package wraps long lines automatically; grey arrows mark only
+  visual continuations and are not prompt text. All 37 listings are unbreakable
+  native floats; the two long JSON instructions and transcript format span both
+  columns.
 - `figures/` contains presentation copies of the eight registered vector PDFs.
   The saved originals use kit-forbidden CID/Identity-H fonts and 6–8 point
   labels. `prepare_assets.py` converts glyphs to vector outlines and enlarges
@@ -55,3 +57,22 @@ CairoSVG 2.8.2, the dependencies in `asset-requirements.txt`, Cairo and Poppler'
 `paper/.toolchain/appendix-python/`. The study Python environment and `uv.lock`
 were not modified. See `source-map.md` for prose sources and `validation.json`
 for the final checks.
+
+The correction pass against commit `76823a6` is documented in
+`fix-pass-report.md`, with old/new locations in `fix-locations.json`. The PDF
+has 34 pages: five main/reference pages and 30 appendix pages including shared
+page 5. The 107 generated appendix tables contain 1,959 traced result cells.
+`verify_fix_facts.py` checks the requested saved-file facts on every table build.
+`validate_fixes.py` checks exact main PDF text, pages 1–4 rendering, all inline
+literals, table hashes, leftover phrases and display changes. It uses the
+committed baseline-location map and Git baseline, so it does not require an old
+build directory. `build_fix_report.py` writes the itemized report after validation.
+
+Values use Decimal round-half-to-even; unadjusted pooled Study 1 cells are
+recovered on their exact 1/240 lattice, and per-pair Length means on their 1/20
+lattice. Belief-adjusted coefficients use their exported decimal values. One
+borderline p-value has six decimals; all 48 Length means have two. Identical
+eligibility, strata, mandate and completion tables were condensed with build
+assertions. The duplicate comprehension tables were checked against the registered
+figure before removal. Some native float/column whitespace remains; the report
+records this limitation without claiming that G6 is fully satisfied.

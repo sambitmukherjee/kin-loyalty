@@ -22,3 +22,15 @@ All referenced study files remain unchanged. The figure treatment changes only
 presentation: the source data geometry and saved estimates are preserved.
 Study reproducibility claims refer to the existing recorded checks, with their
 provenance-metadata exceptions, rather than a new execution of either analysis.
+
+
+The appendix correction pass is checked against commit `76823a6`. Its factual
+checks and sources are recorded in `fix-verifications.json`; every item and its
+old/new location appears in `fix-pass-report.md` and `fix-locations.json`.
+Comprehension CSV counts were compared with the registered figure before the
+four duplicate tables were removed. Repeated Study 2 counts were condensed
+only after equality assertions, whose rows are retained under generated
+statements in `number-trace.json`. Numeric formatting uses Decimal half-even;
+the exact 1/240 claim applies only to unadjusted pooled Study 1 contrasts and
+endpoints, not belief-adjusted regression coefficients. Per-pair message means
+use their exact denominator of 20. No result calculation was rerun.

@@ -1,0 +1,737 @@
+[
+  {
+    "source": "results/study1/generated/contrasts.csv",
+    "row": 63,
+    "field": "permutation_p",
+    "raw": "0.0499950005",
+    "display": "0.049995",
+    "percent_conversion": false,
+    "decimal_places": 6,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "0.0499950005",
+    "table_key": "s1-contrast-10",
+    "previous_displays": [
+      "0.0500"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 2,
+    "field": "messages_used_mean_retained",
+    "raw": "9.25",
+    "display": "9.25",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "9.25",
+    "table_key": "s2-pair-outcomes-claude_sonnet_5_5",
+    "previous_displays": [
+      "9.2"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 4,
+    "field": "messages_used_mean_retained",
+    "raw": "9.0999999999999996",
+    "display": "9.10",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "9.1",
+    "table_key": "s2-pair-outcomes-claude_sonnet_5_5",
+    "previous_displays": [
+      "9.1"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 3,
+    "field": "messages_used_mean_retained",
+    "raw": "9.3000000000000007",
+    "display": "9.30",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "9.3",
+    "table_key": "s2-pair-outcomes-claude_sonnet_5_5",
+    "previous_displays": [
+      "9.3"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 8,
+    "field": "messages_used_mean_retained",
+    "raw": "10.699999999999999",
+    "display": "10.70",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "10.7",
+    "table_key": "s2-pair-outcomes-claude_sonnet_5_5",
+    "previous_displays": [
+      "10.7"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 10,
+    "field": "messages_used_mean_retained",
+    "raw": "10.550000000000001",
+    "display": "10.55",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "10.55",
+    "table_key": "s2-pair-outcomes-claude_sonnet_5_5",
+    "previous_displays": [
+      "10.6"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 9,
+    "field": "messages_used_mean_retained",
+    "raw": "10.449999999999999",
+    "display": "10.45",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "10.45",
+    "table_key": "s2-pair-outcomes-claude_sonnet_5_5",
+    "previous_displays": [
+      "10.4"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 5,
+    "field": "messages_used_mean_retained",
+    "raw": "7.8499999999999996",
+    "display": "7.85",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "7.85",
+    "table_key": "s2-pair-outcomes-claude_sonnet_5_5",
+    "previous_displays": [
+      "7.8"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 7,
+    "field": "messages_used_mean_retained",
+    "raw": "8.0500000000000007",
+    "display": "8.05",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "8.05",
+    "table_key": "s2-pair-outcomes-claude_sonnet_5_5",
+    "previous_displays": [
+      "8.1"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 6,
+    "field": "messages_used_mean_retained",
+    "raw": "7.5999999999999996",
+    "display": "7.60",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "7.6",
+    "table_key": "s2-pair-outcomes-claude_sonnet_5_5",
+    "previous_displays": [
+      "7.6"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 11,
+    "field": "messages_used_mean_retained",
+    "raw": "8.8499999999999996",
+    "display": "8.85",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "8.85",
+    "table_key": "s2-pair-outcomes-claude_sonnet_5_5",
+    "previous_displays": [
+      "8.8"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 13,
+    "field": "messages_used_mean_retained",
+    "raw": "8.5999999999999996",
+    "display": "8.60",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "8.6",
+    "table_key": "s2-pair-outcomes-claude_sonnet_5_5",
+    "previous_displays": [
+      "8.6"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 12,
+    "field": "messages_used_mean_retained",
+    "raw": "8.8000000000000007",
+    "display": "8.80",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "8.8",
+    "table_key": "s2-pair-outcomes-claude_sonnet_5_5",
+    "previous_displays": [
+      "8.8"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 26,
+    "field": "messages_used_mean_retained",
+    "raw": "10.75",
+    "display": "10.75",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "10.75",
+    "table_key": "s2-pair-outcomes-gpt_6_1_terra",
+    "previous_displays": [
+      "10.8"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 28,
+    "field": "messages_used_mean_retained",
+    "raw": "10.85",
+    "display": "10.85",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "10.85",
+    "table_key": "s2-pair-outcomes-gpt_6_1_terra",
+    "previous_displays": [
+      "10.8"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 27,
+    "field": "messages_used_mean_retained",
+    "raw": "10.800000000000001",
+    "display": "10.80",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "10.8",
+    "table_key": "s2-pair-outcomes-gpt_6_1_terra",
+    "previous_displays": [
+      "10.8"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 32,
+    "field": "messages_used_mean_retained",
+    "raw": "10.949999999999999",
+    "display": "10.95",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "10.95",
+    "table_key": "s2-pair-outcomes-gpt_6_1_terra",
+    "previous_displays": [
+      "10.9"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 34,
+    "field": "messages_used_mean_retained",
+    "raw": "11.300000000000001",
+    "display": "11.30",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "11.3",
+    "table_key": "s2-pair-outcomes-gpt_6_1_terra",
+    "previous_displays": [
+      "11.3"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 33,
+    "field": "messages_used_mean_retained",
+    "raw": "10.9",
+    "display": "10.90",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "10.9",
+    "table_key": "s2-pair-outcomes-gpt_6_1_terra",
+    "previous_displays": [
+      "10.9"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 29,
+    "field": "messages_used_mean_retained",
+    "raw": "9.6999999999999993",
+    "display": "9.70",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "9.7",
+    "table_key": "s2-pair-outcomes-gpt_6_1_terra",
+    "previous_displays": [
+      "9.7"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 31,
+    "field": "messages_used_mean_retained",
+    "raw": "9.5",
+    "display": "9.50",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "9.5",
+    "table_key": "s2-pair-outcomes-gpt_6_1_terra",
+    "previous_displays": [
+      "9.5"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 30,
+    "field": "messages_used_mean_retained",
+    "raw": "9.8499999999999996",
+    "display": "9.85",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "9.85",
+    "table_key": "s2-pair-outcomes-gpt_6_1_terra",
+    "previous_displays": [
+      "9.8"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 35,
+    "field": "messages_used_mean_retained",
+    "raw": "9.8000000000000007",
+    "display": "9.80",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "9.8",
+    "table_key": "s2-pair-outcomes-gpt_6_1_terra",
+    "previous_displays": [
+      "9.8"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 37,
+    "field": "messages_used_mean_retained",
+    "raw": "10.15",
+    "display": "10.15",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "10.15",
+    "table_key": "s2-pair-outcomes-gpt_6_1_terra",
+    "previous_displays": [
+      "10.2"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 36,
+    "field": "messages_used_mean_retained",
+    "raw": "10.050000000000001",
+    "display": "10.05",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "10.05",
+    "table_key": "s2-pair-outcomes-gpt_6_1_terra",
+    "previous_displays": [
+      "10.1"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 14,
+    "field": "messages_used_mean_retained",
+    "raw": "7.1500000000000004",
+    "display": "7.15",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "7.15",
+    "table_key": "s2-pair-outcomes-gemini_4_hydrogen",
+    "previous_displays": [
+      "7.2"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 16,
+    "field": "messages_used_mean_retained",
+    "raw": "7.2999999999999998",
+    "display": "7.30",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "7.3",
+    "table_key": "s2-pair-outcomes-gemini_4_hydrogen",
+    "previous_displays": [
+      "7.3"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 15,
+    "field": "messages_used_mean_retained",
+    "raw": "7.4000000000000004",
+    "display": "7.40",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "7.4",
+    "table_key": "s2-pair-outcomes-gemini_4_hydrogen",
+    "previous_displays": [
+      "7.4"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 20,
+    "field": "messages_used_mean_retained",
+    "raw": "7.8499999999999996",
+    "display": "7.85",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "7.85",
+    "table_key": "s2-pair-outcomes-gemini_4_hydrogen",
+    "previous_displays": [
+      "7.8"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 22,
+    "field": "messages_used_mean_retained",
+    "raw": "8",
+    "display": "8.00",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "8",
+    "table_key": "s2-pair-outcomes-gemini_4_hydrogen",
+    "previous_displays": [
+      "8.0"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 21,
+    "field": "messages_used_mean_retained",
+    "raw": "8.1999999999999993",
+    "display": "8.20",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "8.2",
+    "table_key": "s2-pair-outcomes-gemini_4_hydrogen",
+    "previous_displays": [
+      "8.2"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 17,
+    "field": "messages_used_mean_retained",
+    "raw": "6.3499999999999996",
+    "display": "6.35",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "6.35",
+    "table_key": "s2-pair-outcomes-gemini_4_hydrogen",
+    "previous_displays": [
+      "6.3"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 19,
+    "field": "messages_used_mean_retained",
+    "raw": "6.5999999999999996",
+    "display": "6.60",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "6.6",
+    "table_key": "s2-pair-outcomes-gemini_4_hydrogen",
+    "previous_displays": [
+      "6.6"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 18,
+    "field": "messages_used_mean_retained",
+    "raw": "6.5999999999999996",
+    "display": "6.60",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "6.6",
+    "table_key": "s2-pair-outcomes-gemini_4_hydrogen",
+    "previous_displays": [
+      "6.6"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 23,
+    "field": "messages_used_mean_retained",
+    "raw": "7.1500000000000004",
+    "display": "7.15",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "7.15",
+    "table_key": "s2-pair-outcomes-gemini_4_hydrogen",
+    "previous_displays": [
+      "7.2"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 25,
+    "field": "messages_used_mean_retained",
+    "raw": "6.7999999999999998",
+    "display": "6.80",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "6.8",
+    "table_key": "s2-pair-outcomes-gemini_4_hydrogen",
+    "previous_displays": [
+      "6.8"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 24,
+    "field": "messages_used_mean_retained",
+    "raw": "6.9500000000000002",
+    "display": "6.95",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "6.95",
+    "table_key": "s2-pair-outcomes-gemini_4_hydrogen",
+    "previous_displays": [
+      "7.0"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 38,
+    "field": "messages_used_mean_retained",
+    "raw": "8.3499999999999996",
+    "display": "8.35",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "8.35",
+    "table_key": "s2-pair-outcomes-kimi_k3_1_pro",
+    "previous_displays": [
+      "8.3"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 40,
+    "field": "messages_used_mean_retained",
+    "raw": "8.1999999999999993",
+    "display": "8.20",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "8.2",
+    "table_key": "s2-pair-outcomes-kimi_k3_1_pro",
+    "previous_displays": [
+      "8.2"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 39,
+    "field": "messages_used_mean_retained",
+    "raw": "8.5999999999999996",
+    "display": "8.60",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "8.6",
+    "table_key": "s2-pair-outcomes-kimi_k3_1_pro",
+    "previous_displays": [
+      "8.6"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 44,
+    "field": "messages_used_mean_retained",
+    "raw": "9.25",
+    "display": "9.25",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "9.25",
+    "table_key": "s2-pair-outcomes-kimi_k3_1_pro",
+    "previous_displays": [
+      "9.2"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 46,
+    "field": "messages_used_mean_retained",
+    "raw": "9.6999999999999993",
+    "display": "9.70",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "9.7",
+    "table_key": "s2-pair-outcomes-kimi_k3_1_pro",
+    "previous_displays": [
+      "9.7"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 45,
+    "field": "messages_used_mean_retained",
+    "raw": "9.5",
+    "display": "9.50",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "9.5",
+    "table_key": "s2-pair-outcomes-kimi_k3_1_pro",
+    "previous_displays": [
+      "9.5"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 41,
+    "field": "messages_used_mean_retained",
+    "raw": "7.4500000000000002",
+    "display": "7.45",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "7.45",
+    "table_key": "s2-pair-outcomes-kimi_k3_1_pro",
+    "previous_displays": [
+      "7.5"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 43,
+    "field": "messages_used_mean_retained",
+    "raw": "7.3499999999999996",
+    "display": "7.35",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "7.35",
+    "table_key": "s2-pair-outcomes-kimi_k3_1_pro",
+    "previous_displays": [
+      "7.3"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 42,
+    "field": "messages_used_mean_retained",
+    "raw": "7.5499999999999998",
+    "display": "7.55",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "7.55",
+    "table_key": "s2-pair-outcomes-kimi_k3_1_pro",
+    "previous_displays": [
+      "7.5"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 47,
+    "field": "messages_used_mean_retained",
+    "raw": "7.9500000000000002",
+    "display": "7.95",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "7.95",
+    "table_key": "s2-pair-outcomes-kimi_k3_1_pro",
+    "previous_displays": [
+      "8.0"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 49,
+    "field": "messages_used_mean_retained",
+    "raw": "8.5",
+    "display": "8.50",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "8.5",
+    "table_key": "s2-pair-outcomes-kimi_k3_1_pro",
+    "previous_displays": [
+      "8.5"
+    ]
+  },
+  {
+    "source": "results/study2/main/tables/pair_condition_descriptives.csv",
+    "row": 48,
+    "field": "messages_used_mean_retained",
+    "raw": "8.3000000000000007",
+    "display": "8.30",
+    "percent_conversion": false,
+    "decimal_places": 2,
+    "rounding_rule": "ROUND_HALF_EVEN",
+    "exact_decimal_for_rounding": "8.3",
+    "table_key": "s2-pair-outcomes-kimi_k3_1_pro",
+    "previous_displays": [
+      "8.3"
+    ]
+  }
+]

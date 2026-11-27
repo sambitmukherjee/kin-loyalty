@@ -2,49 +2,35 @@
 
 ## PDF and build
 
-- **37 pages total, including the approved technical appendices.** Main text
-  ends on page 4; References begin on page 4 and continue onto page 5. The main
-  paper and references still occupy five pages. Appendices A–H start directly
-  after the references on page 5 and occupy 33 pages including that shared page.
-  They add 32 pages to the original PDF. **Only the later author-requested
-  Table 1 heading has changed in the main paper; no cuts were made.**
-- Compiled with **pdflatex**, TeX Live 2026, and BibTeX using the official
-  AAAI-27 Author Kit from <https://aaai.org/authorkit27/>. All 17 extracted kit
-  files, including `aaai2027.sty` and `aaai2027.bst`, match the downloaded ZIP
-  byte-for-byte. See `author-kit-manifest.json`.
-- US Letter, two columns, PDF 1.7. No margin, font, leading or float-spacing
-  overrides; no forbidden package. The card uses the kit's nine-point
-  monospace size. Table columns use ordinary paragraph alignment without
-  shrinking the font or intercolumn spacing.
-- **Zero LaTeX errors, zero overfull boxes, zero undefined citations.**
-- `pdffonts` confirms all **13** fonts are embedded. No Type 3, CID or
-  Identity-H font remains. Figure lettering is vector outlines, preserving
-  glyph shapes and point sizes. `font-audit.txt` retains the command output.
-- The five pages whose rendering changed in the Table 1 heading revision were
-  visually inspected; the other 32 pages are pixel-identical to the previously inspected
-  PDF. The earlier greyscale check of unchanged Figure 1 still applies. No
-  overlaps, clipped text, unreadable labels or missing glyphs were found.
-- The PDF is **1,068,084 bytes** (about 1.07 MB). The appendices include all
-  requested material, 135 generated tables and eight registered vector figures.
-  `appendix/report.md` records the final appendix audit. The build has ordinary
-  underfull-box messages; it has no overfull boxes or compilation errors.
+- **34 pages total**, down from 37 before the appendix correction pass.
+  The unchanged main text ends on page 4; references end on page 5. The main
+  paper plus references remains five pages. Appendices occupy pages 5–34,
+  or **30 pages including shared page 5**, down from 33.
+- PDFLaTeX, TeX Live 2026 and BibTeX use the official AAAI-27 Author Kit from
+  <https://aaai.org/authorkit27/>. All 17 extracted kit files, including the
+  style and bibliography style, match the downloaded archive byte for byte.
+- US Letter, two columns and PDF 1.7. No margin, font-size, leading or
+  float-spacing overrides, forbidden package or manual page break was added.
+- **Zero LaTeX errors, overfull boxes or undefined citations/references.**
+  All **15 fonts** are embedded Type 1. No Type 3, CID or Identity-H fonts occur.
+  Figure lettering remains vector outlines. `font-audit.txt` records pdffonts.
+- **1,079,781 bytes**, with 107 appendix tables and eight registered vector figures.
+  All 1,959 displayed result cells remain traceable to unchanged saved sources.
+- Every appendix page was visually inspected. No split listing, separated
+  caption, clipping, overlap or missing glyph was found. Some native float and
+  column whitespace remains, especially on prompt pages; the request to remove
+  every large gap is not fully met. Ordinary underfull-box messages remain.
 
-The main document body through the bibliography matches commit
-`15429f61d532905722aff7979876107843479c02` except for the exact author-approved
-Table 1 heading replacement: “Intelligence Index (v5.0.2)” became “Artificial
-Analysis Intelligence Index v5.0.2”. The draft has the same single replacement;
-the bibliography and Figure 1 remain byte-identical. The longer heading wraps
-at the existing font size and causes native text reflow on pages 2–6. Page 1
-and pages 7–37 render pixel-identically to the preceding revision. No manual
-page break or spacing adjustment was added.
+For this pass, the draft, main LaTeX source, bibliography and Figure 1 are
+byte-identical to commit `76823a6dd130e79f9dafe878b32cfeb1824efa91`.
+Extracted PDF text through the final reference is identical; pages 1–4 are also
+pixel-identical. Earlier author-approved wording and the Table 1 heading are
+unchanged in this pass. The copied prompts, study methods and all scientific
+source files remain unchanged. No analysis was run.
 
-At the author's request, appendix instructions to the reader were revised into
-descriptions of what was done or what the registered procedure specifies.
-Checks against appendix commit `8e9f829` preserve every command body, copied
-prompt and display file, formula, number token, figure and numeric result cell.
-That prose revision preserved the statistical methods and main text; the later
-Table 1 heading change is recorded above. The appendix validation records the
-preservation and rendered-page comparison.
+`appendix/fix-pass-report.md` records every requested item, old/new location,
+fact check and display change, including the remaining layout limitation.
+The PDF SHA-256 is `ddb20d79aeb44cb6f9672d92e7d395ca250d72063042114ee66741ddb1a78c46`.
 
 Build command, from the repository root:
 

@@ -1,14 +1,14 @@
 {
-  "page_count": 37,
+  "page_count": 34,
   "references_start_page": 4,
   "body_ends_on_page": 4,
   "main_and_references_page_count": 5,
   "appendices_start_page": 5,
-  "appendix_pages_including_shared_page": 33,
+  "appendix_pages_including_shared_page": 30,
   "overfull_boxes": 0,
   "undefined_citations": 0,
   "latex_errors": 0,
-  "font_count": 13,
+  "font_count": 15,
   "all_fonts_embedded": true,
   "type3_fonts": false,
   "cid_or_identity_h_fonts": false,
@@ -37,20 +37,13 @@
   ],
   "supplement_bytes": 834572,
   "supplement_below_50_mb": true,
-  "pdf_sha256": "f0d4d3d8ccdc02301051e39411403b6f13ce20537e75c1473182e51b054ca2b1",
+  "pdf_sha256": "ddb20d79aeb44cb6f9672d92e7d395ca250d72063042114ee66741ddb1a78c46",
   "tex_sha256": "0bc4b7b56876cd238ea20c4ab4f8aadd2044d869b0e60c4a3db4a24fd54572bf",
-  "visual_review": {
-    "pdf_sha256": "f0d4d3d8ccdc02301051e39411403b6f13ce20537e75c1473182e51b054ca2b1",
-    "render_dpi": 120,
-    "pages_visually_inspected_this_revision": [
-      2,
-      3,
-      4,
+  "appendix_fix_pass_visual_review": {
+    "pdf_sha256": "ddb20d79aeb44cb6f9672d92e7d395ca250d72063042114ee66741ddb1a78c46",
+    "pages_inspected": [
       5,
-      6
-    ],
-    "pages_pixel_identical_to_previously_inspected_pdf": [
-      1,
+      6,
       7,
       8,
       9,
@@ -78,19 +71,14 @@
       31,
       32,
       33,
-      34,
-      35,
-      36,
-      37
+      34
     ],
-    "clipping_overlap_or_missing_glyphs": false,
-    "review_date": "2026-11-27"
+    "all_listing_captions_and_bodies_together": true,
+    "clipped_table_or_figure": false,
+    "overlapping_content": false,
+    "missing_glyph": false,
+    "remaining_native_float_or_column_gaps": true,
+    "G6_no_large_gaps_fully_satisfied": false
   },
-  "table1_heading_revision": {
-    "baseline_commit": "75ee5688f07e89da7dfb3f79bec6e2c070d526dc",
-    "before": "Intelligence Index (v5.0.2)",
-    "after": "Artificial Analysis Intelligence Index v5.0.2",
-    "all_other_manuscript_wording_unchanged": true,
-    "appendix_sources_and_result_cells_unchanged": true
-  }
+  "appendix_fix_pass_main_comparison_commit": "76823a6dd130e79f9dafe878b32cfeb1824efa91"
 }

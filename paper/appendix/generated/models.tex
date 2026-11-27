@@ -1,12 +1,13 @@
 \paragraph{Claude Sonnet 5.5.}
-Requested model ID: \path{claude-sonnet-5-5}. Returned in both studies: \path{claude-sonnet-5-5}.
+Requested model ID: \mbox{\lstinline!claude-sonnet-5-5!}.\par Returned in both studies: \mbox{\lstinline!claude-sonnet-5-5!}.\par
+API address: \mbox{\url{https://api.anthropic.com}}.\par
 \par\noindent\begin{minipage}{\columnwidth}
 \centering
 \begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.25\linewidth}>{\raggedright\arraybackslash}p{0.63\linewidth}@{}}
 \toprule
 Setting & Registered request \\
 \midrule
-Endpoint & Messages API\newline\url{https://api.anthropic.com} \\
+Endpoint & Messages API \\
 Reasoning & low via \path{output_config.effort} \\
 Structured output & JSON schema via \path{output_config.format} \\
 Caching & Cache control omitted; no explicit cache request. \\
@@ -19,17 +20,18 @@ Output cap & 8192 tokens via \path{max_tokens} \\
 \end{minipage}\par
 
 \paragraph{GPT-6.1 Terra.}
-Requested model ID: \path{gpt-6.1-terra}. Returned in both studies: \path{gpt-6.1-terra}.
+Requested model ID: \mbox{\lstinline!gpt-6.1-terra!}.\par Returned in both studies: \mbox{\lstinline!gpt-6.1-terra!}.\par
+API address: \mbox{\url{https://api.openai.com/v1}}.\par
 \par\noindent\begin{minipage}{\columnwidth}
 \centering
 \begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.25\linewidth}>{\raggedright\arraybackslash}p{0.63\linewidth}@{}}
 \toprule
 Setting & Registered request \\
 \midrule
-Endpoint & Chat Completions\newline\url{https://api.openai.com/v1} \\
+Endpoint & Chat Completions \\
 Reasoning & low via \path{reasoning_effort} \\
 Structured output & Strict JSON schema via \path{response_format} \\
-Caching & Explicit mode without breakpoints; storage disabled. \\
+Caching & Explicit caching mode with no cache breakpoints set; storage disabled (store=false). The API reported zero cache reads and writes. \\
 Output cap & 8192 tokens via \path{max_completion_tokens} \\
 \bottomrule
 \end{tabular}
@@ -39,17 +41,18 @@ Output cap & 8192 tokens via \path{max_completion_tokens} \\
 \end{minipage}\par
 
 \paragraph{Gemini 4 Hydrogen.}
-Requested model ID: \path{gemini-4-hydrogen}. Returned in both studies: \path{gemini-4-hydrogen}.
+Requested model ID: \mbox{\lstinline!gemini-4-hydrogen!}.\par Returned in both studies: \mbox{\lstinline!gemini-4-hydrogen!}.\par
+API address: \mbox{\url{https://generativelanguage.googleapis.com}}.\par
 \par\noindent\begin{minipage}{\columnwidth}
 \centering
 \begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.25\linewidth}>{\raggedright\arraybackslash}p{0.63\linewidth}@{}}
 \toprule
 Setting & Registered request \\
 \midrule
-Endpoint & generateContent (v1beta)\newline\url{https://generativelanguage.googleapis.com} \\
+Endpoint & generateContent (v1beta) \\
 Reasoning & low via \path{thinking_config.thinking_level} \\
 Structured output & JSON schema via \path{response_json_schema}; JSON MIME type. \\
-Caching & No cache override; implicit caching only. Inputs below 4,096 tokens. \\
+Caching & No explicit caching. Inputs were kept below 4,096 tokens, the registered threshold for Gemini's implicit caching. The API reported no cache counts. \\
 Output cap & 8192 tokens via \path{max_output_tokens} \\
 \bottomrule
 \end{tabular}
@@ -59,14 +62,15 @@ Output cap & 8192 tokens via \path{max_output_tokens} \\
 \end{minipage}\par
 
 \paragraph{Kimi K3.1 Pro.}
-Requested model ID: \path{kimi-k3.1-pro}. Returned in both studies: \path{kimi-k3.1-pro}.
+Requested model ID: \mbox{\lstinline!kimi-k3.1-pro!}.\par Returned in both studies: \mbox{\lstinline!kimi-k3.1-pro!}.\par
+API address: \mbox{\url{https://api.moonshot.ai/v1}}.\par
 \par\noindent\begin{minipage}{\columnwidth}
 \centering
 \begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.25\linewidth}>{\raggedright\arraybackslash}p{0.63\linewidth}@{}}
 \toprule
 Setting & Registered request \\
 \midrule
-Endpoint & Chat Completions (OpenAI-compatible)\newline\url{https://api.moonshot.ai/v1} \\
+Endpoint & Chat Completions (OpenAI-compatible) \\
 Reasoning & low via \path{reasoning_effort} \\
 Structured output & Strict JSON schema via \path{response_format} \\
 Caching & Automatic caching; reported reads, writes and missing fields retained. \\

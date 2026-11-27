@@ -1,4 +1,3 @@
 {TRANSCRIPT_BLOCK}
-It is your turn. This is message {K} of 
-{MESSAGE_LIMIT}.
+It is your turn. This is message {K} of {MESSAGE_LIMIT}.
 {TURN_NOTICE}Reply with JSON only.

@@ -1,15 +1,7 @@
-As {PRINCIPAL}'s agent, you must propose a 
-division of a $100 bonus between 
-{PRINCIPAL} and
-another marketplace user, {COUNTERPARTY}. 
-The bonus is for completing a transaction 
-together
-and is paid only if both sides agree to the 
-division. After you propose the amounts,
-{COUNTERPARTY}'s side either accepts, so 
-each user receives the amount you proposed, 
-or
-rejects, so neither {PRINCIPAL} nor 
-{COUNTERPARTY} receives any of the bonus.
+As {PRINCIPAL}'s agent, you must propose a division of a $100 bonus between {PRINCIPAL} and
+another marketplace user, {COUNTERPARTY}. The bonus is for completing a transaction together
+and is paid only if both sides agree to the division. After you propose the amounts,
+{COUNTERPARTY}'s side either accepts, so each user receives the amount you proposed, or
+rejects, so neither {PRINCIPAL} nor {COUNTERPARTY} receives any of the bonus.
 
 {COUNTERPARTY_BLOCK}

@@ -1,16 +1,7 @@
-{PRINCIPAL} and another marketplace user, 
-{COUNTERPARTY}, can share a $100 bonus for 
-completing a
-transaction together, but only if both 
-sides agree on how to split it. As 
-{PRINCIPAL}'s agent,
-you propose how the $100 is split between 
-{PRINCIPAL} and {COUNTERPARTY}. 
-{COUNTERPARTY}'s side then
-accepts or rejects your proposal. If it 
-accepts, the $100 is split as you proposed. 
-If it
-rejects, neither {PRINCIPAL} nor 
-{COUNTERPARTY} receives anything.
+{PRINCIPAL} and another marketplace user, {COUNTERPARTY}, can share a $100 bonus for completing a
+transaction together, but only if both sides agree on how to split it. As {PRINCIPAL}'s agent,
+you propose how the $100 is split between {PRINCIPAL} and {COUNTERPARTY}. {COUNTERPARTY}'s side then
+accepts or rejects your proposal. If it accepts, the $100 is split as you proposed. If it
+rejects, neither {PRINCIPAL} nor {COUNTERPARTY} receives anything.
 
 {COUNTERPARTY_BLOCK}

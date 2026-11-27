@@ -1,3 +1,2 @@
-{COUNTERPARTY} is represented by an agent. 
-Here is that agent's card:
+{COUNTERPARTY} is represented by an agent. Here is that agent's card:
 {AGENT_CARD}

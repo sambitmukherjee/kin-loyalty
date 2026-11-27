@@ -1,0 +1,408 @@
+{
+  "baseline_commit": "76823a6dd130e79f9dafe878b32cfeb1824efa91",
+  "pdf_sha256": "ddb20d79aeb44cb6f9672d92e7d395ca250d72063042114ee66741ddb1a78c46",
+  "main_and_reference_pdf_text_identical": true,
+  "main_source_files_unchanged": true,
+  "main_pages_pixel_identical": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "inline_literal_occurrences_checked": 68,
+  "inline_literals": [
+    {
+      "source": "appendix/appendices.tex",
+      "literal": "https://github.com/sambitmukherjee/kin-loyalty",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/appendices.tex",
+      "literal": "4e088670c0cc8386eccf8fff01d93d353a230bda",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/appendices.tex",
+      "literal": ".python-version",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/appendices.tex",
+      "literal": "uv.lock",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/appendices.tex",
+      "literal": "results/study1/reproducibility.json",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/appendices.tex",
+      "literal": "results/study2/reproduction-check.json",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/appendices.tex",
+      "literal": "paper/appendix/build_tables.py",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/appendices.tex",
+      "literal": "paper/appendix/number-trace.json",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/appendices.tex",
+      "literal": "store=false",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/appendices.tex",
+      "literal": "preregistration/study1.md",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/appendices.tex",
+      "literal": "usage_summary.csv",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/appendices.tex",
+      "literal": "paper/appendix/prompt-wrapping.json",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/appendices.tex",
+      "literal": "paper/appendix/prompts/",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/appendices.tex",
+      "literal": "asset-manifest.json",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/appendices.tex",
+      "literal": "Orion-1 (Southwind AI)",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/appendices.tex",
+      "literal": "not disclosed",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/appendices.tex",
+      "literal": "configs/study1.yaml",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/appendices.tex",
+      "literal": "configs/study1.yaml",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/appendices.tex",
+      "literal": "preregistration/study1.md",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/appendices.tex",
+      "literal": "[You]",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/appendices.tex",
+      "literal": "[Seller's agent]",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/appendices.tex",
+      "literal": "[Buyer's agent]",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/appendices.tex",
+      "literal": "preregistration/study2.md",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/appendices.tex",
+      "literal": "configs/study2.yaml",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/appendices.tex",
+      "literal": "preregistration/study1.md",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/appendices.tex",
+      "literal": "preregistration/study2.md",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/appendices.tex",
+      "literal": "docs/decisions.md",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/appendices.tex",
+      "literal": "4e088670c0cc8386eccf8fff01d93d353a230bda",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/appendices.tex",
+      "literal": "prereg-study2",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/appendices.tex",
+      "literal": "prereg-study2",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/appendices.tex",
+      "literal": "study2-data",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/appendices.tex",
+      "literal": "docs/study2_main_execution_patch.md",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/appendices.tex",
+      "literal": "docs/decisions.md",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/appendices.tex",
+      "literal": "results/study1/generated/",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/appendices.tex",
+      "literal": "paper/appendix/asset-manifest.json",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/generated/models.tex",
+      "literal": "claude-sonnet-5-5",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/generated/models.tex",
+      "literal": "claude-sonnet-5-5",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/generated/models.tex",
+      "literal": "https://api.anthropic.com",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/generated/models.tex",
+      "literal": "output_config.effort",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/generated/models.tex",
+      "literal": "output_config.format",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/generated/models.tex",
+      "literal": "max_tokens",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/generated/models.tex",
+      "literal": "configs/models.yaml",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/generated/models.tex",
+      "literal": "gpt-6.1-terra",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/generated/models.tex",
+      "literal": "gpt-6.1-terra",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/generated/models.tex",
+      "literal": "https://api.openai.com/v1",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/generated/models.tex",
+      "literal": "reasoning_effort",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/generated/models.tex",
+      "literal": "response_format",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/generated/models.tex",
+      "literal": "max_completion_tokens",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/generated/models.tex",
+      "literal": "configs/models.yaml",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/generated/models.tex",
+      "literal": "gemini-4-hydrogen",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/generated/models.tex",
+      "literal": "gemini-4-hydrogen",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/generated/models.tex",
+      "literal": "https://generativelanguage.googleapis.com",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/generated/models.tex",
+      "literal": "thinking_config.thinking_level",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/generated/models.tex",
+      "literal": "response_json_schema",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/generated/models.tex",
+      "literal": "max_output_tokens",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/generated/models.tex",
+      "literal": "configs/models.yaml",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/generated/models.tex",
+      "literal": "kimi-k3.1-pro",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/generated/models.tex",
+      "literal": "kimi-k3.1-pro",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/generated/models.tex",
+      "literal": "https://api.moonshot.ai/v1",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/generated/models.tex",
+      "literal": "reasoning_effort",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/generated/models.tex",
+      "literal": "response_format",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/generated/models.tex",
+      "literal": "max_completion_tokens",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/generated/models.tex",
+      "literal": "configs/models.yaml",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/generated/study2-descriptives.tex",
+      "literal": "results/study2/main/tables/pair_condition_descriptives.csv",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/generated/tags.tex",
+      "literal": "prereg-study1",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/generated/tags.tex",
+      "literal": "study1-data",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/generated/tags.tex",
+      "literal": "prereg-study2",
+      "matches_pdf": true
+    },
+    {
+      "source": "appendix/generated/tags.tex",
+      "literal": "study2-data",
+      "matches_pdf": true
+    }
+  ],
+  "unmatched_inline_literals": [],
+  "leftover_phrases_present": [],
+  "listing_caption_labels": 37,
+  "listing_37_price_phrase_unbroken": true,
+  "generated_table_hashes_match": true,
+  "generated_tables": 107,
+  "traced_numeric_cells": 1959,
+  "display_changes": 49,
+  "old_pdf_pages": 37,
+  "new_pdf_pages": 34,
+  "new_analysis_run": false,
+  "appendix_fix_pass_visual_review": {
+    "pdf_sha256": "ddb20d79aeb44cb6f9672d92e7d395ca250d72063042114ee66741ddb1a78c46",
+    "pages_inspected": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34
+    ],
+    "all_listing_captions_and_bodies_together": true,
+    "clipped_table_or_figure": false,
+    "overlapping_content": false,
+    "missing_glyph": false,
+    "remaining_native_float_or_column_gaps": true,
+    "G6_no_large_gaps_fully_satisfied": false
+  },
+  "appendix_fix_pass_main_comparison_commit": "76823a6dd130e79f9dafe878b32cfeb1824efa91"
+}

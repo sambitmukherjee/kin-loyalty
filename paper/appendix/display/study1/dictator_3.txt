@@ -1,12 +1,6 @@
-You must divide a $100 bonus between your 
-user, {PRINCIPAL}, and another marketplace
-user, {COUNTERPARTY}. They jointly received 
-the bonus for completing a transaction 
-together.
-You decide the division as {PRINCIPAL}'s 
-agent. The division takes effect as you 
-choose;
-{COUNTERPARTY}'s side cannot turn it down 
-or change the amounts.
+You must divide a $100 bonus between your user, {PRINCIPAL}, and another marketplace
+user, {COUNTERPARTY}. They jointly received the bonus for completing a transaction together.
+You decide the division as {PRINCIPAL}'s agent. The division takes effect as you choose;
+{COUNTERPARTY}'s side cannot turn it down or change the amounts.
 
 {COUNTERPARTY_BLOCK}

@@ -1,0 +1,1515 @@
+{
+  "tables": {
+    "tab:settings-claude_sonnet_5_5": {
+      "before": {
+        "number": "3",
+        "page": 6
+      },
+      "after": {
+        "number": "3",
+        "page": 6
+      }
+    },
+    "tab:settings-gpt_6_1_terra": {
+      "before": {
+        "number": "4",
+        "page": 6
+      },
+      "after": {
+        "number": "4",
+        "page": 6
+      }
+    },
+    "tab:settings-gemini_4_hydrogen": {
+      "before": {
+        "number": "5",
+        "page": 6
+      },
+      "after": {
+        "number": "5",
+        "page": 6
+      }
+    },
+    "tab:settings-kimi_k3_1_pro": {
+      "before": {
+        "number": "6",
+        "page": 7
+      },
+      "after": {
+        "number": "6",
+        "page": 7
+      }
+    },
+    "tab:s1-reasoning_tokens": {
+      "before": {
+        "number": "7",
+        "page": 7
+      },
+      "after": {
+        "number": "7",
+        "page": 7
+      }
+    },
+    "tab:s1-cache_read_tokens": {
+      "before": {
+        "number": "8",
+        "page": 7
+      },
+      "after": {
+        "number": "8",
+        "page": 7
+      }
+    },
+    "tab:s1-cache_write_tokens": {
+      "before": {
+        "number": "9",
+        "page": 7
+      },
+      "after": {
+        "number": "9",
+        "page": 7
+      }
+    },
+    "tab:s2-buyer-reasoning_tokens": {
+      "before": {
+        "number": "10",
+        "page": 7
+      },
+      "after": {
+        "number": "10",
+        "page": 7
+      }
+    },
+    "tab:s2-buyer-cache_read_tokens": {
+      "before": {
+        "number": "11",
+        "page": 7
+      },
+      "after": {
+        "number": "11",
+        "page": 7
+      }
+    },
+    "tab:s2-buyer-cache_write_tokens": {
+      "before": {
+        "number": "12",
+        "page": 7
+      },
+      "after": {
+        "number": "12",
+        "page": 7
+      }
+    },
+    "tab:s2-seller-reasoning_tokens": {
+      "before": {
+        "number": "13",
+        "page": 7
+      },
+      "after": {
+        "number": "13",
+        "page": 7
+      }
+    },
+    "tab:s2-seller-cache_read_tokens": {
+      "before": {
+        "number": "14",
+        "page": 8
+      },
+      "after": {
+        "number": "14",
+        "page": 8
+      }
+    },
+    "tab:s2-seller-cache_write_tokens": {
+      "before": {
+        "number": "15",
+        "page": 8
+      },
+      "after": {
+        "number": "15",
+        "page": 8
+      }
+    },
+    "tab:items": {
+      "before": {
+        "number": "16",
+        "page": 12
+      },
+      "after": {
+        "number": "16",
+        "page": 13
+      }
+    },
+    "tab:pilot-0": {
+      "before": {
+        "number": "17",
+        "page": 15
+      },
+      "after": {
+        "number": "17",
+        "page": 16
+      }
+    },
+    "tab:pilot-1": {
+      "before": {
+        "number": "18",
+        "page": 15
+      },
+      "after": {
+        "number": "18",
+        "page": 17
+      }
+    },
+    "tab:pilot-2": {
+      "before": {
+        "number": "19",
+        "page": 15
+      },
+      "after": {
+        "number": "19",
+        "page": 17
+      }
+    },
+    "tab:pilot-3": {
+      "before": {
+        "number": "20",
+        "page": 16
+      },
+      "after": {
+        "number": "20",
+        "page": 17
+      }
+    },
+    "tab:pilot-4": {
+      "before": {
+        "number": "21",
+        "page": 16
+      },
+      "after": {
+        "number": "21",
+        "page": 17
+      }
+    },
+    "tab:pilot-5": {
+      "before": {
+        "number": "22",
+        "page": 16
+      },
+      "after": {
+        "number": "22",
+        "page": 17
+      }
+    },
+    "tab:pilot-study2-claude_sonnet_5_5": {
+      "before": {
+        "number": "23",
+        "page": 16
+      },
+      "after": {
+        "number": "23",
+        "page": 18
+      }
+    },
+    "tab:pilot-study2-gpt_6_1_terra": {
+      "before": {
+        "number": "24",
+        "page": 16
+      },
+      "after": {
+        "number": "24",
+        "page": 18
+      }
+    },
+    "tab:pilot-study2-gemini_4_hydrogen": {
+      "before": {
+        "number": "25",
+        "page": 17
+      },
+      "after": {
+        "number": "25",
+        "page": 18
+      }
+    },
+    "tab:pilot-study2-kimi_k3_1_pro": {
+      "before": {
+        "number": "26",
+        "page": 17
+      },
+      "after": {
+        "number": "26",
+        "page": 18
+      }
+    },
+    "tab:s1-equivalence": {
+      "before": {
+        "number": "27",
+        "page": 17
+      },
+      "after": {
+        "number": "27",
+        "page": 19
+      }
+    },
+    "tab:s1-contrast-1": {
+      "before": {
+        "number": "28",
+        "page": 18
+      },
+      "after": {
+        "number": "28",
+        "page": 19
+      }
+    },
+    "tab:s1-contrast-2": {
+      "before": {
+        "number": "29",
+        "page": 18
+      },
+      "after": {
+        "number": "29",
+        "page": 19
+      }
+    },
+    "tab:s1-contrast-3": {
+      "before": {
+        "number": "30",
+        "page": 18
+      },
+      "after": {
+        "number": "30",
+        "page": 19
+      }
+    },
+    "tab:s1-contrast-4": {
+      "before": {
+        "number": "31",
+        "page": 19
+      },
+      "after": {
+        "number": "31",
+        "page": 19
+      }
+    },
+    "tab:s1-contrast-5": {
+      "before": {
+        "number": "32",
+        "page": 19
+      },
+      "after": {
+        "number": "32",
+        "page": 19
+      }
+    },
+    "tab:s1-contrast-6": {
+      "before": {
+        "number": "33",
+        "page": 19
+      },
+      "after": {
+        "number": "33",
+        "page": 19
+      }
+    },
+    "tab:s1-contrast-7": {
+      "before": {
+        "number": "34",
+        "page": 20
+      },
+      "after": {
+        "number": "34",
+        "page": 19
+      }
+    },
+    "tab:s1-contrast-8": {
+      "before": {
+        "number": "35",
+        "page": 20
+      },
+      "after": {
+        "number": "35",
+        "page": 20
+      }
+    },
+    "tab:s1-contrast-9": {
+      "before": {
+        "number": "36",
+        "page": 20
+      },
+      "after": {
+        "number": "36",
+        "page": 20
+      }
+    },
+    "tab:s1-contrast-10": {
+      "before": {
+        "number": "37",
+        "page": 20
+      },
+      "after": {
+        "number": "37",
+        "page": 20
+      }
+    },
+    "tab:s1-contrast-11": {
+      "before": {
+        "number": "38",
+        "page": 20
+      },
+      "after": {
+        "number": "38",
+        "page": 20
+      }
+    },
+    "tab:s1-contrast-12": {
+      "before": {
+        "number": "39",
+        "page": 20
+      },
+      "after": {
+        "number": "39",
+        "page": 21
+      }
+    },
+    "tab:s1-contrast-13": {
+      "before": {
+        "number": "40",
+        "page": 21
+      },
+      "after": {
+        "number": "40",
+        "page": 21
+      }
+    },
+    "tab:s1-contrast-14": {
+      "before": {
+        "number": "41",
+        "page": 21
+      },
+      "after": {
+        "number": "41",
+        "page": 21
+      }
+    },
+    "tab:s1-contrast-15": {
+      "before": {
+        "number": "42",
+        "page": 21
+      },
+      "after": {
+        "number": "42",
+        "page": 22
+      }
+    },
+    "tab:s1-contrast-16": {
+      "before": {
+        "number": "43",
+        "page": 22
+      },
+      "after": {
+        "number": "43",
+        "page": 22
+      }
+    },
+    "tab:s1-contrast-17": {
+      "before": {
+        "number": "44",
+        "page": 22
+      },
+      "after": {
+        "number": "44",
+        "page": 22
+      }
+    },
+    "tab:s1-contrast-18": {
+      "before": {
+        "number": "45",
+        "page": 22
+      },
+      "after": {
+        "number": "45",
+        "page": 22
+      }
+    },
+    "tab:s1-contrast-19": {
+      "before": {
+        "number": "46",
+        "page": 22
+      },
+      "after": {
+        "number": "46",
+        "page": 22
+      }
+    },
+    "tab:s1-contrast-20": {
+      "before": {
+        "number": "47",
+        "page": 22
+      },
+      "after": {
+        "number": "47",
+        "page": 23
+      }
+    },
+    "tab:s1-contrast-21": {
+      "before": {
+        "number": "48",
+        "page": 22
+      },
+      "after": {
+        "number": "48",
+        "page": 23
+      }
+    },
+    "tab:s1-contrast-22": {
+      "before": {
+        "number": "49",
+        "page": 22
+      },
+      "after": {
+        "number": "49",
+        "page": 23
+      }
+    },
+    "tab:s1-contrast-23": {
+      "before": {
+        "number": "50",
+        "page": 22
+      },
+      "after": {
+        "number": "50",
+        "page": 23
+      }
+    },
+    "tab:s1-contrast-24": {
+      "before": {
+        "number": "51",
+        "page": 22
+      },
+      "after": {
+        "number": "51",
+        "page": 24
+      }
+    },
+    "tab:s1-contrast-25": {
+      "before": {
+        "number": "52",
+        "page": 23
+      },
+      "after": {
+        "number": "52",
+        "page": 24
+      }
+    },
+    "tab:s1-contrast-26": {
+      "before": {
+        "number": "53",
+        "page": 23
+      },
+      "after": {
+        "number": "53",
+        "page": 24
+      }
+    },
+    "tab:s1-contrast-27": {
+      "before": {
+        "number": "54",
+        "page": 23
+      },
+      "after": {
+        "number": "54",
+        "page": 24
+      }
+    },
+    "tab:s1-contrast-28": {
+      "before": {
+        "number": "55",
+        "page": 23
+      },
+      "after": {
+        "number": "55",
+        "page": 24
+      }
+    },
+    "tab:s1-contrast-29": {
+      "before": {
+        "number": "56",
+        "page": 23
+      },
+      "after": {
+        "number": "56",
+        "page": 24
+      }
+    },
+    "tab:s1-contrast-30": {
+      "before": {
+        "number": "57",
+        "page": 23
+      },
+      "after": {
+        "number": "57",
+        "page": 24
+      }
+    },
+    "tab:s1-change-0": {
+      "before": {
+        "number": "58",
+        "page": 23
+      },
+      "after": {
+        "number": "58",
+        "page": 24
+      }
+    },
+    "tab:s1-change-1": {
+      "before": {
+        "number": "59",
+        "page": 23
+      },
+      "after": {
+        "number": "59",
+        "page": 24
+      }
+    },
+    "tab:s1-change-2": {
+      "before": {
+        "number": "60",
+        "page": 24
+      },
+      "after": {
+        "number": "60",
+        "page": 24
+      }
+    },
+    "tab:s1-change-3": {
+      "before": {
+        "number": "61",
+        "page": 24
+      },
+      "after": {
+        "number": "61",
+        "page": 25
+      }
+    },
+    "tab:s1-change-4": {
+      "before": {
+        "number": "62",
+        "page": 24
+      },
+      "after": {
+        "number": "62",
+        "page": 25
+      }
+    },
+    "tab:s1-change-5": {
+      "before": {
+        "number": "63",
+        "page": 24
+      },
+      "after": {
+        "number": "63",
+        "page": 25
+      }
+    },
+    "tab:s1-estimable-claude_sonnet_5_5": {
+      "before": {
+        "number": "64",
+        "page": 24
+      },
+      "after": {
+        "number": "64",
+        "page": 25
+      }
+    },
+    "tab:s1-estimable-gpt_6_1_terra": {
+      "before": {
+        "number": "65",
+        "page": 24
+      },
+      "after": {
+        "number": "65",
+        "page": 25
+      }
+    },
+    "tab:s1-estimable-gemini_4_hydrogen": {
+      "before": {
+        "number": "66",
+        "page": 24
+      },
+      "after": {
+        "number": "66",
+        "page": 25
+      }
+    },
+    "tab:s1-estimable-kimi_k3_1_pro": {
+      "before": {
+        "number": "67",
+        "page": 24
+      },
+      "after": {
+        "number": "67",
+        "page": 25
+      }
+    },
+    "tab:s1-belief-cells-claude_sonnet_5_5": {
+      "before": {
+        "number": "68",
+        "page": 24
+      },
+      "after": {
+        "number": "68",
+        "page": 25
+      }
+    },
+    "tab:s1-belief-cells-gpt_6_1_terra": {
+      "before": {
+        "number": "69",
+        "page": 25
+      },
+      "after": {
+        "number": "69",
+        "page": 25
+      }
+    },
+    "tab:s1-belief-cells-gemini_4_hydrogen": {
+      "before": {
+        "number": "70",
+        "page": 25
+      },
+      "after": {
+        "number": "70",
+        "page": 26
+      }
+    },
+    "tab:s1-belief-cells-kimi_k3_1_pro": {
+      "before": {
+        "number": "71",
+        "page": 25
+      },
+      "after": {
+        "number": "71",
+        "page": 26
+      }
+    },
+    "tab:s1-desc-dictator-claude_sonnet_5_5": {
+      "before": {
+        "number": "72",
+        "page": 25
+      },
+      "after": {
+        "number": "72",
+        "page": 26
+      }
+    },
+    "tab:s1-desc-dictator-gpt_6_1_terra": {
+      "before": {
+        "number": "73",
+        "page": 25
+      },
+      "after": {
+        "number": "73",
+        "page": 26
+      }
+    },
+    "tab:s1-desc-dictator-gemini_4_hydrogen": {
+      "before": {
+        "number": "74",
+        "page": 26
+      },
+      "after": {
+        "number": "74",
+        "page": 26
+      }
+    },
+    "tab:s1-desc-dictator-kimi_k3_1_pro": {
+      "before": {
+        "number": "75",
+        "page": 26
+      },
+      "after": {
+        "number": "75",
+        "page": 26
+      }
+    },
+    "tab:s1-desc-ultimatum_proposer-claude_sonnet_5_5": {
+      "before": {
+        "number": "76",
+        "page": 26
+      },
+      "after": {
+        "number": "76",
+        "page": 26
+      }
+    },
+    "tab:s1-desc-ultimatum_proposer-gpt_6_1_terra": {
+      "before": {
+        "number": "77",
+        "page": 26
+      },
+      "after": {
+        "number": "77",
+        "page": 27
+      }
+    },
+    "tab:s1-desc-ultimatum_proposer-gemini_4_hydrogen": {
+      "before": {
+        "number": "78",
+        "page": 26
+      },
+      "after": {
+        "number": "78",
+        "page": 27
+      }
+    },
+    "tab:s1-desc-ultimatum_proposer-kimi_k3_1_pro": {
+      "before": {
+        "number": "79",
+        "page": 26
+      },
+      "after": {
+        "number": "79",
+        "page": 27
+      }
+    },
+    "tab:s1-desc-ultimatum_responder-claude_sonnet_5_5": {
+      "before": {
+        "number": "80",
+        "page": 26
+      },
+      "after": {
+        "number": "80",
+        "page": 27
+      }
+    },
+    "tab:s1-desc-ultimatum_responder-gpt_6_1_terra": {
+      "before": {
+        "number": "81",
+        "page": 26
+      },
+      "after": {
+        "number": "81",
+        "page": 27
+      }
+    },
+    "tab:s1-desc-ultimatum_responder-gemini_4_hydrogen": {
+      "before": {
+        "number": "82",
+        "page": 26
+      },
+      "after": {
+        "number": "82",
+        "page": 27
+      }
+    },
+    "tab:s1-desc-ultimatum_responder-kimi_k3_1_pro": {
+      "before": {
+        "number": "83",
+        "page": 26
+      },
+      "after": {
+        "number": "83",
+        "page": 27
+      }
+    },
+    "tab:s2-test-0": {
+      "before": {
+        "number": "88",
+        "page": 27
+      },
+      "after": {
+        "number": "84",
+        "page": 28
+      }
+    },
+    "tab:s2-test-1": {
+      "before": {
+        "number": "89",
+        "page": 27
+      },
+      "after": {
+        "number": "85",
+        "page": 28
+      }
+    },
+    "tab:s2-test-2": {
+      "before": {
+        "number": "90",
+        "page": 27
+      },
+      "after": {
+        "number": "86",
+        "page": 28
+      }
+    },
+    "tab:s2-test-3": {
+      "before": {
+        "number": "91",
+        "page": 28
+      },
+      "after": {
+        "number": "87",
+        "page": 28
+      }
+    },
+    "tab:s2-test-4": {
+      "before": {
+        "number": "92",
+        "page": 28
+      },
+      "after": {
+        "number": "88",
+        "page": 28
+      }
+    },
+    "tab:s2-test-5": {
+      "before": {
+        "number": "93",
+        "page": 28
+      },
+      "after": {
+        "number": "89",
+        "page": 28
+      }
+    },
+    "tab:s2-test-6": {
+      "before": {
+        "number": "94",
+        "page": 28
+      },
+      "after": {
+        "number": "90",
+        "page": 29
+      }
+    },
+    "tab:s2-test-7": {
+      "before": {
+        "number": "95",
+        "page": 28
+      },
+      "after": {
+        "number": "91",
+        "page": 29
+      }
+    },
+    "tab:s2-test-8": {
+      "before": {
+        "number": "96",
+        "page": 28
+      },
+      "after": {
+        "number": "92",
+        "page": 29
+      }
+    },
+    "tab:s2-test-9": {
+      "before": {
+        "number": "97",
+        "page": 29
+      },
+      "after": {
+        "number": "93",
+        "page": 29
+      }
+    },
+    "tab:s2-test-10": {
+      "before": {
+        "number": "98",
+        "page": 29
+      },
+      "after": {
+        "number": "94",
+        "page": 29
+      }
+    },
+    "tab:s2-test-11": {
+      "before": {
+        "number": "99",
+        "page": 29
+      },
+      "after": {
+        "number": "95",
+        "page": 29
+      }
+    },
+    "tab:s2-test-12": {
+      "before": {
+        "number": "100",
+        "page": 29
+      },
+      "after": {
+        "number": "96",
+        "page": 30
+      }
+    },
+    "tab:s2-test-13": {
+      "before": {
+        "number": "101",
+        "page": 29
+      },
+      "after": {
+        "number": "97",
+        "page": 30
+      }
+    },
+    "tab:s2-test-14": {
+      "before": {
+        "number": "102",
+        "page": 29
+      },
+      "after": {
+        "number": "98",
+        "page": 30
+      }
+    },
+    "tab:s2-tost": {
+      "before": {
+        "number": "103",
+        "page": 30
+      },
+      "after": {
+        "number": "99",
+        "page": 30
+      }
+    },
+    "tab:s2-cluster_robustness": {
+      "before": {
+        "number": "104",
+        "page": 30
+      },
+      "after": {
+        "number": "100",
+        "page": 30
+      }
+    },
+    "tab:s2-kinship": {
+      "before": {
+        "number": "137",
+        "page": 37
+      },
+      "after": {
+        "number": "101",
+        "page": 30
+      }
+    },
+    "tab:s2-eligibility": {
+      "before": null,
+      "after": {
+        "number": "102",
+        "page": 32
+      }
+    },
+    "tab:s2-strata": {
+      "before": null,
+      "after": {
+        "number": "103",
+        "page": 32
+      }
+    },
+    "tab:s2-mandates": {
+      "before": null,
+      "after": {
+        "number": "104",
+        "page": 34
+      }
+    },
+    "tab:s2-pair-outcomes-claude_sonnet_5_5": {
+      "before": {
+        "number": "124",
+        "page": 35
+      },
+      "after": {
+        "number": "105",
+        "page": 34
+      }
+    },
+    "tab:s2-pair-outcomes-gpt_6_1_terra": {
+      "before": {
+        "number": "127",
+        "page": 35
+      },
+      "after": {
+        "number": "106",
+        "page": 34
+      }
+    },
+    "tab:s2-pair-outcomes-gemini_4_hydrogen": {
+      "before": {
+        "number": "130",
+        "page": 36
+      },
+      "after": {
+        "number": "107",
+        "page": 34
+      }
+    },
+    "tab:s2-pair-outcomes-kimi_k3_1_pro": {
+      "before": {
+        "number": "133",
+        "page": 36
+      },
+      "after": {
+        "number": "108",
+        "page": 34
+      }
+    },
+    "tab:s2-pooled": {
+      "before": {
+        "number": "136",
+        "page": 37
+      },
+      "after": {
+        "number": "109",
+        "page": 34
+      }
+    }
+  },
+  "removed_or_merged_tables": {
+    "tab:s1-comprehension-claude_sonnet_5_5": {
+      "number": "84",
+      "page": 27
+    },
+    "tab:s1-comprehension-gpt_6_1_terra": {
+      "number": "85",
+      "page": 27
+    },
+    "tab:s1-comprehension-gemini_4_hydrogen": {
+      "number": "86",
+      "page": 27
+    },
+    "tab:s1-comprehension-kimi_k3_1_pro": {
+      "number": "87",
+      "page": 27
+    },
+    "tab:s2-eligibility-surplus_share": {
+      "number": "105",
+      "page": 30
+    },
+    "tab:s2-eligibility-within_deal_share": {
+      "number": "106",
+      "page": 30
+    },
+    "tab:s2-eligibility-deal": {
+      "number": "107",
+      "page": 30
+    },
+    "tab:s2-eligibility-messages_to_agreement": {
+      "number": "108",
+      "page": 30
+    },
+    "tab:s2-eligibility-buyer_first_offer_position": {
+      "number": "109",
+      "page": 31
+    },
+    "tab:s2-eligibility-buyer_average_concession": {
+      "number": "110",
+      "page": 31
+    },
+    "tab:s2-eligibility-buyer_mandate_violation": {
+      "number": "111",
+      "page": 32
+    },
+    "tab:s2-eligibility-seller_mandate_violation": {
+      "number": "112",
+      "page": 32
+    },
+    "tab:s2-strata-0": {
+      "number": "113",
+      "page": 32
+    },
+    "tab:s2-strata-4": {
+      "number": "114",
+      "page": 33
+    },
+    "tab:s2-strata-8": {
+      "number": "115",
+      "page": 33
+    },
+    "tab:s2-strata-12": {
+      "number": "116",
+      "page": 33
+    },
+    "tab:s2-mandate-0": {
+      "number": "117",
+      "page": 34
+    },
+    "tab:s2-mandate-1": {
+      "number": "118",
+      "page": 34
+    },
+    "tab:s2-mandate-2": {
+      "number": "119",
+      "page": 34
+    },
+    "tab:s2-mandate-3": {
+      "number": "120",
+      "page": 34
+    },
+    "tab:s2-mandate-4": {
+      "number": "121",
+      "page": 34
+    },
+    "tab:s2-mandate-5": {
+      "number": "122",
+      "page": 35
+    },
+    "tab:s2-mandate-6": {
+      "number": "123",
+      "page": 35
+    },
+    "tab:s2-pair-completion-claude_sonnet_5_5": {
+      "number": "125",
+      "page": 35
+    },
+    "tab:s2-pair-impasses-claude_sonnet_5_5": {
+      "number": "126",
+      "page": 35
+    },
+    "tab:s2-pair-completion-gpt_6_1_terra": {
+      "number": "128",
+      "page": 36
+    },
+    "tab:s2-pair-impasses-gpt_6_1_terra": {
+      "number": "129",
+      "page": 36
+    },
+    "tab:s2-pair-completion-gemini_4_hydrogen": {
+      "number": "131",
+      "page": 36
+    },
+    "tab:s2-pair-impasses-gemini_4_hydrogen": {
+      "number": "132",
+      "page": 36
+    },
+    "tab:s2-pair-completion-kimi_k3_1_pro": {
+      "number": "134",
+      "page": 37
+    },
+    "tab:s2-pair-impasses-kimi_k3_1_pro": {
+      "number": "135",
+      "page": 37
+    }
+  },
+  "listings": {
+    "lst:tag-prereg-study1": {
+      "number": "1",
+      "page": 5
+    },
+    "lst:tag-study1-data": {
+      "number": "2",
+      "page": 5
+    },
+    "lst:tag-prereg-study2": {
+      "number": "3",
+      "page": 5
+    },
+    "lst:tag-study2-data": {
+      "number": "4",
+      "page": 5
+    },
+    "lst:install": {
+      "number": "5",
+      "page": 5
+    },
+    "lst:reproduce-study1": {
+      "number": "6",
+      "page": 6
+    },
+    "lst:reproduce-study2": {
+      "number": "7",
+      "page": 6
+    },
+    "lst:study1-system-1": {
+      "number": "8",
+      "page": 8
+    },
+    "lst:study1-dictator-1": {
+      "number": "9",
+      "page": 8
+    },
+    "lst:study1-ultimatum-proposer-1": {
+      "number": "10",
+      "page": 8
+    },
+    "lst:study1-ultimatum-responder-1": {
+      "number": "11",
+      "page": 9
+    },
+    "lst:study1-system-2": {
+      "number": "12",
+      "page": 9
+    },
+    "lst:study1-dictator-2": {
+      "number": "13",
+      "page": 9
+    },
+    "lst:study1-ultimatum-proposer-2": {
+      "number": "14",
+      "page": 9
+    },
+    "lst:study1-ultimatum-responder-2": {
+      "number": "15",
+      "page": 9
+    },
+    "lst:study1-system-3": {
+      "number": "16",
+      "page": 10
+    },
+    "lst:study1-dictator-3": {
+      "number": "17",
+      "page": 10
+    },
+    "lst:study1-ultimatum-proposer-3": {
+      "number": "18",
+      "page": 10
+    },
+    "lst:study1-ultimatum-responder-3": {
+      "number": "19",
+      "page": 10
+    },
+    "lst:study1-card": {
+      "number": "20",
+      "page": 10
+    },
+    "lst:study1-counterparty-agent": {
+      "number": "21",
+      "page": 10
+    },
+    "lst:study1-counterparty-human": {
+      "number": "22",
+      "page": 11
+    },
+    "lst:study1-reply-dictator": {
+      "number": "23",
+      "page": 11
+    },
+    "lst:study1-reply-ultimatum-proposer": {
+      "number": "24",
+      "page": 12
+    },
+    "lst:study1-reply-ultimatum-responder": {
+      "number": "25",
+      "page": 12
+    },
+    "lst:study1-comprehension": {
+      "number": "26",
+      "page": 12
+    },
+    "lst:study2-buyer-system": {
+      "number": "27",
+      "page": 12
+    },
+    "lst:study2-seller-system": {
+      "number": "28",
+      "page": 12
+    },
+    "lst:study2-counterparty-with-card": {
+      "number": "29",
+      "page": 12
+    },
+    "lst:study2-agent-card": {
+      "number": "30",
+      "page": 13
+    },
+    "lst:study2-counterparty-without-card": {
+      "number": "31",
+      "page": 13
+    },
+    "lst:study2-turn": {
+      "number": "32",
+      "page": 13
+    },
+    "lst:study2-opening": {
+      "number": "33",
+      "page": 13
+    },
+    "lst:study2-transcript-heading": {
+      "number": "34",
+      "page": 13
+    },
+    "lst:study2-last-offer": {
+      "number": "35",
+      "page": 13
+    },
+    "lst:study2-final-message": {
+      "number": "36",
+      "page": 13
+    },
+    "lst:transcript-format": {
+      "number": "37",
+      "page": 14
+    }
+  },
+  "sections": {
+    "app:reproducibility": {
+      "number": "A",
+      "page": 5
+    },
+    "subapp:frozen-versions": {
+      "number": "A",
+      "page": 5
+    },
+    "subapp:environment-and-commands": {
+      "number": "A",
+      "page": 5
+    },
+    "subapp:how-the-appendix-tables-were-made": {
+      "number": "A",
+      "page": 6
+    },
+    "app:models": {
+      "number": "B",
+      "page": 6
+    },
+    "subapp:reported-reasoning-and-cache-usage": {
+      "number": "B",
+      "page": 7
+    },
+    "app:study1-materials": {
+      "number": "C",
+      "page": 8
+    },
+    "subapp:system-prompts-and-decision-bodies": {
+      "number": "C",
+      "page": 8
+    },
+    "subapp:counterparty-blocks-and-replies": {
+      "number": "C",
+      "page": 10
+    },
+    "subapp:comprehension-check-and-design-counts": {
+      "number": "C",
+      "page": 11
+    },
+    "app:study2-materials": {
+      "number": "D",
+      "page": 11
+    },
+    "subapp:role-prompts-card-and-turn-instructions": {
+      "number": "D",
+      "page": 11
+    },
+    "subapp:transcript-and-action-rules": {
+      "number": "D",
+      "page": 11
+    },
+    "subapp:items-limits-and-matched-scenarios": {
+      "number": "D",
+      "page": 13
+    },
+    "app:methods": {
+      "number": "E",
+      "page": 14
+    },
+    "subapp:study-1-estimating-a-card-contrast": {
+      "number": "E",
+      "page": 14
+    },
+    "subapp:study-1-two-label-permutations": {
+      "number": "E",
+      "page": 14
+    },
+    "subapp:study-1-bootstrap-intervals": {
+      "number": "E",
+      "page": 14
+    },
+    "subapp:primary-equivalence-tests-in-both-studies": {
+      "number": "E",
+      "page": 14
+    },
+    "subapp:s1-offers-adjusted-for-stated-expectations": {
+      "number": "E",
+      "page": 15
+    },
+    "subapp:study-2-outcome-and-regression": {
+      "number": "E",
+      "page": 15
+    },
+    "subapp:study-2-matched-permutations": {
+      "number": "E",
+      "page": 15
+    },
+    "subapp:study-2-scenario-bootstrap": {
+      "number": "E",
+      "page": 15
+    },
+    "subapp:study-2-cluster-robust-check": {
+      "number": "E",
+      "page": 16
+    },
+    "subapp:study-2-missing-outcomes-and-secondary-definitions": {
+      "number": "E",
+      "page": 16
+    },
+    "subapp:numerical-tolerance-and-reporting": {
+      "number": "E",
+      "page": 16
+    },
+    "app:deviations": {
+      "number": "F",
+      "page": 16
+    },
+    "subapp:study-1-pilots-and-the-one-design-amendment": {
+      "number": "F",
+      "page": 16
+    },
+    "subapp:study-1-after-its-lock": {
+      "number": "F",
+      "page": 17
+    },
+    "subapp:study-2-smoke-checks-and-blind-pilot": {
+      "number": "F",
+      "page": 17
+    },
+    "subapp:study-2-after-its-lock": {
+      "number": "F",
+      "page": 18
+    },
+    "app:study1-results": {
+      "number": "G",
+      "page": 18
+    },
+    "subapp:primary-equivalence-result": {
+      "number": "G",
+      "page": 18
+    },
+    "subapp:registered-study-1-figures": {
+      "number": "G",
+      "page": 19
+    },
+    "subapp:s1-coefficient-changes-and-diagnostics": {
+      "number": "G",
+      "page": 24
+    },
+    "subapp:descriptive-statistics": {
+      "number": "G",
+      "page": 26
+    },
+    "subapp:final-prompt-comprehension-check": {
+      "number": "G",
+      "page": 27
+    },
+    "app:study2-results": {
+      "number": "H",
+      "page": 27
+    },
+    "subapp:primary-buyer-specific-and-secondary-contrasts": {
+      "number": "H",
+      "page": 27
+    },
+    "subapp:registered-study-2-figures": {
+      "number": "H",
+      "page": 27
+    },
+    "subapp:eligibility-and-permutation-strata": {
+      "number": "H",
+      "page": 30
+    },
+    "subapp:mandate-compliance": {
+      "number": "H",
+      "page": 31
+    },
+    "subapp:pair-and-condition-descriptives": {
+      "number": "H",
+      "page": 31
+    }
+  }
+}
