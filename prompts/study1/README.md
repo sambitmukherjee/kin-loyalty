@@ -1,48 +1,78 @@
-# Study 1 experiment templates
+# Study 1 prompt templates
 
-The researcher **approved these stimuli, schemas, and name pairs on 2026-11-25**,
-then explicitly approved removal of the principal-interest system sentence in
-all paraphrases on 2026-11-26 as a Phase 7 pre-lock design change. The final
-system prompts contain two sentences. All other stimulus text is unchanged.
-The three paraphrases retain the same economics and protected text. Registration
-status and the immutable snapshot are recorded in `preregistration/study1.md`
-and the `prereg-study1` tag. Main collection and analysis are complete; these
-files preserve the registered stimuli. Another experiment should use separate
-copies rather than changing these study inputs.
+These files are the registered stimuli used for the completed Study 1 collection.
+They cover three wordings of the dictator, ultimatum proposer and ultimatum
+responder tasks. The economics and condition text remain the same across
+wordings; the person names and some phrasing vary.
 
-| Paraphrase | Names | System | Dictator | Proposer | Responder |
+Read the [complete rendered review](../../docs/study1_prompt_review.md) to see
+what is sent to a model, including the response schemas. For another experiment,
+follow the [worked guide](../../docs/running_a_new_experiment.md) to copy and
+edit separate templates. The [registration index](../../preregistration/README.md)
+identifies the frozen versions, and the
+[reproduction guide](../../docs/reproducing_the_paper.md) explains how the paper
+uses the recorded responses.
+
+## Source files
+
+| Wording | Names | System message | Dictator body | Proposer body | Responder body |
 | --- | --- | --- | --- | --- | --- |
-| 1 | Alex / Jordan | [system](system_1.txt) | [game](dictator_1.txt) | [game](ultimatum_proposer_1.txt) | [game](ultimatum_responder_1.txt) |
-| 2 | Riley / Taylor | [system](system_2.txt) | [game](dictator_2.txt) | [game](ultimatum_proposer_2.txt) | [game](ultimatum_responder_2.txt) |
-| 3 | Casey / Morgan | [system](system_3.txt) | [game](dictator_3.txt) | [game](ultimatum_proposer_3.txt) | [game](ultimatum_responder_3.txt) |
+| 1 | Alex / Jordan | [system_1.txt](system_1.txt) | [dictator_1.txt](dictator_1.txt) | [ultimatum_proposer_1.txt](ultimatum_proposer_1.txt) | [ultimatum_responder_1.txt](ultimatum_responder_1.txt) |
+| 2 | Riley / Taylor | [system_2.txt](system_2.txt) | [dictator_2.txt](dictator_2.txt) | [ultimatum_proposer_2.txt](ultimatum_proposer_2.txt) | [ultimatum_responder_2.txt](ultimatum_responder_2.txt) |
+| 3 | Casey / Morgan | [system_3.txt](system_3.txt) | [dictator_3.txt](dictator_3.txt) | [ultimatum_proposer_3.txt](ultimatum_proposer_3.txt) | [ultimatum_responder_3.txt](ultimatum_responder_3.txt) |
 
-Card fields, their order, and condition-specific model text live in
-`configs/study1.yaml`. [counterparty_agent.txt](counterparty_agent.txt) supplies the
-protected introduction and the slot for the rendered card; the human condition
-uses [counterparty_human.txt](counterparty_human.txt). The card renderer adds
-exactly two spaces before each field. It does not add ratings or trust cues.
+The shared introductions are [counterparty_agent.txt](counterparty_agent.txt)
+and [counterparty_human.txt](counterparty_human.txt). Reply instructions are in
+[reply_dictator.txt](reply_dictator.txt),
+[reply_ultimatum_proposer.txt](reply_ultimatum_proposer.txt),
+[reply_ultimatum_responder.txt](reply_ultimatum_responder.txt) and
+[reply_comprehension.txt](reply_comprehension.txt).
 
-Each game body is followed by two newlines and its shared literal instruction
-file: [dictator](reply_dictator.txt), [proposer](reply_ultimatum_proposer.txt), or
-[responder](reply_ultimatum_responder.txt). JSON braces in these files are never
-treated as template placeholders. The first system sentence is identical across
-paraphrases; the second sentence and game-description wording vary.
+## How a request is assembled
 
-The separate comprehension check reuses the dictator system message and body,
-including its card, but replaces the decision instructions with
-[reply_comprehension.txt](reply_comprehension.txt). It excludes the human label
-and never requests a bonus decision. The three decision tasks never ask about a
-model match.
+For example, an Alex/Jordan dictator request uses `system_1.txt` as its system
+message and `dictator_1.txt` as the start of its user message. The renderer fills
+in the focal model, lab and person names. It replaces the counterparty block
+with the human description or the agent introduction and card, according to
+the condition. The user message ends with two newlines followed by the literal
+contents of `reply_dictator.txt`.
 
-Source files end with a newline. Rendering removes that one file terminator,
-preserves all internal spacing/newlines, and sends messages without trailing
-newlines. Card blocks and reply instructions are otherwise identical across
-paraphrases apart from the specified names.
+The card's fields, order and model text are defined in
+[configs/study1.yaml](../../configs/study1.yaml). The card renderer puts exactly
+two spaces before each field and adds no ratings or trust cues. The five labels
+are `own_model`, `other_lab`, `fictional`, `not_disclosed` and `human`. An
+`other_lab` request names a specific eligible model; the manifest determines
+which name is used for each decision.
 
-The [complete review](../../docs/study1_prompt_review.md) contains every
-decision × label × paraphrase for Claude Sonnet 5.5, every eligible other-lab name,
-and all separate comprehension variants. Prompt approval is recorded in
-`configs/study1.yaml` and `docs/decisions.md`. Real batches need their own approval.
+The separate comprehension check uses the dictator system message and body,
+including its card, but replaces the monetary decision instruction with
+`reply_comprehension.txt`. It excludes the human condition. Decision requests
+do not include that model-match question.
 
-Local instructions for the coding agent belong in the separate, ignored
-`codex_prompts/` directory. Do not copy them into this directory.
+Source files end with a newline. Rendering removes that one file terminator
+and preserves internal spaces and line breaks. JSON braces in the shared reply
+instructions remain literal text. The first system sentence is identical across
+wordings; the second and the game descriptions vary.
+
+## Regenerate the readable review
+
+After the [main setup](../../README.md#set-up-a-current-checkout), run this from
+the repository root using a fresh output path:
+
+```sh
+mkdir -p scratch/prompt-reviews
+uv run --offline --locked kinloyalty review-prompts \
+  --config configs/study1.yaml --model claude_sonnet_5_5 \
+  --output scratch/prompt-reviews/study1.md
+```
+
+The selected model's review contains 63 decision examples and 18 comprehension
+examples, including each eligible other-lab name. These are coverage examples,
+not observed responses or the allocation schedule. The command reads templates
+and configuration; it makes no model calls and needs no credentials.
+
+The final two-sentence system prompts followed an approved change before
+registration. The [decision log](../../docs/decisions.md) and
+[re-pilot report](../../docs/repilot_20261126_report.md) preserve that history.
+Local coding-agent instructions belong in the separate ignored
+`codex_prompts/` directory, not among these experiment templates.

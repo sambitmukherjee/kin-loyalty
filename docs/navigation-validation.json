@@ -1,0 +1,141 @@
+{
+  "purpose": "Final documentation navigation and README verification after the five documentation phases.",
+  "date": "2026-11-28",
+  "baseline_commit": "5d5beaa805a479d04502f5858b5bf16d47697fdb",
+  "scope": {
+    "existing_readmes_updated": [
+      "README.md",
+      "data/study1/README.md",
+      "data/study2/README.md",
+      "preregistration/README.md",
+      "prompts/study1/README.md",
+      "prompts/study2/README.md",
+      "results/study1/README.md",
+      "results/study2/README.md"
+    ],
+    "new_index": "docs/README.md",
+    "paper_and_appendix_readmes_already_updated_in_phase_3": true
+  },
+  "navigation": {
+    "markdown_files_checked": 62,
+    "local_paths_and_heading_anchors_checked": 388,
+    "broken_links": [],
+    "reader_journeys_reviewed": {
+      "reproduce_the_paper": [
+        "README.md#start-here",
+        "docs/reproducing_the_paper.md",
+        "preregistration/README.md",
+        "data/study1/README.md",
+        "data/study2/README.md",
+        "results/study1/README.md",
+        "results/study2/README.md",
+        "paper/README.md"
+      ],
+      "run_another_experiment": [
+        "README.md#start-here",
+        "docs/running_a_new_experiment.md",
+        "prompts/study1/README.md",
+        "prompts/study2/README.md",
+        "docs/adding_a_model.md",
+        "docs/adding_a_game.md"
+      ]
+    },
+    "external_urls": "Clone URL checked against the configured origin; other external links were not rechecked over the network in this phase."
+  },
+  "executed_examples": [
+    {
+      "file": "README.md",
+      "block": 1,
+      "command_sha256": "1ad60c1abfa1dffddd03e5a518d5b9fd5715dedd348614a19c4086d354d5e1b5",
+      "exit_code": 0,
+      "clone_lines_executed": false
+    },
+    {
+      "file": "README.md",
+      "block": 2,
+      "command_sha256": "d0788da1c0134ce838e3f480fcfb23e01c2d4865d7531b247725189ddfcb6cf7",
+      "exit_code": 0,
+      "clone_lines_executed": null
+    },
+    {
+      "file": "prompts/study1/README.md",
+      "block": 1,
+      "command_sha256": "da8b6a365c06867990ff72727c60eb8c859a9b8c41ba465712c78d4339818185",
+      "exit_code": 0,
+      "clone_lines_executed": null
+    },
+    {
+      "file": "prompts/study2/README.md",
+      "block": 1,
+      "command_sha256": "ac0ba176c87d2179a78a2a15f02df7a76a95d32b13d801b433d35b60fc227c41",
+      "exit_code": 0,
+      "clone_lines_executed": null
+    }
+  ],
+  "setup_check": "uv sync and version commands executed in the existing checkout with uv offline. The clone/cd lines were syntax-checked and the clone URL matched origin; the repository was not downloaded again.",
+  "mock_example": {
+    "planned": 4,
+    "first_valid": 4,
+    "first_calls": 4,
+    "resume_already_final": 4,
+    "resume_calls": 0,
+    "all_attempts_marked_synthetic": true
+  },
+  "prompt_reviews": {
+    "study1": {
+      "byte_identical_to_saved_review": true,
+      "sha256": "364f85a0451aba5837750f0eca48853f9705bdb822440e869b6ca2c487c1ad6d"
+    },
+    "study2": {
+      "byte_identical_to_saved_review": true,
+      "sha256": "efc39ef410303fb9b9275b4a675ef4652638919afd390e0270a35826675aedb9"
+    }
+  },
+  "shell_syntax": {
+    "readmes": 11,
+    "shell_blocks": 16,
+    "failures": 0
+  },
+  "network_controls": {
+    "uv_offline": true,
+    "socket_connections_blocked_for_executed_examples": true,
+    "api_keys_loaded": false,
+    "model_provider_calls": 0
+  },
+  "historical_analysis_command_blocks_unchanged": true,
+  "prior_workflow_verification": {
+    "frozen_analysis": "docs/reproduction-validation.json",
+    "paper_build": "paper/portability-validation.json",
+    "worked_mock_examples": "docs/new-experiment-validation.json",
+    "basis_for_reuse": "The detailed guides, scientific source/inputs/outputs and paper tooling are unchanged in this phase. Full analyses, PDF compilation and the longer mock workflows were not repeated."
+  },
+  "preservation": {
+    "all_preexisting_tracked_files_outside_the_eight_updated_readmes_byte_identical": true,
+    "both_scientific_output_inventories_verified": true,
+    "study_code_config_prompt_text_logs_results_protocols_lockfiles_and_historical_reports_unchanged": true,
+    "paper_source_pdf_assets_and_official_kit_unchanged": true,
+    "original_verification_records_unchanged": true,
+    "frozen_tag_commits": {
+      "prereg-study1": "d4d6ff9c1f7b84bc2b4f90578873f18dbc9fb98a",
+      "study1-data": "f7dd0a690a5089b245fff365acf002fcfd7b056a",
+      "prereg-study2": "c277054e182eb3a81a475108fa3439e96e869bb0",
+      "study2-data": "3b3b85d77c619fcc6fb093a93915e5ef769cbf53"
+    },
+    "codex_prompts_tracked": false,
+    "codex_prompts_ignored": true,
+    "analysis_runs_this_phase": 0
+  },
+  "readme_sha256": {
+    "README.md": "5ffced53644f6c8098e611c51f1f1f3c55cefc1d13ff304cef9e2fb1f9d8a06b",
+    "docs/README.md": "b65c4420578a8cfd9eb8c88f7278e7d6bc764a87ba407d9d9f43dd27506ddc41",
+    "data/study1/README.md": "8a778c83ecdf0574421ad263b5dc51cc10cb278c8de19a0488a08292d7142b63",
+    "data/study2/README.md": "4903522470acfcd6942d06a9b902f44f4052a28bac23c54c488838899f4eff9c",
+    "results/study1/README.md": "ee0712542aabf944f9bb3a8e8e34914dd70f133eb32545786a087f1bd6ac6569",
+    "results/study2/README.md": "4692b64f8ca2e4c9a2bd4b357b03393fb479a67221931582c6ac248b3812ed2e",
+    "prompts/study1/README.md": "fc51acb50bb41b198a29df91ed7757a90255bb4cf5e2ae79ea199cfb1d79d630",
+    "prompts/study2/README.md": "023806a57e079001c28b118df8249c29f0a0f95ef88bdb168e22b5f173982630",
+    "preregistration/README.md": "c8391c0512f528da2a7a66e72de049dd159d0f3f67d06981be421303824f0ade",
+    "paper/README.md": "91de945d355eae07f583b8fcd5d1c6bfd5f9a5286f6bf975714ccaac20358998",
+    "paper/appendix/README.md": "1298501834e40f80fa605af48e4af17a7f9fbb442964e0adc5fa536871b5bf06"
+  }
+}

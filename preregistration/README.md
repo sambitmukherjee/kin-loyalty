@@ -1,5 +1,11 @@
 # Pre-registrations and frozen data versions
 
+To reproduce the completed studies, follow the
+[reproduction guide](../docs/reproducing_the_paper.md), which selects the data
+tags below and checks their code and outputs. For a new experiment, start with
+the [worked guide](../docs/running_a_new_experiment.md) and separate inputs;
+these documents remain the historical registrations for the original studies.
+
 Both studies were registered before their main collections. The registrations
 and completed data collections have separate annotated Git tags. A registration
 tag preserves the protocol, code, prompts, settings and planned requests before
@@ -15,6 +21,9 @@ the code present when it was frozen.
 
 Both registration commits and tags were pushed before their respective main
 collections. The dated records are preserved in the [decision log](../docs/decisions.md).
+
+## Protocols and analysis outputs
+
 The [Study 1 protocol](study1.md) defines the hypotheses and estimands, including
 P2. The [Study 2 addendum](study2.md) specifies the negotiation implementation
 and analysis. Their hash inventories are [study1-lock.json](study1-lock.json)
@@ -43,3 +52,6 @@ in the [execution patch report](../docs/study2_main_execution_patch.md) and the
 decision log. A data-tag commit identifies the frozen collection snapshot;
 the execution hash inside a record identifies the code that made the call.
 These hashes serve different purposes.
+
+The [documentation index](../docs/README.md) links the data, prompt and result
+indexes for both studies, together with their methods and verification records.
