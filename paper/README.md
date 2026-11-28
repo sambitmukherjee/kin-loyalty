@@ -136,6 +136,10 @@ appendix checks then verify prompt copies, table cells, figures and preservation
 of the main text. `validate_fixes.py` also checks the specific appendix
 corrections recorded against commit `76823a6`; it is a historical preservation
 audit rather than a general validator for a different manuscript.
+The appendix audits allow the exact author-approved title replacement recorded
+in `applied-edits.json`. They compare the remaining text and page layout without
+exempting other content. The [title-change report](title-change-report.md)
+records the current title, build checks and comparison with the preceding PDF.
 
 The commands update `paper/validation.json`, `paper/font-audit.txt`,
 `paper/author-kit-manifest.json` and the appendix validation reports. Review the
@@ -144,8 +148,8 @@ is described in the [appendix correction report](appendix/fix-pass-report.md).
 
 The [portability check](portability-validation.json) records a successful build
 and all three validators using ordinary installed tools, without a Codex runtime.
-All 34 pages matched the published PDF pixel for pixel at 120 dpi, and extracted
-text matched exactly. The regenerated tables, prompts and numerical cells were
+At that revision, all 34 pages matched the committed PDF pixel for pixel at
+120 dpi, and extracted text matched exactly. The regenerated tables, prompts and numerical cells were
 unchanged. PDF bytes can differ between builds even when text and rendering
 match; the published PDF was retained unchanged during that check.
 Regenerated provenance files can also record newer documentation hashes;

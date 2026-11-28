@@ -1,5 +1,9 @@
 # AAAI-27 typesetting report — paper and approved appendices
 
+This report records the earlier appendix correction pass. The subsequent
+author-approved title update and current PDF checks are recorded in the
+[title-change report](title-change-report.md).
+
 ## PDF and build
 
 - **34 pages total**, down from 37 before the appendix correction pass.

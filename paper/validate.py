@@ -7,6 +7,7 @@ import subprocess
 import zipfile
 
 from tool_paths import poppler_tool
+from title_validation import approved_title_edit
 
 PAPER = Path(__file__).resolve().parent
 ROOT = PAPER.parent
@@ -83,6 +84,8 @@ def main():
     # Reading-order extraction keeps wrapped URLs contiguous in two columns;
     # layout extraction can interleave lines from the other column.
     compact_text=re.sub(r'\s+','',run('pdftotext',PAPER/'main.pdf','-'))
+    title_edit=approved_title_edit()
+    assert compact_text.startswith(re.sub(r'\s+','',title_edit['after']))
     assert benchmark['source_url'] in compact_text
     assert 'Version5.0.2.ScoresasofNovember27,2026' in compact_text
     assert not any(line.strip() in ['{','}'] for line in text.splitlines())
@@ -112,7 +115,8 @@ def main():
                 'numeric_source_files_unchanged':True,'permitted_packages':packages,
                 'supplement_bytes':supplement.stat().st_size,'supplement_below_50_mb':True,
                 'pdf_sha256':hashlib.sha256((PAPER/'main.pdf').read_bytes()).hexdigest(),
-                'tex_sha256':hashlib.sha256((PAPER/'main.tex').read_bytes()).hexdigest()}
+                'tex_sha256':hashlib.sha256((PAPER/'main.tex').read_bytes()).hexdigest(),
+                'paper_title':title_edit['after'],'approved_title_edit_verified':True}
     (PAPER/'validation.json').write_text(json.dumps(validation,indent=2)+'\n')
     print(json.dumps(validation,indent=2))
 

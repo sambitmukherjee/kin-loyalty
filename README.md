@@ -5,7 +5,7 @@ agent card says that both agents use the same model? This repository contains th
 prompts, pre-registrations, recorded responses and completed analyses for two
 studies of that question.
 
-**Paper:** [Do AI Agents Favor Their Own Kind? Model Labels Shift One-Shot Splits but Not Mandated Negotiation](paper/main.pdf),
+**Paper:** [Do AI Agents Favor Their Own Kind? Model Labels Shift Ultimatum Choices but Have Little Effect on Negotiation](paper/main.pdf),
 by Sambit Mukherjee, Independent Researcher. The PDF includes the technical
 appendices after the references.
 

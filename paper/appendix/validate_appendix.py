@@ -16,6 +16,7 @@ PAPER=HERE.parent
 ROOT=PAPER.parent
 sys.path.insert(0, str(PAPER))
 from tool_paths import poppler_tool
+from title_validation import approved_title_edit, apply_approved_title_edit, mask_approved_title, split_title_characters, without_approved_title
 BASELINE='15429f6'
 OLD_HEADING='Intelligence Index (v5.0.2)'
 APPROVED_HEADING='Artificial Analysis Intelligence Index v5.0.2'
@@ -29,6 +30,7 @@ def main():
         if name=='draft.md':
             assert original.count(OLD_HEADING.encode())==1
             original=original.replace(OLD_HEADING.encode(),APPROVED_HEADING.encode(),1)
+            original=apply_approved_title_edit(original.decode()).encode()
         assert original==(PAPER/name).read_bytes(),name
     oldtex=subprocess.check_output(['git','show',baseline+':paper/main.tex'],cwd=ROOT,text=True)
     newtex=(PAPER/'main.tex').read_text()
@@ -81,9 +83,9 @@ def main():
     with pdfplumber.open(before) as a,pdfplumber.open(PAPER/'main.pdf') as b:
         assert len(a.pages)==5
         normalize=lambda s:re.sub(r'[\s-]','',s)
-        previous=normalize(''.join(c['text'] for page in a.pages for c in page.chars))
+        previous=normalize(without_approved_title(''.join(c['text'] for page in a.pages for c in page.chars),original=True))
         previous=previous.replace(normalize(OLD_HEADING),normalize(APPROVED_HEADING),1)
-        current=normalize(''.join(c['text'] for page in b.pages[:5] for c in page.chars))
+        current=normalize(without_approved_title(''.join(c['text'] for page in b.pages[:5] for c in page.chars)))
         assert current.count('AReproducibility')==1
         current=current.split('AReproducibility',1)[0]
         assert normalize(APPROVED_HEADING) in current
@@ -91,16 +93,22 @@ def main():
         # Exact source equality above protects wording and order; this additional
         # character inventory check protects the rendered main/reference content.
         assert Counter(previous)==Counter(current),'main/reference rendered content differs'
-        for c,d in zip(a.pages[0].chars,b.pages[0].chars):
+        _,old_characters=split_title_characters(a.pages[0],original=True)
+        _,new_characters=split_title_characters(b.pages[0])
+        for c,d in zip(old_characters,new_characters,strict=True):
+            assert c['text']==d['text']
             for key in ['x0','x1','size','top','bottom']:
                 assert abs(float(c[key])-float(d[key]))<.001,(1,key,c,d)
-        positions.append({'page':1,'all_character_positions_unchanged':True})
-    # Page 1 remains unchanged; later main pages may reflow after the approved heading.
+        positions.append({'page':1,'all_character_positions_outside_approved_title_unchanged':True})
+    # Only the recorded title can differ on page 1.
     render=PAPER/'build/render';render.mkdir(exist_ok=True)
     for i in [1]:
         target=render/('baseline-'+str(i))
         subprocess.run([poppler_tool('pdftoppm'),'-f',str(i),'-l',str(i),'-singlefile','-r','120','-png',str(before),str(target)],check=True,capture_output=True)
-        diff=ImageChops.difference(Image.open(str(target)+'.png').convert('RGB'),Image.open(render/f'page-{i:02d}.png').convert('RGB'))
+        with pdfplumber.open(before) as a,pdfplumber.open(PAPER/'main.pdf') as b:
+            old_image=mask_approved_title(Image.open(str(target)+'.png').convert('RGB'),a.pages[0],original=True)
+            new_image=mask_approved_title(Image.open(render/f'page-{i:02d}.png').convert('RGB'),b.pages[0])
+        diff=ImageChops.difference(old_image,new_image)
         assert diff.getbbox() is None,('main render changed',i)
     pages=len(PdfReader(PAPER/'main.pdf').pages)
     for start in range(1,pages+1,2):
@@ -108,7 +116,7 @@ def main():
         sheet=Image.new('RGB',(images[0].width*2,images[0].height+30),'#dddddd');draw=ImageDraw.Draw(sheet)
         for j,im in enumerate(images):sheet.paste(im,(j*im.width,30));draw.text((j*im.width+10,8),f'PDF page {start+j}',fill='black')
         sheet.save(render/f'spread-{start:02d}.png')
-    audit={'baseline_main_commit':baseline,'main_draft_unchanged_except_author_approved_table1_heading':True,'bibliography_and_main_figure_unchanged':True,'main_document_body_unchanged_except_author_approved_table1_heading':True,'approved_table1_heading':{'before':OLD_HEADING,'after':APPROVED_HEADING},'main_reference_rendered_character_inventory_matches':True,'main_character_positions':positions,'main_first_page_pixel_identical':True,'main_pages_2_to_5_reflow_after_heading_change':True,'no_manual_page_breaks':True,'exact_prompt_source_files':len(assets['prompts']),'prompt_blocks_including_registered_card':len(wrapping['files']),'reversible_prompt_wrapping':True,'generated_tables':len(trace['tables']),'traced_numeric_cells':len(trace['numeric_cells']),'all_numeric_cells_match_saved_source':True,'source_files_unchanged':True,'registered_figures':len(assets['figures']),'figure_checks':figure_checks,'pdf_pages':pages,'pdf_bytes':(PAPER/'main.pdf').stat().st_size,'pdf_sha256':sha(PAPER/'main.pdf'),'new_analysis_performed':False}
+    audit={'baseline_main_commit':baseline,'main_draft_unchanged_except_author_approved_table1_heading_and_title':True,'bibliography_and_main_figure_unchanged':True,'main_document_body_unchanged_except_author_approved_table1_heading':True,'approved_table1_heading':{'before':OLD_HEADING,'after':APPROVED_HEADING},'main_reference_rendered_character_inventory_matches_except_approved_title':True,'main_character_positions':positions,'main_first_page_pixel_identical_except_approved_title':True,'approved_title_edit':approved_title_edit(),'main_pages_2_to_5_reflow_after_heading_change':True,'no_manual_page_breaks':True,'exact_prompt_source_files':len(assets['prompts']),'prompt_blocks_including_registered_card':len(wrapping['files']),'reversible_prompt_wrapping':True,'generated_tables':len(trace['tables']),'traced_numeric_cells':len(trace['numeric_cells']),'all_numeric_cells_match_saved_source':True,'source_files_unchanged':True,'registered_figures':len(assets['figures']),'figure_checks':figure_checks,'pdf_pages':pages,'pdf_bytes':(PAPER/'main.pdf').stat().st_size,'pdf_sha256':sha(PAPER/'main.pdf'),'new_analysis_performed':False}
     (HERE/'validation.json').write_text(json.dumps(audit,indent=2)+'\n')
     print(json.dumps({k:v for k,v in audit.items() if k not in ['figure_checks','main_character_positions']},indent=2))
 

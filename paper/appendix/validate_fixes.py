@@ -7,16 +7,20 @@ from PIL import Image,ImageChops
 HERE=Path(__file__).resolve().parent;PAPER=HERE.parent;ROOT=PAPER.parent
 sys.path.insert(0, str(PAPER))
 from tool_paths import poppler_tool
+from title_validation import approved_title_edit, apply_approved_title_edit, mask_approved_title, without_approved_title
 BASE='76823a6'
 def original(file):return subprocess.check_output(['git','show',BASE+':'+str(file)],cwd=ROOT)
 def labels(text):return {k:{'number':n,'page':int(p)} for k,n,p in re.findall(r'\\newlabel\{([^}]+)\}\{\{([^}]+)\}\{(\d+)\}',text)}
 def main():
     for file in ['paper/main.tex','paper/draft.md','paper/references.bib','paper/figures/figure1.pdf','paper/prepare_tex.py']:
-        assert (ROOT/file).read_bytes()==original(file),file
+        expected=original(file)
+        if file in ['paper/main.tex','paper/draft.md']:
+            expected=apply_approved_title_edit(expected.decode()).encode()
+        assert (ROOT/file).read_bytes()==expected,file
     before=PAPER/'build/fixes/before.pdf';before.parent.mkdir(parents=True,exist_ok=True);before.write_bytes(original('paper/main.pdf'))
     with pdfplumber.open(before) as a,pdfplumber.open(PAPER/'main.pdf') as b:
         prefix=lambda doc:''.join(c['text'] for page in doc.pages[:5] for c in page.chars).split('AReproducibility',1)[0]
-        assert prefix(a)==prefix(b),'Main/reference PDF text differs'
+        assert without_approved_title(prefix(a),original=True)==without_approved_title(prefix(b)),'Main/reference PDF text differs beyond the approved title'
         columns=[]
         for page in b.pages[4:]:
             columns.extend([page.crop((0,0,306,792)).extract_text() or '',page.crop((306,0,612,792)).extract_text() or '',page.extract_text() or ''])
@@ -25,8 +29,14 @@ def main():
     for n in range(1,5):
         target=PAPER/'build/fixes'/f'before-{n}'
         subprocess.run([poppler_tool('pdftoppm'),'-f',str(n),'-l',str(n),'-singlefile','-r','120','-png',str(before),str(target)],check=True,capture_output=True)
-        assert ImageChops.difference(Image.open(str(target)+'.png').convert('RGB'),Image.open(PAPER/f'build/render/page-{n:02d}.png').convert('RGB')).getbbox() is None
-        identical.append(n)
+        old_image=Image.open(str(target)+'.png').convert('RGB')
+        new_image=Image.open(PAPER/f'build/render/page-{n:02d}.png').convert('RGB')
+        if n==1:
+            with pdfplumber.open(before) as a,pdfplumber.open(PAPER/'main.pdf') as b:
+                old_image=mask_approved_title(old_image,a.pages[0],original=True)
+                new_image=mask_approved_title(new_image,b.pages[0])
+        assert ImageChops.difference(old_image,new_image).getbbox() is None
+        if n!=1:identical.append(n)
     literals=[]
     sources=[HERE/'appendices.tex',*sorted((HERE/'generated').glob('*.tex'))]
     for file in sources:
@@ -57,7 +67,7 @@ def main():
         assert any('[You]' in line and 'price: $X' in line for line in transcript_page.extract_text().splitlines())
     locations={'tables':{k:{'before':old.get(k),'after':v} for k,v in new.items() if k.startswith('tab:')},'removed_or_merged_tables':{k:v for k,v in old.items() if k.startswith('tab:') and k not in new},'listings':{k:v for k,v in new.items() if k.startswith('lst:')},'sections':{k:v for k,v in new.items() if k.startswith(('app:','subapp:'))}}
     (HERE/'fix-locations.json').write_text(json.dumps(locations,indent=2)+'\n')
-    result={'baseline_commit':subprocess.check_output(['git','rev-parse',BASE],cwd=ROOT,text=True).strip(),'pdf_sha256':hashlib.sha256((PAPER/'main.pdf').read_bytes()).hexdigest(),'main_and_reference_pdf_text_identical':True,'main_source_files_unchanged':True,'main_pages_pixel_identical':identical,'inline_literal_occurrences_checked':len(literals),'inline_literals':literals,'unmatched_inline_literals':bad_literals,'leftover_phrases_present':present,'listing_caption_labels':37,'listing_37_price_phrase_unbroken':True,'generated_table_hashes_match':True,'generated_tables':len(trace['tables']),'traced_numeric_cells':len(trace['numeric_cells']),'display_changes':len(changes),'old_pdf_pages':37,'new_pdf_pages':len(pdfplumber.open(PAPER/'main.pdf').pages),'new_analysis_run':False}
+    result={'baseline_commit':subprocess.check_output(['git','rev-parse',BASE],cwd=ROOT,text=True).strip(),'pdf_sha256':hashlib.sha256((PAPER/'main.pdf').read_bytes()).hexdigest(),'main_and_reference_pdf_text_identical_except_approved_title':True,'main_source_files_unchanged_except_approved_title':True,'approved_title_edit':approved_title_edit(),'page1_pixels_outside_approved_title_identical':True,'main_pages_pixel_identical':identical,'inline_literal_occurrences_checked':len(literals),'inline_literals':literals,'unmatched_inline_literals':bad_literals,'leftover_phrases_present':present,'listing_caption_labels':37,'listing_37_price_phrase_unbroken':True,'generated_table_hashes_match':True,'generated_tables':len(trace['tables']),'traced_numeric_cells':len(trace['numeric_cells']),'display_changes':len(changes),'old_pdf_pages':37,'new_pdf_pages':len(pdfplumber.open(PAPER/'main.pdf').pages),'new_analysis_run':False}
     (HERE/'fix-pass-validation.json').write_text(json.dumps(result,indent=2)+'\n')
     print(json.dumps({k:v for k,v in result.items() if k!='inline_literals'},indent=2))
     assert not bad_literals,bad_literals

@@ -110,9 +110,10 @@ optional `pypdf`, `pdfplumber` and Pillow packages. Both validators write audit
 files; they do not run the study analysis.
 
 [validate_fixes.py](validate_fixes.py) additionally checks the appendix correction
-pass against commit `76823a6`. It verifies exact main/reference PDF text,
-rendering of pages 1–4, inline literals, generated table hashes and the requested
-display changes. It uses the committed location map and Git history rather than
+pass against commit `76823a6`. It verifies main/reference PDF text apart from
+the recorded, author-approved title update. It checks page 1 outside that title
+and exact rendering of pages 2–4, inline literals, generated table hashes and
+the requested display changes. It uses the committed location map and Git history rather than
 an old build directory. [build_fix_report.py](build_fix_report.py) can rebuild the
 itemized historical report after those checks.
 

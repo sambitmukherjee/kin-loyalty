@@ -1,0 +1,102 @@
+{
+  "date": "2026-11-28",
+  "baseline_commit": "c6cef9a21f0af7575f4cf9f1263540d1ec885813",
+  "approved_title_edit": {
+    "edit": "Update paper title",
+    "before": "Do AI Agents Favor Their Own Kind? Model Labels Shift One-Shot Splits but Not Mandated Negotiation",
+    "after": "Do AI Agents Favor Their Own Kind? Model Labels Shift Ultimatum Choices but Have Little Effect on Negotiation"
+  },
+  "current_title_locations": [
+    "paper/draft.md",
+    "paper/main.tex",
+    "paper/main.pdf",
+    "README.md",
+    "CITATION.cff"
+  ],
+  "build": {
+    "command": "bash paper/build.sh",
+    "compiler": "pdfLaTeX 1.40.29 / TeX Live 2026; BibTeX",
+    "tool_selection": "PAPER_TEX_BIN and ordinary installed Poppler/Pandoc on PATH",
+    "exit_code": 0,
+    "pdf_sha256": "7a93e15896031bbb01716d5a1f07d2b809c9ffee21b39218dc2502b5362d13b1",
+    "pdf_bytes": 1079784,
+    "page_count": 34,
+    "latex_errors": 0,
+    "overfull_boxes": 0,
+    "undefined_references_or_citations": 0,
+    "font_count": 15,
+    "all_fonts_embedded": true,
+    "all_fonts_type1": true,
+    "official_kit_files_unchanged": 17
+  },
+  "comparison": {
+    "pages": 34,
+    "render_dpi": 120,
+    "pixel_different_pages": [
+      1
+    ],
+    "page1_pixels_outside_title_identical": true,
+    "pages_2_to_34_pixel_identical": true,
+    "entire_pdf_text_identical_except_title": true,
+    "pdf_bytes": 1079784,
+    "new_title_visually_reviewed": true,
+    "new_title_lines": 2,
+    "all_other_source_prose_identical": true
+  },
+  "validators": {
+    "paper/validate.py": 0,
+    "paper/appendix/validate_appendix.py": 0,
+    "paper/appendix/validate_fixes.py": 0
+  },
+  "validation_exception": "Only the title replacement recorded in applied-edits.json is allowed. First-page image comparisons mask the rectangle enclosing the approved title with two points of antialiasing padding; all remaining content stays checked.",
+  "negative_checks": [
+    {
+      "case": "Missing baseline title is rejected",
+      "passed": true
+    },
+    {
+      "case": "Repeated baseline titles are rejected",
+      "passed": true
+    },
+    {
+      "case": "Unexpected rendered title is rejected",
+      "passed": true
+    },
+    {
+      "case": "Changes after the title remain visible to text comparisons",
+      "passed": true
+    },
+    {
+      "case": "Pixels outside the title remain visible to image comparisons",
+      "passed": true
+    }
+  ],
+  "preservation": {
+    "generated_tables": 107,
+    "traced_numeric_cells": 1959,
+    "numeric_cells_table_records_and_generated_tex_identical": true,
+    "number_trace_refreshed_documentation_hashes": [
+      "docs/analysis.md",
+      "docs/study2_analysis.md"
+    ],
+    "number_trace_explanation": "The normal build refreshed hashes for two documentation files edited in an earlier documentation phase. No numerical cell or table changed.",
+    "bibliography_prompt_text_figures_study_code_config_logs_results_registrations_and_seeds_unchanged": true,
+    "supplement_unchanged_and_contains_no_old_paper_title": true,
+    "analysis_run": false,
+    "model_calls": 0,
+    "codex_prompts_untracked_and_ignored": true,
+    "frozen_tags": {
+      "prereg-study1": "d4d6ff9c1f7b84bc2b4f90578873f18dbc9fb98a",
+      "study1-data": "f7dd0a690a5089b245fff365acf002fcfd7b056a",
+      "prereg-study2": "c277054e182eb3a81a475108fa3439e96e869bb0",
+      "study2-data": "3b3b85d77c619fcc6fb093a93915e5ef769cbf53"
+    }
+  },
+  "historical_records": "Earlier reports and audit versions are preserved in Git history. Current paper validator records describe the updated PDF; separate portability and documentation records remain unchanged. Old-title strings occur only as explicit before-values in approval and validation provenance.",
+  "validation_tooling_sha256": {
+    "paper/title_validation.py": "66ed2190b98dab0e14e899d8e3f0be47f1ce24f68c544f20fd46fe3c35adc3f4",
+    "paper/validate.py": "b2129b0c425783963cf98b3da1bb51ea6c639631caf62f37cede773ddf4d2cbe",
+    "paper/appendix/validate_appendix.py": "a24463922e316ae5077ceba25ff7d8bfa9e897db9037bc006d9c8440df751441",
+    "paper/appendix/validate_fixes.py": "545945ffc68263a410e09d70df30c919e06ae07ccc8b494b1e75c6747fc08296"
+  }
+}

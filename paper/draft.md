@@ -1,4 +1,4 @@
-# Do AI Agents Favor Their Own Kind? Model Labels Shift One-Shot Splits but Not Mandated Negotiation
+# Do AI Agents Favor Their Own Kind? Model Labels Shift Ultimatum Choices but Have Little Effect on Negotiation
 
 Nov 27, 2026 · @Sambit Mukherjee
 
